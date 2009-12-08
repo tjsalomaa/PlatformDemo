@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<BackpackRoom id="backpack" xmlns:xi="http://www.w3.org/2001/XInclude">
+	<Backpack>
+		<Collectable id="key" name="Shop Key" description="A big gold key" previewURL="images/key.png" quantity="1"/>
+		<Collectable id="dog" name="Dog" description="A big gold key" previewURL="images/key.png" quantity="1"/>
+		<Collectable id="keyDog" name="Key Dog" description="A funny looking key dog" previewURL="images/key.png" quantity="0"/>
+		<Triggers>
+			<OnAdded>
+				<Trace message="OnAddedCollectable {Event.collectable.id}"/>
+			</OnAdded>
+			<OnRemoved>
+				<Trace message="OnRemovedCollectable {Event.collectable.id}"/>
+			</OnRemoved>
+			<OnSelected>
+				<AddToWorld gameObject="{Event.collectable}" room="{Model.rooms.currentRoom}"/>
+				<RemoveFromBackpack gameObject="{Event.collectable}"/>
+			</OnSelected>
+		</Triggers>
+		<AcceptCombine>
+			<KeyWithDog>
+				<AddToBackpack collectableID="keyDog"/>
+			</KeyWithDog>
+		</AcceptCombine>
+		<RejectCombine>
+			<KeyWithDog>
+				<Alert message="Are you mad, you can't combine a dog with a key!" title="What!?"/>
+			</KeyWithDog>	
+			<Default>
+				<Trace message="Defalt reject combine {Event.collectable.id} : {Event.collectable2.id}"/>
+			</Default>
+		</RejectCombine>
+	</Backpack>
+</BackpackRoom>

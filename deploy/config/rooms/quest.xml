@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<QuestRoom id="quest" xmlns:xi="http://www.w3.org/2001/XInclude">
+
+	<Quest id="keyQuest" name="Help the shop keeper" active="true" complete="false" test="{Room.keyQuest}" description="The objective of this quest is to help the shop keeper find his missing key.">
+		<Objective name="Talk to shop keeper" id="talkToShopKeeper" complete="false" active="false"/>
+		<Objective name="Find the key to open the shop keepers door" id="findShopKey" complete="false" active="false"/>
+		<Objective name="Bring key to back to shop keeper" id="bringKeyToShopKeeper" complete="false" active="false"/>
+		<Triggers>
+			<OnBeginQuest>
+				<Trace message="Quest Begun"/>
+			</OnBeginQuest>
+			<OnCompleteQuest>
+				<Trace message="Quest Complete"/>
+			</OnCompleteQuest>
+			<OnBeginObjective>
+				<Trace message="Objective Begun '{Event.objective.name}'"/>
+			</OnBeginObjective>
+			<OnCompleteObjective>
+			</OnCompleteObjective> 
+		</Triggers>
+	</Quest>
+	
+	<Quest id="keyQuest2" name="Help the shop keeper 2" active="true" complete="false" test="{Room.keyQuest}" description="The objective of this quest is to help the shop keeper find his missing key.">
+		<Objective name="Talk to shop keeper" id="talkToShopKeeper" complete="false" active="false"/>
+		<Objective name="Find the key to open the shop keepers door" id="findShopKey" complete="false" active="false"/>
+		<Objective name="Bring key to back to shop keeper" id="bringKeyToShopKeeper" complete="false" active="false"/>
+		<Triggers>
+			<OnBeginQuest>
+				<Trace message="Quest Begun"/>
+			</OnBeginQuest>
+			<OnCompleteQuest>
+				<Trace message="Quest Complete"/>
+			</OnCompleteQuest>
+			<OnBeginObjective>
+				<Trace message="Objective Begun '{Event.objective.name}'"/>
+			</OnBeginObjective>
+			<OnCompleteObjective>
+				<If expression="({true}=={true})">
+					<Then>
+						<Trace message="true"/>
+					</Then>
+					<Else>
+						<Trace message="false"/>
+					</Else>
+				</If>
+			</OnCompleteObjective> 
+		</Triggers>
+	</Quest>	
+
+</QuestRoom>

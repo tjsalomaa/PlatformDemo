@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<environments current="dev">
+    
+	<environment type="all">
+	    <property name="setting.rooms.path" value="config/rooms/"/>
+		<property name="setting.rooms.default-room" value="session"/>
+		<property name="setting.rooms.quest-room" value="quest"/>
+		<property name="setting.rooms.backpack-room" value="backpack"/>
+	</environment>
+	
+</environments>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SessionRoom id="session" xmlns:xi="http://www.w3.org/2001/XInclude">
+	
+	<Behaviour>
+		<onFixUp>
+			<Trace message="Session created "/>
+			<Startup/>
+		</onFixUp>
+		<onChangeRoom>
+			<Call behaviourID="EnterRoom" roomName="{Event.roomName}"/>
+		</onChangeRoom>
+	</Behaviour>	
+
+	<BehaviourDefinition id="startup">
+		<Call behaviourID="EnterRoom" roomName="snow"/>
+	</BehaviourDefinition>	
+	
+	<BehaviourDefinition id="EnterRoom">
+		<Trace message="EnterRoom called: roomName={Event.roomName}"/>
+				
+		<ChangeRoom roomName="{Event.roomName}" useServer="false">
+			<loadAssetError>
+				<Trace message="loadAssetError called in script!"/>
+			</loadAssetError>
+			<loadVitalAssetError>
+				<Alert message="loadVitalAssetError called in script!">
+					<Ok>
+						<ExecuteBehaviour target="enterDemoRoom"/>
+					</Ok>
+				</Alert>
+			</loadVitalAssetError>
+		</ChangeRoom>
+	</BehaviourDefinition>
+	
+</SessionRoom>
