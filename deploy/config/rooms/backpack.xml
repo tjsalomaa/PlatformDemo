@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <BackpackRoom id="backpack" xmlns:xi="http://www.w3.org/2001/XInclude">
 	<Backpack>
-		<Collectable id="key" name="Shop Key" description="A big gold key" previewURL="images/key.png" quantity="1"/>
-		<Collectable id="dog" name="Dog" description="A big gold key" previewURL="images/key.png" quantity="1"/>
-		<Collectable id="keyDog" name="Key Dog" description="A funny looking key dog" previewURL="images/key.png" quantity="0"/>
+		<Collectable id="key" name="Shop Key" description="A big gold key" previewURL="images/backpack/hammer.png" quantity="1"/>
+		<Collectable id="dog" name="Dog" description="A big gold key" previewURL="images/backpack/hammer.png" quantity="1"/>
+		<Collectable id="dog2" name="Dog" description="A big gold key" previewURL="images/backpack/hammer.png" quantity="1"/>
+		<Collectable id="hammer" name="Hammer" description="A mighty hammer" previewURL="images/backpack/hammer.png" quantity="1"/>
+		<Collectable id="keyDog" name="Key Dog" description="A funny looking key dog" previewURL="images/backpack/hammer.png" quantity="1"/>
 		<Triggers>
 			<OnAdded>
 				<Trace message="OnAddedCollectable {Event.collectable.id}"/>

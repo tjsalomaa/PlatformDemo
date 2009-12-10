@@ -55,7 +55,10 @@
 	<!--<Binding name="ShowBubble" class="uk.co.dubit.application.control.behaviour.world.ShowBubble" />-->
 	<Binding name="AddToChatHistory" class="uk.co.dubit.platform.components.chat.history.AddMessageToChatHistory"/>
 	<Binding name="ClearChatBar" class="uk.co.dubit.platform.components.chat.chatpanel.ClearChatBar"/>
-	<Binding name="ChangeRoom" class="uk.co.dubit.platform.scriptEngine.behaviour.types.room.ChangeRoom"/>
+	<Binding name="ChangeRoom" class="uk.co.dubit.platform.scriptEngine.behaviour.types.room.ChangeRoomPreloader">
+		<Attribute required="true" name="skin" type="string" description="The skin class" defaultValue="uk.co.dubit.platform.components.rooms.ui.ChatRoomPreloaderView"/>
+		<Attribute required="true" name="targetContainer" type="string" description="The skin container" defaultValue="RoomPreloader"/>		
+	</Binding>
 	<Binding name="LeaveRoom" class="uk.co.dubit.platform.scriptEngine.behaviour.types.room.LeaveRoom"/>
 	<Binding name="CreateContact" class="uk.co.dubit.platform.components.contacts.behaviors.CreateContact"/>
 	<Binding name="DestroyContact" class="uk.co.dubit.platform.components.contacts.behaviors.DestroyContact"/>
@@ -119,10 +122,10 @@
 		<Attribute required="true" name="attachSkin" type="boolean" description="True if the skin should be attached immediately" defaultValue="true"/>
 	</Binding>
 	<Binding name="SessionRoom" factory="uk.co.dubit.platform.scriptEngine.room.RoomFactory" class="uk.co.dubit.platform.scriptEngine.room.SessionRoom"/>
-	<Binding name="Room" factory="uk.co.dubit.platform.scriptEngine.room.RoomFactory" class="uk.co.dubit.platform.scriptEngine.room.Room"/>
+	<!--<Binding name="Room" factory="uk.co.dubit.platform.scriptEngine.room.RoomFactory" class="uk.co.dubit.platform.scriptEngine.room.Room"/>-->
 	<!-- QUEST BINDINGS -->
 	<Binding name="QuestRoom" factory="uk.co.dubit.platform.scriptEngine.room.RoomFactory" class="uk.co.dubit.platform.components.quest.QuestRoom">
-		<Attribute required="true" name="skin" type="string" description="The skin class" defaultValue="uk.co.dubit.platform.components.quest.QuestView"/>
+		<Attribute required="true" name="skin" type="string" description="The skin class" defaultValue="com.dubitplatform.views.QuestsView"/>
 		<Attribute required="true" name="targetContainer" type="string" description="The skin container" defaultValue="Quest"/>
 		<Attribute required="true" name="attachSkin" type="boolean" description="True if the skin should be attached immediately" defaultValue="true"/>
 	</Binding>
@@ -180,7 +183,11 @@
 	<Binding name="AcceptCombine" factory="uk.co.dubit.platform.scriptEngine.behaviour.BehaviourFactory"/>
 	<Binding name="RejectCombine" factory="uk.co.dubit.platform.scriptEngine.behaviour.BehaviourFactory"/>
 	<!-- DIALOGUE BINDINGS -->
-	<Binding name="Dialogue" class="uk.co.dubit.platform.components.dialogue.Dialogue" factory="uk.co.dubit.platform.scriptEngine.gameObject.GameObjectFactory"/>
+	<Binding name="Dialogue" class="uk.co.dubit.platform.components.dialogue.Dialogue" factory="uk.co.dubit.platform.scriptEngine.gameObject.GameObjectFactory">
+		<Attribute required="true" name="skin" type="string" description="The skin class" defaultValue="com.dubitplatform.views.BranchingConversationView"/>
+		<Attribute required="true" name="targetContainer" type="string" description="The skin container" defaultValue="Dialogue"/>
+		<Attribute required="true" name="attachSkin" type="boolean" description="True if the skin should be attached immediately" defaultValue="true"/>	
+	</Binding>
 	<Binding name="Statement" class="uk.co.dubit.platform.components.dialogue.Statement" factory="uk.co.dubit.platform.scriptEngine.behaviour.BehaviourFactory"/>
 	<Binding name="Response" class="uk.co.dubit.platform.components.dialogue.Response" factory="uk.co.dubit.platform.scriptEngine.behaviour.BehaviourFactory"/>
 	<Binding name="BeginDialogue" class="uk.co.dubit.platform.components.dialogue.behaviours.BeginDialogue"/>
@@ -209,7 +216,7 @@
 	<Binding name="DisplayObjectDefinition" factory="uk.co.dubit.platform.scriptEngine.gameObject.GameObjectDefinitionFactory" class="uk.co.dubit.platform.scriptEngine.gameObject.types.avatar.MovingGameObject"/>
 	<!-- FILTERS -->
 	
-	<Binding name="Filters" type="pass"/>
+	<Binding name="Filters" factory="uk.co.dubit.platform.scriptEngine.gameObject.GameObjectFactory"/>
 	<Binding name="DepthFilter" factory="uk.co.dubit.platform.scriptEngine.gameObject.GameObjectFactory" class="uk.co.dubit.platform.scriptEngine.gameObject.types.filters.DepthFilterNode"/>
 	<Binding name="MultiplyFilter" factory="uk.co.dubit.platform.scriptEngine.gameObject.GameObjectFactory" class="uk.co.dubit.platform.scriptEngine.gameObject.types.filters.MultiplyFilterNode"/>
 	<!-- COLLISION -->
@@ -237,5 +244,12 @@
 	</Binding>	
 	
 	<Binding name="Actions" factory="uk.co.dubit.platform.scriptEngine.node.ScriptNodeFactory" class="uk.co.dubit.platform.scriptEngine.gameObject.types.actions.ActionsNode"/>
-	<Binding name="DesireAction" factory="uk.co.dubit.platform.scriptEngine.node.ScriptNodeFactory" class="uk.co.dubit.platform.scriptEngine.behaviour.types.actions.DesireAction"/>	
+	<Binding name="DesireAction" factory="uk.co.dubit.platform.scriptEngine.node.ScriptNodeFactory" class="uk.co.dubit.platform.scriptEngine.behaviour.types.actions.DesireAction"/>
+	<!-- MAP -->
+	<Binding name="Map" class="uk.co.dubit.platform.components.map.Map" factory="uk.co.dubit.platform.scriptEngine.gameObject.GameObjectFactory">
+		<Attribute required="true" name="skin" type="string" description="The skin class" defaultValue="com.dubitplatform.views.RoomListView"/>
+		<Attribute required="true" name="targetContainer" type="string" description="The skin container" defaultValue="Map"/>
+		<Attribute required="true" name="attachSkin" type="boolean" description="True if the skin should be attached immediately" defaultValue="true"/>	
+	</Binding>	
+	<Binding name="Location" factory="uk.co.dubit.platform.scriptEngine.gameObject.GameObjectFactory" class="uk.co.dubit.platform.components.map.Location"/>
 </Bindings>

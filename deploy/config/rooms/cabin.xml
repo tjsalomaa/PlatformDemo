@@ -50,4 +50,9 @@
 		<MoveTo gameObject="{Room.player}" x="{Room.player.x}" y="{Room.player.y}" targetX="{Event.x}" targetY="{Event.y}"/>
 	</Trigger>
 
+	<Trigger event="OnDragDrop" gameObject="{Room.player}">	
+		<ShowBubble gameObject="{Room.player}" message="Oooh a {Event.dragInitiator.description}!" yOffset="-150"/>
+		<RemoveFromBackpack gameObject="{Event.dragInitiator}"/>
+	</Trigger>
+
 </ChatRoom>

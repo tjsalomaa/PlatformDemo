@@ -5,6 +5,7 @@
       <compilerSourcePathEntry kind="1" linkType="1" path="src"/>
       <compilerSourcePathEntry kind="1" linkType="1" path="${DOCUMENTS}/DubitPlatform_Client/src"/>
       <compilerSourcePathEntry kind="1" linkType="1" path="${DOCUMENTS}/DubitPlatform_Client/vendor"/>
+      <compilerSourcePathEntry kind="1" linkType="1" path="vendor"/>
     </compilerSourcePath>
     <libraryPath defaultLinkType="1">
       <libraryPathEntry kind="4" path="">

@@ -32,4 +32,12 @@
 		</ChangeRoom>
 	</BehaviourDefinition>
 	
+	<Map>
+		<Location name="Winter Cabin" roomID="cabin" id="cabinRoom"/>
+		<Location name="Control Room" roomID="control" id="controlRoom"/>
+		<Location name="Likeaballs City" roomID="city" id="cityRoom"/>
+		<Location name="Snowy Mountain" roomID="snow" id="snowRoom"/>
+		<Location name="Lost in Space!" roomID="space" id="spaceRoom"/>
+	</Map>
+	
 </SessionRoom>
