@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <BackpackRoom id="backpack" xmlns:xi="http://www.w3.org/2001/XInclude">
 	<Backpack>
-		<Collectable id="key" name="Shop Key" description="A big gold key" previewURL="images/backpack/hammer.png" quantity="1"/>
-		<Collectable id="dog" name="Dog" description="A big gold key" previewURL="images/backpack/hammer.png" quantity="1"/>
-		<Collectable id="dog2" name="Dog" description="A big gold key" previewURL="images/backpack/hammer.png" quantity="1"/>
-		<Collectable id="hammer" name="Hammer" description="A mighty hammer" previewURL="images/backpack/hammer.png" quantity="1"/>
-		<Collectable id="keyDog" name="Key Dog" description="A funny looking key dog" previewURL="images/backpack/hammer.png" quantity="1"/>
+		<Collectable id="apple" name="Apple" description="A shiny red apple, looks tasty! " previewURL="images/backpack/apple.png" quantity="1"/>
+		<Collectable id="grog" name="Grog" description="Ahh, the drink of pirates " previewURL="images/backpack/grog.png" quantity="0"/>
+		<Collectable id="rainwater" name="Rainwater" description="A vessel of rainwater " previewURL="images/backpack/rainwater.png" quantity="1"/>
+		<Collectable id="rum" name="Rum" description="Rum, the poor mans grog " previewURL="images/backpack/rum.png" quantity="1"/>
 		<Triggers>
 			<OnAdded>
 				<Trace message="OnAddedCollectable {Event.collectable.id}"/>
@@ -14,19 +13,11 @@
 				<Trace message="OnRemovedCollectable {Event.collectable.id}"/>
 			</OnRemoved>
 			<OnSelected>
-				<AddToWorld gameObject="{Event.collectable}" room="{Model.rooms.currentRoom}"/>
-				<RemoveFromBackpack gameObject="{Event.collectable}"/>
 			</OnSelected>
 		</Triggers>
 		<AcceptCombine>
-			<KeyWithDog>
-				<AddToBackpack collectableID="keyDog"/>
-			</KeyWithDog>
 		</AcceptCombine>
-		<RejectCombine>
-			<KeyWithDog>
-				<Alert message="Are you mad, you can't combine a dog with a key!" title="What!?"/>
-			</KeyWithDog>	
+		<RejectCombine>	
 			<Default>
 				<Trace message="Defalt reject combine {Event.collectable.id} : {Event.collectable2.id}"/>
 			</Default>

@@ -15,7 +15,7 @@
 		<DepthFilter scaleBack="-0.1" scaleFront="0.6" />
 	</Filters>
 	
-	<Scene id="scene" target="{Room.player}" viewportWidth="760" viewportHeight="418" width="887" height="631">
+	<Scene id="scene" target="{Room.player}" viewportWidth="784" viewportHeight="445" width="887" height="631">
 		<DisplayObject2D id="background" assetID="background" mouseEnabled="false" />
 		<DisplayObject2D id="click" assetID="click" mouseEnabled="true" clickThrough="true" alpha="0" name="Some dude"/>
 		<ZSortingDisplayObject id="furniture">
@@ -53,7 +53,8 @@
 	</Trigger>
 	
 	<Trigger event="OnClick" gameObject="{Room.player}">
-		<BeginDialogue statement="{Room.talkToShopKeeper}" npc="{Room.click}" player="{Room.player}" messageDelay="0" dialogueID="dialogue" />
+		<BeginQuest questID="keyQuest"/>
+		<!--BeginDialogue statement="{Room.talkToShopKeeper}" npc="{Room.click}" player="{Room.player}" messageDelay="0" dialogueID="dialogue" /-->
 	</Trigger>
 	
 	<Dialogue id="dialogue">

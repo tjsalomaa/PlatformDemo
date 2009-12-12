@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <QuestRoom id="quest" xmlns:xi="http://www.w3.org/2001/XInclude">
 
-	<Quest id="keyQuest" name="Quest 1: Find the missing coconuts!" active="true" complete="false" description="Poor old Mrs Myers has lost her coconuts again, she thinks shes left them some where need the giant monkey head. Help her find them for 200 credits.">
-		<Objective name="1) Poor old Mrs Myers has lost her" id="objective1" complete="false" active="false"/>
-		<Objective name="2) Find the key to open the shop keepers door" id="findShopKey" complete="false" active="false"/>
-		<Objective name="3) Bring key to back to shop keeper" id="bringKeyToShopKeeper" complete="false" active="false"/>
+	<Quest id="grogQuest" name="Quest 1: Find some grog for the drunken old pirate" active="false" complete="false" description="Poor ol' Le Chuck is down on his luck and suffering from a dreadful hangover. Before he'll talk to you any more you'll need to find him some Grog!">
+		<Objective name="1) Visit the docks and find the Scumm Bar" id="visitTheDocks" complete="false" active="false"/>
+		<Objective name="2) Search the Bar for a bottle of Grog" id="findTheGrog" complete="false" active="false"/>
+		<Objective name="3) Bring the Grog back to Le Chuck" id="returnTheGrog" complete="false" active="false"/>
 		<Triggers>
 			<OnBeginQuest>
 				<Trace message="Quest Begun"/>
@@ -19,24 +19,5 @@
 			</OnCompleteObjective> 
 		</Triggers>
 	</Quest>
-	
-	<Quest id="keyQuest2" name="Quest 2: Help the shop keeper 2" active="true" complete="false" test="{Room.keyQuest}" description="The objective of this quest is to help the shop keeper find his missing key.">
-		<Objective name="Talk to shop keeper" id="obj1" complete="false" active="false"/>
-		<Objective name="Find the key to open the shop keepers door" id="obj2" complete="false" active="false"/>
-		<Objective name="Bring key to back to shop keeper" id="obj3" complete="false" active="false"/>
-		<Triggers>
-			<OnBeginQuest>
-				<Trace message="Quest Begun"/>
-			</OnBeginQuest>
-			<OnCompleteQuest>
-				<Trace message="Quest Complete"/>
-			</OnCompleteQuest>
-			<OnBeginObjective>
-				<Trace message="Objective Begun '{Event.objective.name}'"/>
-			</OnBeginObjective>
-			<OnCompleteObjective>
-			</OnCompleteObjective> 
-		</Triggers>
-	</Quest>	
 
 </QuestRoom>

@@ -12,7 +12,7 @@
 	</Behaviour>	
 
 	<BehaviourDefinition id="startup">
-		<Call behaviourID="EnterRoom" roomName="snow"/>
+		<Call behaviourID="EnterRoom" roomName="mansion"/>
 	</BehaviourDefinition>	
 	
 	<BehaviourDefinition id="EnterRoom">
@@ -33,11 +33,9 @@
 	</BehaviourDefinition>
 	
 	<Map>
-		<Location name="Winter Cabin" roomID="cabin" id="cabinRoom"/>
-		<Location name="Control Room" roomID="control" id="controlRoom"/>
-		<Location name="Likeaballs City" roomID="city" id="cityRoom"/>
-		<Location name="Snowy Mountain" roomID="snow" id="snowRoom"/>
-		<Location name="Lost in Space!" roomID="space" id="spaceRoom"/>
+.		<Location name="Cannibal Town" roomID="huts" id="tacotikitownRoom"/>
+		<Location name="Dark Docks" roomID="docks" id="darkdocksRoom"/>
+		<Location name="Mansion" roomID="mansion" id="mansionRoom"/>
 	</Map>
 	
 </SessionRoom>
