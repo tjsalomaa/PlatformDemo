@@ -15,16 +15,4 @@
 		<nature>com.adobe.flexbuilder.project.flexnature</nature>
 		<nature>com.adobe.flexbuilder.project.actionscriptnature</nature>
 	</natures>
-	<linkedResources>
-		<link>
-			<name>[source path] src</name>
-			<type>2</type>
-			<locationURI>DOCUMENTS/DubitPlatform_Client/src</locationURI>
-		</link>
-		<link>
-			<name>[source path] vendor</name>
-			<type>2</type>
-			<locationURI>DOCUMENTS/DubitPlatform_Client/vendor</locationURI>
-		</link>
-	</linkedResources>
 </projectDescription>

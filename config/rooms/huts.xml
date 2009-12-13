@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ChatRoom id="huts" xmlns:xi="http://www.w3.org/2001/XInclude">
+
+	<Attribute key="startX" value="1667" type="number" />
+	<Attribute key="startY" value="442" type="number" />
+
+	<ActorMouseMovementProxy id="playerMovementProxy"/>
+	<TargetedCollisionProxy id="targetedCollisionProxy" target="{Room.player}"/>	
+		
+	<Collision width="2000" height="540" id="walkableArea" solid="true">
+		<Asset assetID="hit" x="0" y="0" />
+	</Collision>
+	
+	<Filters id="playerFilters">	
+		<DepthFilter id="playerDepthFilter" scaleBack="-1.3" scaleFront="0.25" />
+		<MultiplyFilter id="lightFilter" >
+			<Asset id="light_filter" assetID="light_filter_asset" x="0" y="0" />
+		</MultiplyFilter>
+	</Filters>
+	
+	<Sounds target="{Room.player}" >
+		<Sound id="backgroundMusic" play="true" looping="true" assetID="music" />
+	</Sounds>
+
+	<Scene id="scene" target="{Room.player}" viewportWidth="784" viewportHeight="445" width="2000" height="540">
+		<DisplayObject2D id="background" assetID="background" mouseEnabled="false" />
+		<DisplayObject2D id="click" assetID="click" mouseEnabled="true" clickThrough="true" alpha="0"/>
+		<ZSortingDisplayObject id="furniture">
+			<Character id="player" filters="{Room.playerFilters}" speed="0" defaultSpeed="10" x="{Room.startX}" y="{Room.startY}" originX="210" originY="401" collidable="true" mouseEnabled="true" clickThrough="true" displayObjectClass="uk.co.dubit.graphics.render2D.ActionPlayer">
+				<Actions id="actions" defaultAction="stand">
+					<Stand id="stand" path="avatar/stand.swf"/>
+					<Walk id="walk" path="avatar/walk.swf"/>
+				</Actions>
+			</Character>
+			<DisplayObject2D id="arch" assetID="arch" x="0" y="408" originX="0" originY="408" mouseEnabled="false"/>
+			<DisplayObject2D id="foliageright" assetID="foliageright" x="0" y="508" originX="0" originY="508" mouseEnabled="false"/>
+			<DisplayObject2D id="posts" assetID="posts" x="0" y="478" originX="0" originY="478" mouseEnabled="false"/>
+			<DisplayObject2D id="lechuck" name="Le Chuck" assetID="lechuck" x="930" y="496" originX="62" originY="184" mouseEnabled="true"/>
+			<DisplayObject2D id="hutsdoor1" assetID="hutsdoor1" x="1700" y="374" originX="75" originY="100" mouseEnabled="true" useHandCursor="true" distance = "70" clickThrough="true" collidable="true"/>
+		</ZSortingDisplayObject>
+		<DisplayObject2D id="foreground" assetID="foreground" x="0" y="0" originX="0" originY="0" mouseEnabled="false"/>
+		<ZSortingDisplayObject id="playerMessages" />
+	</Scene>
+	
+	<Assets>
+		<Asset id="hit" url="[base.url]images/huts/hit.png"/>
+		<Asset id="click" url="[base.url]images/huts/click.png"/>
+		<Asset id="light_filter_asset" url="[base.url]images/huts/light.jpg"/>
+		<Asset id="background" url="[base.url]images/huts/background.png"/>
+		<Asset id="foreground" url="[base.url]images/huts/foreground.png"/>
+		<Asset id="player" url="[base.url]images/avatar/player.png" />	
+		<Asset id="foliageright" url="[base.url]images/huts/foliageright.png" />	
+		<Asset id="posts" url="[base.url]images/huts/posts.png" />	
+		<Asset id="lechuck" url="[base.url]images/huts/lechuck.png" />	
+		<Asset id="hutsdoor1" url="[base.url]images/huts/hutsdoor1.png" />	
+		<Asset id="music" url="[base.url]sounds/huts/music.mp3" />
+	</Assets>
+	
+	<Trigger event="OnClick" gameObject="{Room.click}">	
+		<MoveTo gameObject="{Room.player}" x="{Room.player.x}" y="{Room.player.y}" targetX="{Event.x}" targetY="{Event.y}"/>
+	</Trigger>
+
+	<Trigger event="OnEnterCollision" gameObject="{Room.hutsdoor1}">	
+		<ChangeRoom roomName="docks" useServer="false"/>
+	</Trigger>	
+	
+	<Trigger event="OnClick" gameObject="{Room.lechuck}">
+		<BeginDialogue statement="{Room.talkToPirate}" npc="{Room.click}" player="{Room.player}" messageDelay="1000" dialogueID="dialogue" />
+	</Trigger>
+	
+	<Dialogue id="dialogue">
+		<Triggers>	
+			<OnBeginDialogue><Trace message="Dialogue began"/></OnBeginDialogue>
+			<OnCompleteDialogue><Trace message="Dialogue complete"/></OnCompleteDialogue>
+			<OnMessage>
+				<If expression="({Event.messageTarget}=={Room.player})">
+					<Then>
+						<ShowBubble gameObject="{Room.player}" message="{Event.message}" yOffset="-160"/>
+					</Then>
+					<Else>
+						<ShowBubble gameObject="{Room.lechuck}" message="{Event.message}" yOffset="-190"/>
+					</Else>
+				</If>
+			</OnMessage>
+		</Triggers>
+	</Dialogue>	
+	
+	<Statement id="talkToPirate" message1="Ye scurvy knave! What do ye want with a down on his luck ol' privateer such as I?">
+		
+		<Response message="I'm just passing through">
+			<PlayStatement statementID="standardResponse"/>
+		</Response>	
+
+		<Response message="You don't look so bad ">	
+			<Statement message="Regardless of what ye've heard about seamen, I be a woman's man, with no time fer talk">
+				<Response message="All I meant was you are better dressed than your average castaway">
+					<Statement message="Tis naught but seashells and sartorial misdirection. Tis also the way I holds meself.">
+						<PlayResponses statementID="talkToPirate" />
+					</Statement>
+				</Response>
+				<Response message="Charming! You're not my type either!">
+					<PlayStatement statementID="standardResponse"/>
+				</Response>
+				<Response message="I am mesmerised by your hat, can I have it?">
+					<Statement message="This hat be me pride and joy. Tho I would trade it in a heartbeat fer a goodly swig o' grog">
+						<PlayResponses statementID="talkToPirate" />
+					</Statement>
+				</Response>
+			</Statement>
+		</Response>
+		
+		<Response message="What is this place?">
+			<Statement message="Tis a place worse than the very depths o' Hades. If I only had some grog to soothe me despair and dull me senses">
+				<Response message="There's always voodoo... or hoodoo... or sudoku...?">
+					<Statement message="Taunt me not, lubber! I tells ye, ye'll get a ball o' shot in the skull if ye'll be the one around when I's a sudokuin'">
+						<Response message="Eeek, I'll leave you alone!"/>
+					</Statement>
+				</Response>
+				<Response message="I'll get some grog for you. Where can I get some?">
+					<Statement message="If ye travel westward bound ye'll come to the Scumm Bar, there's sure to be some grog to slake a sea dog's throat">
+						<BeginQuest questID="grogQuest"/>
+						<Response message="Which rather begs the question why don't you just go there yourself, I can practically see it from here!"/>
+					</Statement>
+				</Response>
+				<Response message="It's not so bad... A friend of mine went to Corfu and that was pretty similar.">
+					<Statement message="Avast ye gutless Spaniard! Back to ye package holidays and bottled cider. I'll have naught to do with ye!!">
+						<Response message="Oh, errrm bye then"/>
+					</Statement>
+				</Response>	
+			</Statement>		
+		</Response>	
+
+	</Statement>
+	
+	<Statement id="standardResponse" message="Keep walkin' land lubber... leave me to me revery">
+		<Response message="Shame, can't we talk about something else?">
+			<Statement message="Hmmm....anything else?">
+				<PlayResponses statementID="talkToPirate" />
+			</Statement>
+		</Response>
+	</Statement> 
+
+</ChatRoom>

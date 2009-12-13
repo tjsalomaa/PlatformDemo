@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<DialogueViewBase xmlns="uk.co.dubit.platform.components.dialogue.*" xmlns:mx="http://www.adobe.com/2006/mxml" width="760" height="200" x="260" y="510" verticalScrollPolicy="off" horizontalScrollPolicy="off" creationComplete="onCreationComplete();">
+	
+	<mx:Script>
+		<![CDATA[
+			import uk.co.dubit.platform.components.dialogue.IResponse;
+			import uk.co.dubit.platform.components.dialogue.DialogueEvent;
+			import uk.co.dubit.platform.components.dialogue.DialogueModel;
+			
+			private function onCreationComplete () : void
+			{
+				filters = [new DropShadowFilter(0, 0, 0, 0.7, 40, 40, 1, 3)];
+			}
+		]]>
+	</mx:Script>
+	
+	<mx:Panel layout="vertical" title="Talking with {DialogueModel.getInstance().activeDialogue.npc.getValue('name')}" width="100%" height="100%">
+	
+		<mx:VBox width="100%" height="100%" paddingLeft="5" paddingRight="5" paddingTop="10">
+			<mx:List id="messageList" dataProvider="{ DialogueModel.getInstance().activeStatement.messages }" width="100%" height="30" variableRowHeight="true" useRollOver="false" borderStyle="none">
+				<mx:itemRenderer>
+					<mx:Component>
+						<mx:Text text="{data}" width="100%" selectable="false" fontWeight="bold"/>
+					</mx:Component>
+				</mx:itemRenderer>
+			</mx:List>		
+			
+			<mx:HRule width="100%"/>
+			
+			<mx:List id="responseList" dataProvider="{ responses }" width="100%" height="110" variableRowHeight="true" change="{dispatchEvent( new DialogueEvent(DialogueEvent.PLAY_RESPONSE, IResponse(responseList.selectedItem) ) )}" borderStyle="none" verticalScrollPolicy="on">
+				<mx:itemRenderer>
+					<mx:Component>
+						<mx:Text text="{data.message}" width="100%" selectable="false"/>
+					</mx:Component>
+				</mx:itemRenderer>
+			</mx:List>			
+		</mx:VBox>
+	
+	</mx:Panel>
+
+</DialogueViewBase>

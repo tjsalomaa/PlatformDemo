@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ChatRoom id="docks" xmlns:xi="http://www.w3.org/2001/XInclude">
+
+	<Attribute key="startX" value="1284" type="number" />
+	<Attribute key="startY" value="471" type="number" />
+
+	<ActorMouseMovementProxy id="playerMovementProxy"/>
+	<TargetedCollisionProxy id="targetedCollisionProxy" target="{Room.player}"/>	
+
+	<Collision width="3024" height="518" id="walkableArea" solid="true">
+		<Asset assetID="hit" x="0" y="0" />
+	</Collision>
+
+	<Filters id="playerFilters">	
+		<DepthFilter id="playerDepthFilter" scaleBack="-0.2" scaleFront="0.3" />
+		<MultiplyFilter id="lightFilter" >
+			<Asset id="light_filter" assetID="light_filter_asset" x="0" y="0" />
+		</MultiplyFilter>
+	</Filters>
+	
+	<Sounds target="{Room.player}" >
+		<Sound id="backgroundMusic" play="true" looping="true" assetID="music" />
+		<Sound id="bar" play="true" looping="true" assetID="bar" bufferDuration="10" x="2160" y="485" strength="3" carry="300" stereoWidth="0.8" />
+	</Sounds>
+
+	<Scene id="scene" target="{Room.player}" viewportWidth="784" viewportHeight="445" width="3024" height="518">
+		<DisplayObject2D id="background" assetID="background" mouseEnabled="false" />
+		<DisplayObject2D id="click" assetID="click" mouseEnabled="true" clickThrough="true" alpha="0"/>
+		<ZSortingDisplayObject id="furniture">
+			<Character id="player" filters="{Room.playerFilters}" speed="0" defaultSpeed="13" x="{Room.startX}" y="{Room.startY}" originX="200" originY="375" collidable="true" clickThrough="true" displayObjectClass="uk.co.dubit.graphics.render2D.ActionPlayer">
+				<Actions id="actions" defaultAction="stand">
+					<Stand id="stand" path="avatar/stand.swf"/>
+					<Walk id="walk" path="avatar/walk.swf"/>
+				</Actions>
+			</Character>
+			<DisplayObject2D id="barrelsfront" assetID="barrelsfront" x="0" y="426" originX="0" originY="426" mouseEnabled="false"/>
+			<DisplayObject2D id="cliff" assetID="cliff" x="0" y="460" originX="0" originY="460" mouseEnabled="false"/>
+			<DisplayObject2D id="barside" assetID="barside" x="0" y="438" originX="0" originY="438" mouseEnabled="false"/>
+			<DisplayObject2D id="farstumps" assetID="farstumps" x="0" y="460" originX="0" originY="460" mouseEnabled="false"/>
+			<DisplayObject2D id="midstumps" assetID="midstumps" x="0" y="460" originX="0" originY="460" mouseEnabled="false"/>
+			<DisplayObject2D id="rearbarrels" assetID="rearbarrels" x="0" y="343" originX="0" originY="343" mouseEnabled="false"/>
+			<DisplayObject2D id="rearstumps" assetID="rearstumps" x="0" y="351" originX="0" originY="351" mouseEnabled="false"/>
+			<DisplayObject2D id="rock" assetID="rock" x="0" y="285" originX="0" originY="285" mouseEnabled="false"/>
+			<DisplayObject2D id="grogbg" assetID="grogbg" x="1761" y="381" originX="11" originY="23" mouseEnabled="true"/>
+			<DisplayObject2D id="docksdoor1" assetID="docksdoor1" x="130" y="260" originX="75" originY="100" mouseEnabled="true" useHandCursor="true" distance = "70" clickThrough="true" collidable="true"/>
+			<DisplayObject2D id="docksdoor2" assetID="docksdoor2" x="2793" y="438" originX="75" originY="100" mouseEnabled="true" useHandCursor="true" distance = "170" clickThrough="true" collidable="true"/>	
+		</ZSortingDisplayObject>
+		<DisplayObject2D id="foreground" assetID="foreground" x="0" y="0" originX="0" originY="0" mouseEnabled="false"/>
+		<ZSortingDisplayObject id="playerMessages" />
+	</Scene>
+
+	<Assets>
+		<Asset id="hit" url="[base.url]images/docks/hit.png"/>
+		<Asset id="click" url="[base.url]images/docks/click.gif"/>
+	    <Asset id="light_filter_asset" url="[base.url]images/docks/light.jpg"/>
+		<Asset id="background" url="[base.url]images/docks/background.jpg"/>
+		<Asset id="player" url="[base.url]images/avatar/player.png" />
+		<Asset id="barrelsfront" url="[base.url]images/dock/barrelsfront.png" />
+		<Asset id="barside" url="[base.url]images/dock/barside.png" />
+		<Asset id="cliff" url="[base.url]images/dock/cliff.png" />
+		<Asset id="farstumps" url="[base.url]images/dock/farstumps.png" />
+		<Asset id="midstumps" url="[base.url]images/dock/midstumps.png" />
+		<Asset id="rearstumps" url="[base.url]images/dock/rearstumps.png" />
+		<Asset id="rock" url="[base.url]images/dock/rock.png" />
+		<Asset id="docksdoor1" url="[base.url]images/docks/docksdoor1.png"/>
+		<Asset id="docksdoor2" url="[base.url]images/docks/docksdoor2.png"/>
+		<Asset id="grogbg" url="[base.url]images/docks/grogbg.png"/>
+		<Asset id="foreground" url="[base.url]images/docks/foreground.png"/>
+		<Asset id="music" url="[base.url]sounds/docks/music.mp3" />
+		<Asset id="bar" url="[base.url]sounds/docks/bar.mp3" />
+	</Assets>
+
+	<Trigger event="OnEnterCollision" gameObject="{Room.docksdoor1}">	
+		<ChangeRoom roomName="mansion" useServer="false"/>
+	</Trigger>	
+
+	<Trigger event="OnEnterCollision" gameObject="{Room.docksdoor2}">	
+		<ChangeRoom roomName="huts" useServer="false"/>
+	</Trigger>	
+
+	<Trigger event="OnClick" gameObject="{Room.click}">	
+		<MoveTo gameObject="{Room.player}" x="{Room.player.x}" y="{Room.player.y}" targetX="{Event.x}" targetY="{Event.y}"/>
+	</Trigger>
+	
+	<Trigger event="OnClick" gameObject="{Room.grogbg}">	
+		<AddToBackpack collectableID="grog"/>
+		<RemoveFromWorld gameObject="{Room.grogbg}"/>
+		<CompleteObjective objective="{Quests.grogQuest.findTheGrog}"/>
+	</Trigger>	
+	
+	<Trigger event="OnDragDrop" gameObject="{Room.player}">	
+		<If expression="({Event.dragInitiator.name}=={Rum})">
+			<Then>
+				<ShowBubble gameObject="{Room.player}" message="Ah Rum, an old friend..." yOffset="-150"/>
+				<RemoveFromBackpack gameObject="{Event.dragInitiator}"/>				
+			</Then>
+		</If>
+	</Trigger>	
+	
+	<Behaviour>
+		<onFixUp>
+			<If expression="({Quests.grogQuest.active}=={true})">
+				<Then>
+					<CompleteObjective objective="{Quests.grogQuest.visitTheDocks}"/>
+				</Then>
+			</If>
+		</onFixUp>
+	</Behaviour>	
+
+</ChatRoom>	
