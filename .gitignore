@@ -2,6 +2,8 @@
 .DS_Store
 .actionScriptProperties
 .project
+.flexProperties
+.settings
 
 # Can also ignore all directories and files in a directory.
 bin/*
