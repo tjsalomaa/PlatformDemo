@@ -6,6 +6,8 @@
 	
 	<mx:Script>
 		<![CDATA[
+			import uk.co.dubit.logging.LoggingPanel;
+			import uk.co.dubit.logging.LoggingPopUp;
 			import com.dubitplatform.views.RoomListView;
 			
 			import mx.managers.PopUpManager;
@@ -18,6 +20,7 @@
 			private var controlPanel : ControlPanel;
 			private var backpackView : BackpackView;
 			private var roomListView : RoomListView;
+			private var loggingPanel : LoggingPanel;
 			private var branchingConversationView : BranchingConversationView;
 			
 			private function onCreationComplete () : void
@@ -27,24 +30,36 @@
 				controlPanel.visible = false;	
 				
 				chatRoomSkinContainer.filters = [new DropShadowFilter(0, 0, 0, 0.7, 40, 40, 1, 3)];
+				
+				loggingPanel = PopUpManager.createPopUp(this, LoggingPanel) as LoggingPanel;
+				loggingPanel.visible = false;
 			}
 			
             public function openControlPanel () : void
             {            	
-            	PopUpManager.centerPopUp(controlPanel);
+            	if (!controlPanel.visible) PopUpManager.centerPopUp(controlPanel);
+            	PopUpManager.bringToFront(controlPanel);
             	controlPanel.visible = true;
-            }			
+            }	
+            
+            public function openDebugPanel () : void
+            {            	
+             	if (!loggingPanel.visible) PopUpManager.centerPopUp(loggingPanel);
+             	PopUpManager.bringToFront(loggingPanel);
+            	loggingPanel.visible = true;           	 
+            }	            		
 		]]>
 	</mx:Script>
 				
 	<ui:ChatRoomSkinContainer id="chatRoomSkinContainer" width="100%" height="100%" x="248" y="150" horizontalScrollPolicy="off" verticalScrollPolicy="off" />
 
-	<!--mx:Image source="@Embed('/../assets/MIScreenOverlay.png')" width="100%" height="100%" scaleContent="false" mouseChildren="true" buttonMode="false" mouseEnabled="false"/-->
-
 	<dialogue:DialogueSkinContainer width="100%" height="100%"/>
 	
 	<mx:Box width="100%" backgroundColor="0x333333" bottom="0">
-		<mx:ControlBar width="100%"><mx:Button label="Launch Control Panel" click="openControlPanel();"/></mx:ControlBar>		
+		<mx:ControlBar width="100%">
+			<mx:Button label="World Panel" click="openControlPanel();"/>
+			<mx:Button label="Debug Panel" click="openDebugPanel();"/>
+		</mx:ControlBar>		
 	</mx:Box>
 		
 </app:NexusBase>

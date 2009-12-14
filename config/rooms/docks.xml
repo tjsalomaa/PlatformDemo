@@ -4,17 +4,17 @@
 	<Attribute key="startX" value="1284" type="number" />
 	<Attribute key="startY" value="471" type="number" />
 
-	<ActorMouseMovementProxy id="playerMovementProxy"/>
-	<TargetedCollisionProxy id="targetedCollisionProxy" target="{Room.player}"/>	
+	<MouseMovementController/>
+	<CollisionController target="{Room.player}"/>	
 
 	<Collision width="3024" height="518" id="walkableArea" solid="true">
-		<Asset assetID="hit" x="0" y="0" />
+		<Image assetID="hit"/>
 	</Collision>
 
 	<Filters id="playerFilters">	
 		<DepthFilter id="playerDepthFilter" scaleBack="-0.2" scaleFront="0.3" />
 		<MultiplyFilter id="lightFilter" >
-			<Asset id="light_filter" assetID="light_filter_asset" x="0" y="0" />
+			<Image id="light_filter" assetID="light_filter_asset"/>
 		</MultiplyFilter>
 	</Filters>
 	
@@ -54,14 +54,13 @@
 		<Asset id="click" url="[base.url]images/docks/click.gif"/>
 	    <Asset id="light_filter_asset" url="[base.url]images/docks/light.jpg"/>
 		<Asset id="background" url="[base.url]images/docks/background.jpg"/>
-		<Asset id="player" url="[base.url]images/avatar/player.png" />
-		<Asset id="barrelsfront" url="[base.url]images/dock/barrelsfront.png" />
-		<Asset id="barside" url="[base.url]images/dock/barside.png" />
-		<Asset id="cliff" url="[base.url]images/dock/cliff.png" />
-		<Asset id="farstumps" url="[base.url]images/dock/farstumps.png" />
-		<Asset id="midstumps" url="[base.url]images/dock/midstumps.png" />
-		<Asset id="rearstumps" url="[base.url]images/dock/rearstumps.png" />
-		<Asset id="rock" url="[base.url]images/dock/rock.png" />
+		<Asset id="barrelsfront" url="[base.url]images/docks/barrelsfront.png" />
+		<Asset id="barside" url="[base.url]images/docks/barside.png" />
+		<Asset id="cliff" url="[base.url]images/docks/cliff.png" />
+		<Asset id="farstumps" url="[base.url]images/docks/farstumps.png" />
+		<Asset id="midstumps" url="[base.url]images/docks/midstumps.png" />
+		<Asset id="rearstumps" url="[base.url]images/docks/rearstumps.png" />
+		<Asset id="rock" url="[base.url]images/docks/rock.png" />
 		<Asset id="docksdoor1" url="[base.url]images/docks/docksdoor1.png"/>
 		<Asset id="docksdoor2" url="[base.url]images/docks/docksdoor2.png"/>
 		<Asset id="grogbg" url="[base.url]images/docks/grogbg.png"/>
@@ -89,6 +88,7 @@
 	</Trigger>	
 	
 	<Trigger event="OnDragDrop" gameObject="{Room.player}">	
+		<Trace message="Dropping {Event.dragInitiator.name} on player"/>
 		<If expression="({Event.dragInitiator.name}=={Rum})">
 			<Then>
 				<ShowBubble gameObject="{Room.player}" message="Ah Rum, an old friend..." yOffset="-150"/>

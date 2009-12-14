@@ -4,22 +4,22 @@
 	<Attribute key="startX" value="297" type="number" />
 	<Attribute key="startY" value="567" type="number" />
 
-	<ActorMouseMovementProxy id="playerMovementProxy"/>
-	<TargetedCollisionProxy id="targetedCollisionProxy" target="{Room.player}"/>	
+	<MouseMovementController/>
+	<CollisionController target="{Room.player}"/>	
 		
 	<Collision width="1296" height="700" id="walkableArea" solid="true">
-		<Asset assetID="hit" x="0" y="0" />
+		<Image assetID="hit"/>
 	</Collision>
 	
 	<Filters id="playerFilters">
 		<DepthFilter id="playerDepthFilter" scaleBack="-1.4" scaleFront="0.001" />
 		<MultiplyFilter id="lightFilter" >
-			<Asset id="light_filter" assetID="light_filter_asset" x="0" y="0" />
+			<Image id="light_filter" assetID="light_filter_asset" />
 		</MultiplyFilter>	
 	</Filters>
 	
 	<Sounds target="{Room.player}" >
-		<Sound id="backgroundMusic" play="true" looping="true" assetID="music" />
+		<!--<Sound id="backgroundMusic" play="true" looping="true" assetID="music" />-->
 	</Sounds>
 	
 	<Scene id="scene" target="{Room.player}" viewportWidth="784" viewportHeight="445" width="1296" height="700">
@@ -47,9 +47,8 @@
 		<Asset id="click" url="[base.url]images/mansion/click.jpg"/>
 	    <Asset id="light_filter_asset" url="[base.url]images/mansion/light.jpg"/>
 		<Asset id="background" url="[base.url]images/mansion/background.jpg"/>
-		<Asset id="player" url="[base.url]images/avatar/player.png" />
 		<Asset id="music" url="[base.url]sounds/mansion/music.mp3" />
-		<Asset id="shrubs1" url="[base.url]images/massion/shrubs1.png"/>
+		<Asset id="shrubs1" url="[base.url]images/mansion/shrubs1.png"/>
 		<Asset id="shrubs2" url="[base.url]images/mansion/shrubs2.png"/>
 		<Asset id="porch" url="[base.url]images/mansion/porch.png"/>
 		<Asset id="rearporch" url="[base.url]images/mansion/rearporch.png"/>

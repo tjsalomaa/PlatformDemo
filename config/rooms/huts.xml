@@ -4,17 +4,17 @@
 	<Attribute key="startX" value="1667" type="number" />
 	<Attribute key="startY" value="442" type="number" />
 
-	<ActorMouseMovementProxy id="playerMovementProxy"/>
-	<TargetedCollisionProxy id="targetedCollisionProxy" target="{Room.player}"/>	
+	<MouseMovementController/>
+	<CollisionController target="{Room.player}"/>	
 		
 	<Collision width="2000" height="540" id="walkableArea" solid="true">
-		<Asset assetID="hit" x="0" y="0" />
+		<Image assetID="hit"/>
 	</Collision>
 	
 	<Filters id="playerFilters">	
 		<DepthFilter id="playerDepthFilter" scaleBack="-1.3" scaleFront="0.25" />
 		<MultiplyFilter id="lightFilter" >
-			<Asset id="light_filter" assetID="light_filter_asset" x="0" y="0" />
+			<Image id="light_filter" assetID="light_filter_asset"/>
 		</MultiplyFilter>
 	</Filters>
 	
@@ -47,8 +47,7 @@
 		<Asset id="click" url="[base.url]images/huts/click.png"/>
 		<Asset id="light_filter_asset" url="[base.url]images/huts/light.jpg"/>
 		<Asset id="background" url="[base.url]images/huts/background.png"/>
-		<Asset id="foreground" url="[base.url]images/huts/foreground.png"/>
-		<Asset id="player" url="[base.url]images/avatar/player.png" />	
+		<Asset id="foreground" url="[base.url]images/huts/foreground.png"/>	
 		<Asset id="foliageright" url="[base.url]images/huts/foliageright.png" />	
 		<Asset id="posts" url="[base.url]images/huts/posts.png" />	
 		<Asset id="lechuck" url="[base.url]images/huts/lechuck.png" />	
