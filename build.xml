@@ -55,6 +55,7 @@
 			<fileset dir="${dir.assets}/html">
 				<include name="*.html" />
 				<include name="*.js" />
+				<include name="*.swf" />
 			</fileset>
 			<filterchain>
 				<replacetokens>
@@ -72,7 +73,7 @@
 			<arg line="-sp+=${dir.vendor}"/>	
 			<arg line="-library-path+=${dir.lib}/platform-library.swc"/>
 			<arg line="${dir.src}/${build.application}.mxml"/>
-			<arg line="-o='${dir.bin}/${build.application}.swf'"/>
+			<arg line="-o='${dir.assets}/html/${build.application}.swf'"/>
 			<arg line="-compiler.debug=${build.debug}"/>
 			<arg line="-target-player=${build.version}"/>
 			<arg line="-warnings=${build.warnings}"/>
