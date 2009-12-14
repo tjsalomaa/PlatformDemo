@@ -1,4 +1,4 @@
-<project name="DubitPlatform" default="full-build">
+<project name="DubitPlatform" default="config-build">
 
 	<taskdef name="xcluder" classname="gr.abiss.xcluder.XercesXcluder">
 		<classpath>
@@ -83,7 +83,7 @@
 	
 	<target name="clean">
 		<echo message="Beginning clean up of files and folders from bin directory"/>
-		<delete includeemptydirs="true">
+		<delete includeemptydirs="true" quiet="true">
 			<fileset dir="${dir.bin}" includes="**/*" excludes="*.swf"/>
 		</delete>
 		<echo message="Completed clean up"/>
