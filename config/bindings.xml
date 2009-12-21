@@ -332,4 +332,21 @@
 		<Attribute required="true" name="targetContainer" type="string" description="The skin container" defaultValue="RoomPreloader"/>		
 	</Binding>
 	
+	<!-- EXPERIENCE -->
+	<Binding name="Experience" class="uk.co.dubit.platform.components.experience.Experience" factory="uk.co.dubit.platform.scriptEngine.gameObject.GameObjectFactory">
+		<Attribute required="true" name="skin" type="string" description="The skin class" defaultValue="com.dubitplatform.views.ExperienceView"/>
+		<Attribute required="true" name="targetContainer" type="string" description="The skin container" defaultValue="Experience"/>
+		<Attribute required="true" name="attachSkin" type="boolean" description="True if the skin should be attached immediately" defaultValue="true"/>	
+	</Binding>	
+	
+	<Binding name="Level" class="uk.co.dubit.platform.components.experience.Level" factory="uk.co.dubit.platform.scriptEngine.gameObject.GameObjectFactory" >
+		<Attribute required="true" name="points" type="number" description="The number of experience points the player must obtain to reach this level."/>
+		<Attribute required="true" name="name" type="string" description="The name of the level"/>
+		<Attribute required="true" name="message" type="string" description="A message shown when the player reaches that level"/>
+	</Binding>	
+	
+	<Binding name="AwardExperiencePoints" class="uk.co.dubit.platform.components.experience.behaviours.AwardExperiencePoints">
+		<Attribute required="true" name="points" type="number" description="The number of experience points to award"/>
+	</Binding>	
+	
 </Bindings>

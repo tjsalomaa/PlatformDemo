@@ -58,6 +58,7 @@
 	
 	<Trigger event="OnClick" gameObject="{Room.click}">	
 		<MoveTo gameObject="{Room.player}" x="{Room.player.x}" y="{Room.player.y}" targetX="{Event.x}" targetY="{Event.y}"/>
+		<AwardExperiencePoints points="8"/>
 	</Trigger>
 
 	<Trigger event="OnEnterCollision" gameObject="{Room.mansiondoor1}">	

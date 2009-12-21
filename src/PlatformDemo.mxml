@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <app:NexusBase xmlns:mx="http://www.adobe.com/2006/mxml" xmlns:app="uk.co.dubit.platform.app.*" xmlns:skin="uk.co.dubit.platform.components.skin.*" xmlns:ui="uk.co.dubit.platform.components.rooms.ui.*" xmlns:backpack="uk.co.dubit.platform.components.backpack.*" xmlns:quest="uk.co.dubit.platform.components.quest.*"
-			   width="100%" height="100%" layout="absolute" backgroundColor="black" horizontalScrollPolicy="off" verticalScrollPolicy="off" creationComplete="onCreationComplete();" xmlns:dialogue="uk.co.dubit.platform.components.dialogue.*">
+			   width="100%" height="100%" layout="absolute" backgroundColor="black" horizontalScrollPolicy="off" verticalScrollPolicy="off" creationComplete="onCreationComplete();" xmlns:dialogue="uk.co.dubit.platform.components.dialogue.*" xmlns:experience="uk.co.dubit.platform.components.experience.*">
 	
 	<mx:Style source="style/style.css"/>
 	
 	<mx:Script>
 		<![CDATA[
+			import com.dubitplatform.views.ExperienceView;
 			import uk.co.dubit.logging.LoggingPanel;
 			import uk.co.dubit.logging.LoggingPopUp;
 			import com.dubitplatform.views.RoomListView;
@@ -21,6 +22,7 @@
 			private var backpackView : BackpackView;
 			private var roomListView : RoomListView;
 			private var loggingPanel : LoggingPanel;
+			private var experienceView : ExperienceView;
 			private var branchingConversationView : BranchingConversationView;
 			
 			private function onCreationComplete () : void
@@ -51,9 +53,16 @@
 		]]>
 	</mx:Script>
 				
+	<mx:ApplicationControlBar width="784" x="248" y="110">
+		<mx:Box paddingTop="4" width="100%">
+			<experience:ExperienceSkinContainer width="100%" height="20"/>
+		</mx:Box>
+	</mx:ApplicationControlBar>			
+				
+				
 	<ui:ChatRoomSkinContainer id="chatRoomSkinContainer" width="100%" height="100%" x="248" y="150" horizontalScrollPolicy="off" verticalScrollPolicy="off" />
 
-	<dialogue:DialogueSkinContainer width="100%" height="100%"/>
+	<dialogue:DialogueSkinContainer width="100%" height="100%" x="260" y="510"/>
 	
 	<mx:Box width="100%" backgroundColor="0x333333" bottom="0">
 		<mx:ControlBar width="100%">

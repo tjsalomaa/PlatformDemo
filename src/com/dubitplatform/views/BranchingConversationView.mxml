@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<DialogueViewBase xmlns="uk.co.dubit.platform.components.dialogue.*" xmlns:mx="http://www.adobe.com/2006/mxml" width="760" height="200" x="260" y="510" verticalScrollPolicy="off" horizontalScrollPolicy="off" creationComplete="onCreationComplete();">
+<DialogueViewBase xmlns="uk.co.dubit.platform.components.dialogue.*" xmlns:mx="http://www.adobe.com/2006/mxml" width="760" height="200" verticalScrollPolicy="off" horizontalScrollPolicy="off" creationComplete="onCreationComplete();">
 	
 	<mx:Script>
 		<![CDATA[

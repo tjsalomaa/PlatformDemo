@@ -37,5 +37,20 @@
 		<Location name="Dark Docks" roomID="docks" id="darkdocksRoom"/>
 		<Location name="Mansion" roomID="mansion" id="mansionRoom"/>
 	</Map>
+		
+	<Experience points="0">
+		<Level points="0" name="Getting Started" message="" />
+		<Level points="20" name="New Arrival" message="Congratualtion you are now a new arrival, and we've awarded you a basic ball!" />
+		<Level points="50" name="Learner" message="Blah blah"/>
+		<Level points="100" name="Playful" message="Blah blah"/>
+		<Triggers>
+			<OnLevelUp>
+				<Trace message="OnLevelUp level={Event.level}"/>
+			</OnLevelUp>
+			<OnAwardedExperience>
+				<Trace message="OnAwardedExperience level={Event.level}"/>
+			</OnAwardedExperience>
+		</Triggers>
+	</Experience>	
 	
 </SessionRoom>
