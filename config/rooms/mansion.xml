@@ -19,7 +19,7 @@
 	</Filters>
 	
 	<Sounds target="{Room.player}" >
-		<!--<Sound id="backgroundMusic" play="true" looping="true" assetID="music" />-->
+		<Sound id="backgroundMusic" play="true" looping="true" assetID="music" />
 	</Sounds>
 	
 	<Scene id="scene" target="{Room.player}" viewportWidth="784" viewportHeight="445" width="1296" height="700">
