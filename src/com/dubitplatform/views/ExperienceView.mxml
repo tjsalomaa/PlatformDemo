@@ -1,25 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ExperienceViewBase xmlns="uk.co.dubit.platform.components.experience.*" xmlns:mx="http://www.adobe.com/2006/mxml" width="100%">
+<ExperienceViewBase xmlns="uk.co.dubit.platform.components.experience.*" xmlns:mx="http://www.adobe.com/2006/mxml" width="100%" creationComplete="onCreationComplete(event);">
 	
 	<mx:Script>
 		<![CDATA[
 			
-			override protected function onPointsAwarded () : void
+			private function updateLevel () : void
 			{
-				progressBar.minimum = level.points;
-				progressBar.maximum = nextLevel.points;
-				progressBar.setProgress(points, nextLevel.points);
+				progressBar.minimum = experience.level.points;
+				progressBar.maximum = experience.nextLevel.points;
+				progressBar.setProgress(experience.points, experience.nextLevel.points);
+				
+				levelLabel.text = "Level " + experience.level.index + " : " + experience.level.name + " (" + experience.points + "/" + experience.nextLevel.points + ")";	
+			}
+			
+			override public function onAwardExperience (points : int) : void
+			{
+				updateLevel();
+			}	
+			
+			public function onCreationComplete (event : Event) : void
+			{
+				updateLevel();
 			}	
 		
 		]]>
 	</mx:Script>
 	
-	<mx:HBox width="100%">
-		<mx:Label text="Level {level.index} - {level.name}" fontWeight="bold"/>
-		<mx:Box paddingTop="3">
+	<mx:HBox width="400">
+		<mx:Box width="100" paddingTop="5">
 			<mx:ProgressBar id="progressBar" mode="manual" width="100" label=""/>	
 		</mx:Box>
-		<mx:Label text="{points + '/' + nextLevel.points }" width="50"/>			
+		<mx:Label id="levelLabel" width="100%" paddingTop="2"/>
 	</mx:HBox>
-		
+	
 </ExperienceViewBase>

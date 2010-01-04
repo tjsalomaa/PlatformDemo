@@ -31,11 +31,22 @@
 			</loadVitalAssetError>
 		</ChangeRoom>
 	</BehaviourDefinition>
-	
+
+	<!-- TODO: Implement Map Events -->
 	<Map>
-.		<Location name="Cannibal Town" roomID="huts" id="tacotikitownRoom"/>
-		<Location name="Dark Docks" roomID="docks" id="darkdocksRoom"/>
-		<Location name="Mansion" roomID="mansion" id="mansionRoom"/>
+.		<Location name="Cannibal Town" roomID="huts" id="tacotikitownRoom" visible="false" visited="false"/>
+		<Location name="Dark Docks" roomID="docks" id="darkdocksRoom" visible="false" visited="false"/>
+		<Location name="Mansion" roomID="mansion" id="mansionRoom" visible="true" visited="false"/>
+		<Location name="Street" roomID="street" id="mansionRoom" visible="true" visited="false"/>
+		
+		<Triggers>
+			<OnLocationVisible>
+				<Trace message="Location visible location={Event.location}"/>
+			</OnLocationVisible>
+			<OnLocationVisited>
+				<Trace message="Location visited location={Event.location}"/>
+			</OnLocationVisited>		
+		</Triggers>	
 	</Map>
 		
 	<Experience points="0">
@@ -43,14 +54,131 @@
 		<Level points="20" name="New Arrival" message="Congratualtion you are now a new arrival, and we've awarded you a basic ball!" />
 		<Level points="50" name="Learner" message="Blah blah"/>
 		<Level points="100" name="Playful" message="Blah blah"/>
+		<Level points="150" name="Playful 2" message="Blah blah"/>
+		<Level points="200" name="Playful 3" message="Blah blah"/>
+		<Level points="300" name="Playful 4" message="Blah blah"/>
 		<Triggers>
 			<OnLevelUp>
 				<Trace message="OnLevelUp level={Event.level}"/>
+				<AwardSkillPoints points="1"/>
 			</OnLevelUp>
 			<OnAwardedExperience>
-				<Trace message="OnAwardedExperience level={Event.level}"/>
+				<Trace message="OnAwardedExperience level={Experience.level}"/>
 			</OnAwardedExperience>
 		</Triggers>
-	</Experience>	
+	</Experience>
+	
+	<Skills points="0">
+		<Skill id="exploring" name="Exploring" points="1" maximum="20" description="This skill makes it easier for you to find things"/>
+		<Skill id="inventing" name="Inventing" points="1" maximum="20" description="This skill makes it easier for you to invent things"/>
+		<Skill id="racing" name="Racing" points="1" maximum="20" description="This skill makes it easier for you to race"/>
+		<Triggers>
+			<OnAwardedSkillPoints>
+				<Trace message="OnSkillPointAwarded points={Skills.points}"/>
+			</OnAwardedSkillPoints>
+			<OnUsedSkillPoints>
+				<Trace message="OnUsedSkillPoints skill={Event.skill}"/>
+			</OnUsedSkillPoints>
+		</Triggers>
+	</Skills>	
+	
+	<!-- CHANGE BACKPACK TO USE POSSESSION -->
+
+	<Backpack>
+		<Possession id="apple" name="Apple" description="A shiny red apple, looks tasty! " previewURL="images/backpack/apple.png" quantity="1"/>
+		<Possession id="grog" name="Grog" description="Ahh, the drink of pirates " previewURL="images/backpack/grog.png" quantity="0"/>
+		<Possession id="rainwater" name="Rainwater" description="A vessel of rainwater " previewURL="images/backpack/rainwater.png" quantity="1"/>
+		<Possession id="rum" name="Rum" description="Rum, the poor mans grog " previewURL="images/backpack/rum.png" quantity="1"/>
+		<Possession id="rum_rainwater" name="Watery Rum" description="Someones mixed dirty water with this perfectly good rum!" previewURL="images/backpack/grog.png" quantity="0"/>
+		<Combinations>
+			<Combination condition="({Skills.inventing.points}>{1})" collectable1="{Backpack.rum}" collectable2="{Backpack.rainwater}" success="Well done blah" fail="Oh dear you're not smart enough!"/>
+		</Combinations>	
+		<Triggers>
+			<OnAdded>
+				<Trace message="OnAddedCollectable {Event.possession.id}"/>
+			</OnAdded>
+			<OnRemoved>
+				<Trace message="OnRemovedCollectable {Event.possession.id}"/>
+			</OnRemoved>
+			<OnSelected>
+				<Trace message="OnSelectedCollectable {Event.possession.id}"/>
+			</OnSelected>			
+			<OnCombinationSuccess>
+				<Trace message="Successfully combined {Event.possession1.name} with {Event.possession2.name} message={Event.combination.success}"/>
+			</OnCombinationSuccess>
+			<OnCombinationFail>
+				<Trace message="Failed to combine {Event.possession1.name} with {Event.possession2.name} message={Event.combination.fail}"/>
+			</OnCombinationFail>
+			<OnCombinationUnknown>
+				<Trace message="I can't combinate a {Event.possession1.name} with a {Event.possession2.name}!"/>
+			</OnCombinationUnknown>	
+		</Triggers>
+	</Backpack>
+	
+	<Quest id="grogQuest" name="Quest 1: Find some grog for the drunken old pirate" active="false" complete="false" description="Poor ol' Le Chuck is down on his luck and suffering from a dreadful hangover. Before he'll talk to you any more you'll need to find him some Grog!">
+		<Objective name="1) Visit the docks and find the Scumm Bar" id="visitTheDocks" complete="false" active="false"/>
+		<Objective name="2) Search the Bar for a bottle of Grog" id="findTheGrog" complete="false" active="false"/>
+		<Objective name="3) Bring the Grog back to Le Chuck" id="returnTheGrog" complete="false" active="false"/>
+		<Triggers>
+			<OnBeginQuest>
+				<Trace message="Quest Begun"/>
+			</OnBeginQuest>
+			<OnCompleteQuest>
+				<Trace message="Quest Complete"/>
+			</OnCompleteQuest>
+			<OnBeginObjective>
+				<Trace message="Objective Begun '{Event.objective.name}'"/>
+			</OnBeginObjective>
+			<OnCompleteObjective>
+			</OnCompleteObjective> 
+		</Triggers>
+	</Quest>			
+	
+	<Achievements>
+		<Achievement id="visitsToFriends" name="Visits To Friends" score="0" suffix="Visits" description="How many times you have visited your friends">
+			<Trophy name="Pet About Towm" score="25" imageURL="images/trophies/visitsToFriends_1.png"/>
+			<Trophy name="Vizier of Visits" score="100" imageURL="images/trophies/visitsToFriends_2.png"/>
+			<Trophy name="Social Whirlwind" score="300" imageURL="images/trophies/visitsToFriends_3.png"/>
+		</Achievement>	
+		<Achievement id="playingCatch" name="Longest Sequence Of Ball Passes" score="15" suffix="Passes" description="How many times have you managed to catch the ball in a row">
+			<Trophy name="Playing Softball" score="15" imageURL="images/trophies/ballPasses_1.png"/>
+			<Trophy name="Playing Hardball" score="30" imageURL="images/trophies/ballPasses_2.png"/>
+			<Trophy name="Pro Baller" score="50" imageURL="images/trophies/ballPasses_3.png"/>
+		</Achievement>
+		<Achievement id="coinsSpent" name="Coins Spent" score="10000000" suffix="Spent Coins" description="The number of coins you've spent in the world">
+			<Trophy name="Window Shopper" score="500" imageURL="images/trophies/coinsSpent_1.png"/>
+			<Trophy name="Mall Rat" score="3000" imageURL="images/trophies/coinsSpent_2.png"/>
+			<Trophy name="Big Spender" score="10000" imageURL="images/trophies/coinsSpent_3.png"/>
+		</Achievement>		
+		<Triggers>
+			<OnAwardedTrophy>
+				<Trace message="Awarded trophy {Event.trophy.name} : {Event.achievement.name}"/>
+			</OnAwardedTrophy>	
+		</Triggers>				
+	</Achievements>	
+	
+	<Collections>
+		<Collection id="animalCollection" name="Animal Collection" description="Collect all the animals hidden around the world and get something super awesome when you complete the collection!">
+			<Collectable id="dog" name="Dog" imageURL="images/collections/animals/dog.png" quantity="0"/>
+			<Collectable id="elephant" name="Elephant" imageURL="images/collections/animals/elephant.png" quantity="0"/>
+			<Collectable id="lion" name="Lion" imageURL="images/collections/animals/lion.png" quantity="0"/>
+			<Collectable id="fox" name="Fox" imageURL="images/collections/animals/fox.png" quantity="0"/>
+			<Collectable id="panda" name="Panda" imageURL="images/collections/animals/panda.png" quantity="0"/>
+		</Collection>
+		<Collection id="foodCollection" name="Food Collection" description="Collect all the food hidden around the world and get something super coolio when you've collected them all!">
+			<Collectable id="coffee" name="Coffee" imageURL="images/collections/food/coffee.png" quantity="0"/>
+			<Collectable id="muffin" name="Muffin" imageURL="images/collections/food/muffin.png" quantity="0"/>
+			<Collectable id="sugar" name="Sugar" imageURL="images/collections/food/sugar.png" quantity="0"/>
+			<Collectable id="toast" name="Toast" imageURL="images/collections/food/toast.png" quantity="0"/>
+		</Collection>			 
+		<Triggers>
+			<OnFoundCollectable>
+				<Trace message="Found collectable {Event.collection.name} : {Event.collectable.name}"/>
+			</OnFoundCollectable>
+			<OnCompleteCollection>
+				<Trace message="Completed collection {Event.collection.name} : {Event.collectable.name}"/>
+			</OnCompleteCollection>			
+		</Triggers>	
+	</Collections>		
 	
 </SessionRoom>

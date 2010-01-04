@@ -3,7 +3,7 @@
 
 	<mx:VBox width="110" height="110" paddingRight="5" paddingLeft="5" horizontalAlign="center">
 		<mx:Box borderColor="black" borderStyle="solid" paddingBottom="4" paddingTop="5" paddingLeft="5" paddingRight="4">
-			<platform:SmoothImage toolTip="{collectable.description} ({collectable.quantity})" source="{data.previewURL}" width="80" height="80" scaleContent="true"/>	
+			<platform:SmoothImage toolTip="{collectable.description} ({collectable.quantity})" source="{data.previewURL}" width="90" height="80" scaleContent="true"/>	
 		</mx:Box>
 	</mx:VBox>
 	

@@ -1,9 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ChatRoom id="docks" xmlns:xi="http://www.w3.org/2001/XInclude">
 
-	<Attribute key="startX" value="1284" type="number" />
-	<Attribute key="startY" value="471" type="number" />
-
 	<MouseMovementController/>
 	<CollisionController target="{Room.player}"/>	
 
@@ -79,6 +76,7 @@
 
 	<Trigger event="OnClick" gameObject="{Room.click}">	
 		<MoveTo gameObject="{Room.player}" x="{Room.player.x}" y="{Room.player.y}" targetX="{Event.x}" targetY="{Event.y}"/>
+		<Trace message="Test {Rooms.lastRoomID}"/>
 	</Trigger>
 	
 	<Trigger event="OnClick" gameObject="{Room.grogbg}">	
@@ -99,12 +97,28 @@
 	
 	<Behaviour>
 		<onFixUp>
+			<UpdateAchievementScore score="110" achievementID="visitsToFriends"/>
+			
 			<If expression="({Quests.grogQuest.active}=={true})">
 				<Then>
 					<CompleteObjective objective="{Quests.grogQuest.visitTheDocks}"/>
 				</Then>
 			</If>
 		</onFixUp>
-	</Behaviour>	
-
+	</Behaviour>
+	
+	<Behaviour>
+		<onInit>
+			<!-- Set up the start positions for the room -->
+			<Switch value="{Rooms.lastRoomID}">
+				<Mansion>
+					<SetValues target="{Room}" startX="100" startY="350"/>
+				</Mansion>
+				<Default>
+					<SetValues target="{Room}" startX="2600" startY="438"/>
+				</Default>		
+			</Switch>
+		</onInit>
+	</Behaviour>
+	
 </ChatRoom>	

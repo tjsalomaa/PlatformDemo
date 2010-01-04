@@ -4,8 +4,14 @@
 	<Attribute key="startX" value="1667" type="number" />
 	<Attribute key="startY" value="442" type="number" />
 
-	<MouseMovementController/>
+	<MouseMovementController yVelocityScale="0.3"/>
 	<CollisionController target="{Room.player}"/>	
+	
+	<VerbController>
+		<Verb id="OnLookAt" name="Look at"/>
+		<Verb id="OnPickUp" name="Pick up"/>
+		<Verb id="OnTalkTo" name="Talk to"/>
+	</VerbController>		
 		
 	<Collision width="2000" height="540" id="walkableArea" solid="true">
 		<Image assetID="hit"/>
@@ -35,7 +41,7 @@
 			<DisplayObject2D id="arch" assetID="arch" x="0" y="408" originX="0" originY="408" mouseEnabled="false"/>
 			<DisplayObject2D id="foliageright" assetID="foliageright" x="0" y="508" originX="0" originY="508" mouseEnabled="false"/>
 			<DisplayObject2D id="posts" assetID="posts" x="0" y="478" originX="0" originY="478" mouseEnabled="false"/>
-			<DisplayObject2D id="lechuck" name="Le Chuck" assetID="lechuck" x="930" y="496" originX="62" originY="184" mouseEnabled="true"/>
+			<DisplayObject2D id="lechuck" name="Le Chuck" assetID="lechuck" x="930" y="496" originX="62" originY="184" mouseEnabled="true" verbEnabled="true" clickThrough="true"/>
 			<DisplayObject2D id="hutsdoor1" assetID="hutsdoor1" x="1700" y="374" originX="75" originY="100" mouseEnabled="true" useHandCursor="true" distance = "70" clickThrough="true" collidable="true"/>
 		</ZSortingDisplayObject>
 		<DisplayObject2D id="foreground" assetID="foreground" x="0" y="0" originX="0" originY="0" mouseEnabled="false"/>
@@ -63,9 +69,14 @@
 		<ChangeRoom roomName="docks" useServer="false"/>
 	</Trigger>	
 	
-	<Trigger event="OnClick" gameObject="{Room.lechuck}">
+	<Trigger event="OnTalkTo" gameObject="{Room.lechuck}">
+		<MoveTo gameObject="{Room.player}" x="{Room.player.x}" y="{Room.player.y}" targetX="980" targetY="506"/>
 		<BeginDialogue statement="{Room.talkToPirate}" npc="{Room.click}" player="{Room.player}" messageDelay="1000" dialogueID="dialogue" />
 	</Trigger>
+
+	<Trigger event="OnLookAt" gameObject="{Room.lechuck}">
+		<ShowBubble gameObject="{Room.player}" message="It looks like a big scary pirate!"/>
+	</Trigger>	
 	
 	<Dialogue id="dialogue">
 		<Triggers>	
@@ -74,10 +85,10 @@
 			<OnMessage>
 				<If expression="({Event.messageTarget}=={Room.player})">
 					<Then>
-						<ShowBubble gameObject="{Room.player}" message="{Event.message}" yOffset="-160"/>
+						<ShowBubble gameObject="{Room.player}" message="{Event.message}"/>
 					</Then>
 					<Else>
-						<ShowBubble gameObject="{Room.lechuck}" message="{Event.message}" yOffset="-190"/>
+						<ShowBubble gameObject="{Room.lechuck}" message="{Event.message}"/>
 					</Else>
 				</If>
 			</OnMessage>

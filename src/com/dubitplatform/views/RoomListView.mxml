@@ -2,8 +2,8 @@
 <MapViewBase xmlns="uk.co.dubit.platform.components.map.*" xmlns:mx="http://www.adobe.com/2006/mxml" width="100%" height="100%">
 	
 	<mx:VBox width="100%" height="100%" paddingTop="15">
-		<mx:Repeater id="locationsRepeater" dataProvider="{ locations }" >
-			<mx:Button label="{locationsRepeater.currentItem.name}"  click="{changeRoomByName(event.target.label)}" width="100%" paddingBottom="5"/>
+		<mx:Repeater id="locationsRepeater" dataProvider="{ map.visibleLocations }" >
+			<mx:Button label="{locationsRepeater.currentItem.name + (locationsRepeater.currentItem.visited ? ' (visited)' : '') }"  click="{changeRoomByName(event.target.label)}" width="100%" paddingBottom="5"/>
 		</mx:Repeater>		
 	</mx:VBox>
 	

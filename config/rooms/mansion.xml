@@ -4,8 +4,13 @@
 	<Attribute key="startX" value="297" type="number" />
 	<Attribute key="startY" value="567" type="number" />
 
-	<MouseMovementController/>
+	<MouseMovementController yVelocityScale="0.5"/>
 	<CollisionController target="{Room.player}"/>	
+	<VerbController>
+		<Verb id="OnLookAt" name="Look at"/>
+		<Verb id="OnPickUp" name="Pick up"/>
+		<Verb id="OnTalkTo" name="Talk to"/>
+	</VerbController>	
 		
 	<Collision width="1296" height="700" id="walkableArea" solid="true">
 		<Image assetID="hit"/>
@@ -19,24 +24,24 @@
 	</Filters>
 	
 	<Sounds target="{Room.player}" >
-		<Sound id="backgroundMusic" play="true" looping="true" assetID="music" />
+		<!--Sound id="backgroundMusic" play="true" looping="true" assetID="music" /-->
 	</Sounds>
 	
 	<Scene id="scene" target="{Room.player}" viewportWidth="784" viewportHeight="445" width="1296" height="700">
 		<DisplayObject2D id="background" assetID="background" mouseEnabled="false" />
 		<DisplayObject2D id="click" assetID="click" mouseEnabled="true" clickThrough="true" alpha="0"/>
 		<ZSortingDisplayObject id="furniture">
-			<Character id="player" filters="{Room.playerFilters}" speed="0" defaultSpeed="10" x="{Room.startX}" y="{Room.startY}" originX="210" originY="401" collidable="true" mouseEnabled="true" clickThrough="true" displayObjectClass="uk.co.dubit.graphics.render2D.ActionPlayer">
+			<Character id="player" filters="{Room.playerFilters}" speed="0" defaultSpeed="10" x="{Room.startX}" y="{Room.startY}" originX="210" originY="401" collidable="true" mouseEnabled="false" clickThrough="true" displayObjectClass="uk.co.dubit.graphics.render2D.ActionPlayer">
 				<Actions id="actions" defaultAction="stand">
 					<Stand id="stand" path="avatar/stand.swf"/>
 					<Walk id="walk" path="avatar/walk.swf"/>
 				</Actions>
 			</Character>
-			<DisplayObject2D id="rearporch" assetID="rearporch" x="0" y="521" originX="0" originY="521" mouseEnabled="false"/>
+			<DisplayObject2D id="rearporch" name="a big porch" assetID="rearporch" x="0" y="521" originX="0" originY="521" mouseEnabled="true" verbEnabled="true" clickThrough="true"/>
 			<DisplayObject2D id="porch" assetID="porch" x="0" y="525" originX="0" originY="525" mouseEnabled="false"/>
 			<DisplayObject2D id="shrubs1" assetID="shrubs1" x="0" y="665" originX="0" originY="665" mouseEnabled="false"/>
-			<DisplayObject2D id="shrubs2" assetID="shrubs2" x="0" y="632" originX="0" originY="632" mouseEnabled="false"/>
-			<DisplayObject2D id="mansiondoor1" assetID="mansiondoor1" x="1296" y="618" originX="75" originY="100" mouseEnabled="true" useHandCursor="true" distance = "140" clickThrough="true" collidable="true"/>
+			<DisplayObject2D id="shrubs2" name="the shrubs" assetID="shrubs2" x="0" y="632" originX="0" originY="632" mouseEnabled="true" verbEnabled="true" clickThrough="true"/>
+			<DisplayObject2D id="mansiondoor1" assetID="mansiondoor1" x="1296" y="618" originX="75" originY="100" mouseEnabled="true" verbEnabled="true" useHandCursor="true" distance = "140" clickThrough="true" collidable="true"/>
 		</ZSortingDisplayObject>
 		<DisplayObject2D id="foreground" assetID="foreground" x="0" y="0" originX="0" originY="0" mouseEnabled="false"/>
 		<ZSortingDisplayObject id="playerMessages" />
@@ -57,12 +62,59 @@
 	</Assets>
 	
 	<Trigger event="OnClick" gameObject="{Room.click}">	
-		<MoveTo gameObject="{Room.player}" x="{Room.player.x}" y="{Room.player.y}" targetX="{Event.x}" targetY="{Event.y}"/>
-		<AwardExperiencePoints points="8"/>
+		<MoveTo gameObject="{Room.player}" targetX="{Event.x}" targetY="{Event.y}">
+			<Complete>
+				<Trace message="Movement complete {Event.x} : {Event}"/>
+				<AwardExperiencePoints points="8"/>
+				<AddToBackpack possessionID="grog"/>
+			</Complete>	
+		</MoveTo>
+		
+		<AddToCollection collectionID="animalCollection" collectableID="dog"/>
 	</Trigger>
 
-	<Trigger event="OnEnterCollision" gameObject="{Room.mansiondoor1}">	
-		<ChangeRoom roomName="docks" useServer="false"/>
+	<Trigger event="OnEnterCollision" gameObject="{Room.mansiondoor1}">
+		<If expression="({Map.tacotikitownRoom.visible}=={true})">
+			<Then>
+				<ChangeRoom roomName="docks" useServer="false"/>
+			</Then>	
+		</If>		
+	</Trigger>
+	
+	<Trigger event="OnLookAt" gameObject="{Room.rearporch}">
+		<Trace message="OnLookAt rearporch"/>
+		<ShowBubble gameObject="{Room.player}" message="Yep, it's the porch to the mansion. And what a porch!"/>
+		<RemoveFromBackpack possession="{Backpack.grog}"/>
+	</Trigger>
+	
+	<Trigger event="OnPickUp" gameObject="{Room.rearporch}">
+		<Trace message="OnPickUp rearporch"/>
+		<ShowBubble gameObject="{Room.player}" message="Hum, I'm not sure I can pick that up!"/>
+		<UpdateAchievementScore score="110" achievementID="visitsToFriends"/>
 	</Trigger>	
 	
+	<Trigger event="OnLookAt" gameObject="{Room.shrubs2}">
+		<ShowBubble gameObject="{Room.player}" message="Ooh I've found a map with instructions to the docks, and the cannibal town!"/>
+		
+		<UpdateLocationVisibility locationID="darkdocksRoom" visible="true"/>
+		<UpdateLocationVisibility locationID="tacotikitownRoom" visible="true"/>
+	</Trigger>		
+	
+	<Trigger event="OnClick" gameObject="{Room.rearporch}">
+		<Trace message="OnClick rearporch"/>
+	</Trigger>
+	
+	<Trigger event="OnDragDrop" gameObject="{Room.shrubs2}">
+		<Trace message="OnDragDrop dragInitiator={Event.dragInitiator}"/>
+		<Switch value="{Event.dragInitiator.id}">
+			<Rainwater>
+				<Trace message="You've watered the grass"/>
+				<RemoveFromBackpack collectable="{Event.dragInitiator}"/>
+			</Rainwater>
+			<Default>
+				<Trace message="I don't know how to use those together"/>
+			</Default>	
+		</Switch>	
+	</Trigger>		
+		
 </ChatRoom>
