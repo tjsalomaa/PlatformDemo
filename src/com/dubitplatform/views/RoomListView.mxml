@@ -6,5 +6,4 @@
 			<mx:Button label="{locationsRepeater.currentItem.name + (locationsRepeater.currentItem.visited ? ' (visited)' : '') }"  click="{changeRoomByName(event.target.label)}" width="100%" paddingBottom="5"/>
 		</mx:Repeater>		
 	</mx:VBox>
-	
 </MapViewBase>

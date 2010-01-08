@@ -6,6 +6,9 @@
 	
 	<mx:Script>
 		<![CDATA[
+			import com.dubitplatform.views.GrowlView;
+			import com.dubitplatform.views.ShopView;
+			import uk.co.dubit.platform.components.catalogue.Shops;
 			import com.dubitplatform.views.CollectionView;
 			import com.dubitplatform.views.CollectionsPanel;
 			import com.dubitplatform.views.AchievementsView;
@@ -34,6 +37,7 @@
 			private var achievementView : AchievementsView;
 			private var verbControllerView : VerbControllerView;
 			private var branchingConversationView : BranchingConversationView;
+			private var growlView:GrowlView
 			
 			private function onCreationComplete () : void
 			{
@@ -81,8 +85,9 @@
 		<skills:SkillsSkinContainer width="150" height="20"/>
 	</mx:ApplicationControlBar>			
 	
+	<skin:PopupSkinContainer containerID="growlContainer" />
 	<ui:ChatRoomSkinContainer id="chatRoomSkinContainer" width="100%" height="100%" x="248" y="150" horizontalScrollPolicy="off" verticalScrollPolicy="off"/>
-
+	<skin:PopupSkinContainer x="50" y="50" containerID="shopContainer" />
 	<dialogue:DialogueSkinContainer width="100%" height="100%" x="260" y="510"/>
 	
 	<verb:VerbSkinContainer width="784" height="30" x="248" y="565"/>
@@ -93,8 +98,5 @@
 			<mx:Button label="My Collections" click="openCollectionsPanel();"/>
 			<mx:Button label="Debug" click="openDebugPanel();"/>
 		</mx:ControlBar>		
-	</mx:Box>
-		
+	</mx:Box>	
 </app:NexusBase>
-
- 

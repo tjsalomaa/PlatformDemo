@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:TitleWindow title="{ growl.notification.title }" showCloseButton="true" close="{ closeGrowl(); }"
+	implements="uk.co.dubit.platform.components.growl.IGrowlSkin"
+	xmlns="uk.co.dubit.platform.components.growl.*" 
+	xmlns:mx="http://www.adobe.com/2006/mxml">
+	
+	<mx:VBox>
+		<mx:Label text="{ growl.notification.body }" />
+	</mx:VBox>
+	
+	<mx:Script>
+		<![CDATA[
+			import uk.co.dubit.platform.components.skin.SkinContainerRegister;
+			import mx.managers.PopUpManager;
+			import uk.co.dubit.platform.components.growl.IGrowl;
+			private var _growl:IGrowl;
+			
+			[Bindable]
+			public function get growl() : IGrowl
+			{
+				return _growl;
+			}
+			
+			public function set growl(value:IGrowl) : void
+			{
+				_growl = value;
+			}
+			
+			private function closeGrowl() : void
+			{
+				SkinContainerRegister.getInstance().getContainer("growlContainer").removeSkin(this);
+			}
+		]]>
+	</mx:Script>
+	
+</mx:TitleWindow>
