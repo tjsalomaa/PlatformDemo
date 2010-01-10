@@ -60,9 +60,11 @@
 		<Triggers>
 			<OnLevelUp>
 				<Trace message="OnLevelUp level={Event.level}"/>
+				
 				<AwardSkillPoints points="1"/>
 			</OnLevelUp>
 			<OnAwardedExperience>
+				<Call behaviourID="ShowPlayerBubble" scope="{Rooms.currentRoom}" message="monkeys"/>
 				<Trace message="OnAwardedExperience level={Experience.level}"/>
 			</OnAwardedExperience>
 		</Triggers>

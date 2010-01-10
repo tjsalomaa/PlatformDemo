@@ -437,4 +437,7 @@
 		<Attribute required="true" name="collectabeID" type="string" description="The id of the collectable to be added to the collection"/>
 	</Binding>
 	
+	<Binding name="GotoAndPlay" class="uk.co.dubit.platform.scriptEngine.behaviour.types.world.GotoAndPlay" />
+	<Binding name="GotoAndPlay" class="uk.co.dubit.platform.scriptEngine.behaviour.types.world.GotoAndPlay" />
+	
 </Bindings>
