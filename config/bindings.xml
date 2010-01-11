@@ -448,6 +448,7 @@
 		<Attribute required="false" name="useServer" type="boolean" defaultValue="true" description="If set to false the client will change room without attempting to speak to the server"/>
 		<Attribute required="true" name="skin" type="string" description="The skin class" defaultValue="uk.co.dubit.platform.components.rooms.ui.ChatRoomPreloaderView"/>
 		<Attribute required="true" name="targetContainer" type="string" description="The skin container" defaultValue="RoomPreloader"/>		
+		<Attribute required="true" name="attachSkin" type="boolean" description="True if the skin should be attached immediately" defaultValue="true"/>	
 	</Binding>
 	
 	<!-- EXPERIENCE -->
