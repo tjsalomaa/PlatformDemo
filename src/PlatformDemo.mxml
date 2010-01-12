@@ -87,14 +87,13 @@
 		<skills:SkillsSkinContainer width="150" height="20"/>
 	</mx:ApplicationControlBar>			
 	
-	<skin:PopupSkinContainer containerID="growlContainer" />
 	<mx:Box id="roomBackground" width="784" height="445" x="248" y="150" backgroundColor="black"/>
 	
 	<ui:ChatRoomSkinContainer id="chatRoomSkinContainer" width="784" height="445" x="248" y="150" horizontalScrollPolicy="off" verticalScrollPolicy="off"/>
 	<skin:PopupSkinContainer x="50" y="50" containerID="shopContainer" />
 	
 	<dialogue:DialogueSkinContainer width="100%" height="100%" x="260" y="510"/>
-		
+	<skin:BasicSkinContainer containerID="growlContainer" x="825" y="155" />
 	<verb:VerbSkinContainer width="784" height="30" x="248" y="565"/>
 	
 	<ui:ChatRoomPreloaderSkinContainer width="784" height="445" x="248" y="150" mouseEnabled="false"/>
