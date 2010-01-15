@@ -207,11 +207,24 @@
 			<Triggers>
 				<onNotificationAccepted>
 					<AddToBackpack collectable="{Backpack.apple}" />
-					<RemoveNotification notification="{Event.notification}" />
+					<!--RemoveNotification notification="{Event.notification}" /-->
 					<CreateNotification title="Item accepted" body="You've received an apple!  Use it wisely" can_remove="true" />
 				</onNotificationAccepted>
 			</Triggers>
 		</Notification>
+		
+		<Notification title="Game" body="Fancy a game? Accept = Flex | Reject = Flash" can_accept="true" can_reject="true">
+			<Triggers>
+				<onNotificationAccepted>
+					<OpenMinigame minigame="{Minigames.flex}" />
+				</onNotificationAccepted>
+				
+				<onNotificationRejected>
+					<OpenMinigame minigame="{Minigames.flash}" />
+				</onNotificationRejected>
+			</Triggers>
+		</Notification>
+		
 		<Triggers>
 			<onNotificationReceived>
 				<ShowGrowl notification="{Event.notification}" skin="com.dubitplatform.views.GrowlView" targetContainer="growlContainer" duration="6000"/>
@@ -234,4 +247,15 @@
 			</onNotificationRemoved>
 		</Triggers>
 	</Notifications>
+	
+	<Minigames>
+		<Minigame id="flex" name="Flex game" test="{Rooms.session.backpack}" url="[base.url]games/SampleMinigame.swf" skin="com.dubitplatform.views.MinigameTitleWindow" targetContainer="minigameContainer" />
+		<Minigame id="flash" name="Flash game" url="[base.url]games/FlashMinigame.swf" skin="com.dubitplatform.views.MinigameTitleWindow" targetContainer="minigameContainer" />
+		
+		<Triggers>
+			<onMinigameClosed>
+				<CreateNotification title="Points awarded!" body="The {Event.minigame.name} awarded you {Event.minigame.score} points" can_remove="true" />
+			</onMinigameClosed>
+		</Triggers>
+	</Minigames>
 </SessionRoom>

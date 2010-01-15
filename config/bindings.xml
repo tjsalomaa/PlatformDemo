@@ -541,4 +541,14 @@
 	<Binding name="GotoAndPlay" class="uk.co.dubit.platform.scriptEngine.behaviour.types.world.GotoAndPlay" />
 	<Binding name="GotoAndPlay" class="uk.co.dubit.platform.scriptEngine.behaviour.types.world.GotoAndPlay" />
 	
+	<!-- Minigames++ -->
+	<Binding name="Minigames" class="uk.co.dubit.platform.components.minigame.Minigames" factory="uk.co.dubit.platform.scriptEngine.gameObject.GameObjectFactory" />
+	<Binding name="Minigame" class="uk.co.dubit.platform.components.minigame.Minigame" factory="uk.co.dubit.platform.scriptEngine.gameObject.GameObjectFactory">
+		<Attribute name="name" description="Name/Title of the minigame" required="false" />
+		<Attribute name="skin" description="The skin used to show the minigame" required="false" defaultValue="uk.co.dubit.application.view.minigame.MinigameSkin" />
+		<Attribute name="targetContainer" type="ISkinContainer" description="Named MXML component used to display the minigame skin" defaultValue="minigameContainer" />
+	</Binding>
+	<Binding name="OpenMinigame" class="uk.co.dubit.platform.components.minigame.behaviours.OpenMinigame" />
+	<Binding name="CloseMinigame" class="uk.co.dubit.platform.components.minigame.behaviours.CloseMinigame" />
+	
 </Bindings>

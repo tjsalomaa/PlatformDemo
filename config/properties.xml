@@ -6,6 +6,8 @@
 		<property name="setting.rooms.default-room" value="session"/>
 		<property name="setting.rooms.quest-room" value="quest"/>
 		<property name="setting.rooms.backpack-room" value="backpack"/>
+		<property name="setting.alert.xOffset" value="0" />
+		<property name="setting.alert.yOffset" value="0" />
 	</environment>
 	
 </environments>
