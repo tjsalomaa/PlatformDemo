@@ -88,6 +88,7 @@
 	</mx:ApplicationControlBar>			
 	
 	<skin:PopupSkinContainer containerID="growlContainer" />
+	
 	<mx:Box id="roomBackground" width="784" height="445" x="248" y="150" backgroundColor="black"/>
 	
 	<ui:ChatRoomSkinContainer id="chatRoomSkinContainer" width="784" height="445" x="248" y="150" horizontalScrollPolicy="off" verticalScrollPolicy="off"/>
