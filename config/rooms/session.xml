@@ -49,7 +49,7 @@
 		
 	<Experience points="0">
 		<Level points="0" name="Getting Started" message="" />
-		<Level points="20" name="New Arrival" message="Congratualtion you are now a new arrival, and we've awarded you a basic ball!" />
+		<Level points="20" name="New Arrival" message="Congratulations!  You are now a new arrival, and we've awarded you a basic ball!" />
 		<Level points="50" name="Learner" message="Blah blah"/>
 		<Level points="100" name="Playful" message="Blah blah"/>
 		<Level points="150" name="Playful 2" message="Blah blah"/>
@@ -59,7 +59,7 @@
 			<OnLevelUp>
 				<Trace message="OnLevelUp level={Event.level}"/>
 				<AwardSkillPoints points="1"/>
-				<CreateGameObject type="notification" title="Level up!" body="{Event.level.message}" can_remove="true" />
+				<CreateNotification title="Level up!" body="{Event.level.message}" can_remove="true" />
 			</OnLevelUp>
 			<OnAwardedExperience>
 				<Trace message="OnAwardedExperience level={Experience.level}"/>
@@ -84,7 +84,7 @@
 	<!-- CHANGE BACKPACK TO USE POSSESSION -->
 
 	<Backpack>
-		<Possession id="apple" name="Apple" description="A shiny red apple, looks tasty! " previewURL="images/backpack/apple.png" quantity="1"/>
+		<Possession id="apple" name="Apple" description="A shiny red apple, looks tasty! " previewURL="images/backpack/apple.png" quantity="0"/>
 		<Possession id="grog" name="Grog" description="Ahh, the drink of pirates " previewURL="images/backpack/grog.png" quantity="0"/>
 		<Possession id="rainwater" name="Rainwater" description="A vessel of rainwater " previewURL="images/backpack/rainwater.png" quantity="1"/>
 		<Possession id="rum" name="Rum" description="Rum, the poor mans grog " previewURL="images/backpack/rum.png" quantity="1"/>
@@ -200,10 +200,32 @@
 	</Shops>	
 	
 	<Notifications>
-		<Notification title="Welcome!" body="Check back here to read messages you have received" can_remove="true" />
+		<Notification title="Welcome!" body="Check back here to read messages you have received" can_remove="true"/>
+		<Notification title="Free stuff!" body="Hey, since you're new here maybe you'd like this free apple?" can_accept="true" can_reject="true">
+			<Triggers>
+				<onNotificationAccepted>
+					<AddToBackpack collectable="{Backpack.apple}" />
+					<!--RemoveNotification notification="{Event.notification}" /-->
+					<CreateNotification title="Item accepted" body="You've received an apple!  Use it wisely" can_remove="true" />
+				</onNotificationAccepted>
+			</Triggers>
+		</Notification>
+		
+		<Notification title="Game" body="Fancy a game? Accept = Flex | Reject = Flash" can_accept="true" can_reject="true">
+			<Triggers>
+				<onNotificationAccepted>
+					<OpenMinigame minigame="{Minigames.flex}" />
+				</onNotificationAccepted>
+				
+				<onNotificationRejected>
+					<OpenMinigame minigame="{Minigames.flash}" />
+				</onNotificationRejected>
+			</Triggers>
+		</Notification>
+		
 		<Triggers>
 			<onNotificationReceived>
-				<ShowGrowl notification="{Event.notification}" skin="com.dubitplatform.views.GrowlView" targetContainer="growlContainer" />
+				<ShowGrowl notification="{Event.notification}" skin="com.dubitplatform.views.GrowlView" targetContainer="growlContainer" duration="6000"/>
 			</onNotificationReceived>
 			
 			<onNotificationAccepted>
@@ -224,4 +246,14 @@
 		</Triggers>
 	</Notifications>
 	
+	<Minigames>
+		<Minigame id="flex" name="Flex game" test="{Rooms.session.backpack}" url="[base.url]games/SampleMinigame.swf" skin="com.dubitplatform.views.MinigameTitleWindow" targetContainer="minigameContainer" />
+		<Minigame id="flash" name="Flash game" url="[base.url]games/FlashMinigame.swf" skin="com.dubitplatform.views.MinigameTitleWindow" targetContainer="minigameContainer" />
+		
+		<Triggers>
+			<onMinigameClosed>
+				<CreateNotification title="Points awarded!" body="The {Event.minigame.name} awarded you {Event.minigame.score} points" can_remove="true" />
+			</onMinigameClosed>
+		</Triggers>
+	</Minigames>
 </SessionRoom>

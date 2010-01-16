@@ -10,5 +10,6 @@
 		]]>
 	</mx:Script>
 	
-	<mx:List id="notificationsList" width="100%" height="100%" dataProvider="{ notifications.notifications }" itemRenderer="{ new ClassFactory(NotificationView) }" />	
+	<mx:List id="notificationsList" width="100%" height="100%" useRollOver="false"
+		dataProvider="{ notifications.notifications }" itemRenderer="{ new ClassFactory(NotificationView) }" />	
 </mx:Canvas>

@@ -1,11 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<app:NexusBase xmlns:mx="http://www.adobe.com/2006/mxml" xmlns:app="uk.co.dubit.platform.app.*" xmlns:skin="uk.co.dubit.platform.components.skin.*" xmlns:ui="uk.co.dubit.platform.components.rooms.ui.*" xmlns:backpack="uk.co.dubit.platform.components.backpack.*" xmlns:quest="uk.co.dubit.platform.components.quest.*" 
-			   width="100%" height="100%" layout="absolute" backgroundColor="black" horizontalScrollPolicy="off" verticalScrollPolicy="off" creationComplete="onCreationComplete();" xmlns:dialogue="uk.co.dubit.platform.components.dialogue.*" xmlns:experience="uk.co.dubit.platform.components.experience.*" xmlns:skills="uk.co.dubit.platform.components.skills.*" xmlns:verb="uk.co.dubit.platform.components.verb.*">
+<app:NexusBase 
+	width="100%" height="100%" layout="absolute" horizontalCenter="0" backgroundColor="black" horizontalScrollPolicy="off" verticalScrollPolicy="off" 
+	creationComplete="onCreationComplete();"
+	
+	xmlns:mx="http://www.adobe.com/2006/mxml" 
+	xmlns:app="uk.co.dubit.platform.app.*" 
+	xmlns:skin="uk.co.dubit.platform.components.skin.*" 
+	xmlns:ui="uk.co.dubit.platform.components.rooms.ui.*" 
+	xmlns:backpack="uk.co.dubit.platform.components.backpack.*" 
+	xmlns:quest="uk.co.dubit.platform.components.quest.*"
+	xmlns:dialogue="uk.co.dubit.platform.components.dialogue.*" 
+	xmlns:experience="uk.co.dubit.platform.components.experience.*" 
+	xmlns:skills="uk.co.dubit.platform.components.skills.*"
+	xmlns:verb="uk.co.dubit.platform.components.verb.*">
 	
 	<mx:Style source="style/style.css"/>
 	
 	<mx:Script>
 		<![CDATA[
+			import com.dubitplatform.views.MinigameTitleWindow;
+			import uk.co.dubit.platform.components.minigame.Minigame;
+			import com.dubitplatform.views.MinigameSkin;
 			import com.dubitplatform.views.GrowlView;
 			import com.dubitplatform.views.ShopView;
 			import uk.co.dubit.platform.components.catalogue.Shops;
@@ -40,6 +55,8 @@
 			private var chatRoomPreloaderView : ChatRoomPreloaderView;
 			private var branchingConversationView : BranchingConversationView;
 			private var growlView:GrowlView
+			private var minigameSkin:MinigameSkin;
+			private var minigameView:MinigameTitleWindow;
 			
 			private function onCreationComplete () : void
 			{
@@ -79,26 +96,26 @@
             	collectionsPanel.visible = true;           	 
             }	            		
 		]]>
-	</mx:Script>
-				
-	<mx:ApplicationControlBar width="784" x="248" y="110" height="30">
+	</mx:Script>	
+	
+	<mx:Box id="roomBackground" width="784" height="445" horizontalCenter="0" y="150" backgroundColor="black"/>
+	
+	<ui:ChatRoomSkinContainer id="chatRoomSkinContainer" width="784" height="445" horizontalCenter="0" y="150" horizontalScrollPolicy="off" verticalScrollPolicy="off"/>
+	<skin:PopupSkinContainer x="50" y="50" containerID="shopContainer" />
+	
+	<skin:PopupSkinContainer containerID="minigameContainer" horizontalCenter="-200" y="180" />
+	
+	<dialogue:DialogueSkinContainer width="100%" height="100%" horizontalCenter="0" y="510"/>
+	<skin:BasicSkinContainer containerID="growlContainer" horizontalCenter="280" y="155" />
+	<verb:VerbSkinContainer width="784" height="30" horizontalCenter="0" y="565"/>
+	
+	<ui:ChatRoomPreloaderSkinContainer width="784" height="445" horizontalCenter="0" y="150" mouseEnabled="false"/>
+	
+	<mx:ApplicationControlBar width="784" horizontalCenter="0" y="110" height="30">
 		<experience:ExperienceSkinContainer width="400" height="20"/>
 		<mx:Spacer width="100%"/>
 		<skills:SkillsSkinContainer width="150" height="20"/>
-	</mx:ApplicationControlBar>			
-	
-	<skin:PopupSkinContainer containerID="growlContainer" />
-	
-	<mx:Box id="roomBackground" width="784" height="445" x="248" y="150" backgroundColor="black"/>
-	
-	<ui:ChatRoomSkinContainer id="chatRoomSkinContainer" width="784" height="445" x="248" y="150" horizontalScrollPolicy="off" verticalScrollPolicy="off"/>
-	<skin:PopupSkinContainer x="50" y="50" containerID="shopContainer" />
-	
-	<dialogue:DialogueSkinContainer width="100%" height="100%" x="260" y="510"/>
-		
-	<verb:VerbSkinContainer width="784" height="30" x="248" y="565"/>
-	
-	<ui:ChatRoomPreloaderSkinContainer width="784" height="445" x="248" y="150" mouseEnabled="false"/>
+	</mx:ApplicationControlBar>	
 	
 	<mx:Box width="100%" backgroundColor="0x333333" bottom="0">
 		<mx:ControlBar width="100%">

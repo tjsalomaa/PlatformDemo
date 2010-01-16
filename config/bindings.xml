@@ -62,9 +62,10 @@
 		<Attribute name="can_cancel" type="Boolean" description="Whether the notification can be cancelled" required="false" defaultValue="false" />
 		<Attribute name="can_remove" type="Boolean" description="Whether the notification can be removed (Use for client created notifications only)" required="false" defaultValue="false" />
 	</Binding>
-
+	
  	<!-- This binding exists so CRUD operations from the game server work -->
 	<Binding name="Request" class="uk.co.dubit.platform.components.notifications.Notification" factory="uk.co.dubit.platform.scriptEngine.gameObject.GameObjectFactory" />
+	<Binding name="CreateNotification" class="uk.co.dubit.platform.components.notifications.behaviours.CreateNotification" />
 	<Binding name="GetNotifications" class="uk.co.dubit.platform.components.notifications.behaviours.GetNotifications" />
 	<Binding name="AcceptNotification" class="uk.co.dubit.platform.components.notifications.behaviours.AcceptNotification" />
 	<Binding name="RejectNotification" class="uk.co.dubit.platform.components.notifications.behaviours.RejectNotification" />
@@ -539,5 +540,15 @@
 	
 	<Binding name="GotoAndPlay" class="uk.co.dubit.platform.scriptEngine.behaviour.types.world.GotoAndPlay" />
 	<Binding name="GotoAndPlay" class="uk.co.dubit.platform.scriptEngine.behaviour.types.world.GotoAndPlay" />
+	
+	<!-- Minigames++ -->
+	<Binding name="Minigames" class="uk.co.dubit.platform.components.minigame.Minigames" factory="uk.co.dubit.platform.scriptEngine.gameObject.GameObjectFactory" />
+	<Binding name="Minigame" class="uk.co.dubit.platform.components.minigame.Minigame" factory="uk.co.dubit.platform.scriptEngine.gameObject.GameObjectFactory">
+		<Attribute name="name" description="Name/Title of the minigame" required="false" />
+		<Attribute name="skin" description="The skin used to show the minigame" required="false" defaultValue="uk.co.dubit.application.view.minigame.MinigameSkin" />
+		<Attribute name="targetContainer" type="ISkinContainer" description="Named MXML component used to display the minigame skin" defaultValue="minigameContainer" />
+	</Binding>
+	<Binding name="OpenMinigame" class="uk.co.dubit.platform.components.minigame.behaviours.OpenMinigame" />
+	<Binding name="CloseMinigame" class="uk.co.dubit.platform.components.minigame.behaviours.CloseMinigame" />
 	
 </Bindings>
