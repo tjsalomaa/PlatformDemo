@@ -183,19 +183,19 @@
 	</Collections>
 
 	<Shops>
-		<Shop id="default" skin="com.dubitplatform.views.ShopView" targetContainer="shopContainer">
+		<Shop id="default" name="Local shop" skin="com.dubitplatform.views.ShopTitleWindow" targetContainer="shopContainer">
 			<ProductGroup display_name="Food">
-				<Product id="apple" display_name="Apple" preview_url="[base.url]images/backpack/apple.png" points="10" />
+				<Product id="shop_apple" name="Apple" preview_url="[base.url]images/backpack/apple.png" points_price="10" />
 			</ProductGroup>
 			<ProductGroup display_name="Drink">
-				<Product id="rum" display_name="Rum" preview_url="[base.url]images/backpack/rum.png" points="35" />
-				<Product id="grog" display_name="Grog" preview_url="[base.url]images/backpack/grog.png" points="20" />
+				<Product id="shop_rum" name="Rum" preview_url="[base.url]images/backpack/rum.png" points_price="35" />
+				<Product id="shop_grog" name="Grog" preview_url="[base.url]images/backpack/grog.png" points_price="20" />
 			</ProductGroup>
 		</Shop>
 		
 		<Triggers>
 			<OnPurchaseProduct>				
-				<AddToBackpack collectableID="{Event.product.id}" />
+				<AddToBackpack collectableID="{Event.product.name}" />
 				<SetValues target="{Event.product}" owned="true" />
 			</OnPurchaseProduct>
 		</Triggers>

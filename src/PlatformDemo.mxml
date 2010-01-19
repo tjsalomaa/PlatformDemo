@@ -18,11 +18,11 @@
 	
 	<mx:Script>
 		<![CDATA[
+			import com.dubitplatform.views.ShopTitleWindow;
 			import com.dubitplatform.views.MinigameTitleWindow;
 			import uk.co.dubit.platform.components.minigame.Minigame;
 			import com.dubitplatform.views.MinigameSkin;
 			import com.dubitplatform.views.GrowlView;
-			import com.dubitplatform.views.ShopView;
 			import uk.co.dubit.platform.components.catalogue.Shops;
 			import com.dubitplatform.views.ChatRoomPreloaderView;
 			import com.dubitplatform.views.CollectionView;
@@ -55,9 +55,9 @@
 			private var chatRoomPreloaderView : ChatRoomPreloaderView;
 			private var branchingConversationView : BranchingConversationView;
 			private var growlView:GrowlView
-			private var minigameSkin:MinigameSkin;
-			private var minigameView:MinigameTitleWindow;
-			
+			private var minigameView:MinigameTitleWindow; 
+			private var shopTitleView:ShopTitleWindow;
+					
 			private function onCreationComplete () : void
 			{
 				controlPanel = PopUpManager.createPopUp(this, ControlPanel) as ControlPanel;
@@ -94,14 +94,19 @@
              	if (!collectionsPanel.visible) PopUpManager.centerPopUp(collectionsPanel);
              	PopUpManager.bringToFront(collectionsPanel);
             	collectionsPanel.visible = true;           	 
-            }	            		
+            }	
+            
+            private function openShop() : void
+            {
+            	Shops.getInstance().getShopByID("default").open();
+            }            		
 		]]>
 	</mx:Script>	
 	
 	<mx:Box id="roomBackground" width="784" height="445" horizontalCenter="0" y="150" backgroundColor="black"/>
 	
 	<ui:ChatRoomSkinContainer id="chatRoomSkinContainer" width="784" height="445" horizontalCenter="0" y="150" horizontalScrollPolicy="off" verticalScrollPolicy="off"/>
-	<skin:PopupSkinContainer x="50" y="50" containerID="shopContainer" />
+	<skin:PopupSkinContainer horizontalCenter="-200" y="180" containerID="shopContainer" />
 	
 	<skin:PopupSkinContainer containerID="minigameContainer" horizontalCenter="-200" y="180" />
 	
@@ -121,6 +126,7 @@
 		<mx:ControlBar width="100%">
 			<mx:Button label="My Stuff" click="openControlPanel();"/>
 			<mx:Button label="My Collections" click="openCollectionsPanel();"/>
+			<mx:Button label="Shop" click="openShop();"/>
 			<mx:Button label="Debug" click="openDebugPanel();"/>
 		</mx:ControlBar>		
 	</mx:Box>	
