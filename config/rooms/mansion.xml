@@ -24,7 +24,7 @@
 	</Filters>
 	
 	<Sounds target="{Room.player}" >
-		<!--Sound id="backgroundMusic" play="true" looping="true" assetID="music" /-->
+		<Sound id="backgroundMusic" play="true" looping="true" assetID="music" />
 	</Sounds>
 	
 	<Scene id="scene" target="{Room.player}" viewportWidth="784" viewportHeight="445" width="1296" height="700">
@@ -40,7 +40,6 @@
 			<DisplayObject2D id="rearporch" name="a big porch" assetID="rearporch" x="0" y="521" originX="0" originY="521" mouseEnabled="true" verbEnabled="true" clickThrough="true"/>
 			<DisplayObject2D id="porch" assetID="porch" x="0" y="525" originX="0" originY="525" mouseEnabled="false"/>
 			<DisplayObject2D id="shrubs1" assetID="shrubs1" x="0" y="665" originX="0" originY="665" mouseEnabled="false"/>
-			<DisplayObject2D id="dennis" assetID="rocketshoes" x="0" y="0" originX="0" originY="0" mouseEnabled="false"/>
 			<DisplayObject2D id="shrubs2" name="the shrubs" assetID="shrubs2" x="0" y="632" originX="0" originY="632" mouseEnabled="true" verbEnabled="true" clickThrough="true"/>
 			<DisplayObject2D id="mansiondoor1" assetID="mansiondoor1" x="1296" y="618" originX="75" originY="100" mouseEnabled="true" verbEnabled="true" useHandCursor="true" distance = "140" clickThrough="true" collidable="true"/>
 		</ZSortingDisplayObject>
@@ -60,7 +59,6 @@
 		<Asset id="rearporch" url="[base.url]images/mansion/rearporch.png"/>
 		<Asset id="foreground" url="[base.url]images/mansion/foreground.png"/>
 		<Asset id="mansiondoor1" url="[base.url]images/mansion/mansiondoor1.png" />	
-		<Asset id="rocketshoes" url="[base.url]images/rocketshoes.swf" />	
 	</Assets>
 	
 	<Trigger event="OnClick" gameObject="{Room.click}">	
@@ -97,7 +95,6 @@
 	
 	<Trigger event="OnLookAt" gameObject="{Room.shrubs2}">
 		<ShowBubble gameObject="{Room.player}" message="Ooh I've found a map with instructions to the docks, and the cannibal town!"/>
-		
 		<UpdateLocationVisibility locationID="darkdocksRoom" visible="true"/>
 		<UpdateLocationVisibility locationID="tacotikitownRoom" visible="true"/>
 	</Trigger>		

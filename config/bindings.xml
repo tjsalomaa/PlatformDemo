@@ -314,7 +314,12 @@
 	
 	<!-- BUBBLE BINDINGS -->
 	<Binding name="ShowBubble" class="uk.co.dubit.platform.scriptEngine.behaviour.types.world.ShowBubble">
-		<Attribute required="true" name="bubbleClass" type="string" defaultValue="uk.co.dubit.graphics.render2D.types.DefaultChatBubble2D"/>	
+		<Attribute required="true" name="gameObject" type="gameobject" description="The game object the speech bubble will appear above"/>
+		<Attribute required="true" name="message" type="string" description="The message to show in the chat bubble"/>
+		<Attribute required="false" name="fitToScreen" type="boolean" defaultValue="true" description="If true the bubble will not slide off the edge of visible area"/>
+		<Attribute required="false" name="moveTail" type="boolean" defaultValue="true" description="If the bubble is fitted to screen this attribute will move the bubble tail to follow the player"/>
+		<Attribute required="false" name="screenBuffer" type="number" defaultValue="10" description="How far the bubble should stop from the edge of the screen"/>
+		<Attribute required="false" name="bubbleClass" type="string" defaultValue="uk.co.dubit.graphics.render2D.types.DefaultChatBubble2D"/>	
 	</Binding>
 	
 	<!-- FUNCTION CALL BINDINGS -->

@@ -36,9 +36,7 @@
 	<Map>
 		<Location name="Cannibal Town" roomID="huts" id="tacotikitownRoom" visible="false" visited="false"/>
 		<Location name="Dark Docks" roomID="docks" id="darkdocksRoom" visible="false" visited="false"/>
-		<Location name="Mansion" roomID="mansion" id="mansionRoom" visible="true" visited="false"/>
-		<Location name="Street" roomID="street" id="mansionRoom" visible="true" visited="false"/>
-		
+		<Location name="Mansion" roomID="mansion" id="mansionRoom" visible="true" visited="false"/>		
 		<Triggers>
 			<OnLocationVisible>
 				<Trace message="Location visible location={Event.location}"/>
