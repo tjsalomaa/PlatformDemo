@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ChatRoom id="huts" xmlns:xi="http://www.w3.org/2001/XInclude">
 
+	<xi:include href="includes/room_config.xml" />
 	<Attribute key="startX" value="1667" type="number" />
 	<Attribute key="startY" value="442" type="number" />
 

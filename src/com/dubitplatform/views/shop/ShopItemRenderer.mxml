@@ -5,7 +5,7 @@
 	xmlns:mx="http://www.adobe.com/2006/mxml" 
 	xmlns:shared="uk.co.dubit.platform.components.shared.*">
 	
-	<mx:VBox width="100%" height="100%" verticalAlign="middle" horizontalAlign="center" >
+	<mx:VBox width="100%" height="100%" verticalAlign="middle" horizontalAlign="center" enabled="{ !product.owned }" >
 		<mx:Label text="{ product.name }" />
 		<shared:CachedImage width="100%" height="100%" source="{ product.previewURL }" toolTip="{ product.name }" horizontalAlign="center" />
 		<mx:Button label="Buy" toolTip="This costs {product.points} points" enabled="{ !product.owned }" click="{ product.purchase() }" />

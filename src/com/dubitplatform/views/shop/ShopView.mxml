@@ -16,6 +16,7 @@
 				
 				if(shop) onProductGroupChanged();
 			}
+			
 			private function onProductGroupChanged() : void
 			{
 				var selectedProductGroup:IProductGroup = groupSelector.selectedItem as IProductGroup;
@@ -27,7 +28,7 @@
 	
 	<mx:VBox width="100%" height="100%">
 		<mx:HBox width="100%" verticalAlign="middle">
-			<mx:Label text="Product Group:" />
+			<mx:Label text="Select ye wares!" />
 			<mx:ComboBox id="groupSelector" labelField="name" dataProvider="{ shop.productGroups }" change="onProductGroupChanged()" />		
 		</mx:HBox>
 		<mx:TileList id="products" 

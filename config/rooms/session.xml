@@ -1,19 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <SessionRoom id="session" xmlns:xi="http://www.w3.org/2001/XInclude">
 	
+	<xi:include href="../server/startup.xml" />
+	
 	<Behaviour>
 		<onFixUp>
 			<Trace message="Session created "/>
-			<Startup/>
 		</onFixUp>
 		<onChangeRoom>
-			<Call behaviourID="EnterRoom" roomName="{Event.roomName}"/>
+			<!--Call behaviourID="EnterRoom" roomName="{Event.roomName}"/-->
 		</onChangeRoom>
 	</Behaviour>	
-
-	<BehaviourDefinition id="startup">
-		<Call behaviourID="EnterRoom" roomName="mansion"/>
-	</BehaviourDefinition>	
 	
 	<BehaviourDefinition id="EnterRoom">
 		<Trace message="EnterRoom called: roomName={Event.roomName}"/>
@@ -80,8 +77,6 @@
 			</OnUsedSkillPoints>
 		</Triggers>
 	</Skills>	
-	
-	<!-- CHANGE BACKPACK TO USE POSSESSION -->
 
 	<Backpack>
 		<Possession id="apple" name="Apple" description="A shiny red apple, looks tasty! " previewURL="images/backpack/apple.png" quantity="0"/>
@@ -183,11 +178,11 @@
 	<Shops>
 		<Shop id="default" name="Local shop" skin="com.dubitplatform.views.ShopTitleWindow" targetContainer="shopContainer">
 			<ProductGroup display_name="Food">
-				<Product id="shop_apple" name="Apple" preview_url="[base.url]images/backpack/apple.png" points_price="10" />
+				<Product id="shop_apple" name="Apple" preview_url="[base.url]images/backpack/apple.png" points_price="10" useServer="false"/>
 			</ProductGroup>
 			<ProductGroup display_name="Drink">
-				<Product id="shop_rum" name="Rum" preview_url="[base.url]images/backpack/rum.png" points_price="35" />
-				<Product id="shop_grog" name="Grog" preview_url="[base.url]images/backpack/grog.png" points_price="20" />
+				<Product id="shop_rum" name="Rum" preview_url="[base.url]images/backpack/rum.png" points_price="35" useServer="false" />
+				<Product id="shop_grog" name="Grog" preview_url="[base.url]images/backpack/grog.png" points_price="20"  useServer="false"/>
 			</ProductGroup>
 		</Shop>
 		
@@ -256,4 +251,19 @@
 			</onMinigameClosed>
 		</Triggers>
 	</Minigames>
+	
+	<Menus>
+		<ContextMenu id="playerMenu" track="true" offsetX="350" offsetY="200" skin="com.dubitplatform.views.ContextMenuSkin" >
+			<MenuItem id="onShowProfile" text="Show profile" toolTip="Shows the selected user's profile" />
+			<MenuItem id="onWave" text="Wave" toolTip="Wave!" />
+			<MenuItem id="onCheer" text="Cheer" toolTip="Cheer!" />
+			<MenuItem id="onDance" text="Dance" toolTip="Dance!" />
+			<MenuItem id="onPose" text="Pose" toolTip="Pose!" />
+		</ContextMenu>
+	</Menus>
+	
+	<Actions id="actions" defaultAction="stand">
+		<Stand id="stand" path="avatar/stand.swf"/>
+		<Walk id="walk" path="avatar/walk.swf"/>
+	</Actions>
 </SessionRoom>

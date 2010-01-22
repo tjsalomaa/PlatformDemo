@@ -18,6 +18,8 @@
 	
 	<mx:Script>
 		<![CDATA[
+			import com.dubitplatform.views.ContextMenuSkin;
+			import uk.co.dubit.sound.SoundManager;
 			import com.dubitplatform.views.ShopTitleWindow;
 			import com.dubitplatform.views.MinigameTitleWindow;
 			import uk.co.dubit.platform.components.minigame.Minigame;
@@ -57,6 +59,7 @@
 			private var growlView:GrowlView
 			private var minigameView:MinigameTitleWindow; 
 			private var shopTitleView:ShopTitleWindow;
+			private var contextMenuSkin:ContextMenuSkin;
 					
 			private function onCreationComplete () : void
 			{
@@ -73,6 +76,8 @@
 				collectionsPanel = PopUpManager.createPopUp(this, CollectionsPanel) as CollectionsPanel;
 				collectionsPanel.filters = [new DropShadowFilter(0, 0, 0, 0.7, 40, 40, 1, 3)];
 				collectionsPanel.visible = false;
+				
+				SoundManager.getInstance().volume = 0;
 			}
 			
             public function openControlPanel () : void

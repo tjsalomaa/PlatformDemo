@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Include xmlns:xi="http://www.w3.org/2001/XInclude">	
+	<!-- Handles behaviours / data sent from the Nexus Game Server to the room -->
+	<NotificationHandler id="world" namespace="{Room.namespace}" channel="roomChannel">
+		<!-- Each trigger is a behaviour which is sent from the server -->
+		<Triggers>
+			<!-- Game objects are created / destroyed when players enter / exit rooms -->
+			<createGameObjects><CreateGameObjects gameObjects="{Event.gameObjects}" /></createGameObjects>
+			<createGameObject><CreateGameObject gameObject="{Event.gameObject}" /></createGameObject>
+			<destroyGameObject><DestroyGameObject gameObject="{Event.gameObject}" /></destroyGameObject>
+			
+			<!-- Player movement messages -->
+			<moveToPoint>
+				<!-- This move behaviour must not notifyServer (as it was the server which notified us about the movement.
+				     Notifying the server here would cause a loop -->
+				<MovePlayerTo gameObject="{Event.gameObject}" targetX="{Event.end_x}" targetY="{Event.end_y}" notifyServer="false"/>
+			</moveToPoint>
+		</Triggers>
+	</NotificationHandler>
+	
+	<!-- Definition of players in the room -->
+	<PlayerDefinition id="playerDefinition">
+		<Attributes>
+			<Attribute key="mouseEnabled" value="true" />
+			<Attribute key="mouseChildren" value="false" />
+			<Attribute key="clickThrough" value="true" />
+			<Attribute key="x" value="{Room.startX}" />
+			<Attribute key="y" value="{Room.startY}" />
+			<Attribute key="clothingLayers" value="{model.avatarEditorModel.clothingLayers}" />
+			<Attribute key="originX" value="200" />
+			<Attribute key="originY" value="390" />
+			<Attribute key="nameOriginX" value="0" />
+			<Attribute key="nameOriginY" value="0" />
+			<Attribute key="location" value="furniture.{This.id}" />
+			<Attribute key="scaleX" value="{Room.player.displayObject.scaleX}" />
+			<Attribute key="scaleY" value="{Room.player.displayObject.scaleY}" />
+			<Attribute key="filters" value="{Room.playerFilters}" />
+			<Attribute key="speed" value="0" type="number" />
+			<Attribute key="defaultSpeed" value="14" type="number" />
+			<Attribute key="flip" value="true" />
+			<Attribute key="cacheAsBitmap" value="false" />			
+			<Attribute key="displayObjectClass" value="uk.co.dubit.graphics.render2D.ActionPlayer" />
+			<Attribute key="nameBubbleClass" value="uk.co.dubit.application.view.render2D.BritchicksNameBubble" />
+			<Attribute key="speechBubbleClass" value="uk.co.dubit.application.view.render2D.FloatingSpeechBubble" />
+			<!--Attribute key="loaderClass" value="uk.co.dubit.application.view.render2D.BritchicksPlayerLoader" /-->
+			<!--Attribute key="preloaderOriginX" value="-75" />
+			<Attribute key="preloaderOriginY" value="-150" /-->
+			<Attribute key="satMin" value="0.95" />
+			<Attribute key="satMax" value="0.95" />
+			<Attribute key="lumMin" value="0.7" />
+			<Attribute key="lumMax" value="0.7" />
+		</Attributes>
+		
+		<Triggers>
+			<onClick>
+				<OpenMenu menuID="playerMenu" />
+			</onClick>
+		</Triggers>
+	</PlayerDefinition>
+</Include>
