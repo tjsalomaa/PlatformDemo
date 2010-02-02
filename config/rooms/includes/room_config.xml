@@ -11,22 +11,51 @@
 			
 			<!-- Player movement messages -->
 			<moveToPoint>
-				<!-- This move behaviour must not notifyServer (as it was the server which notified us about the movement.
-				     Notifying the server here would cause a loop -->
-				<MovePlayerTo gameObject="{Event.gameObject}" targetX="{Event.end_x}" targetY="{Event.end_y}" notifyServer="false"/>
+				<!-- This behaviour must not notifyServer (as it was the server which notified us about the movement)
+				     Notifying the server here would cause an endless loop scenario -->
+				<MovePlayerTo gameObject="{Event.gameObject}" targetX="{Event.end_x}" targetY="{Event.end_y}" useServer="false"/>
 			</moveToPoint>
+			
+			<!-- Player chat messages -->
+			<receiveMessage>
+				<If expression="({Event.gameObject} != {Room.player})">
+					<Then>
+						<!-- This behaviour must not notifyServer (as it was the server which notified us about the message)
+						     Notifying the server here would cause an endless loop scenario -->
+						<ShowChatBubble gameObject="{Event.gameObject}" message="{Event.message}" useServer="false" />
+					</Then>
+				</If>
+			</receiveMessage>
+			
+			<!-- Updates to game objects send from the server -->
+			<setMemberAttribute>
+			     <Switch value="{Event.attributename}">
+			         <layers>
+			            <UpdateCharacterClothes avatarEditorModel="{model.avatarEditorModel}" name="{Event.attributename}" value="{Event.attributevalue}" target="{Event.gameObject}" />
+			         </layers>
+			         <default>
+			             <SetValue name="{Event.attributename}" value="{Event.attributevalue}" target="{Event.gameObject}" />
+			         </default>
+			     </Switch>
+			</setMemberAttribute>
 		</Triggers>
 	</NotificationHandler>
+	
+	<!-- Chat messages -->
+	<Trigger event="onSendChatMessage" gameObject="{Room}">
+		<ShowBubble gameObject="{Room.player}" message="{Event.message}" />
+	</Trigger>
 	
 	<!-- Definition of players in the room -->
 	<PlayerDefinition id="playerDefinition">
 		<Attributes>
+			<Attribute key="avatarName" value="Hello world" />
 			<Attribute key="mouseEnabled" value="true" />
 			<Attribute key="mouseChildren" value="false" />
 			<Attribute key="clickThrough" value="true" />
 			<Attribute key="x" value="{Room.startX}" />
 			<Attribute key="y" value="{Room.startY}" />
-			<Attribute key="clothingLayers" value="{model.avatarEditorModel.clothingLayers}" />
+			<Attribute key="clothingLayers" value="{AvatarEditorModel.clothingLayers}" />
 			<Attribute key="originX" value="200" />
 			<Attribute key="originY" value="390" />
 			<Attribute key="nameOriginX" value="0" />
@@ -52,9 +81,17 @@
 		</Attributes>
 		
 		<Triggers>
+			<onFixup>
+				<Call behaviourID="moveToSpawnPoint" avatar="{Event.gameObject}" if="({Event.gameObject.id} != {playerDefinition})"/>
+			</onFixup>
+			
 			<onClick>
-				<OpenMenu menuID="playerMenu" />
+				<OpenMenu menuID="playerMenu" target="{Event.handler}" />
 			</onClick>
+			
+			<onShowProfile>
+				<OpenProfile profile="playerProfile" avatar="{Event.handler}"/>
+			</onShowProfile>
 		</Triggers>
 	</PlayerDefinition>
 </Include>

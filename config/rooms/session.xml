@@ -8,14 +8,14 @@
 			<Trace message="Session created "/>
 		</onFixUp>
 		<onChangeRoom>
-			<!--Call behaviourID="EnterRoom" roomName="{Event.roomName}"/-->
+			<Call behaviourID="EnterRoom" roomName="{Event.roomName}"/>
 		</onChangeRoom>
 	</Behaviour>	
 	
 	<BehaviourDefinition id="EnterRoom">
 		<Trace message="EnterRoom called: roomName={Event.roomName}"/>
 				
-		<ChangeRoom roomName="{Event.roomName}" useServer="false">
+		<ChangeRoom roomName="{Event.roomName}">
 			<loadAssetError>
 				<Trace message="loadAssetError called in script!"/>
 			</loadAssetError>
@@ -255,12 +255,12 @@
 	<Menus>
 		<ContextMenu id="playerMenu" track="true" offsetX="350" offsetY="200" skin="com.dubitplatform.views.ContextMenuSkin" >
 			<MenuItem id="onShowProfile" text="Show profile" toolTip="Shows the selected user's profile" />
-			<MenuItem id="onWave" text="Wave" toolTip="Wave!" />
-			<MenuItem id="onCheer" text="Cheer" toolTip="Cheer!" />
-			<MenuItem id="onDance" text="Dance" toolTip="Dance!" />
-			<MenuItem id="onPose" text="Pose" toolTip="Pose!" />
 		</ContextMenu>
 	</Menus>
+	
+	<Profiles>
+		<Profile id="playerProfile" skin="com.dubitplatform.views.ProfileSkinTitleWindow" targetContainer="shopContainer" />
+	</Profiles>
 	
 	<Actions id="actions" defaultAction="stand">
 		<Stand id="stand" path="avatar/stand.swf"/>

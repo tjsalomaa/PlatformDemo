@@ -9,7 +9,7 @@
 					<Result>
 						<Trace message="Entered session" />
 						
-						<ChangeRoom roomName="mansion"  />
+						<ChangeRoom roomName="{Properties.[setting.rooms.default-room]}"  />
 					</Result>
 					<Fault><Trace message="Failed to enter session" /></Fault>
 				</EnterSession>

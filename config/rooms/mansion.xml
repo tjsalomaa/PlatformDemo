@@ -80,7 +80,7 @@
 	<Trigger event="OnEnterCollision" gameObject="{Room.mansiondoor1}">
 		<If expression="({Map.tacotikitownRoom.visible}=={true})">
 			<Then>
-				<ChangeRoom roomName="docks" useServer="false"/>
+				<ChangeRoom roomName="docks"/>
 			</Then>	
 		</If>		
 	</Trigger>

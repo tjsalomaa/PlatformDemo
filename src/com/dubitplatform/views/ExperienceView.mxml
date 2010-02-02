@@ -1,16 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ExperienceViewBase xmlns="uk.co.dubit.platform.components.experience.*" xmlns:mx="http://www.adobe.com/2006/mxml" width="100%" creationComplete="onCreationComplete(event);">
+<ExperienceViewBase 
+	xmlns="uk.co.dubit.platform.components.experience.*" 
+	xmlns:mx="http://www.adobe.com/2006/mxml" width="100%">
 	
 	<mx:Script>
 		<![CDATA[
+			import uk.co.dubit.platform.scriptEngine.node.IScriptNode;
 			
 			private function updateLevel () : void
 			{
-				progressBar.minimum = experience.level.points;
-				progressBar.maximum = experience.nextLevel.points;
-				progressBar.setProgress(experience.points, experience.nextLevel.points);
-				
-				levelLabel.text = "Level " + experience.level.index + " : " + experience.level.name + " (" + experience.points + "/" + experience.nextLevel.points + ")";	
+				if(experience.level)
+				{
+					progressBar.minimum = experience.level.points;
+					progressBar.maximum = experience.nextLevel.points;
+					progressBar.setProgress(experience.points, experience.nextLevel.points);
+					
+					levelLabel.text = "Level " + experience.level.index + " : " + experience.level.name + " (" + experience.points + "/" + experience.nextLevel.points + ")";	
+				}
 			}
 			
 			override public function onAwardExperience (points : int) : void
@@ -18,10 +24,12 @@
 				updateLevel();
 			}	
 			
-			public function onCreationComplete (event : Event) : void
+			override public function set node(node:IScriptNode) : void
 			{
+				super.node = node;
+				
 				updateLevel();
-			}	
+			}
 		
 		]]>
 	</mx:Script>

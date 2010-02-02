@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ChatRoomViewBase 
+	width="500" height="200"
+	xmlns="uk.co.dubit.platform.components.rooms.ui.*" 
+	xmlns:mx="http://www.adobe.com/2006/mxml">
+	
+	<mx:Script>
+		<![CDATA[
+			import uk.co.dubit.platform.scriptEngine.events.types.OnTrigger;
+		]]>
+	</mx:Script>
+	
+	<mx:Button  bottom="0" click="{ new OnTrigger('onSendChatMessage', room, room, {message:'Hello world'}, true) }" />
+</ChatRoomViewBase>

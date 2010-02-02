@@ -18,6 +18,8 @@
 	
 	<mx:Script>
 		<![CDATA[
+			import com.dubitplatform.views.ProfileSkinTitleWindow;
+			import com.dubitplatform.views.ChatRoomView;
 			import com.dubitplatform.views.ContextMenuSkin;
 			import uk.co.dubit.sound.SoundManager;
 			import com.dubitplatform.views.ShopTitleWindow;
@@ -60,6 +62,8 @@
 			private var minigameView:MinigameTitleWindow; 
 			private var shopTitleView:ShopTitleWindow;
 			private var contextMenuSkin:ContextMenuSkin;
+			private var chatRoomSkin:ChatRoomView;
+			private var profileSkinTitleWindow:ProfileSkinTitleWindow;
 					
 			private function onCreationComplete () : void
 			{

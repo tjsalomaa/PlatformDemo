@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ChatRoom id="docks" xmlns:xi="http://www.w3.org/2001/XInclude">
-
+	<xi:include href="includes/room_config.xml" />
 	<MouseMovementController/>
 	<CollisionController target="{Room.player}"/>	
 
@@ -24,12 +24,6 @@
 		<DisplayObject2D id="background" assetID="background" mouseEnabled="false" />
 		<DisplayObject2D id="click" assetID="click" mouseEnabled="true" clickThrough="true" alpha="0"/>
 		<ZSortingDisplayObject id="furniture">
-			<Character id="player" filters="{Room.playerFilters}" speed="0" defaultSpeed="13" x="{Room.startX}" y="{Room.startY}" originX="200" originY="375" collidable="true" clickThrough="true" displayObjectClass="uk.co.dubit.graphics.render2D.ActionPlayer">
-				<Actions id="actions" defaultAction="stand">
-					<Stand id="stand" path="avatar/stand.swf"/>
-					<Walk id="walk" path="avatar/walk.swf"/>
-				</Actions>
-			</Character>
 			<DisplayObject2D id="barrelsfront" assetID="barrelsfront" x="0" y="426" originX="0" originY="426" mouseEnabled="false"/>
 			<DisplayObject2D id="cliff" assetID="cliff" x="0" y="460" originX="0" originY="460" mouseEnabled="false"/>
 			<DisplayObject2D id="barside" assetID="barside" x="0" y="438" originX="0" originY="438" mouseEnabled="false"/>
@@ -95,6 +89,18 @@
 		</If>
 	</Trigger>	
 	
+	<BehaviourDefinition id="moveToSpawnPoint" >
+		<!-- Set up the start positions for the room -->
+		<Switch value="{Event.avatar.last_room_id}">
+			<mansion>
+				<SetValues target="{Event.avatar}" x="100" y="350" /> 
+			</mansion>
+			<default>
+				<SetValues target="{Event.avatar}" x="2600" y="438" /> 
+			</default>		
+		</Switch>
+	</BehaviourDefinition>
+	
 	<Behaviour>
 		<onFixUp>
 			<UpdateAchievementScore score="110" achievementID="visitsToFriends"/>
@@ -105,20 +111,5 @@
 				</Then>
 			</If>
 		</onFixUp>
-	</Behaviour>
-	
-	<Behaviour>
-		<onInit>
-			<!-- Set up the start positions for the room -->
-			<Switch value="{Rooms.lastRoomID}">
-				<Mansion>
-					<SetValues target="{Room}" startX="100" startY="350"/>
-				</Mansion>
-				<Default>
-					<SetValues target="{Room}" startX="2600" startY="438"/>
-				</Default>		
-			</Switch>
-		</onInit>
-	</Behaviour>
-	
+	</Behaviour>	
 </ChatRoom>	

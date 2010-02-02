@@ -33,12 +33,6 @@
 		<DisplayObject2D id="background" assetID="background" mouseEnabled="false" />
 		<DisplayObject2D id="click" assetID="click" mouseEnabled="true" clickThrough="true" alpha="0"/>
 		<ZSortingDisplayObject id="furniture">
-			<Character id="player" filters="{Room.playerFilters}" speed="0" defaultSpeed="10" x="{Room.startX}" y="{Room.startY}" originX="210" originY="401" collidable="true" mouseEnabled="true" clickThrough="true" displayObjectClass="uk.co.dubit.graphics.render2D.ActionPlayer">
-				<Actions id="actions" defaultAction="stand">
-					<Stand id="stand" path="avatar/stand.swf"/>
-					<Walk id="walk" path="avatar/walk.swf"/>
-				</Actions>
-			</Character>
 			<DisplayObject2D id="arch" assetID="arch" x="0" y="408" originX="0" originY="408" mouseEnabled="false"/>
 			<DisplayObject2D id="foliageright" assetID="foliageright" x="0" y="508" originX="0" originY="508" mouseEnabled="false"/>
 			<DisplayObject2D id="posts" assetID="posts" x="0" y="478" originX="0" originY="478" mouseEnabled="false"/>
@@ -67,7 +61,7 @@
 	</Trigger>
 
 	<Trigger event="OnEnterCollision" gameObject="{Room.hutsdoor1}">	
-		<ChangeRoom roomName="docks" useServer="false"/>
+		<ChangeRoom roomName="docks"/>
 	</Trigger>	
 	
 	<Trigger event="OnTalkTo" gameObject="{Room.lechuck}">

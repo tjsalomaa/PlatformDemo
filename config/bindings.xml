@@ -138,7 +138,7 @@
 	<!-- ROOM BINDINGS -->
 	<Binding name="ChatRoom" factory="uk.co.dubit.platform.scriptEngine.room.RoomFactory" class="uk.co.dubit.platform.components.rooms.ChatRoom">
 		<Attribute required="false" name="namespace" desciption="The namespace used by the room when communicating with the server" defaultValue="world" />
-		<Attribute required="true" name="skin" type="string" description="The skin class" defaultValue="uk.co.dubit.platform.components.rooms.ui.ChatRoomView"/>
+		<Attribute required="true" name="skin" type="string" description="The skin class" defaultValue="com.dubitplatform.views.ChatRoomView"/>
 		<Attribute required="true" name="targetContainer" type="string" description="The skin container" defaultValue="ChatRoom"/>
 		<Attribute required="true" name="attachSkin" type="boolean" description="True if the skin should be attached immediately" defaultValue="true"/>
 	</Binding>
@@ -322,13 +322,14 @@
 	<Binding name="PlayResponses" class="uk.co.dubit.platform.components.dialogue.behaviours.PlayResponses"/>
 	
 	<!-- BUBBLE BINDINGS -->
-	<Binding name="ShowBubble" class="uk.co.dubit.platform.scriptEngine.behaviour.types.world.ShowBubble">
+	<Binding name="ShowBubble" class="uk.co.dubit.platform.scriptEngine.behaviour.types.world.ShowBubble" alias="ShowChatBubble">
 		<Attribute required="true" name="gameObject" type="gameobject" description="The game object the speech bubble will appear above"/>
 		<Attribute required="true" name="message" type="string" description="The message to show in the chat bubble"/>
 		<Attribute required="false" name="fitToScreen" type="boolean" defaultValue="true" description="If true the bubble will not slide off the edge of visible area"/>
 		<Attribute required="false" name="moveTail" type="boolean" defaultValue="true" description="If the bubble is fitted to screen this attribute will move the bubble tail to follow the player"/>
 		<Attribute required="false" name="screenBuffer" type="number" defaultValue="10" description="How far the bubble should stop from the edge of the screen"/>
 		<Attribute required="false" name="bubbleClass" type="string" defaultValue="uk.co.dubit.graphics.render2D.types.DefaultChatBubble2D"/>	
+		<Attribute required="false" name="useServer" defaultValue="{Properties.[setting.useServer]}" description="Whether to broadcast this message to other users in the room" />
 	</Binding>
 	
 	<!-- FUNCTION CALL BINDINGS -->
@@ -338,14 +339,16 @@
 	<Binding name="MouseMovementController" class="uk.co.dubit.platform.scriptEngine.gameObject.types.avatar.ActorMouseMovementProxy" factory="uk.co.dubit.platform.scriptEngine.gameObject.GameObjectFactory"/>
 	<Binding name="ActorDefinition" factory="uk.co.dubit.platform.scriptEngine.gameObject.GameObjectDefinitionFactory" class="uk.co.dubit.platform.scriptEngine.gameObject.types.avatar.MovingGameObject"/>
 	<Binding name="CollisionController" factory="uk.co.dubit.platform.scriptEngine.gameObject.GameObjectDefinitionFactory" class="uk.co.dubit.platform.scriptEngine.gameObject.types.collision.TargetedCollisionProxy"/>
+	
 	<Binding name="MovePlayerTo" alias="MoveTo" class="uk.co.dubit.platform.world.movement.MoveTo">
 		<Attribute name="gameObject" description="The game object to move" type="IGameObject" required="true" />
 		<Attribute name="x" description="The x location of the game object.  If none is specified the x attritubte of the game object will be used" type="Integer" required="false" />
 		<Attribute name="x" description="The y location of the game object.  If none is specified the y attritubte of the game object will be used" type="Integer" required="false" />
 		<Attribute name="end_x" description="The end x location of the game object" type="Integer" required="true" />
 		<Attribute name="end_y" description="The end y location of the game object" type="Integer" required="true" />
-		<Attribute name="notifyServer" description="Whether the game server should be notified of the move event" required="false" defaultValue="true" />
+		<Attribute name="useServer" description="Whether the game server should be notified of the move event" required="false" defaultValue="{Properties.[setting.useServer]}" />
 	</Binding>
+	
 	<Binding name="JumpPlayerTo" alias="JumpTo" class="uk.co.dubit.platform.world.movement.JumpTo"/>
 	<Binding name="SendMovePlayerTo" alias="SendMoveTo" class="uk.co.dubit.platform.world.movement.SendMoveTo"/>
 	
@@ -573,4 +576,32 @@
 	<Binding name="OpenMenu" class="uk.co.dubit.platform.components.menu.behaviours.OpenMenu" />
 	<Binding name="CloseMenu" class="uk.co.dubit.platform.components.menu.behaviours.CloseMenu" />
 	<Binding name="CloseAllMenus" class="uk.co.dubit.platform.components.menu.behaviours.CloseAllMenus" />
+	
+	<!-- Profile++ -->
+	<Binding name="Profiles" 
+		class="uk.co.dubit.platform.components.profile.Profiles"
+		factory="uk.co.dubit.platform.scriptEngine.gameObject.GameObjectFactory" />
+		
+	<Binding name="Profile" 
+		class="uk.co.dubit.platform.components.profile.Profile"
+		factory="uk.co.dubit.platform.scriptEngine.gameObject.GameObjectFactory" />
+	<Binding name="PlayerProfile" 
+		class="uk.co.dubit.platform.components.profile.Profile"
+		factory="uk.co.dubit.platform.scriptEngine.gameObject.GameObjectFactory" />
+	<Binding name="OtherPlayerProfile" 
+		class="uk.co.dubit.platform.components.profile.Profile"
+		factory="uk.co.dubit.platform.scriptEngine.gameObject.GameObjectFactory" />
+	<Binding name="NPCProfile" 
+		class="uk.co.dubit.platform.components.profile.Profile"
+		factory="uk.co.dubit.platform.scriptEngine.gameObject.GameObjectFactory" />
+		
+	<Binding name="OpenProfile" class="uk.co.dubit.platform.components.profile.behaviours.OpenProfile">
+		<Attribute name="Profile" description="The profile object or the id of the profile you wish to open" required="true" />
+		<Attribute name="Avatar" description="The avatar which has this profile" required="false" />
+	</Binding>
+	
+	<Binding name="GetProfileFor" class="uk.co.dubit.platform.components.profile.behaviours.GetProfileFor">
+		<Attribute name="Profile" description="The profile to load the profile data into" required="true" />
+		<Attribute name="Avatar" description="The avatar which owns the profile data" required="true" />
+	</Binding>
 </Bindings>
