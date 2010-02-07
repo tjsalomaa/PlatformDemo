@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ChatRoom id="mansion" xmlns:xi="http://www.w3.org/2001/XInclude" startX="297" startY="567">
+
+	<MouseMovementController yVelocityScale="0.5" directions="12" id="movement" />
+	<CollisionController target="{Room.player}" id="collision"/>	
+	
+	<VerbController id="verb">
+		<Verb id="OnLookAt" name="Look at"/>
+		<Verb id="OnPickUp" name="Pick up"/>
+		<Verb id="OnTalkTo" name="Talk to"/>
+	</VerbController>
+		
+	<Collision width="1296" height="700" id="walkableArea" solid="true">
+		<Triggers>
+			<OnCollision>
+				<Trace message="collision"/>
+			</OnCollision>	
+		</Triggers>	
+	</Collision>
+	
+	<Scene id="scene" target="{Room.player}" viewportWidth="784" viewportHeight="445" width="1296" height="700">
+		<DisplayObject2D id="background" index="1" mouseEnabled="false" />
+		<DisplayObject2D id="click" index="2" mouseEnabled="true" clickThrough="true" alpha="0"/>
+		<ZSortingDisplayObject id="furniture" index="3">
+		</ZSortingDisplayObject>
+		<DisplayObject2D id="foreground" index="4" x="0" y="0" originX="0" originY="0" mouseEnabled="false"/>
+		<ZSortingDisplayObject id="playerMessages" index="15" />
+		<DisplayObject2D id="top" index="20"/>
+	</Scene>
+	
+	<Assets id="assets">
+	
+	</Assets>
+
+</ChatRoom>

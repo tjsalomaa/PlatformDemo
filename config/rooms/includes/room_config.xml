@@ -1,0 +1,3 @@
+<Trigger gameObject="{Room.click}" event="OnClicl">
+	<Trace message="monkeys"/>
+</Trigger>	

@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<app:NexusBase 
+	width="100%" height="100%" layout="absolute" horizontalCenter="0" backgroundColor="black" horizontalScrollPolicy="off" verticalScrollPolicy="off" 
+	creationComplete="onCreationComplete();"
+	
+	xmlns:mx="http://www.adobe.com/2006/mxml" 
+	xmlns:app="uk.co.dubit.platform.app.*" 
+	xmlns:skin="uk.co.dubit.platform.components.skin.*" 
+	xmlns:ui="uk.co.dubit.platform.components.rooms.ui.*" 
+	xmlns:backpack="uk.co.dubit.platform.components.backpack.*" 
+	xmlns:quest="uk.co.dubit.platform.components.quest.*"
+	xmlns:dialogue="uk.co.dubit.platform.components.dialogue.*" 
+	xmlns:experience="uk.co.dubit.platform.components.experience.*" 
+	xmlns:skills="uk.co.dubit.platform.components.skills.*"
+	xmlns:verb="uk.co.dubit.platform.components.verb.*" xmlns:editor="uk.co.dubit.platform.components.editor.*">
+	
+	<mx:Style source="style/style.css"/>
+	
+	<mx:Script>
+		<![CDATA[
+			import com.dubitplatform.views.EditRoomPanel;
+			import com.dubitplatform.views.MinigameTitleWindow;
+			import uk.co.dubit.platform.components.minigame.Minigame;
+			import com.dubitplatform.views.MinigameSkin;
+			import com.dubitplatform.views.GrowlView;
+			import com.dubitplatform.views.ShopView;
+			import uk.co.dubit.platform.components.catalogue.Shops;
+			import com.dubitplatform.views.ChatRoomPreloaderView;
+			import com.dubitplatform.views.CollectionView;
+			import com.dubitplatform.views.CollectionsPanel;
+			import com.dubitplatform.views.AchievementsView;
+			import com.dubitplatform.views.VerbControllerView;
+			import com.dubitplatform.views.SkillsView;
+			import com.dubitplatform.views.ExperienceView;
+			import uk.co.dubit.logging.LoggingPanel;
+			import uk.co.dubit.logging.LoggingPopUp;
+			import com.dubitplatform.views.RoomListView;
+			
+			import mx.managers.PopUpManager;
+			import com.dubitplatform.views.ControlPanel;
+			import com.dubitplatform.views.QuestsView;
+			import com.dubitplatform.views.BackpackView;
+			import com.dubitplatform.views.BranchingConversationView;
+			
+			private var skillsView : SkillsView;
+			private var questsView : QuestsView;
+			private var controlPanel : ControlPanel;
+			private var collectionsPanel : CollectionsPanel;
+			private var backpackView : BackpackView;
+			private var roomListView : RoomListView;
+			private var loggingPanel : LoggingPanel;
+			private var experienceView : ExperienceView;
+			private var colletionView : CollectionView;
+			private var achievementView : AchievementsView;
+			private var verbControllerView : VerbControllerView;
+			private var chatRoomPreloaderView : ChatRoomPreloaderView;
+			private var branchingConversationView : BranchingConversationView;
+			private var growlView : GrowlView
+			private var minigameSkin : MinigameSkin;
+			private var minigameView : MinigameTitleWindow;
+			private var editRoomPanel : EditRoomPanel;
+			
+			private function onCreationComplete () : void
+			{
+				controlPanel = PopUpManager.createPopUp(this, ControlPanel) as ControlPanel;
+				controlPanel.filters = [new DropShadowFilter(0, 0, 0, 0.7, 40, 40, 1, 3)];
+				controlPanel.visible = false;	
+				
+				roomBackground.filters = [new DropShadowFilter(0, 0, 0, 0.7, 40, 40, 1, 3)];
+				
+				loggingPanel = PopUpManager.createPopUp(this, LoggingPanel) as LoggingPanel;
+				loggingPanel.filters = [new DropShadowFilter(0, 0, 0, 0.7, 40, 40, 1, 3)];
+				loggingPanel.visible = false;
+				
+				collectionsPanel = PopUpManager.createPopUp(this, CollectionsPanel) as CollectionsPanel;
+				collectionsPanel.filters = [new DropShadowFilter(0, 0, 0, 0.7, 40, 40, 1, 3)];
+				collectionsPanel.visible = false;
+			}
+			
+            public function openControlPanel () : void
+            {            	
+            	if (!controlPanel.visible) PopUpManager.centerPopUp(controlPanel);
+            	PopUpManager.bringToFront(controlPanel);
+            	controlPanel.visible = true;
+            }	
+            
+            public function openDebugPanel () : void
+            {            	
+             	if (!loggingPanel.visible) PopUpManager.centerPopUp(loggingPanel);
+             	PopUpManager.bringToFront(loggingPanel);
+            	loggingPanel.visible = true;           	 
+            }
+            
+            public function openCollectionsPanel () : void
+            {            	
+             	if (!collectionsPanel.visible) PopUpManager.centerPopUp(collectionsPanel);
+             	PopUpManager.bringToFront(collectionsPanel);
+            	collectionsPanel.visible = true;           	 
+            }           	            		
+		]]>
+	</mx:Script>	
+	
+	<mx:HDividedBox width="100%" height="100%" paddingRight="50" verticalScrollPolicy="off">
+		
+		<mx:Canvas width="750" height="100%" maxWidth="750" verticalScrollPolicy="off">
+			<mx:Box id="roomBackground" width="700" height="445" x="50" y="100" backgroundColor="black"/>
+			<ui:ChatRoomSkinContainer id="chatRoomSkinContainer" width="700" height="445" x="50" y="100" horizontalScrollPolicy="off" verticalScrollPolicy="off"/>
+		
+			<verb:VerbSkinContainer width="700" height="30" x="50" y="515"/>
+			<dialogue:DialogueSkinContainer horizontalCenter="0" y="440"  width="760" height="200"/>	
+			
+			<ui:ChatRoomPreloaderSkinContainer width="700" height="445" x="50" y="100" mouseEnabled="false"/>
+			
+			<mx:ApplicationControlBar width="700" x="50" y="60" height="30">
+				<experience:ExperienceSkinContainer width="400" height="20"/>
+				<mx:Spacer width="100%"/>
+				<skills:SkillsSkinContainer width="150" height="20"/>
+			</mx:ApplicationControlBar>			
+		</mx:Canvas>
+		
+		<mx:Canvas height="100%">
+			<mx:Panel title="Room GAML" y="60" height="485" width="100%"><!-- width="475"-->
+				<editor:EditorSkinContainer width="100%" height="100%"/>	
+			</mx:Panel>			
+		</mx:Canvas> 
+		
+	</mx:HDividedBox>
+
+	<skin:PopupSkinContainer x="50" y="50" containerID="shopContainer" />
+	<skin:PopupSkinContainer containerID="minigameContainer" horizontalCenter="-200" y="180" />
+	<skin:BasicSkinContainer containerID="growlContainer" horizontalCenter="280" y="155" />	
+	
+	<mx:Box width="100%" backgroundColor="0x333333" bottom="0">
+		<mx:ControlBar width="100%">
+			<mx:Button label="My Stuff" click="openControlPanel();"/>
+			<mx:Button label="My Collections" click="openCollectionsPanel();"/>
+			<mx:Spacer width="100%"/>
+			<mx:Button label="Debug" click="openDebugPanel();"/>
+		</mx:ControlBar>		
+	</mx:Box>	
+</app:NexusBase>
