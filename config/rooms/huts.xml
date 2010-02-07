@@ -4,7 +4,7 @@
 	<Attribute key="startX" value="1667" type="number" />
 	<Attribute key="startY" value="442" type="number" />
 
-	<MouseMovementController yVelocityScale="0.3"/>
+	<MouseMovementController yVelocityScale="0.3" directions="12" useFixedAngles="true"/>
 	<CollisionController target="{Room.player}"/>	
 	
 	<VerbController>
@@ -32,10 +32,10 @@
 		<DisplayObject2D id="background" assetID="background" mouseEnabled="false" />
 		<DisplayObject2D id="click" assetID="click" mouseEnabled="true" clickThrough="true" alpha="0"/>
 		<ZSortingDisplayObject id="furniture">
-			<Character id="player" filters="{Room.playerFilters}" speed="0" defaultSpeed="10" x="{Room.startX}" y="{Room.startY}" originX="210" originY="401" collidable="true" mouseEnabled="true" clickThrough="true" displayObjectClass="uk.co.dubit.graphics.render2D.ActionPlayer">
+			<Character id="player" filters="{Room.playerFilters}" speed="0" defaultSpeed="10" x="{Room.startX}" y="{Room.startY}" originX="90" originY="310" collidable="true" mouseEnabled="false" verbEnabled="false" clickThrough="true" displayObjectClass="uk.co.dubit.graphics.render2D.ActionPlayer">
 				<Actions id="actions" defaultAction="stand">
-					<Stand id="stand" path="avatar/stand.swf"/>
-					<Walk id="walk" path="avatar/walk.swf"/>
+					<Stand id="stand" path="avatar/walk12.swf"/>
+					<Walk id="walk" path="avatar/walk12.swf"/>
 				</Actions>
 			</Character>
 			<DisplayObject2D id="arch" assetID="arch" x="0" y="408" originX="0" originY="408" mouseEnabled="false"/>

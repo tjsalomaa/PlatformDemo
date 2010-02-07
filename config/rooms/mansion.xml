@@ -1,66 +1,94 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ChatRoom id="mansion" xmlns:xi="http://www.w3.org/2001/XInclude">
+<ChatRoom id="mansion" xmlns:xi="http://www.w3.org/2001/XInclude" startX="297" startY="567">
 
-	<Attribute key="startX" value="297" type="number" />
-	<Attribute key="startY" value="567" type="number" />
-
-	<MouseMovementController yVelocityScale="0.5"/>
-	<CollisionController target="{Room.player}"/>	
-	<VerbController>
+	<MouseMovementController yVelocityScale="0.5" directions="12" id="movement" />
+	
+	<CollisionController target="{Room.player}" id="collision"/>	
+	
+	<Include href="includes/room_config.xml" />
+	
+	
+	<VerbController id="verb">
 		<Verb id="OnLookAt" name="Look at"/>
 		<Verb id="OnPickUp" name="Pick up"/>
 		<Verb id="OnTalkTo" name="Talk to"/>
-	</VerbController>	
+	</VerbController>
+	
+	<Editor id="editor"/>	
 		
 	<Collision width="1296" height="700" id="walkableArea" solid="true">
-		<Image assetID="hit"/>
+		<Image assetID="hit_asset" id="hitAreaImage"/>
+		<Triggers>
+			<OnCollision>
+				<Trace message="collision"/>
+			</OnCollision>	
+		</Triggers>	
 	</Collision>
 	
 	<Filters id="playerFilters">
 		<DepthFilter id="playerDepthFilter" scaleBack="-1.4" scaleFront="0.001" />
-		<MultiplyFilter id="lightFilter" >
+		<MultiplyFilter id="lightFilter">
 			<Image id="light_filter" assetID="light_filter_asset" />
 		</MultiplyFilter>	
 	</Filters>
 	
-	<Sounds target="{Room.player}" >
-		<Sound id="backgroundMusic" play="true" looping="true" assetID="music" />
+	<Sounds target="{Room.player}" id="sounds">
+		<!-- <Sound id="backgroundMusic" play="true" looping="true" assetID="music" /> -->
 	</Sounds>
 	
 	<Scene id="scene" target="{Room.player}" viewportWidth="784" viewportHeight="445" width="1296" height="700">
-		<DisplayObject2D id="background" assetID="background" mouseEnabled="false" />
-		<DisplayObject2D id="click" assetID="click" mouseEnabled="true" clickThrough="true" alpha="0"/>
-		<ZSortingDisplayObject id="furniture">
-			<Character id="player" filters="{Room.playerFilters}" speed="0" defaultSpeed="10" x="{Room.startX}" y="{Room.startY}" originX="210" originY="401" collidable="true" mouseEnabled="false"  mouseChildren="true" clickThrough="true" displayObjectClass="uk.co.dubit.graphics.render2D.ActionPlayer">
+		<DisplayObject2D id="background" assetID="background_asset" index="1" mouseEnabled="false" />
+		<DisplayObject2D id="click" index="2" assetID="click_asset" mouseEnabled="true" clickThrough="true" alpha="0"/>
+		<ZSortingDisplayObject id="furniture" index="3">
+			<Character id="player" filters="{Room.playerFilters}" speed="0" defaultSpeed="10" x="{Room.startX}" y="{Room.startY}" originX="90" originY="310" collidable="true" mouseEnabled="false" verbEnabled="false" clickThrough="true" displayObjectClass="uk.co.dubit.graphics.render2D.ActionPlayer">
 				<Actions id="actions" defaultAction="stand">
-					<Stand id="stand" path="avatar/stand.swf"/>
-					<Walk id="walk" path="avatar/walk.swf"/>
+					<Stand id="stand" path="avatar/walk12.swf"/>
+					<Walk id="walk" path="avatar/walk12.swf"/>
 				</Actions>
 			</Character>
-			<DisplayObject2D id="rearporch" name="a big porch" assetID="rearporch" x="0" y="521" originX="0" originY="521" mouseEnabled="true" verbEnabled="true" clickThrough="true"/>
-			<DisplayObject2D id="porch" assetID="porch" x="0" y="525" originX="0" originY="525" mouseEnabled="false"/>
-			<DisplayObject2D id="shrubs1" assetID="shrubs1" x="0" y="665" originX="0" originY="665" mouseEnabled="false"/>
-			<DisplayObject2D id="shrubs2" name="the shrubs" assetID="shrubs2" x="0" y="632" originX="0" originY="632" mouseEnabled="true" verbEnabled="true" clickThrough="true"/>
-			<DisplayObject2D id="mansiondoor1" assetID="mansiondoor1" x="1296" y="618" originX="75" originY="100" mouseEnabled="true" verbEnabled="true" useHandCursor="true" distance = "140" clickThrough="true" collidable="true"/>
+			<DisplayObject2D id="rearporch" name="a big porch" assetID="rearporch_asset" x="0" y="521" originX="0" originY="521" mouseEnabled="true" verbEnabled="true" clickThrough="true"/>
+			<DisplayObject2D id="porch" assetID="porch_asset" x="0" y="525" originX="0" originY="525" mouseEnabled="false"/>
+			<DisplayObject2D id="shrubs1" assetID="shrubs1_asset" x="0" y="665" originX="0" originY="665" mouseEnabled="false"/>
+			<DisplayObject2D id="greenBottle" assetID="grog_asset" x="570" y="580" originX="10" originY="20" mouseEnabled="true"/>
+			<DisplayObject2D id="shrubs2" name="the shrubs" assetID="shrubs2_asset" x="0" y="632" originX="0" originY="632" mouseEnabled="true" verbEnabled="true" clickThrough="true"/>
+			<DisplayObject2D id="mansiondoor1" assetID="mansiondoor1_asset" x="1296" y="618" originX="75" originY="100" mouseEnabled="true" verbEnabled="true" useHandCursor="true" distance = "140" clickThrough="true" collidable="true"/>
 		</ZSortingDisplayObject>
-		<DisplayObject2D id="foreground" assetID="foreground" x="0" y="0" originX="0" originY="0" mouseEnabled="false"/>
-		<ZSortingDisplayObject id="playerMessages" />
+		<DisplayObject2D id="foreground" index="4" assetID="foreground_asset" x="0" y="0" originX="0" originY="0" mouseEnabled="false"/>
+		<ZSortingDisplayObject id="playerMessages" index="15" />
+		<DisplayObject2D id="top" index="20"/>
 	</Scene>
 	
-	<Assets>
-		<Asset id="hit" url="[base.url]images/mansion/hit.png"/>
-		<Asset id="click" url="[base.url]images/mansion/click.jpg"/>
-	    <Asset id="light_filter_asset" url="[base.url]images/mansion/light.jpg"/>
-		<Asset id="background" url="[base.url]images/mansion/background.jpg"/>
-		<Asset id="music" url="[base.url]sounds/mansion/music.mp3" />
-		<Asset id="shrubs1" url="[base.url]images/mansion/shrubs1.png"/>
-		<Asset id="shrubs2" url="[base.url]images/mansion/shrubs2.png"/>
-		<Asset id="porch" url="[base.url]images/mansion/porch.png"/>
-		<Asset id="rearporch" url="[base.url]images/mansion/rearporch.png"/>
-		<Asset id="foreground" url="[base.url]images/mansion/foreground.png"/>
-		<Asset id="mansiondoor1" url="[base.url]images/mansion/mansiondoor1.png" />	
+	<Assets id="assets">
+		<Asset id="hit_asset" url="images/mansion/hit.png"/>
+		<Asset id="click_asset" url="images/mansion/click.jpg"/>
+	    <Asset id="light_filter_asset" url="images/mansion/light.jpg"/>
+		<Asset id="background_asset" url="images/mansion/background.jpg"/>
+		<Asset id="music" url="sounds/mansion/music.mp3" />
+		<Asset id="shrubs1_asset" url="images/mansion/shrubs1.png"/>
+		<Asset id="shrubs2_asset" url="images/mansion/shrubs2.png"/>
+		<Asset id="shrubs3_asset" url="images/mansion/shrubs2.png"/>
+		<Asset id="porch_asset" url="images/mansion/porch.png"/>
+		<Asset id="rearporch_asset" url="images/mansion/rearporch.png"/>
+		<Asset id="foreground_asset" url="images/mansion/foreground.png"/>
+		<Asset id="mansiondoor1_asset" url="images/mansion/mansiondoor1.png" />	
+		<Asset id="grog_asset" url="images/mansion/grogbg.png" />	
 	</Assets>
+
+	<Trigger event="OnClick" gameObject="{Room.click}">
+		<Trace message="click"/>
+		<MoveTo gameObject="{Room.player}" targetX="{Event.x}" targetY="{Event.y}"/>		
+	</Trigger>
 	
+	<Trigger event="OnDragDrop" gameObject="{Room.player}">
+		<Switch value="{Event.dragInitiator.id}">
+			<Rum>
+				<RemoveFromBackpack possession="{Event.dragInitiator}"/>
+				<ShowBubble gameObject="{Room.player}" message="Yum, rum!"/>
+			</Rum>	
+		</Switch>	
+	</Trigger>
+
+<!--	
 	<Trigger event="OnClick" gameObject="{Room.click}">	
 		<MoveTo gameObject="{Room.player}" targetX="{Event.x}" targetY="{Event.y}">
 			<Complete>
@@ -73,6 +101,14 @@
 		<AddToCollection collectionID="animalCollection" collectableID="dog"/>
 	</Trigger>
 
+<Trigger event="OnClick" gameObject="{Room.click}">
+	<ShowBubble gameObject="{Room.player}" message="Ok, I'm on my way"/>		
+</Trigger>
+	
+	<Trigger event="OnClick" gameObject="{Room.click}" id="clickTest">	
+		<MoveTo gameObject="{Room.player}" targetX="{Event.x}" targetY="{Event.y}"/>		
+	</Trigger>	
+
 	<Trigger event="OnEnterCollision" gameObject="{Room.mansiondoor1}">
 		<If expression="({Map.tacotikitownRoom.visible}=={true})">
 			<Then>
@@ -81,10 +117,12 @@
 		</If>		
 	</Trigger>
 	
-	<Trigger event="OnLookAt" gameObject="{Room.rearporch}">
-		<Trace message="OnLookAt rearporch"/>
-		<ShowBubble gameObject="{Room.player}" message="Yep, it's the porch to the mansion. And what a porch!"/>
-		<RemoveFromBackpack possession="{Backpack.grog}"/>
+	<Trigger event="OnEnterCollision" gameObject="{Room.mansiondoor1}">
+		
+	</Trigger>	
+	
+	<Trigger event="OnClick" gameObject="{Room.rearporch}" id="triggerID">
+		<Trace message="OnLookAt rearporch" id="traceID"/>
 	</Trigger>
 	
 	<Trigger event="OnPickUp" gameObject="{Room.rearporch}">
@@ -93,7 +131,7 @@
 		<UpdateAchievementScore score="110" achievementID="visitsToFriends"/>
 	</Trigger>	
 	
-	<Trigger event="OnLookAt" gameObject="{Room.shrubs2}">
+	<Trigger event="OnChris" gameObject="{Room.shrubs2}">
 		<ShowBubble gameObject="{Room.player}" message="Ooh I've found a map with instructions to the docks, and the cannibal town!"/>
 		<UpdateLocationVisibility locationID="darkdocksRoom" visible="true"/>
 		<UpdateLocationVisibility locationID="tacotikitownRoom" visible="true"/>
@@ -102,7 +140,7 @@
 	<Trigger event="OnClick" gameObject="{Room.rearporch}">
 		<Trace message="OnClick rearporch"/>
 		<GotoAndPlay gameObject="{Room.dennis}" frame="2"/>
-	</Trigger>
+	</Trigger>	
 	
 	<Trigger event="OnDragDrop" gameObject="{Room.shrubs2}">
 		<Trace message="OnDragDrop dragInitiator={Event.dragInitiator}"/>
@@ -120,5 +158,5 @@
 	<BehaviourDefinition id="ShowPlayerBubble">
 		<ShowBubble gameObject="{Room.player}" message="{Event.message}"/>
 	</BehaviourDefinition>
-		
+		-->
 </ChatRoom>
