@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <app:NexusBase 
-	width="100%" height="100%" layout="absolute" horizontalCenter="0" backgroundColor="black" horizontalScrollPolicy="off" verticalScrollPolicy="off" 
+	width="100%" height="100%" layout="absolute" horizontalCenter="0" backgroundColor="black" backgroundImage="@Embed('../assets/gui_images/demoBackground.jpg')" horizontalScrollPolicy="off" verticalScrollPolicy="off" 
 	creationComplete="onCreationComplete();"
 	
 	xmlns:mx="http://www.adobe.com/2006/mxml" 
@@ -12,18 +12,23 @@
 	xmlns:dialogue="uk.co.dubit.platform.components.dialogue.*" 
 	xmlns:experience="uk.co.dubit.platform.components.experience.*" 
 	xmlns:skills="uk.co.dubit.platform.components.skills.*"
-	xmlns:verb="uk.co.dubit.platform.components.verb.*" xmlns:editor="uk.co.dubit.platform.components.editor.*">
+	xmlns:verb="uk.co.dubit.platform.components.verb.*" xmlns:editor="uk.co.dubit.platform.components.editor.*" xmlns:chat="uk.co.dubit.platform.components.chat.*">
 	
 	<mx:Style source="style/style.css"/>
 	
 	<mx:Script>
 		<![CDATA[
-			import com.dubitplatform.views.EditRoomPanel;
+			import com.dubitplatform.views.ChatView;
+			import com.dubitplatform.game.ScriptChatBubble;
+			import com.dubitplatform.views.ProfileSkinTitleWindow;
+			import com.dubitplatform.views.ChatRoomView;
+			import com.dubitplatform.views.ContextMenuSkin;
+			import uk.co.dubit.sound.SoundManager;
+			import com.dubitplatform.views.ShopTitleWindow;
 			import com.dubitplatform.views.MinigameTitleWindow;
 			import uk.co.dubit.platform.components.minigame.Minigame;
 			import com.dubitplatform.views.MinigameSkin;
 			import com.dubitplatform.views.GrowlView;
-			import com.dubitplatform.views.ShopView;
 			import uk.co.dubit.platform.components.catalogue.Shops;
 			import com.dubitplatform.views.ChatRoomPreloaderView;
 			import com.dubitplatform.views.CollectionView;
@@ -55,11 +60,16 @@
 			private var verbControllerView : VerbControllerView;
 			private var chatRoomPreloaderView : ChatRoomPreloaderView;
 			private var branchingConversationView : BranchingConversationView;
-			private var growlView : GrowlView
-			private var minigameSkin : MinigameSkin;
-			private var minigameView : MinigameTitleWindow;
-			private var editRoomPanel : EditRoomPanel;
+			private var growlView:GrowlView
+			private var minigameView:MinigameTitleWindow; 
+			private var shopTitleView:ShopTitleWindow;
+			private var contextMenuSkin:ContextMenuSkin;
+			private var chatRoomSkin:ChatRoomView;
+			private var chatView:ChatView
+			private var profileSkinTitleWindow:ProfileSkinTitleWindow;
 			
+			private var chatBubble : ScriptChatBubble;
+					
 			private function onCreationComplete () : void
 			{
 				controlPanel = PopUpManager.createPopUp(this, ControlPanel) as ControlPanel;
@@ -75,10 +85,6 @@
 				collectionsPanel = PopUpManager.createPopUp(this, CollectionsPanel) as CollectionsPanel;
 				collectionsPanel.filters = [new DropShadowFilter(0, 0, 0, 0.7, 40, 40, 1, 3)];
 				collectionsPanel.visible = false;
-				
-				editRoomPanel = PopUpManager.createPopUp(this, EditRoomPanel) as EditRoomPanel;
-				editRoomPanel.filters = [new DropShadowFilter(0, 0, 0, 0.7, 40, 40, 1, 3)];
-				editRoomPanel.visible = false;
 			}
 			
             public function openControlPanel () : void
@@ -100,42 +106,39 @@
              	if (!collectionsPanel.visible) PopUpManager.centerPopUp(collectionsPanel);
              	PopUpManager.bringToFront(collectionsPanel);
             	collectionsPanel.visible = true;           	 
-            }
+            }	
             
-            public function openEditRoomPanel () : void
-            {            	
-             	if (!collectionsPanel.visible) PopUpManager.centerPopUp(editRoomPanel);
-             	PopUpManager.bringToFront(editRoomPanel);
-            	editRoomPanel.visible = true;           	 
-            }            	            		
+            private function openShop() : void
+            {
+            	Shops.getInstance().getShopByID("default").open();
+            }            		
 		]]>
 	</mx:Script>	
-	
-	<mx:Box id="roomBackground" width="700" height="445" horizontalCenter="0" y="100" backgroundColor="black"/>
-	
-	<ui:ChatRoomSkinContainer id="chatRoomSkinContainer" width="700" height="445" horizontalCenter="0" y="100" horizontalScrollPolicy="off" verticalScrollPolicy="off"/>
-	<skin:PopupSkinContainer x="50" y="50" containerID="shopContainer" />
-	
-	<skin:PopupSkinContainer containerID="minigameContainer" horizontalCenter="-200" y="180" />
-	
-	<skin:BasicSkinContainer containerID="growlContainer" horizontalCenter="280" y="155" />
-	<verb:VerbSkinContainer width="700" height="30" horizontalCenter="0" y="515"/>
-	<dialogue:DialogueSkinContainer horizontalCenter="0" y="440"  width="760" height="200"/>
-	
-	<ui:ChatRoomPreloaderSkinContainer width="700" height="445" horizontalCenter="0" y="100" mouseEnabled="false"/>
 
-	<mx:ApplicationControlBar width="700" horizontalCenter="0" y="60" height="30">
-		<experience:ExperienceSkinContainer width="400" height="20"/>
-		<mx:Spacer width="100%"/>
-		<skills:SkillsSkinContainer width="150" height="20"/>
-	</mx:ApplicationControlBar>	
-	
-	<mx:Box width="100%" backgroundColor="0x333333" bottom="0">
-		<mx:ControlBar width="100%">
-			<mx:Button label="My Stuff" click="openControlPanel();"/>
-			<mx:Button label="My Collections" click="openCollectionsPanel();"/>
-			<mx:Spacer width="100%"/>
-			<mx:Button label="Debug" click="openDebugPanel();"/>
-		</mx:ControlBar>		
-	</mx:Box>	
+	  <mx:Style>
+	     @font-face {
+	        src:url("../assets/fonts/Gabrielle.ttf");
+	        fontFamily: Gabrielle;
+	     }
+	  </mx:Style>
+
+		<mx:Canvas width="100%" height="100%" verticalScrollPolicy="off">
+			<mx:Box id="roomBackground"  width="850" height="445" horizontalCenter="0" y="100" backgroundColor="black"/>
+			<ui:ChatRoomSkinContainer id="chatRoomSkinContainer" width="850" height="445" y="100" horizontalScrollPolicy="off" verticalScrollPolicy="off" horizontalCenter="0"/>
+			
+			<chat:ChatSkinContainer width="850" height="30" y="515" horizontalCenter="0"/>			
+			<verb:VerbSkinContainer width="850" height="30" y="515" horizontalCenter="0"/>	
+			
+			<ui:ChatRoomPreloaderSkinContainer width="850" height="445" y="100" mouseEnabled="false" horizontalCenter="0"/>
+			
+			<mx:HBox width="850" horizontalCenter="0" y="100" height="30" verticalAlign="middle" paddingLeft="5">
+				<experience:ExperienceSkinContainer width="400" height="30"/>
+				<mx:Spacer width="100%"/>
+				<mx:LinkButton label="My Stuff" click="openControlPanel();" fontFamily="Gabrielle" fontSize="19" color="black" rollOverColor="0x2e120a"/>
+				<skills:SkillsSkinContainer width="130" height="30"/>
+			</mx:HBox>	
+			
+			<dialogue:DialogueSkinContainer horizontalCenter="0" y="480"  width="760" height="200"/>				
+		</mx:Canvas>
+		
 </app:NexusBase>

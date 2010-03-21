@@ -1,3 +1,105 @@
-<Trigger gameObject="{Room.click}" event="OnClicl">
-	<Trace message="monkeys"/>
-</Trigger>	
+<?xml version="1.0" encoding="UTF-8"?>
+<Include>
+	<BehaviourDefinition id="ShowPlayerBubble">
+		<ShowBubble gameObject="{Room.player}" message="{Event.message}"/>
+	</BehaviourDefinition>
+
+	<!-- Handles behaviours / data sent from the Nexus Game Server to the room -->
+	<NotificationHandler id="world" namespace="world" channel="roomChannel">
+		<!-- Each trigger is a behaviour which is sent from the server -->
+		<Triggers>
+			<!-- Game objects are created / destroyed when players enter / exit rooms -->
+			<createGameObjects><CreateGameObjects gameObjects="{Event.gameObjects}" /></createGameObjects>
+			<createGameObject><CreateGameObject gameObject="{Event.gameObject}" /></createGameObject>
+			<destroyGameObject><DestroyGameObject gameObject="{Event.gameObject}" /></destroyGameObject>
+		
+			<!-- Player movement messages -->
+			<moveToPoint>
+				<!-- This behaviour must not notifyServer (as it was the server which notified us about the movement)
+				     Notifying the server here would cause an endless loop scenario -->
+				<MovePlayerTo gameObject="{Event.gameObject}" targetX="{Event.end_x}" targetY="{Event.end_y}" useServer="false" />
+			</moveToPoint>
+		
+			<!-- Player chat messages -->
+			<receiveMessage>
+				<If expression="({Event.gameObject} != {Room.player})">
+					<Then>
+						<!-- This behaviour must not notifyServer (as it was the server which notified us about the message)
+						     Notifying the server here would cause an endless loop scenario -->
+						<ShowChatBubble gameObject="{Event.gameObject}" message="{Event.message}" useServer="false"  />
+					</Then>
+				</If>
+			</receiveMessage>
+		
+			<!-- Updates to game objects send from the server -->
+			<setMemberAttribute>
+			     <Switch value="{Event.attributename}">
+			         <layers>
+			            <UpdateCharacterClothes avatarEditorModel="{model.avatarEditorModel}" name="{Event.attributename}" value="{Event.attributevalue}" target="{Event.gameObject}" />
+			         </layers>
+			         <default>
+			             <SetValue name="{Event.attributename}" value="{Event.attributevalue}" target="{Event.gameObject}" />
+			         </default>
+			     </Switch>
+			</setMemberAttribute>
+		</Triggers>
+	</NotificationHandler>
+
+	<!-- Chat messages -->
+	<Trigger event="onSendChatMessage" gameObject="{Room}">
+		<ShowBubble gameObject="{Room.player}" message="{Event.message}" />
+	</Trigger>
+
+	<!-- Definition of players in the room -->
+	<PlayerDefinition id="playerDefinition">
+		<Attributes>
+			<Attribute key="avatarName" value="Dennis" />
+			<Attribute key="mouseEnabled" value="false" />
+			<Attribute key="mouseChildren" value="false" />
+			<Attribute key="clickThrough" value="true" />
+			<Attribute key="collidable" value="true" />
+			<Attribute key="x" value="{Room.startX}" />
+			<Attribute key="y" value="{Room.startY}" />
+			<Attribute key="originX" value="90" />
+			<Attribute key="originY" value="310" />
+			<Attribute key="nameOriginX" value="0" />
+			<Attribute key="nameOriginY" value="0" />
+			<Attribute key="location" value="furniture.{This.id}" />
+			<Attribute key="filters" value="{Room.playerFilters}" />
+			<Attribute key="speed" value="0" type="number" />
+			<Attribute key="defaultSpeed" value="7" type="number" />
+			<Attribute key="flip" value="true" />
+			<Attribute key="cacheAsBitmap" value="false" />			
+			<Attribute key="displayObjectClass" value="uk.co.dubit.graphics.render2D.ActionPlayer" />
+			<Attribute key="speechBubbleClass" value="uk.co.dubit.application.view.render2D.FloatingSpeechBubble" />
+		</Attributes>
+	
+		<Actions id="actions" defaultAction="stand">
+			<Stand id="stand" path="avatar/stand12.swf"/>
+			<Walk id="walk" path="avatar/walk12.swf"/>
+		</Actions>	
+	
+		<Triggers>
+			<onFixup>
+				<If expression="({Event.gameObject.id} != {playerDefinition})">
+					<Then>
+						<If expression="({Event.gameObject.x} == {Room.startX})" if="({Event.gameObject.y} == {Room.startY})">
+							<Then>
+								<Call behaviourID="moveToSpawnPoint" avatar="{Event.gameObject}"/>
+							</Then>
+						</If>
+					</Then>
+				</If>	
+			</onFixup>
+		</Triggers>
+	</PlayerDefinition>
+	
+	<Trigger event="OnClick" gameObject="{Room.click}">	
+		<MoveTo gameObject="{Room.player}" x="{Room.player.x}" y="{Room.player.y}" targetX="{Event.x}" targetY="{Event.y}"/>
+	</Trigger>	
+	
+	<Trigger event="OnFixup" gameObject="{Room}">
+		<CreateGameObject definitionID="playerDefinition" id="player" if="({Properties.[setting.useServer]}=={false})"/>
+	</Trigger>
+	
+</Include>

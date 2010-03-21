@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ChatViewBase xmlns="uk.co.dubit.platform.components.chat.ui.*" xmlns:mx="http://www.adobe.com/2006/mxml" width="100%" height="100%" backgroundColor="#2e120a" backgroundAlpha="0.7">
+	
+	<mx:Script>
+		<![CDATA[
+			import mx.core.Container;
+			import uk.co.dubit.platform.scriptEngine.events.types.OnTrigger;
+						
+			protected function handleClickChatInput (event : Event) : void
+			{
+				sendChatMessage(chatInput.text);
+				chatInput.text = "";
+			}
+	
+		]]>
+	</mx:Script>
+	
+	  <mx:Style>
+	     @font-face {
+	        src:url("../assets/fonts/Gabrielle.ttf");
+	        fontFamily: Gabrielle;
+	     }
+	  </mx:Style>	
+	
+	<mx:VBox width="100%" bottom="0" paddingLeft="10" paddingTop="10" paddingRight="10" paddingBottom="0">
+		<mx:HRule width="100%" strokeColor="0x632d1b" strokeWidth="1"/> 
+		<mx:TextInput id="chatInput" width="100%" enter="handleClickChatInput(event);" borderThickness="0" borderSkin="{null}" fontSize="19" fontFamily="Gabrielle" color="black" maxChars="68"/>
+	</mx:VBox>		
+	
+</ChatViewBase>

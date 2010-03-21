@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MenuSkinViewBase 
+	width="100" height="{ menu.menuItems.length * 25 }" backgroundColor="black"
+	xmlns="uk.co.dubit.platform.components.menu.ui.*"
+	xmlns:mx="http://www.adobe.com/2006/mxml">
+	
+	<mx:List id="menuItemList" dataProvider="{ menu.menuItems}" labelField="text"  width="100%" height="100%" itemClick="{ menu.selectAndClose(menuItemList.selectedIndex) }"/>
+	
+</MenuSkinViewBase>

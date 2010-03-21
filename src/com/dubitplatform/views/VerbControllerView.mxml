@@ -1,9 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<VerbControllerViewBase xmlns="uk.co.dubit.platform.components.verb.*" xmlns:mx="http://www.adobe.com/2006/mxml" width="100%" height="100%" backgroundColor="0x333333" backgroundAlpha="0.5">
+<VerbControllerViewBase
+	 xmlns="uk.co.dubit.platform.components.verb.*" 
+	 xmlns:mx="http://www.adobe.com/2006/mxml" width="100%" height="100%" visible="false" backgroundColor="black" backgroundAlpha="0" creationComplete="init();">
 	
 	<mx:Script>
 		<![CDATA[
+			import mx.binding.utils.ChangeWatcher;
 			import uk.co.dubit.platform.components.verb.IVerb;
+			
+			private function init () : void
+			{
+				ChangeWatcher.watch(verbController, "targettedGameObject", function (e : Event) : void
+				{
+					visible = verbController.targettedGameObject != null; 
+				});
+				ChangeWatcher.watch(verbController.activeVerbs, "length", function (e : Event) : void
+				{
+					visible = verbController.activeVerbs.length > 0;; 
+				});				
+			}
 			
 			private function labelFunction (item : Object) : String 
 			{
@@ -15,15 +30,30 @@
 			{
 				fireVerb(item as IVerb);
 			}
+			
+			private function handleLinkClick (label : String) : void
+			{
+				for each (var verb : IVerb in verbController.activeVerbs) if (labelFunction(verb) == label) return fireVerb(verb);
+			}
 		]]>
 	</mx:Script>
 	
-	<mx:VBox verticalAlign="middle" width="100%" height="100%" visible="{verbController.activeVerbs.length > 0}">
-		<mx:LinkBar dataProvider="{verbController.activeVerbs}" itemClick="clickFunction(event.item);"  width="100%" labelFunction="labelFunction" horizontalAlign="center"/>  
-	</mx:VBox>
+	<mx:Style>
+	     @font-face 
+	     {
+	        src:url("../assets/fonts/Gabrielle.ttf");
+	        fontFamily: Gabrielle;
+	     }	     
+	</mx:Style>
 	
-	<mx:VBox verticalAlign="middle" width="100%" height="100%" visible="{verbController.activeVerbs.length == 0}">
-		<mx:Label text="{getGameObjectName(verbController.targettedGameObject)}" width="100%" textAlign="center"/>		
+	<mx:HBox id="verbBox" horizontalAlign="center" width="100%" height="100%" visible="{verbController.activeVerbs.length > 0}">
+		<mx:Repeater id="linkRepeater" dataProvider="{verbController.activeVerbs}">
+			<mx:LinkButton label="{labelFunction(linkRepeater.currentItem)}" click="{handleLinkClick(event.target.label)}" fontFamily="Gabrielle" fontSize="19" color="black" rollOverColor="0x2e120a"/>
+		</mx:Repeater>  
+	</mx:HBox>
+	
+	<mx:VBox verticalAlign="middle" width="100%" height="100%" visible="{verbController.activeVerbs.length == 0}" paddingTop="2">
+		<mx:Label text="{getGameObjectName(verbController.targettedGameObject)}" width="100%" textAlign="center" color="black" fontFamily="Gabrielle" fontSize="19"/>		
 	</mx:VBox>	
 	
 </VerbControllerViewBase>

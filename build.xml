@@ -25,7 +25,7 @@
 				<include name="**/*.xml" />
 			</fileset>
 		</xcluder>
-		<delete dir="${dir.bin}/config/rooms/includes" />		
+		<!--<delete dir="${dir.bin}/config/rooms/includes" />-->		
 		<echo message="Completed copying GAML" />
 	</target>
 

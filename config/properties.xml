@@ -2,12 +2,17 @@
 <environments current="dev">
     
 	<environment type="all">
+		<property name="setting.useServer" value="false" />
+		
+		<!-- <property name="path.game-server" value="localhost:1943" /> -->
+		<property name="path.game-server" value="67.207.128.86:1937" />	
+		
 	    <property name="setting.rooms.path" value="config/rooms/"/>
-		<property name="setting.rooms.default-room" value="session"/>
-		<property name="setting.rooms.quest-room" value="quest"/>
-		<property name="setting.rooms.backpack-room" value="backpack"/>
+		<property name="setting.rooms.default-room" value="lab"/>
+		
 		<property name="setting.alert.xOffset" value="0" />
 		<property name="setting.alert.yOffset" value="0" />
 	</environment>
 	
 </environments>
+

@@ -1,16 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ExperienceViewBase xmlns="uk.co.dubit.platform.components.experience.*" xmlns:mx="http://www.adobe.com/2006/mxml" width="100%" creationComplete="onCreationComplete(event);">
+<ExperienceViewBase 
+	xmlns="uk.co.dubit.platform.components.experience.*" 
+	xmlns:mx="http://www.adobe.com/2006/mxml" width="100%">
 	
 	<mx:Script>
 		<![CDATA[
+			import uk.co.dubit.platform.scriptEngine.node.IScriptNode;
 			
 			private function updateLevel () : void
 			{
-				progressBar.minimum = experience.level.points;
-				progressBar.maximum = experience.nextLevel.points;
-				progressBar.setProgress(experience.points, experience.nextLevel.points);
-				
-				levelLabel.text = "Level " + experience.level.index + " : " + experience.level.name + " (" + experience.points + "/" + experience.nextLevel.points + ")";	
+				if(experience.level && levelLabel)
+				{
+					levelLabel.text = experience.level.name + " (" + experience.points + "/" + experience.nextLevel.points + ")";	
+				}
 			}
 			
 			override public function onAwardExperience (points : int) : void
@@ -18,19 +20,26 @@
 				updateLevel();
 			}	
 			
-			public function onCreationComplete (event : Event) : void
+			override public function set node(node:IScriptNode) : void
 			{
+				super.node = node;
+				
 				updateLevel();
-			}	
+			}
 		
 		]]>
 	</mx:Script>
 	
+	<mx:Style>
+	     @font-face 
+	     {
+	        src:url("../assets/fonts/Gabrielle.ttf");
+	        fontFamily: Gabrielle;
+	     }
+	</mx:Style>		
+	
 	<mx:HBox width="400">
-		<mx:Box width="100" paddingTop="5">
-			<mx:ProgressBar id="progressBar" mode="manual" width="100" label=""/>	
-		</mx:Box>
-		<mx:Label id="levelLabel" width="100%" paddingTop="2"/>
+		<mx:Label id="levelLabel" width="100%" paddingTop="2" fontFamily="Gabrielle" fontSize="19" color="black"/>
 	</mx:HBox>
 	
 </ExperienceViewBase>
