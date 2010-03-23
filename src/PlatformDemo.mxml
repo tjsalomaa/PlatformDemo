@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <app:NexusBase 
-	width="100%" height="100%" layout="absolute" horizontalCenter="0" backgroundColor="black" backgroundImage="@Embed('../assets/gui_images/demoBackground.jpg')" horizontalScrollPolicy="off" verticalScrollPolicy="off" 
+	width="100%" height="100%" layout="absolute" horizontalCenter="0" backgroundColor="black" horizontalScrollPolicy="off" verticalScrollPolicy="off" 
 	creationComplete="onCreationComplete();"
 	
 	xmlns:mx="http://www.adobe.com/2006/mxml" 
@@ -115,13 +115,6 @@
 		]]>
 	</mx:Script>	
 
-	  <mx:Style>
-	     @font-face {
-	        src:url("../assets/fonts/Gabrielle.ttf");
-	        fontFamily: Gabrielle;
-	     }
-	  </mx:Style>
-
 		<mx:Canvas width="100%" height="100%" verticalScrollPolicy="off">
 			<mx:Box id="roomBackground"  width="850" height="445" horizontalCenter="0" y="100" backgroundColor="black"/>
 			<ui:ChatRoomSkinContainer id="chatRoomSkinContainer" width="850" height="445" y="100" horizontalScrollPolicy="off" verticalScrollPolicy="off" horizontalCenter="0"/>
@@ -134,7 +127,7 @@
 			<mx:HBox width="850" horizontalCenter="0" y="100" height="30" verticalAlign="middle" paddingLeft="5">
 				<experience:ExperienceSkinContainer width="400" height="30"/>
 				<mx:Spacer width="100%"/>
-				<mx:LinkButton label="My Stuff" click="openControlPanel();" fontFamily="Gabrielle" fontSize="19" color="black" rollOverColor="0x2e120a"/>
+				<mx:LinkButton label="My Stuff" click="openControlPanel();"/>
 				<skills:SkillsSkinContainer width="130" height="30"/>
 			</mx:HBox>	
 			
