@@ -19,16 +19,8 @@
 		]]>
 	</mx:Script>
 	
-	<mx:Style>
-	     @font-face 
-	     {
-	        src:url("../assets/fonts/Gabrielle.ttf");
-	        fontFamily: Gabrielle;
-	     }
-	</mx:Style>		
-	
 	<mx:VBox width="100%" height="100%" horizontalAlign="right">
-		<mx:LinkButton id="skillButton" label="Skill Points ({skills.points})" click="showSkillsWindow();" fontFamily="Gabrielle" fontSize="19" color="black" rollOverColor="0x2e120a"/>		
+		<mx:LinkButton id="skillButton" label="Skill Points ({skills.points})" click="showSkillsWindow();" paddingTop="6"/>		
 	</mx:VBox>
  	
 </SkillsViewBase>

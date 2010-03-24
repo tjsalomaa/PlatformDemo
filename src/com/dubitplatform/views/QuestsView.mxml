@@ -21,7 +21,7 @@
 					<mx:List dataProvider="{ questsRepeater.currentItem.objectives }" width="100%" height="100%" borderStyle="none" variableRowHeight="true" useRollOver="false">
 						<mx:itemRenderer>
 					   		<mx:Component>
-								<views:ObjectiveView objective="{ IObjective(data) }" width="100%" height="20" /> 	
+								<views:ObjectiveView objective="{ IObjective(data) }" width="100%" height="20" horizontalScrollPolicy="off"/> 	
 					   		</mx:Component>
 						</mx:itemRenderer>
 					</mx:List>

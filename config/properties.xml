@@ -12,6 +12,9 @@
 		
 		<property name="setting.alert.xOffset" value="0" />
 		<property name="setting.alert.yOffset" value="0" />
+		
+	    <property name="scene-viewportHeight" value="400"/>
+	    <property name="scene-viewportWidth" value="850"/>		
 	</environment>
 	
 </environments>

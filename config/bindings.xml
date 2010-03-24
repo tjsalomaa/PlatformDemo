@@ -339,7 +339,7 @@
 		<Attribute required="false" name="moveTail" type="boolean" defaultValue="true" description="If the bubble is fitted to screen this attribute will move the bubble tail to follow the player"/>
 		<Attribute required="false" name="screenBuffer" type="number" defaultValue="10" description="How far the bubble should stop from the edge of the screen"/>
 		<Attribute required="false" name="maxWidth" type="number" defaultValue="650" description="The max width for the text field. If the text is wider the bubble will span multile lines"/>
-		<Attribute required="false" name="bubbleClass" type="string" defaultValue="com.dubitplatform.game.ScriptChatBubble"/>	
+		<Attribute required="false" name="bubbleClass" type="string" defaultValue="com.dubitplatform.game.CartoonChatBubble"/>	
 		<Attribute required="false" name="useServer" defaultValue="{Properties.[setting.useServer]}" description="Whether to broadcast this message to other users in the room" />
 	</Binding>
 	

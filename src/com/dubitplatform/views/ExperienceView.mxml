@@ -29,17 +29,9 @@
 		
 		]]>
 	</mx:Script>
-	
-	<mx:Style>
-	     @font-face 
-	     {
-	        src:url("../assets/fonts/Gabrielle.ttf");
-	        fontFamily: Gabrielle;
-	     }
-	</mx:Style>		
-	
+		
 	<mx:HBox width="400">
-		<mx:Label id="levelLabel" width="100%" paddingTop="2" fontFamily="Gabrielle" fontSize="19" color="black"/>
+		<mx:Label id="levelLabel" width="100%" paddingTop="6" />
 	</mx:HBox>
 	
 </ExperienceViewBase>

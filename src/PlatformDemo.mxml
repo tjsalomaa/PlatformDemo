@@ -2,7 +2,7 @@
 <app:NexusBase 
 	width="100%" height="100%" layout="absolute" horizontalCenter="0" backgroundColor="black" horizontalScrollPolicy="off" verticalScrollPolicy="off" 
 	creationComplete="onCreationComplete();"
-	
+	implements="uk.co.dubit.properties.IPropertiesListener"
 	xmlns:mx="http://www.adobe.com/2006/mxml" 
 	xmlns:app="uk.co.dubit.platform.app.*" 
 	xmlns:skin="uk.co.dubit.platform.components.skin.*" 
@@ -18,6 +18,10 @@
 	
 	<mx:Script>
 		<![CDATA[
+			import com.dubitplatform.game.CartoonChatBubble;
+			import uk.co.dubit.utils.StringUtils;
+			import com.adobe.utils.StringUtil;
+			import uk.co.dubit.properties.Properties;
 			import com.dubitplatform.views.ChatView;
 			import com.dubitplatform.game.ScriptChatBubble;
 			import com.dubitplatform.views.ProfileSkinTitleWindow;
@@ -68,7 +72,7 @@
 			private var chatView:ChatView
 			private var profileSkinTitleWindow:ProfileSkinTitleWindow;
 			
-			private var chatBubble : ScriptChatBubble;
+			private var chatBubble : CartoonChatBubble;
 					
 			private function onCreationComplete () : void
 			{
@@ -85,6 +89,31 @@
 				collectionsPanel = PopUpManager.createPopUp(this, CollectionsPanel) as CollectionsPanel;
 				collectionsPanel.filters = [new DropShadowFilter(0, 0, 0, 0.7, 40, 40, 1, 3)];
 				collectionsPanel.visible = false;
+				
+				Properties.getInstance().addListener(this);
+			}
+			
+			public function onPropertyChange (property : String, oldValue : *, newValue : *) : void
+			{
+				if (StringUtils.equals("scene-viewportHeight", property, true))
+				{
+					roomBackground.height = newValue;
+					chatRoomSkinContainer.height = newValue;
+					chatRoomPreloaderContainer.height = newValue;
+					chatSkinContainer.y = newValue + chatRoomSkinContainer.y + 10// verbSkinContainer.height;
+					verbSkinContainer.y = newValue + chatRoomSkinContainer.y - verbSkinContainer.height;
+					dialogueSkinContainer.y = verbSkinContainer.y - 30;  
+				}
+				if (StringUtils.equals("scene-viewportWidth", property, true))
+				{
+					roomBackground.width = newValue;
+					chatRoomSkinContainer.width = newValue;
+					chatSkinContainer.width = newValue;
+					verbSkinContainer.width = newValue;
+					chatRoomPreloaderContainer.width = newValue; 
+					bar.width = newValue;
+					dialogueSkinContainer.width = newValue - 90;
+				}				
 			}
 			
             public function openControlPanel () : void
@@ -115,23 +144,25 @@
 		]]>
 	</mx:Script>	
 
-		<mx:Canvas width="100%" height="100%" verticalScrollPolicy="off">
-			<mx:Box id="roomBackground"  width="850" height="445" horizontalCenter="0" y="100" backgroundColor="black"/>
-			<ui:ChatRoomSkinContainer id="chatRoomSkinContainer" width="850" height="445" y="100" horizontalScrollPolicy="off" verticalScrollPolicy="off" horizontalCenter="0"/>
-			
-			<chat:ChatSkinContainer width="850" height="30" y="515" horizontalCenter="0"/>			
-			<verb:VerbSkinContainer width="850" height="30" y="515" horizontalCenter="0"/>	
-			
-			<ui:ChatRoomPreloaderSkinContainer width="850" height="445" y="100" mouseEnabled="false" horizontalCenter="0"/>
-			
-			<mx:HBox width="850" horizontalCenter="0" y="100" height="30" verticalAlign="middle" paddingLeft="5">
-				<experience:ExperienceSkinContainer width="400" height="30"/>
-				<mx:Spacer width="100%"/>
-				<mx:LinkButton label="My Stuff" click="openControlPanel();"/>
-				<skills:SkillsSkinContainer width="130" height="30"/>
-			</mx:HBox>	
-			
-			<dialogue:DialogueSkinContainer horizontalCenter="0" y="480"  width="760" height="200"/>				
-		</mx:Canvas>
+	<mx:Resize duration="500" id="resizeEffect"/>
+
+	<mx:Canvas width="100%" height="100%" verticalScrollPolicy="off">
+		<mx:Box id="roomBackground"  width="850" height="445" horizontalCenter="0" y="100" backgroundColor="black"/>
+		<ui:ChatRoomSkinContainer id="chatRoomSkinContainer" width="850" height="445" y="100" horizontalScrollPolicy="off" verticalScrollPolicy="off" horizontalCenter="0" resizeEffect="resizeEffect"/>
+		
+		<chat:ChatSkinContainer id="chatSkinContainer" width="850" height="30" y="515" horizontalCenter="0" resizeEffect="resizeEffect"/>			
+		<verb:VerbSkinContainer id="verbSkinContainer" width="850" height="30" y="515" horizontalCenter="0" resizeEffect="resizeEffect"/>	
+		
+		<ui:ChatRoomPreloaderSkinContainer id="chatRoomPreloaderContainer" width="850" height="445" y="100" mouseEnabled="false" horizontalCenter="0" resizeEffect="resizeEffect"/>
+		
+		<mx:ControlBar id="bar" width="850" horizontalCenter="0" y="60" height="30" paddingLeft="5" resizeEffect="resizeEffect">
+			<experience:ExperienceSkinContainer width="400" height="30"/>
+			<mx:Spacer width="100%"/>
+			<mx:LinkButton label="My Stuff" click="openControlPanel();"/>
+			<skills:SkillsSkinContainer width="130" height="30"/>
+		</mx:ControlBar>	
+		
+		<dialogue:DialogueSkinContainer id="dialogueSkinContainer" horizontalCenter="0" y="480"  width="760" height="200"/>				
+	</mx:Canvas>
 		
 </app:NexusBase>
