@@ -2,9 +2,8 @@
 <environments current="dev">
     
 	<environment type="all">
-		<property name="setting.useServer" value="false" />
+		<property name="setting.useServer" value="true" />
 		
-		<!-- <property name="path.game-server" value="localhost:1943" /> -->
 		<property name="path.game-server" value="67.207.128.86:1937" />	
 		
 	    <property name="setting.rooms.path" value="config/rooms/"/>
@@ -15,6 +14,8 @@
 		
 	    <property name="scene-viewportHeight" value="400"/>
 	    <property name="scene-viewportWidth" value="850"/>		
+	
+		<property name="app.name" value="1"/>
 	</environment>
 	
 </environments>
