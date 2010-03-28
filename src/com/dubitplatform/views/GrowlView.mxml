@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<mx:TitleWindow
+<skin:TitleWindowSkin
 	width="200" creationComplete="onCreationComplete()"
 	title="{ growl.notification.title }" showCloseButton="true" close="{ closeGrowl(); }"
 	implements="uk.co.dubit.platform.components.growl.IGrowlSkin"
 	xmlns="uk.co.dubit.platform.components.growl.*" 
-	xmlns:mx="http://www.adobe.com/2006/mxml">
+	xmlns:mx="http://www.adobe.com/2006/mxml"
+	xmlns:skin="uk.co.dubit.platform.components.skin.*">
 	
 	<mx:Text id="textArea" width="100%" height="50" selectable="false" text="{ growl.notification.body }" truncateToFit="true" />
 	
@@ -45,4 +46,4 @@
 		]]>
 	</mx:Script>
 	
-</mx:TitleWindow>
+</skin:TitleWindowSkin>
