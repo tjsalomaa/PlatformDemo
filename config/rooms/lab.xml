@@ -679,7 +679,7 @@
 
 <!-- Other -->
 	<Trigger event="OnClick" gameObject="{Room.click}">	
-		<MoveTo gameObject="{Room.player}" x="{Room.player.x}" y="{Room.player.y}" targetX="{Event.x}" targetY="{Event.y}"/>
+		<!--<MoveTo gameObject="{Room.player}" x="{Room.player.x}" y="{Room.player.y}" targetX="{Event.x}" targetY="{Event.y}"/>-->
 	</Trigger>
 
 	<BehaviourDefinition id="ShowPlayerBubble">
