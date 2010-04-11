@@ -28,7 +28,7 @@
 	<Sounds target="{Room.player}" id="sounds">
 		<Sound id="background_music" assetID="background_music_asset" play="false" looping="true"/>
 	</Sounds>
-
+	
 	<Scene id="scene" target="{Room.player}" viewportWidth="850" viewportHeight="445" width="1400" height="546">
 		
 		<DisplayObject2D id="sky" assetID="sky_asset"/>
@@ -698,27 +698,20 @@
 	<Trigger event="OnTalkTo" gameObject="{Room.doc}">
 		<MoveTo gameObject="{Room.player}" x="{Room.player.x}" y="{Room.player.y}" targetX="280" targetY="475">
 			<Complete>
-				<BeginDialogue statement="{Room.talkToTheDoc}" npc="{Room.doc}" player="{Room.player}" messageDelay="1000" dialogueID="dialogue"/>
+				<!-- CHECK BINDINGS -->
+				<BeginDialogue statement="{Room.talkToTheDoc}" npc="{Room.doc}"/>
 			</Complete>
 		</MoveTo>
 	</Trigger>
 
-	<Dialogue id="dialogue">
+	<!-- MOVING TO ICNLUDE -->
+	<!-- <Dialogue id="dialogue">
 		<Triggers>	
-			<OnBeginDialogue><Trace message="Dialogue began"/></OnBeginDialogue>
-			<OnCompleteDialogue><Trace message="Dialogue complete"/></OnCompleteDialogue>
 			<OnMessage>
-				<If expression="({Event.messageTarget}=={Room.player})">
-					<Then>
-						<ShowBubble gameObject="{Room.player}" message="{Event.message}"/>
-					</Then>
-					<Else>
-						<ShowBubble gameObject="{Room.doc}" message="{Event.message}"/>
-					</Else>
-				</If>
+				<ShowBubble gameObject="{Event.messageTarget}" message="{Event.message}"/>
 			</OnMessage>
 		</Triggers>
-	</Dialogue>	
+	</Dialogue>	 -->
 	
 	<Statement id="talkToTheDoc" message1=" Ah hello there lad. Inspector Lavigeur told me he'd send over some assistance. Peckham isn't it?">
 		<Response message="It's George, sir. George Peckham">

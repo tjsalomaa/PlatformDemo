@@ -18,6 +18,7 @@
 	
 	<mx:Script>
 		<![CDATA[
+			import com.dubitplatform.views.MapTitleWindow;
 			import com.dubitplatform.game.CartoonChatBubble;
 			import uk.co.dubit.utils.StringUtils;
 			import com.adobe.utils.StringUtil;
@@ -73,6 +74,7 @@
 			private var profileSkinTitleWindow:ProfileSkinTitleWindow;
 			
 			private var chatBubble : CartoonChatBubble;
+			private var map : MapTitleWindow;
 					
 			private function onCreationComplete () : void
 			{
@@ -89,6 +91,10 @@
 				collectionsPanel = PopUpManager.createPopUp(this, CollectionsPanel) as CollectionsPanel;
 				collectionsPanel.filters = [new DropShadowFilter(0, 0, 0, 0.7, 40, 40, 1, 3)];
 				collectionsPanel.visible = false;
+				
+				map = PopUpManager.createPopUp(this, MapTitleWindow) as MapTitleWindow;
+				PopUpManager.centerPopUp(map);
+				map.visible = false;
 				
 				Properties.getInstance().addListener(this);
 			}
@@ -140,7 +146,12 @@
             private function openShop() : void
             {
             	Shops.getInstance().getShopByID("default").open();
-            }            		
+            }      
+            
+            private function openMap () : void
+            {
+            	map.visible = !map.visible;
+            }      		
 		]]>
 	</mx:Script>	
 
@@ -158,6 +169,7 @@
 		<mx:ControlBar id="bar" width="850" horizontalCenter="0" y="60" height="30" paddingLeft="5" resizeEffect="resizeEffect">
 			<experience:ExperienceSkinContainer width="400" height="30"/>
 			<mx:Spacer width="100%"/>
+			<mx:Button toggle="true" label="Map" click="openMap();"/>
 			<mx:LinkButton label="My Stuff" click="openControlPanel();"/>
 			<skills:SkillsSkinContainer width="130" height="30"/>
 		</mx:ControlBar>	

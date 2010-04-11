@@ -26,7 +26,7 @@
 			<views:NotificationsView width="100%" height="100%"/>
 		</mx:Canvas>	
 		<mx:Canvas label="Rooms" width="100%" height="100%">
-			<map:MapSkinContainer width="100%" height="100%"/>
+			<!--<map:MapSkinContainer width="100%" height="100%"/>-->
 		</mx:Canvas>	
 		<mx:Canvas label="Trophies" width="100%" height="100%">
 			<achievements:AchievementsSkinContainer width="100%" height="100%"/>

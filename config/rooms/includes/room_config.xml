@@ -102,4 +102,12 @@
 		<CreateGameObject definitionID="playerDefinition" id="player" if="({Properties.[setting.useServer]}=={false})"/>
 	</Trigger>
 	
+	<Dialogue id="dialogue">
+		<Triggers>	
+			<OnMessage>
+				<ShowBubble gameObject="{Event.messageTarget}" message="{Event.message}"/>
+			</OnMessage>
+		</Triggers>
+	</Dialogue>	
+	
 </Include>
