@@ -1,4 +1,4 @@
-package com.dubitplatform.game
+package com.dubitplatform.views.game
 {
 	import flash.text.TextFormat;
 	
