@@ -179,11 +179,7 @@
 		<mx:ControlBar id="bar" width="850" horizontalCenter="0" y="60" height="30" paddingLeft="5" resizeEffect="resizeEffect">
 			<mx:LinkButton label="Quests ({QuestModel.getInstance().activeQuestCount})" click="openControlPanel('quests');"/>
 			<mx:LinkButton label="Inventory ({Backpack.getInstance().count})" click="openControlPanel('inventory');"/>
-			<!--<experience:ExperienceSkinContainer width="400" height="30"/>-->
 			<mx:Spacer width="100%"/>
-			<!--<mx:Button toggle="true" label="Map" click="openMap();"/>-->
-			<!--<mx:LinkButton label="My Stuff" click="openControlPanel();"/>
-			<skills:SkillsSkinContainer width="130" height="30"/>-->
 		</mx:ControlBar>	
 		
 		<dialogue:DialogueSkinContainer id="dialogueSkinContainer" outEffect="{fadeOutEffect}" inEffect="{fadeInEffect}" horizontalCenter="0" width="850" height="445" y="100"/>				

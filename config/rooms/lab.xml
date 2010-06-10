@@ -702,6 +702,7 @@
 					<Statement message="A good idea, young man. Lavigeur's more astute than he looks. Now, to business!'">
 						<Response message="What are we investigating, sir?">
 							<Statement message="This is the laboratory and study of one Rothwell Ruskin-Horton II, inventor, alchemist and philosopher. Eight days ago he contacted me, he described making some breakthrough in the sciences, but did not elaborate any further. No one has heard anything from him since... The Inspector suspects foul play. And its up to us to find him.'">
+								<Alert message="Showing how to run a behaviour in a conversation"/>
 							</Statement>
 						</Response>
 						<Response message="What is this place? I've never seen such baffling wonders!">
