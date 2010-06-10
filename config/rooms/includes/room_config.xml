@@ -3,7 +3,7 @@
 	<BehaviourDefinition id="ShowPlayerBubble">
 		<ShowBubble gameObject="{Room.player}" message="{Event.message}"/>
 	</BehaviourDefinition>
-
+	
 	<!-- Handles behaviours / data sent from the Nexus Game Server to the room -->
 	<NotificationHandler id="world" namespace="world" channel="roomChannel">
 		<!-- Each trigger is a behaviour which is sent from the server -->
@@ -105,7 +105,7 @@
 	<Dialogue id="dialogue">
 		<Triggers>	
 			<OnMessage>
-				<ShowBubble gameObject="{Event.messageTarget}" message="{Event.message}"/>
+				<!-- <ShowBubble gameObject="{Event.messageTarget}" message="{Event.message}"/> -->
 			</OnMessage>
 		</Triggers>
 	</Dialogue>	

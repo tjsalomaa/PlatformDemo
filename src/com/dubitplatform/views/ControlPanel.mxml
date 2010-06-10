@@ -10,12 +10,19 @@
             {
             	visible = false
             }
+
+            public function set view (view : String) : void
+            {
+            	if (view.toLowerCase() == "quests") tabNavigator.selectedIndex = 0;
+            	if (view.toLowerCase() == "stuff") tabNavigator.selectedIndex = 1;
+            	if (view.toLowerCase() == "inventory") tabNavigator.selectedIndex = 1;
+            }            
             
        ]]>
        
 	</mx:Script>
 	
-	<mx:TabNavigator x="0" y="0" width="100%" height="100%" creationPolicy="all">
+	<mx:TabNavigator id="tabNavigator" x="0" y="0" width="100%" height="100%" creationPolicy="all">
 		<mx:Canvas label="Quests" width="100%" height="100%">
 			<quest:QuestSkinContainer width="100%" height="100%"/>
 		</mx:Canvas>

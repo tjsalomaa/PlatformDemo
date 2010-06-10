@@ -677,15 +677,6 @@
 		<ShowBubble gameObject="{Room.player}" message="It appears to be an extensive library of books relating to physics, engineering and philosophy"/>
 	</Trigger>
 
-<!-- Other -->
-	<Trigger event="OnClick" gameObject="{Room.click}">	
-		<!--<MoveTo gameObject="{Room.player}" x="{Room.player.x}" y="{Room.player.y}" targetX="{Event.x}" targetY="{Event.y}"/>-->
-	</Trigger>
-
-	<BehaviourDefinition id="ShowPlayerBubble">
-		<ShowBubble gameObject="{Room.player}" message="{Event.message}"/>
-	</BehaviourDefinition>
-
 	<Trigger event="OnLookAt" gameObject="{Room.doc}">
 		<ShowBubble gameObject="{Room.player}" message="It's Karlheinz Fotheringay"/>
 	</Trigger>
@@ -693,25 +684,16 @@
 	<Trigger event="OnLookAt" gameObject="{Room.chalkboard}">
 		<ShowBubble gameObject="{Room.player}" message="Notes and calculations made by Rothwell Ruskin-Horton II are scribbled on the blackboard. These are mostly half erased and illegible"/>
 	</Trigger>
+	
+	<!-- DIALOGUE -->
 
-<!-- Dialogue with the Doctor -->
 	<Trigger event="OnTalkTo" gameObject="{Room.doc}">
 		<MoveTo gameObject="{Room.player}" x="{Room.player.x}" y="{Room.player.y}" targetX="280" targetY="475">
 			<Complete>
-				<!-- CHECK BINDINGS -->
 				<BeginDialogue statement="{Room.talkToTheDoc}" npc="{Room.doc}"/>
 			</Complete>
 		</MoveTo>
 	</Trigger>
-
-	<!-- MOVING TO ICNLUDE -->
-	<!-- <Dialogue id="dialogue">
-		<Triggers>	
-			<OnMessage>
-				<ShowBubble gameObject="{Event.messageTarget}" message="{Event.message}"/>
-			</OnMessage>
-		</Triggers>
-	</Dialogue>	 -->
 	
 	<Statement id="talkToTheDoc" message1=" Ah hello there lad. Inspector Lavigeur told me he'd send over some assistance. Peckham isn't it?">
 		<Response message="It's George, sir. George Peckham">

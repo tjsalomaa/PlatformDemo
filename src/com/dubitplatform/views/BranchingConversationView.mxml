@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<DialogueViewBase xmlns="uk.co.dubit.platform.components.dialogue.*" xmlns:mx="http://www.adobe.com/2006/mxml" width="100%" height="100%" verticalScrollPolicy="off" horizontalScrollPolicy="off" creationComplete="onCreationComplete();">
+<DialogueViewBase xmlns="uk.co.dubit.platform.components.dialogue.*" xmlns:mx="http://www.adobe.com/2006/mxml" width="100%" height="100%" verticalScrollPolicy="off" horizontalScrollPolicy="off" creationComplete="onCreationComplete();" backgroundColor="black" backgroundAlpha="0.4" xmlns:view="uk.co.dubit.view.*">
 	
 	<mx:Script>
 		<![CDATA[
@@ -40,42 +40,82 @@
 				
 				return null;
 			}
+			
+			
+			private function handleResponseClick (event : Event) : void
+			{
+				for each (var response : IResponse in responses)
+				{
+					if (response.message == event.currentTarget.text)
+					{
+						response.play();
+						//dispatchEvent(new DialogueEvent(DialogueEvent.PLAY_RESPONSE, response ));
+					}
+				}
+			}
 		]]>
 	</mx:Script>
 	
-	<mx:Box width="100%" height="100%" backgroundColor="#333333" cornerRadius="2" shadowDistance="1" dropShadowEnabled="true"
-		borderColor="#555555" borderStyle="solid" borderThickness="2">
+	<mx:Style>
+        @font-face 
+        {
+            src: url("/../assets/fonts/Deeko_Comic.ttf");
+		    fontFamily: Deeko;
+		    advancedAntiAliasing: true;
+        }	
+	</mx:Style>
 	
-		<mx:HBox width="100%" height="100%">
+	<mx:Fade duration="1000" id="fadeOutEffect" alphaFrom="1" alphaTo="0" startDelay="0"/>
+	<mx:Fade duration="500" id="fadeInEffect" alphaFrom="0" alphaTo="1" startDelay="500"/>
+	
+	<mx:VBox width="100%" height="100%">
+	
+		<mx:Spacer height="100%"/>
+	
+		<mx:HBox width="100%" height="100%" paddingBottom="20">
 			
-			<mx:VBox paddingLeft="5" paddingRight="5" paddingTop="10" paddingBottom="5" height="100%">
-				<mx:Image source="{getNPCImage(DialogueModel.getInstance().activeDialogue.npc)}" height="100%" width="120" scaleContent="true"/>			
+			<mx:VBox paddingLeft="5" paddingRight="5" paddingTop="40" paddingBottom="5" height="100%">
+				<mx:Spacer height="100%"/>
+				<mx:Image source="{getNPCImage(DialogueModel.getInstance().activeDialogue.player)}" height="150" width="120" scaleContent="true" smoothBitmapContent="true"/>			
 			</mx:VBox>
 			
 			<mx:VBox width="100%" height="100%" paddingLeft="5" paddingRight="5" paddingTop="10">
 			
-				<mx:List id="messageList" dataProvider="{ DialogueModel.getInstance().activeStatement.messages }" width="100%" height="30" variableRowHeight="true" useRollOver="false" borderStyle="none">
-					<mx:itemRenderer>
-						<mx:Component>
-							<mx:Text text="{data}" width="100%" selectable="false" fontWeight="bold"/>
-						</mx:Component>
-					</mx:itemRenderer>
-				</mx:List>
-	
+				<mx:HBox width="100%">
+					<mx:Spacer width="20%"/>
+					<mx:VBox width="80%" horizontalAlign="right" backgroundSize="100%" backgroundImage="@Embed(source='/../assets/gui_images/bubble.png',scaleGridLeft='9',scaleGridTop='6',scaleGridRight='34',scaleGridBottom='21')">
+						<mx:Repeater id="messagesRepeater" dataProvider="{DialogueModel.getInstance().activeStatement.messages}">
+							<mx:Text text="{messagesRepeater.currentItem}" selectable="false" width="100%" paddingBottom="5" paddingTop="7" paddingLeft="10" paddingRight="5" color="black" fontFamily="Deeko"/>
+						</mx:Repeater>	
+						<mx:filters>
+							<mx:DropShadowFilter blurX="8" blurY="8" quality="4" distance="0"/>
+						</mx:filters>						
+					</mx:VBox>								
+				</mx:HBox>
+
+				<mx:Spacer height="10"/>
+
+				<mx:VBox width="80%">
+					<mx:Repeater id="responsesRepeater" dataProvider="{responses}">
+						<mx:VBox width="100%" horizontalAlign="right" backgroundSize="100%" backgroundImage="@Embed(source='/../assets/gui_images/bubble.png',scaleGridLeft='9',scaleGridTop='6',scaleGridRight='34',scaleGridBottom='21')" dropShadowEnabled="true">
+							<mx:Text text="{responsesRepeater.currentItem.message}" width="100%" paddingBottom="5" paddingTop="7" paddingLeft="10" paddingRight="5" color="black" fontFamily="Deeko"
+								click="handleResponseClick(event);" mouseEnabled="true" buttonMode="true" selectable="false"/>
+							<mx:filters>
+								<mx:DropShadowFilter blurX="8" blurY="8" quality="4" distance="0"/>
+							</mx:filters>
+						</mx:VBox>						
+					</mx:Repeater>					
+				</mx:VBox>
 				
-				<mx:HRule width="100%"/>
-				
-				<mx:List id="responseList" dataProvider="{ responses }" width="100%" height="110" variableRowHeight="true" change="{dispatchEvent( new DialogueEvent(DialogueEvent.PLAY_RESPONSE, IResponse(responseList.selectedItem) ) )}" borderStyle="none" verticalScrollPolicy="on">
-					<mx:itemRenderer>
-						<mx:Component>
-							<mx:Text text="{data.message}" width="100%" selectable="false"/>
-						</mx:Component>
-					</mx:itemRenderer>
-				</mx:List>			
 			</mx:VBox>
+			
+			<mx:VBox paddingLeft="5" paddingRight="5" paddingTop="40" paddingBottom="5" height="100%">
+				<mx:Spacer height="100%"/>
+				<mx:Image source="{getNPCImage(DialogueModel.getInstance().activeDialogue.npc)}" height="150" width="120" scaleContent="true" smoothBitmapContent="true"/>			
+			</mx:VBox>			
 			
 		</mx:HBox>
 		
-	</mx:Box>
+	</mx:VBox>
 
 </DialogueViewBase>
