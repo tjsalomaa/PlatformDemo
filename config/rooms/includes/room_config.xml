@@ -54,7 +54,7 @@
 	<PlayerDefinition id="playerDefinition">
 		<Attributes>
 			<Attribute key="avatarName" value="Dennis" />
-			<Attribute key="mouseEnabled" value="false" />
+			<Attribute key="mouseEnabled" value="true" />
 			<Attribute key="mouseChildren" value="false" />
 			<Attribute key="clickThrough" value="true" />
 			<Attribute key="collidable" value="true" />
@@ -91,6 +91,12 @@
 					</Then>
 				</If>	
 			</onFixup>
+			<onClick>
+				<OpenMenu menu="{Menus.playerMenu}" target="{Event.handler}" />
+			</onClick>
+			<onShowProfile>
+				<OpenProfile profile="{Profiles.playerProfile}" avatar="{Room.player}" />
+			</onShowProfile>
 		</Triggers>
 	</PlayerDefinition>
 	
@@ -102,12 +108,42 @@
 		<CreateGameObject definitionID="playerDefinition" id="player" if="({Properties.[setting.useServer]}=={false})"/>
 	</Trigger>
 	
+	<BehaviourDefinition id="mouseOff">
+		<ForEach in="{Room.renderObjects}">
+			<If expression="({Event.iteration.mouseEnabled} == {true})">
+				<Then>
+					<SetValues target="{Event.iteration}" mouseEnabled="false" previousMouseEnabled="true"/>
+				</Then>
+			</If>
+			<If expression="({Event.iteration.verbEnabled} == {true})">
+				<Then>
+					<SetValues target="{Event.iteration}" verbEnabled="false" previousVerbEnabled="true"/>
+				</Then>
+			</If>
+		</ForEach>
+	</BehaviourDefinition>
+		
+	<BehaviourDefinition id="mouseOn">
+		<ForEach in="{Room.renderObjects}">
+			<If expression="({Event.iteration.previousMouseEnabled} == {true})">
+				<Then>
+					<SetValues target="{Event.iteration}" mouseEnabled="true" previousMouseEnabled=""/>
+				</Then>
+			</If>
+			<If expression="({Event.iteration.previousVerbEnabled} == {true})">
+				<Then>
+					<SetValues target="{Event.iteration}" verbEnabled="true" previousVerbEnabled=""/>
+				</Then>
+			</If>
+		</ForEach>
+	</BehaviourDefinition>
+	
 	<Dialogue id="dialogue">
 		<Triggers>	
 			<OnMessage>
 				<!-- <ShowBubble gameObject="{Event.messageTarget}" message="{Event.message}"/> -->
 			</OnMessage>
 		</Triggers>
-	</Dialogue>	
+	</Dialogue>
 	
 </Include>

@@ -231,7 +231,7 @@
 		</Triggers>	
 	</Collections>
 
-<!--
+
 	<Shops>
 		<Shop id="default" name="Local shop" skin="com.dubitplatform.views.ShopTitleWindow" targetContainer="shopContainer">
 			<ProductGroup display_name="Food">
@@ -249,10 +249,10 @@
 				<SetValues target="{Event.product}" owned="true"/>
 			</OnPurchaseProduct>
 		</Triggers>
-	</Shops>-->
+	</Shops>
 	
 	
-	<!-- <Notifications>
+	<Notifications>
 		<Notification title="Welcome!" body="Check back here to read messages you have received" can_remove="true"/>
 		<Notification title="Free stuff!" body="Hey, since you're new here maybe you'd like this free apple?" can_accept="true" can_reject="true">
 			<Triggers>
@@ -295,7 +295,7 @@
 				<Trace message="Notification {Event.notification.requestID} removed"/>
 			</onNotificationRemoved>
 		</Triggers>
-	</Notifications> -->
+	</Notifications>
 	
 	<Minigames>
 		<Minigame id="flex" name="Flex game" test="{Rooms.session.backpack}" url="[base.url]games/SampleMinigame.swf" skin="com.dubitplatform.views.MinigameTitleWindow" targetContainer="minigameContainer"/>
@@ -309,13 +309,35 @@
 	</Minigames>
 	
 	<Menus>
-		<ContextMenu id="playerMenu" track="true" offsetX="350" offsetY="200" skin="com.dubitplatform.views.ContextMenuSkin">
+		<ContextMenu id="playerMenu" track="true" offsetX="50" offsetY="50" skin="com.dubitplatform.views.ContextMenuSkin">
 			<MenuItem id="onShowProfile" text="Show profile" toolTip="Shows the selected user's profile"/>
+			<MenuItem id="onCancel" text="Cancel" toolTip="A test option"/>
 		</ContextMenu>
 	</Menus>
 	
 	<Profiles>
-		<Profile id="playerProfile" skin="com.dubitplatform.views.ProfileSkinTitleWindow" targetContainer="shopContainer"/>
+		<Profile id="playerProfile" skin="com.dubitplatform.views.ProfileSkinTitleWindow" name="George Peckham" health="100" targetContainer="shopContainer"/>
+		<Triggers>
+			<onProfileOpened>
+				<GetProfileFor profile="{Event.profile}" avatar="{Event.profile.avatar}" />
+			</onProfileOpened>
+		</Triggers>
 	</Profiles>
+	
+	<Meters>
+		<Meter id="energy" amount="75" minAmount="0" maxAmount="100" updateFrequency="5000" updateAmount="1" updateOffline="false" offlineMultiplier="1" persist="true" />
+	</Meters>
+	
+	<ActivityBars>
+		<ActivityBar id="reading" skin="com.dubitplatform.views.ActivityBarView" targetContainer="shopContainer"  
+				 target="{Rooms.currentRoom.player}" duration="4280">
+			<Triggers>
+				<OnActivityComplete>
+					<Call behaviourID="mouseOn" scope="{Rooms.currentRoom}"/>
+					<CloseActivityBar activityBar="reading" />
+				</OnActivityComplete>
+			</Triggers>
+		</ActivityBar>
+	</ActivityBars>
 	
 </SessionRoom>
