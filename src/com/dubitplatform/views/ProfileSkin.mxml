@@ -6,9 +6,10 @@
 	
 	<mx:Script>
 		<![CDATA[
+			import uk.co.dubit.utils.IAttributes;
 			import uk.co.dubit.platform.scriptEngine.node.IScriptNode;
 			
-			override public function set node(value:IScriptNode) : void
+			override public function set node(value:IAttributes) : void
 			{
 				super.node = value;
 				

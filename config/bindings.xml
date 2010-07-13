@@ -466,10 +466,10 @@
 
 		<!-- Growl -->
 		<Binding name="ShowGrowl" class="uk.co.dubit.platform.components.growl.behaviours.ShowGrowl">
-			<Attribute name="targetContainer" type="ISkinContainer" description="Named MXML component used to display the growl" />
+			<Attribute name="targetContainer" type="ISkinContainer" description="Named MXML component used to display the growl" defaultValue="growlContainer" />
 			<Attribute name="notification" type="INotification" description="The notification to display" required="true" />
-			<Attribute name="duration" type="Integer" description="Number of milliseconds to display the growl for (-1 = forever)" required="false" defaultValue="-1" />
-			<Attribute name="skin" type="IGrowlSkin" description="Growl skin" required="true" />
+			<Attribute name="duration" type="Integer" description="Number of milliseconds to display the growl for (-1 = forever)" required="false" defaultValue="5000" />
+			<Attribute name="skin" type="IGrowlSkin" description="Growl skin" required="false" defaultValue="com.dubitplatform.views.GrowlView"/>
 		</Binding>		
 	</Package>
 		
@@ -632,6 +632,7 @@
 				]]>		
 			</Example>			
 			<Attribute required="true" name="message" type="String" description="The message to show in the chat bubble"/>
+			<Attribute required="false" name="embedFonts" type="Boolean" defaultValue="true"/>	
 			<Attribute required="false" name="gameObject" type="GameObject" defaultValue="{Room.player}" description="The game object the speech bubble will appear above. By default the bubble will appear above the player"/>
 			<Attribute required="false" name="fitToScreen" type="Boolean" defaultValue="true" description="If true the bubble will not slide off the edge of visible area"/>
 			<Attribute required="false" name="moveTail" type="Boolean" defaultValue="true" description="If the bubble is fitted to screen this attribute will move the bubble tail to follow the player"/>
@@ -2164,12 +2165,20 @@
 	<Package name="Games">
 		<Binding name="Minigames" class="uk.co.dubit.platform.components.minigame.Minigames" factory="uk.co.dubit.platform.scriptEngine.gameObject.GameObjectFactory" />
 		<Binding name="Minigame" class="uk.co.dubit.platform.components.minigame.Minigame" factory="uk.co.dubit.platform.scriptEngine.gameObject.GameObjectFactory">
-			<Attribute name="name" description="Name/Title of the minigame" required="false" />
-			<Attribute name="skin" description="The skin used to show the minigame" required="false" defaultValue="uk.co.dubit.application.view.minigame.MinigameSkin" />
-			<Attribute name="targetContainer" type="ISkinContainer" description="Named MXML component used to display the minigame skin" defaultValue="minigameContainer" />
+			<Attribute required="true" name="id" type="GameObjectID" description="A unique mini game ID"/>
+			<Attribute required="true" name="url" type="FilePath" description="The url to the mini game"/>
+			<Attribute required="true" name="name" type="String" description="Name of the mini game"/>
+			<Attribute required="true" name="score" type="Number" description="The current score of the mini game"/>
+			<Attribute required="false" name="skin" description="The skin used to show the minigame" defaultValue="com.dubitplatform.views.MinigameTitleWindow" />
+			<Attribute required="false" name="targetContainer" type="ISkinContainer" description="Named MXML component used to display the minigame skin" defaultValue="minigameContainer" />
+			<Attribute required="false" name="attachSkin" type="boolean" description="True if the skin should be attached immediately" defaultValue="false"/>	
 		</Binding>
-		<Binding name="OpenMinigame" class="uk.co.dubit.platform.components.minigame.behaviours.OpenMinigame" />
-		<Binding name="CloseMinigame" class="uk.co.dubit.platform.components.minigame.behaviours.CloseMinigame" />
+		<Binding name="OpenMinigame" class="uk.co.dubit.platform.components.minigame.behaviours.OpenMinigame">
+			<Attribute required="true" name="minigame" type="MiniGameID" description="The unique ID of the mini game"/>
+		</Binding>	
+		<Binding name="CloseMinigame" class="uk.co.dubit.platform.components.minigame.behaviours.CloseMinigame">
+			<Attribute required="true" name="minigame" type="MiniGameID" description="The unique ID of the mini game"/>
+		</Binding>	
 	</Package>
 
 	<!-- EDITOR -->

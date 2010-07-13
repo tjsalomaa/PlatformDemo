@@ -12,7 +12,7 @@
 	xmlns:dialogue="uk.co.dubit.platform.components.dialogue.*" 
 	xmlns:experience="uk.co.dubit.platform.components.experience.*" 
 	xmlns:skills="uk.co.dubit.platform.components.skills.*"
-	xmlns:verb="uk.co.dubit.platform.components.verb.*" xmlns:editor="uk.co.dubit.platform.components.editor.*" xmlns:chat="uk.co.dubit.platform.components.chat.*" xmlns:video="uk.co.dubit.platform.components.video.*">
+	xmlns:verb="uk.co.dubit.platform.components.verb.*" xmlns:editor="uk.co.dubit.platform.components.editor.*" xmlns:chat="uk.co.dubit.platform.components.chat.*" xmlns:video="uk.co.dubit.platform.components.video.*" xmlns:minigame="uk.co.dubit.platform.components.minigame.*" xmlns:growl="uk.co.dubit.platform.components.growl.*">
 	
 	<mx:Style source="style/style.css"/>
 	
@@ -175,6 +175,10 @@
 		<video:VideosSkinContainer id="videoContainer" outEffect="{fadeOutEffect}" width="850" height="445" horizontalCenter="0" y="100"/>
 		
 		<ui:ChatRoomPreloaderSkinContainer id="chatRoomPreloaderContainer" width="850" height="445" y="100" mouseEnabled="false" horizontalCenter="0" resizeEffect="resizeEffect"/>
+		
+		<minigame:MinigameSkinContainer width="850" height="445" y="100" mouseEnabled="false" horizontalCenter="0" resizeEffect="resizeEffect"/>
+		
+		<growl:GrowlSkinContainer width="850" height="445" y="100" mouseEnabled="false" horizontalCenter="0" resizeEffect="resizeEffect"/>
 		
 		<mx:ControlBar id="bar" width="850" horizontalCenter="0" y="60" height="30" paddingLeft="5" resizeEffect="resizeEffect">
 			<mx:LinkButton label="Quests ({QuestModel.getInstance().activeQuestCount})" click="openControlPanel('quests');"/>

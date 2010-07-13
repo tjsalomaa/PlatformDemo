@@ -2,7 +2,7 @@
 <environments current="dev">
     
 	<environment type="all">
-		<property name="setting.useServer" value="true" />
+		<property name="setting.useServer" value="false" />
 		
 		<property name="path.game-server" value="67.207.128.86:1937" />	
 		
