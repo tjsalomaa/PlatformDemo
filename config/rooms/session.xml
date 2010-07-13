@@ -243,6 +243,7 @@
 			</onMinigameOpened>
 			<onMinigameScoreSet>
 				<Trace message="Mini Game Score {Event.score}"/>
+				<AwardExperience points="{Event.score}"/>
 				<Alert message="The {Event.minigame.name} awarded you {Event.score} points!" title="Success"/>
 			</onMinigameScoreSet>
 			<onRequestInstantMatch>

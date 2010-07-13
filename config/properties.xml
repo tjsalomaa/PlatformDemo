@@ -16,8 +16,6 @@
 	    <property name="scene-viewportWidth" value="850"/>		
 	
 		<property name="app.name" value="1"/>
-		
-		<!-- <property name="base.url" value="/world_assets/31/"/> -->
 
 	</environment>
 	

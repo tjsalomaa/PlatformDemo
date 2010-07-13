@@ -18,6 +18,7 @@
 	
 	<mx:Script>
 		<![CDATA[
+			import uk.co.dubit.platform.components.experience.Experience;
 			import com.dubitplatform.views.game.CartoonChatBubble;
 			import uk.co.dubit.graphics.render2D.types.ChatBubble2D;
 			import uk.co.dubit.platform.components.backpack.Backpack;
@@ -75,6 +76,7 @@
 			private var chatView:ChatView
 			private var profileSkinTitleWindow:ProfileSkinTitleWindow;
 			private var chatBubble : CartoonChatBubble;
+			
 
 			private var map : MapTitleWindow;
 					
@@ -184,6 +186,7 @@
 			<mx:LinkButton label="Quests ({QuestModel.getInstance().activeQuestCount})" click="openControlPanel('quests');"/>
 			<mx:LinkButton label="Inventory ({Backpack.getInstance().count})" click="openControlPanel('inventory');"/>
 			<mx:Spacer width="100%"/>
+			<mx:Label text="{Experience.getInstance().currentLevel.name}({Experience.getInstance().points}/{Experience.getInstance().nextLevel.points})"/>
 		</mx:ControlBar>	
 		
 		<dialogue:DialogueSkinContainer id="dialogueSkinContainer" outEffect="{fadeOutEffect}" inEffect="{fadeInEffect}" horizontalCenter="0" width="850" height="445" y="100"/>				
