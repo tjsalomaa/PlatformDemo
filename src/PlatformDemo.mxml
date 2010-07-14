@@ -2,7 +2,7 @@
 <app:NexusBase 
 	width="100%" height="100%" layout="absolute" horizontalCenter="0" backgroundColor="black" horizontalScrollPolicy="off" verticalScrollPolicy="off" 
 	creationComplete="onCreationComplete();"
-	implements="uk.co.dubit.properties.IPropertiesListener"
+	implements="uk.co.dubit.properties.IPropertiesListener, uk.co.dubit.platform.scriptEngine.gameObject.IGameObjectListener"
 	xmlns:mx="http://www.adobe.com/2006/mxml" 
 	xmlns:app="uk.co.dubit.platform.app.*" 
 	xmlns:skin="uk.co.dubit.platform.components.skin.*" 
@@ -18,6 +18,7 @@
 	
 	<mx:Script>
 		<![CDATA[
+<<<<<<< HEAD
 			import uk.co.dubit.platform.components.experience.Experience;
 			import com.dubitplatform.views.game.CartoonChatBubble;
 			import uk.co.dubit.graphics.render2D.types.ChatBubble2D;
@@ -25,35 +26,49 @@
 			import uk.co.dubit.platform.components.quest.QuestModel;
 			import com.dubitplatform.views.MapTitleWindow;
 			import uk.co.dubit.utils.StringUtils;
+=======
+>>>>>>> a0d5262987b06a5657aabe23260d923a02c8330c
 			import com.adobe.utils.StringUtil;
-			import uk.co.dubit.properties.Properties;
-			import com.dubitplatform.views.ChatView;
-			import com.dubitplatform.views.ProfileSkinTitleWindow;
-			import com.dubitplatform.views.ChatRoomView;
-			import com.dubitplatform.views.ContextMenuSkin;
-			import uk.co.dubit.sound.SoundManager;
-			import com.dubitplatform.views.ShopTitleWindow;
-			import com.dubitplatform.views.MinigameTitleWindow;
-			import uk.co.dubit.platform.components.minigame.Minigame;
-			import com.dubitplatform.views.MinigameSkin;
-			import com.dubitplatform.views.GrowlView;
-			import uk.co.dubit.platform.components.catalogue.Shops;
-			import com.dubitplatform.views.ChatRoomPreloaderView;
-			import com.dubitplatform.views.CollectionView;
-			import com.dubitplatform.views.CollectionsPanel;
 			import com.dubitplatform.views.AchievementsView;
-			import com.dubitplatform.views.VerbControllerView;
-			import com.dubitplatform.views.SkillsView;
-			import com.dubitplatform.views.ExperienceView;
-			import uk.co.dubit.logging.LoggingPanel;
-			import uk.co.dubit.logging.LoggingPopUp;
-			import com.dubitplatform.views.RoomListView;
-			
-			import mx.managers.PopUpManager;
-			import com.dubitplatform.views.ControlPanel;
-			import com.dubitplatform.views.QuestsView;
+			import com.dubitplatform.views.ActivityBarView;
 			import com.dubitplatform.views.BackpackView;
 			import com.dubitplatform.views.BranchingConversationView;
+			import com.dubitplatform.views.ChatRoomPreloaderView;
+			import com.dubitplatform.views.ChatRoomView;
+			import com.dubitplatform.views.ChatView;
+			import com.dubitplatform.views.CollectionView;
+			import com.dubitplatform.views.CollectionsPanel;
+			import com.dubitplatform.views.ContextMenuSkin;
+			import com.dubitplatform.views.ControlPanel;
+			import com.dubitplatform.views.ExperienceView;
+			import com.dubitplatform.views.GrowlView;
+			import com.dubitplatform.views.MapTitleWindow;
+			import com.dubitplatform.views.MinigameSkin;
+			import com.dubitplatform.views.MinigameTitleWindow;
+			import com.dubitplatform.views.ProfileSkinTitleWindow;
+			import com.dubitplatform.views.QuestsView;
+			import com.dubitplatform.views.RoomListView;
+			import com.dubitplatform.views.ShopTitleWindow;
+			import com.dubitplatform.views.SkillsView;
+			import com.dubitplatform.views.VerbControllerView;
+			import com.dubitplatform.views.game.CartoonChatBubble;
+			
+			import mx.managers.PopUpManager;
+			
+			import uk.co.dubit.graphics.render2D.types.ChatBubble2D;
+			import uk.co.dubit.logging.LoggingPanel;
+			import uk.co.dubit.logging.LoggingPopUp;
+			import uk.co.dubit.platform.components.backpack.Backpack;
+			import uk.co.dubit.platform.components.catalogue.Shops;
+			import uk.co.dubit.platform.components.meters.IMeter;
+			import uk.co.dubit.platform.components.meters.Meter;
+			import uk.co.dubit.platform.components.meters.Meters;
+			import uk.co.dubit.platform.components.minigame.Minigame;
+			import uk.co.dubit.platform.components.quest.QuestModel;
+			import uk.co.dubit.platform.scriptEngine.gameObject.IGameObject;
+			import uk.co.dubit.properties.Properties;
+			import uk.co.dubit.sound.SoundManager;
+			import uk.co.dubit.utils.StringUtils;
 			
 			private var skillsView : SkillsView;
 			private var questsView : QuestsView;
@@ -76,9 +91,14 @@
 			private var chatView:ChatView
 			private var profileSkinTitleWindow:ProfileSkinTitleWindow;
 			private var chatBubble : CartoonChatBubble;
+<<<<<<< HEAD
 			
+=======
+			private var activityBarView : ActivityBarView;
+>>>>>>> a0d5262987b06a5657aabe23260d923a02c8330c
 
 			private var map : MapTitleWindow;
+			private var energyMeter:IMeter;
 					
 			private function onCreationComplete () : void
 			{
@@ -101,6 +121,13 @@
 				map.visible = false;
 				
 				Properties.getInstance().addListener(this);
+			}
+			
+			public function openEnergyMeter () : void
+			{
+				energyMeter = Meters.getInstance().getMeterByID("energy");	
+				energyMeter.gameObjectListeners.addListener(this);
+				updateEnergyLabel();
 			}
 			
 			public function onPropertyChange (property : String, oldValue : *, newValue : *) : void
@@ -126,6 +153,11 @@
 					bar.width = newValue;
 					dialogueSkinContainer.width = newValue;
 				}				
+			}
+			
+			public function onAttributeChange(go:IGameObject, property:String, oldVal:*, newVal:*) : void
+			{
+				updateEnergyLabel();
 			}
 			
             public function openControlPanel (view : String = null) : void
@@ -158,7 +190,13 @@
             private function openMap () : void
             {
             	map.visible = !map.visible;
-            }      		
+            }    
+			
+			private function updateEnergyLabel() : void
+			{
+				if (energyMeter)
+					energyDisplay.text = "Energy: (" + energyMeter.amount + "/" + energyMeter.maxAmount + ")";
+			}
 		]]>
 	</mx:Script>	
 
@@ -185,10 +223,19 @@
 		<mx:ControlBar id="bar" width="850" horizontalCenter="0" y="60" height="30" paddingLeft="5" resizeEffect="resizeEffect">
 			<mx:LinkButton label="Quests ({QuestModel.getInstance().activeQuestCount})" click="openControlPanel('quests');"/>
 			<mx:LinkButton label="Inventory ({Backpack.getInstance().count})" click="openControlPanel('inventory');"/>
+			<mx:LinkButton label="Shop" click="openShop();" />
+			<mx:LinkButton label="Show Energy Meter" click="openEnergyMeter();" />
 			<mx:Spacer width="100%"/>
+<<<<<<< HEAD
 			<mx:Label text="{Experience.getInstance().currentLevel.name}({Experience.getInstance().points}/{Experience.getInstance().nextLevel.points})"/>
 		</mx:ControlBar>	
+=======
+			<mx:Text id="energyDisplay"/>			
+		</mx:ControlBar>
+>>>>>>> a0d5262987b06a5657aabe23260d923a02c8330c
 		
+		<skin:PopupSkinContainer containerID="shopContainer" width="100%" height="100%" />
+					
 		<dialogue:DialogueSkinContainer id="dialogueSkinContainer" outEffect="{fadeOutEffect}" inEffect="{fadeInEffect}" horizontalCenter="0" width="850" height="445" y="100"/>				
 	</mx:Canvas>
 		

@@ -230,7 +230,7 @@
 			</OnCompleteCollection>			
 		</Triggers>	
 	</Collections>
-	
+
 	<Minigames id="minigames">
 		<Minigame id="multi" name="Multiplayer Sample Game" url="[base.url]games/SampleMultiplayerMinigame.swf" score="0"/>
 		<Minigame id="flex" name="Flex Sample Game" url="[base.url]games/SampleMinigame.swf" score="0"/>
@@ -264,9 +264,94 @@
 			</Triggers>	
 		</ContextMenu>		
 	</Menus>
+
+	<Shops>
+		<Shop id="default" name="Local shop" skin="com.dubitplatform.views.ShopTitleWindow" targetContainer="shopContainer">
+			<ProductGroup display_name="Food">
+				<Product id="shop_apple" name="Apple" preview_url="[base.url]images/backpack/apple.png" points_price="10" useServer="false"/>
+			</ProductGroup>
+			<ProductGroup display_name="Drink">
+				<Product id="shop_rum" name="Rum" preview_url="[base.url]images/backpack/rum.png" points_price="35" useServer="false"/>
+				<Product id="shop_grog" name="Grog" preview_url="[base.url]images/backpack/grog.png" points_price="20" useServer="false"/>
+			</ProductGroup>
+		</Shop>
+		
+		<Triggers>
+			<OnPurchaseProduct>				
+				<AddToBackpack collectableID="{Event.product.name}"/>
+				<SetValues target="{Event.product}" owned="true"/>
+			</OnPurchaseProduct>
+		</Triggers>
+	</Shops>
 	
+	<Notifications>
+		<Notification title="Welcome!" body="Check back here to read messages you have received" can_remove="true"/>
+		<Notification title="Free stuff!" body="Hey, since you're new here maybe you'd like this free apple?" can_accept="true" can_reject="true">
+			<Triggers>
+				<onNotificationAccepted>
+					<CreateNotification title="Item accepted" body="You've received an apple!  Use it wisely" can_remove="true"/>
+				</onNotificationAccepted>
+			</Triggers>
+		</Notification>
+		
+		<Notification title="Game" body="Fancy a game? Accept = Flex | Reject = Flash" can_accept="true" can_reject="true">
+			<Triggers>
+				<onNotificationAccepted>
+					<OpenMinigame minigame="{Minigames.flex}"/>
+				</onNotificationAccepted>
+				
+				<onNotificationRejected>
+					<OpenMinigame minigame="{Minigames.flash}"/>
+				</onNotificationRejected>
+			</Triggers>
+		</Notification>
+		
+		<Triggers>
+			<onNotificationReceived>
+				<ShowGrowl notification="{Event.notification}" skin="com.dubitplatform.views.GrowlView" targetContainer="growlContainer" duration="6000"/>
+			</onNotificationReceived>
+			
+			<onNotificationAccepted>
+				<Trace message="Notification accepted"/>
+			</onNotificationAccepted>
+
+			<onNotificationRejected>
+				<Trace message="Notification rejected"/>
+			</onNotificationRejected>
+
+			<onNotificationCancelled>
+				<Trace message="Notification cancelled"/>
+			</onNotificationCancelled>
+
+			<onNotificationRemoved>
+				<Trace message="Notification {Event.notification.requestID} removed"/>
+			</onNotificationRemoved>
+		</Triggers>
+	</Notifications>
+		
 	<Profiles>
-		<Profile id="playerProfile" skin="com.dubitplatform.views.ProfileSkinTitleWindow" targetContainer="shopContainer"/>
+		<Profile id="playerProfile" skin="com.dubitplatform.views.ProfileSkinTitleWindow" name="George Peckham" health="100" targetContainer="shopContainer"/>
+		<Triggers>
+			<onProfileOpened>
+				<GetProfileFor profile="{Event.profile}" avatar="{Event.profile.avatar}" />
+			</onProfileOpened>
+		</Triggers>
 	</Profiles>
+	
+	<Meters>
+		<Meter id="energy" amount="75" minAmount="0" maxAmount="100" updateFrequency="5000" updateAmount="1" updateOffline="false" offlineMultiplier="1" persist="true" />
+	</Meters>
+	
+	<ActivityBars>
+		<ActivityBar id="reading" skin="com.dubitplatform.views.ActivityBarView" targetContainer="shopContainer"  
+				 target="{Rooms.currentRoom.player}" duration="4280">
+			<Triggers>
+				<OnActivityComplete>
+					<Call behaviourID="mouseOn" scope="{Rooms.currentRoom}"/>
+					<CloseActivityBar activityBar="reading" />
+				</OnActivityComplete>
+			</Triggers>
+		</ActivityBar>
+	</ActivityBars>
 	
 </SessionRoom>

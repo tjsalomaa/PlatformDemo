@@ -12,6 +12,7 @@
 		<Verb id="OnPickUp" name="Pick up"/>
 		<Verb id="OnTalkTo" name="Talk to"/>
 		<Verb id="OnUse" name="Use the"/>
+		<Verb id="OnRead" name="Read something from"/>
 	</VerbController>
 
 	<Collision width="1400" height="546" id="walkableArea" solid="true">
@@ -655,6 +656,11 @@
 
 	<Trigger event="OnLookAt" gameObject="{Room.bookshelf_two}">
 		<ShowBubble gameObject="{Room.player}" message="It appears to be an extensive library of books relating to physics, engineering and philosophy"/>
+	</Trigger>
+	
+	<Trigger event="OnRead" gameObject="{Room.bookshelf_two}">
+		<OpenActivityBar activityBar="reading" targettedObject="{Event.handler}"/>
+		<Call behaviourID="mouseOff" scope="{Rooms.currentRoom}"/>
 	</Trigger>
 
 	<Trigger event="OnLookAt" gameObject="{Room.bookshelf_three}">

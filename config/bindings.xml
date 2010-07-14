@@ -2255,4 +2255,40 @@
 	<Binding name="CloseVideo" class="uk.co.dubit.platform.components.video.behaviour.CloseVideo">
 		<Attribute name="video" description="The video to close" type="Video" required="true" />
 	</Binding>	
+	
+		<Binding name="Meters" 
+		factory="uk.co.dubit.platform.scriptEngine.gameObject.GameObjectFactory"
+		class="uk.co.dubit.platform.components.meters.Meters" />
+	
+	<Binding name="Meter" 
+		factory="uk.co.dubit.platform.scriptEngine.gameObject.GameObjectFactory"
+		class="uk.co.dubit.platform.components.meters.Meter">
+		<Attribute name="amount" description="The starting value for the amount in the meter" required="true" />
+		<Attribute name="minAmount" description="The minimum amount that the meter can represent" required="true" />
+		<Attribute name="maxAmount" description="The maximum amount that the meter can represent" required="true" />
+		<Attribute name="updateFrequency" description="How often the meter increases/decreases, in milliseconds" required="false" />
+		<Attribute name="updateAmount" description="The difference that the meter will change by every update" required="false" />
+		<Attribute name="updateOffline" description="Whether the meter should continue to update when the player is offline" required="false" />
+		<Attribute name="offlineMultiplier" description="The multiplier that will be applied to the update amount when updating offline" required="false" />
+	</Binding>
+		
+	<Binding name="ActivityBars" 
+		factory="uk.co.dubit.platform.scriptEngine.gameObject.GameObjectFactory"
+		class="uk.co.dubit.platform.components.activitybars.ActivityBars" />
+	
+	<Binding name="ActivityBar" 
+		factory="uk.co.dubit.platform.scriptEngine.gameObject.GameObjectFactory"
+		class="uk.co.dubit.platform.components.activitybars.ActivityBar">
+		<Attribute name="duration" description="The amount of time in milliseconds that the activity will last for" />
+		<Attribute name="target" description="The target object where the activity display will be drawn" />
+	</Binding>
+		
+	<Binding name="OpenActivityBar"
+		class="uk.co.dubit.platform.components.activitybars.behaviours.OpenActivityBar" />
+		
+	<Binding name="CloseActivityBar"
+		class="uk.co.dubit.platform.components.activitybars.behaviours.CloseActivityBar" />
+		
+	<Binding name="CloseAllActivityBars"
+		class="uk.co.dubit.platform.components.activitybars.behaviours.CloseAllActivityBars" />
 </Bindings>

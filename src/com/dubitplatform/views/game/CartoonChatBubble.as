@@ -15,7 +15,6 @@ package com.dubitplatform.views.game
 			super(name);
 			
 			textFormat = new TextFormat("Deeko", 11, 0);
-		}
-		
+		}		
 	}
 }
