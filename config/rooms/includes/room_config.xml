@@ -93,6 +93,7 @@
 				</If>	
 			</onFixup>
 			<onClick>
+				<Trace message="Opening Menu {Room.player}"/>
 				<OpenMenu menu="{Menu.playerMenu}" target="{Room.player}"/>
 			</onClick>	
 		</Triggers>

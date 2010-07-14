@@ -9,7 +9,7 @@
 	
 	<property file="./build/build.properties" />
 
-	<target name="full-build" depends="check-settings, clean, setup, compile-app, copy-config, copy-assets, create-html-wrapper"/>		
+	<target name="build" depends="check-settings, clean, setup, copy-config, copy-assets, compile-app, compile-minigame, create-html-wrapper"/>		
 	<target name="config-build" depends="copy-config, copy-assets, create-html-wrapper"/>
 
 	<target name="copy-config" description="Copies local config">
@@ -93,6 +93,23 @@
 		<delete dir="${dir.env}/temp/"/>
 		<echo message="Completed compiling"/>
 	</target>
+	
+	<target name="compile-minigame" description="Compiles the sample multiplayer mini game">
+		<echo message="Beginning compiling mini game"/>
+		<exec executable="${build.mxmlc}" failonerror="true">
+			<arg line="-sp+=${dir.src}"/>
+			<arg line="-sp+=${dir.vendor}"/>	
+			<arg line="-library-path+=${dir.lib}/platform-library.swc"/>
+			<arg line="${dir.src}/${build.minigame}.mxml"/>
+			<arg line="-o='${dir.bin}/games/${build.minigame}.swf'"/>
+			<arg line="-compiler.debug=${build.debug}"/>
+			<arg line="-target-player=${build.version}"/>
+			<arg line="-warnings=${build.warnings}"/>
+			<arg line="-managers=flash.fonts.AFEFontManager"/>
+		</exec>
+		<delete dir="${dir.env}/temp/"/>
+		<echo message="Completed compiling"/>
+	</target>	
 	
 	<target name="clean">
 		<echo message="Beginning clean up of files and folders from bin directory"/>

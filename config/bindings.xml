@@ -1938,7 +1938,7 @@
 			<Attribute required="true" name="message" type="string" description="A message shown when the player reaches that level"/>
 		</Binding>	
 	
-		<Binding name="AwardExperiencePoints" class="uk.co.dubit.platform.components.experience.behaviours.AwardExperiencePoints">
+		<Binding name="AwardExperiencePoints" alias="AwardExperience" class="uk.co.dubit.platform.components.experience.behaviours.AwardExperiencePoints">
 			<Attribute required="true" name="points" type="number" description="The number of experience points to award"/>
 		</Binding>
 	</Package>	
@@ -2195,7 +2195,7 @@
 		<Binding name="Menus" class="uk.co.dubit.platform.components.menu.Menus" factory="uk.co.dubit.platform.scriptEngine.gameObject.GameObjectFactory" />
 		
 		<Binding name="ContextMenu" class="uk.co.dubit.platform.components.menu.PopupMenu" factory="uk.co.dubit.platform.scriptEngine.gameObject.GameObjectFactory">
-			<Attribute required="false" name="skin" defaultValue="uk.co.dubit.application.view.menu.ContextMenu" type="class" description="Menu skin" />
+			<Attribute required="false" name="skin" defaultValue="com.dubitplatform.views.ContextMenuSkin" type="class" description="Menu skin" />
 		</Binding>
 	
 		<Binding name="MenuItem" class="uk.co.dubit.platform.components.menu.MenuItem" factory="uk.co.dubit.platform.scriptEngine.gameObject.GameObjectFactory" />

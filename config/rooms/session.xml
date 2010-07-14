@@ -232,6 +232,7 @@
 	</Collections>
 	
 	<Minigames id="minigames">
+		<Minigame id="multi" name="Multiplayer Sample Game" url="[base.url]games/SampleMultiplayerMinigame.swf" score="0"/>
 		<Minigame id="flex" name="Flex Sample Game" url="[base.url]games/SampleMinigame.swf" score="0"/>
 		<Minigame id="flash" name="Flash Mini Game" url="[base.url]games/FlashMinigame.swf" score="0"/>
 		<Triggers>
@@ -258,7 +259,7 @@
 			<Triggers>
 				<onMenuItemSelected>
 					<Trace message="onMenuItemSelected {Event.menuItem.id}"/>
-					<OpenMinigame minigame="{Minigame.flex}"/>
+					<OpenMinigame minigame="{Minigame.multi}"/>
 				</onMenuItemSelected>	
 			</Triggers>	
 		</ContextMenu>		
