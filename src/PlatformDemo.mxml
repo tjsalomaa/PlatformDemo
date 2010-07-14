@@ -18,7 +18,6 @@
 	
 	<mx:Script>
 		<![CDATA[
-<<<<<<< HEAD
 			import uk.co.dubit.platform.components.experience.Experience;
 			import com.dubitplatform.views.game.CartoonChatBubble;
 			import uk.co.dubit.graphics.render2D.types.ChatBubble2D;
@@ -26,8 +25,6 @@
 			import uk.co.dubit.platform.components.quest.QuestModel;
 			import com.dubitplatform.views.MapTitleWindow;
 			import uk.co.dubit.utils.StringUtils;
-=======
->>>>>>> a0d5262987b06a5657aabe23260d923a02c8330c
 			import com.adobe.utils.StringUtil;
 			import com.dubitplatform.views.AchievementsView;
 			import com.dubitplatform.views.ActivityBarView;
@@ -91,11 +88,7 @@
 			private var chatView:ChatView
 			private var profileSkinTitleWindow:ProfileSkinTitleWindow;
 			private var chatBubble : CartoonChatBubble;
-<<<<<<< HEAD
-			
-=======
 			private var activityBarView : ActivityBarView;
->>>>>>> a0d5262987b06a5657aabe23260d923a02c8330c
 
 			private var map : MapTitleWindow;
 			private var energyMeter:IMeter;
