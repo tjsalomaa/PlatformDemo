@@ -75,24 +75,10 @@
 			private var backpackView : BackpackView;
 			private var roomListView : RoomListView;
 			private var loggingPanel : LoggingPanel;
-			private var experienceView : ExperienceView;
-			private var colletionView : CollectionView;
-			private var achievementView : AchievementsView;
-			private var verbControllerView : VerbControllerView;
-			private var chatRoomPreloaderView : ChatRoomPreloaderView;
-			private var branchingConversationView : BranchingConversationView;
-			private var growlView:GrowlView
-			private var minigameView:MinigameTitleWindow; 
-			private var shopTitleView:ShopTitleWindow;
-			private var contextMenuSkin:ContextMenuSkin;
-			private var chatRoomSkin:ChatRoomView;
-			private var chatView:ChatView
-			private var profileSkinTitleWindow:ProfileSkinTitleWindow;
-			private var chatBubble : CartoonChatBubble;
-			private var activityBarView : ActivityBarView;
-
 			private var map : MapTitleWindow;
 			private var energyMeter:IMeter;
+			
+			private var placeholders : Placeholders;
 					
 			private function onCreationComplete () : void
 			{

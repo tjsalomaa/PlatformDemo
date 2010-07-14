@@ -2173,6 +2173,15 @@
 			<Attribute required="false" name="targetContainer" type="ISkinContainer" description="Named MXML component used to display the minigame skin" defaultValue="minigameContainer" />
 			<Attribute required="false" name="attachSkin" type="boolean" description="True if the skin should be attached immediately" defaultValue="false"/>	
 		</Binding>
+		<Binding name="MutiplayerMinigame" class="uk.co.dubit.platform.components.minigame.MultiplayerMinigame" factory="uk.co.dubit.platform.scriptEngine.gameObject.GameObjectFactory">
+			<Attribute required="true" name="id" type="GameObjectID" description="A unique mini game ID"/>
+			<Attribute required="true" name="url" type="FilePath" description="The url to the mini game"/>
+			<Attribute required="true" name="name" type="String" description="Name of the mini game"/>
+			<Attribute required="true" name="score" type="Number" description="The current score of the mini game"/>
+			<Attribute required="false" name="skin" description="The skin used to show the minigame" defaultValue="com.dubitplatform.views.MinigameTitleWindow" />
+			<Attribute required="false" name="targetContainer" type="ISkinContainer" description="Named MXML component used to display the minigame skin" defaultValue="minigameContainer" />
+			<Attribute required="false" name="attachSkin" type="boolean" description="True if the skin should be attached immediately" defaultValue="false"/>	
+		</Binding>		
 		<Binding name="OpenMinigame" class="uk.co.dubit.platform.components.minigame.behaviours.OpenMinigame">
 			<Attribute required="true" name="minigame" type="MiniGameID" description="The unique ID of the mini game"/>
 		</Binding>	
