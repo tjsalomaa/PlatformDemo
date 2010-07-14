@@ -343,8 +343,7 @@
 	</Meters>
 	
 	<ActivityBars>
-		<ActivityBar id="reading" skin="com.dubitplatform.views.ActivityBarView" targetContainer="shopContainer"  
-				 target="{Rooms.currentRoom.player}" duration="4280">
+		<ActivityBar id="reading" skin="com.dubitplatform.views.ActivityBarView" targetContainer="shopContainer" target="{Rooms.currentRoom.player}" duration="4280">
 			<Triggers>
 				<OnActivityComplete>
 					<Call behaviourID="mouseOn" scope="{Rooms.currentRoom}"/>

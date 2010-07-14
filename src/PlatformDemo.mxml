@@ -18,6 +18,7 @@
 	
 	<mx:Script>
 		<![CDATA[
+			import uk.co.dubit.platform.components.session.SessionModel;
 			import uk.co.dubit.platform.components.experience.Experience;
 			import com.dubitplatform.views.game.CartoonChatBubble;
 			import uk.co.dubit.graphics.render2D.types.ChatBubble2D;
@@ -114,15 +115,16 @@
 				map.visible = false;
 				
 				Properties.getInstance().addListener(this);
+
 			}
 			
-			public function openEnergyMeter () : void
+			override public function setupComplete () : void 
 			{
 				energyMeter = Meters.getInstance().getMeterByID("energy");	
 				energyMeter.gameObjectListeners.addListener(this);
-				updateEnergyLabel();
+				updateEnergyLabel();		
 			}
-			
+						
 			public function onPropertyChange (property : String, oldValue : *, newValue : *) : void
 			{
 				if (StringUtils.equals("scene-viewportHeight", property, true))
@@ -187,8 +189,7 @@
 			
 			private function updateEnergyLabel() : void
 			{
-				if (energyMeter)
-					energyDisplay.text = "Energy: (" + energyMeter.amount + "/" + energyMeter.maxAmount + ")";
+				if (energyMeter) energyDisplay.text = "Energy: (" + energyMeter.amount + "/" + energyMeter.maxAmount + ")";
 			}
 		]]>
 	</mx:Script>	
@@ -217,15 +218,10 @@
 			<mx:LinkButton label="Quests ({QuestModel.getInstance().activeQuestCount})" click="openControlPanel('quests');"/>
 			<mx:LinkButton label="Inventory ({Backpack.getInstance().count})" click="openControlPanel('inventory');"/>
 			<mx:LinkButton label="Shop" click="openShop();" />
-			<mx:LinkButton label="Show Energy Meter" click="openEnergyMeter();" />
 			<mx:Spacer width="100%"/>
-<<<<<<< HEAD
-			<mx:Label text="{Experience.getInstance().currentLevel.name}({Experience.getInstance().points}/{Experience.getInstance().nextLevel.points})"/>
-		</mx:ControlBar>	
-=======
+			<mx:Label text="{Experience.getInstance().currentLevel.name}({Experience.getInstance().points}/{Experience.getInstance().nextLevel.points})"/>	
 			<mx:Text id="energyDisplay"/>			
 		</mx:ControlBar>
->>>>>>> a0d5262987b06a5657aabe23260d923a02c8330c
 		
 		<skin:PopupSkinContainer containerID="shopContainer" width="100%" height="100%" />
 					
