@@ -3,7 +3,7 @@
 	width="830" height="380"
 	creationComplete="onCreationComplete()"
 	removedFromStage="{ enableCPULoad = false; intervalTimer.stop() }"
-	implements="uk.co.dubit.platform.components.minigame.client.multiplayer.IMultiplayerMinigameClient, 	"
+	implements="uk.co.dubit.platform.components.minigame.client.multiplayer.IMultiplayerMinigameClient, uk.co.dubit.platform.components.minigame.client.multiplayer.IMultiplayerGameListener, uk.co.dubit.platform.components.minigame.client.IMinigameClient"
 	xmlns:mx="http://www.adobe.com/2006/mxml" layout="absolute">
 	
 	<mx:VBox width="100%" height="100%">
