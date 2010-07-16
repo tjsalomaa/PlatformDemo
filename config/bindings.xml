@@ -632,6 +632,7 @@
 				]]>		
 			</Example>			
 			<Attribute required="true" name="message" type="String" description="The message to show in the chat bubble"/>
+			<Attribute required="false" name="displayTime" type="Number" defaultValue="10000" description="The time in milliseconds that the bubble stays on the screen"/>	
 			<Attribute required="false" name="embedFonts" type="Boolean" defaultValue="true"/>	
 			<Attribute required="false" name="gameObject" type="GameObject" defaultValue="{Room.player}" description="The game object the speech bubble will appear above. By default the bubble will appear above the player"/>
 			<Attribute required="false" name="fitToScreen" type="Boolean" defaultValue="true" description="If true the bubble will not slide off the edge of visible area"/>
@@ -640,6 +641,50 @@
 			<Attribute required="false" name="maxWidth" type="Number" defaultValue="650" description="The max width for the text field. If the text is wider the bubble will span multile lines"/>
 			<Attribute required="false" nodoc="true" name="bubbleClass" type="String" defaultValue="com.dubitplatform.views.game.CartoonChatBubble"/>	
 			<Attribute required="false" nodoc="true" name="useServer" defaultValue="{Properties.[setting.useServer]}" description="Whether to broadcast this message to other users in the room" />
+		</Binding>
+		<Binding name="RemoveChatBubble" class="uk.co.dubit.platform.scriptEngine.behaviour.types.world.RemoveBubble" alias="RemoveBubble">
+			<Description>
+				<![CDATA[
+					Removes the chat bubble attached to a gameobject.
+				]]>
+			</Description>
+			<Example>
+				<![CDATA[
+					When the player looks at the can of coke a speech bubble will be shown above his avatar. Picking up the coke will remove the bubble.
+					
+					<code>	
+						<Scene id="scene" target="{Room.player}" width="700" height="419">
+							<DisplayObject2D id="coke" index="1" mouseEnabled="true" assetURL="/coke.png"/>
+						</Scene>						
+
+						<!-- Triggered when the player looks at the coke DisplayObject -->
+						<Trigger gameObject="{Room.coke}" event="OnLookAt">		
+							<ShowChatBubble message="It's a can of fizzy water!"/>
+						</Trigger>	
+						<Trigger gameObject="{Room.coke}" event="OnPickup">	
+							<!-- By default removes the bubble attached to the player -->
+							<RemoveChatBubble/>
+						</Trigger>						
+					</code>
+					
+					The second example illustrates how to show and remove a bubble above a non-player character.
+					
+					<code>	
+						<Scene id="scene" target="{Room.player}" width="700" height="419">
+							<DisplayObject2D id="policeman" index="1" mouseEnabled="true" assetURL="/policeman.png"/>
+						</Scene>						
+
+						<!-- Triggered when the player talks to the police man DisplayObject -->
+						<Trigger gameObject="{Room.policeman}" event="OnTalkTo">		
+							<ShowChatBubble message="Evenin' all!" gameObject="{Room.policeman}"/>
+						</Trigger>	
+						<Trigger gameObject="{Room.policeman}" event="OnLookAt">		
+							<RemoveChatBubble gameObject="{Room.policeman}"/>
+						</Trigger>						
+					</code>					
+				]]>		
+			</Example>			
+			<Attribute required="false" name="gameObject" type="GameObject" defaultValue="{Room.player}" description="The game object the speech bubble will be removed from By default the bubble will appear above the player"/>		
 		</Binding>
 		<Binding name="MoveTo" type="Behaviour"  alias="MovePlayerTo" class="uk.co.dubit.platform.world.movement.MoveTo">
 			<Description>
@@ -705,6 +750,8 @@
 			<Attribute name="targetX" description="The target x coordinate" type="Number" required="false" />
 			<Attribute name="targetY" description="The target y coordinate" type="Number" required="false" />						
 		</Binding>	
+		<Binding name="PauseClock" class="uk.co.dubit.platform.scriptEngine.behaviour.types.world.PauseClock"/>
+		<Binding name="ResumeClock" class="uk.co.dubit.platform.scriptEngine.behaviour.types.world.ResumeClock"/>
 	</Package>
 	
 	<Binding nodoc="true" name="SendMovePlayerTo" alias="SendMoveTo" class="uk.co.dubit.platform.world.movement.SendMoveTo"/>	
