@@ -25,6 +25,13 @@
 			<Image id="light_filter" assetID="light_filter_asset"/>
 		</MultiplyFilter>
 	</Filters>
+	
+	<Filters id="helperFilters">
+		<DepthFilter id="helperDepthFilter" scaleBack="-1.1" scaleFront="0.48"/>
+		<MultiplyFilter id="lightFilter">
+			<Image id="light_filter" assetID="light_filter_asset"/>
+		</MultiplyFilter>
+	</Filters>
 
 	<Sounds target="{Room.player}" id="sounds">
 		<Sound id="background_music" assetID="background_music_asset" play="false" looping="true"/>
@@ -51,6 +58,10 @@
 		<DisplayObject2D name="A grandfather clock?" id="Grandfather clock" assetID="timemachine_asset" x="744" y="403" originX="61" originY="209" verbEnabled="true" clickThrough="true" mouseEnabled="true" alpha="0"/> <!-- Clock Hit -->
 		<DisplayObject2D name="The Fireplace" id="Fireplace" assetID="fireplace_asset" x="448" y="421" originX="36" originY="67" verbEnabled="true" clickThrough="true" mouseEnabled="true" alpha="0"/> <!-- Fire Hit -->
 		<DisplayObject2D name="A device of some sort" id="Cogs" assetID="cogs_asset" x="448" y="303" originX="49" originY="23" verbEnabled="true" clickThrough="true" mouseEnabled="true" alpha="0"/> <!-- Cogs Hit -->
+		
+		<!-- path finding room debug object -->
+		<DisplayObject2d name="Go to pathfinding" id="path_test" assetURL="[base.url]images/backpack/cog_three_backpack.swf" x="400" y="300" visible="true" mouseEnabled="true" useHandCursor="true" clickThrough="true"/>
+		
 		
 		<ZSortingDisplayObject id="furniture">
 						
@@ -87,6 +98,7 @@
 		<ZSortingDisplayObject id="playerMessages"/>
 		
 		<DisplayObject2D id="npc_elf_test" displayObjectClass="uk.co.dubit.graphics.render2D.ActionPlayer" x="500" y="500" originX="0" originY="25" defaultSpeed="3">
+			<Attribute key="filters" value="{Room.helperFilters}" />
 			<Actions defaultAction="stand_test">
 				<Stand id="stand_test" path="[base.url]images/lab/npc_elf_stand.swf"/>
 				<Walk id="walk_test" path="[base.url]images/lab/npc_elf_walk.swf"/>
@@ -148,6 +160,10 @@
         <Asset id="wallLens3_asset" url="images/lab/wallLens3.swf"/>
         <!--><Asset id="clockanimation_asset" url="images/lab/clockanimation.swf"/>-->
     </Assets>
+
+	<Trigger event="OnClick" gameObject="{Room.path_test}">
+		<ChangeRoom roomName="path_test"/>
+	</Trigger>
 
 <!--Telescope-->
 	<Trigger event="OnLookAt" gameObject="{Room.telescope}">
@@ -686,7 +702,7 @@
 		<ShowBubble gameObject="{Room.player}" message="It appears to be an extensive library of books relating to physics, engineering and philosophy"/>
 	</Trigger>
 
-	<Trigger event="OnLookAt" gameObject="{Room.bookshelf_six">
+	<Trigger event="OnLookAt" gameObject="{Room.bookshelf_six}">
 		<ShowBubble gameObject="{Room.player}" message="It appears to be an extensive library of books relating to physics, engineering and philosophy"/>
 	</Trigger>
 		
