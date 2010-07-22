@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ChatRoom id="lab" xmlns:xi="http://www.w3.org/2001/XInclude" startX="700" startY="470">
+<ChatRoom id="path_test" xmlns:xi="http://www.w3.org/2001/XInclude" startX="700" startY="470">
 
 	<Include href="config/rooms/includes/room_config.xml"/>
 
@@ -13,6 +13,10 @@
 
 	<Filters id="playerFilters">
 		<DepthFilter id="playerDepthFilter" scaleBack="0.5" scaleFront="0.48"/>
+	</Filters>	
+	
+	<Filters id="helperFilters">
+		<DepthFilter id="helperDepthFilter" scaleBack="2" scaleFront="2"/>
 	</Filters>
 	
 
@@ -41,7 +45,7 @@
 	</Scene>
 	
 	<Trackers>
-		<Tracker id="pet_follower" target="{Room.npc_elf_test}" source="{Room.player}" maxDistance="100" minDistance="40" trackingEnabled="false"/>
+		<Tracker id="pet_follower" target="{Room.npc_elf_test}" source="{Room.player}" maxDistance="100" minDistance="40" trackingEnabled="true"/>
 	</Trackers>
 
 	<Assets id="assets">

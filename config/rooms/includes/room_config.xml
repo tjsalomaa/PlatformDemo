@@ -57,6 +57,7 @@
 			<Attribute key="mouseEnabled" value="true" />
 			<Attribute key="mouseChildren" value="false" />
 			<Attribute key="clickThrough" value="true" />
+			<Attribute key="useHandCursor" value="true" />
 			<Attribute key="collidable" value="true" />
 			<Attribute key="x" value="{Room.startX}" />
 			<Attribute key="y" value="{Room.startY}" />
@@ -92,11 +93,8 @@
 				</If>	
 			</onFixup>
 			<onClick>
-				<OpenMenu menu="{Menus.playerMenu}" target="{Event.handler}" />
-			</onClick>
-			<onShowProfile>
-				<OpenProfile profile="{Profiles.playerProfile}" avatar="{Room.player}" />
-			</onShowProfile>
+				<OpenMenu menu="{Menu.playerMenu}" target="{Room.player}"/>
+			</onClick>	
 		</Triggers>
 	</PlayerDefinition>
 	

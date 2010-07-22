@@ -15,14 +15,6 @@ package com.dubitplatform.views.game
 			super(name);
 			
 			textFormat = new TextFormat("Deeko", 11, 0);
-		}
-		
-		override protected function readRenderObjectAttributes(renderObject:IRenderObject):void
-		{
-			super.readRenderObjectAttributes(renderObject);
-			
-			embedFonts = true;
-		}
-		
+		}		
 	}
 }
