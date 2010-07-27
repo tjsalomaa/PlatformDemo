@@ -2336,4 +2336,6 @@
 	<Binding name="CloseActivityBar" class="uk.co.dubit.platform.components.activitybars.behaviours.CloseActivityBar" />
 		
 	<Binding name="CloseAllActivityBars" class="uk.co.dubit.platform.components.activitybars.behaviours.CloseAllActivityBars" />
+	
+	<Binding name="Contains" class="com.dubitplatform.behaviours.Contains" />
 </Bindings>

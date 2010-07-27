@@ -47,7 +47,12 @@
 
 	<!-- Chat messages -->
 	<Trigger event="onSendChatMessage" gameObject="{Room}">
-		<ShowBubble gameObject="{Room.player}" message="{Event.message}" />
+        <ShowChatBubble gameObject="{Room.player}" message="{Event.message}" displayTime="5000"/>
+        <Contains string="{Event.message}" value="blue">
+              <Then>
+                    <ShowChatBubble gameObject="{Room.doc}" displayTime="-1" message="That is the color of the sky. Water makes the a planet's sky appear blue."/>
+              </Then>
+        </Contains>		
 	</Trigger>
 
 	<!-- Definition of players in the room -->

@@ -1,5 +1,6 @@
 package
 {
+	import com.dubitplatform.behaviours.Contains;
 	import com.dubitplatform.views.AchievementsView;
 	import com.dubitplatform.views.ActivityBarView;
 	import com.dubitplatform.views.BranchingConversationView;
@@ -33,5 +34,6 @@ package
 		private var profileSkinTitleWindow:ProfileSkinTitleWindow;
 		private var chatBubble:CartoonChatBubble;
 		private var activityBarView:ActivityBarView;
+		private var contains: Contains;
 	}
 }
