@@ -35,7 +35,7 @@
 
 		<ZSortingDisplayObject id="playerMessages"/>
 		
-		<DisplayObject2D id="npc_elf_test" displayObjectClass="uk.co.dubit.graphics.render2D.ActionPlayer" x="500" y="500" originX="0" originY="25" defaultSpeed="3">
+		<DisplayObject2D id="helper" displayObjectClass="uk.co.dubit.graphics.render2D.ActionPlayer" x="500" y="500" originX="0" originY="25" defaultSpeed="3">
 			<Attribute key="filters" value="{Room.helperFilters}" />
 			<Actions defaultAction="stand_test">
 				<Stand id="stand_test" path="[base.url]images/lab/npc_elf_stand.swf"/>
@@ -44,10 +44,6 @@
 		</DisplayObject2D>		
 	</Scene>
 	
-	<Trackers>
-		<Tracker id="pet_follower" target="{Room.npc_elf_test}" source="{Room.player}" maxDistance="100" minDistance="40" trackingEnabled="true"/>
-	</Trackers>
-
 	<Assets id="assets">
         <Asset id="background_music_asset" url="sounds/lab/music.mp3"/>
         <Asset id="hit_asset" url="images/pathtest/background.png"/>

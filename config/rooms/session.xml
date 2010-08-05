@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <SessionRoom id="session" xmlns:xi="http://www.w3.org/2001/XInclude">
+	<xi:include href="includes/session/activity_bars.xml"/>
+	
 	
 	<Include xmlns:xi="http://www.w3.org/2001/XInclude" xml:base="../server/startup.xml">
 	<Channel id="roomChannel" encoding="3" type="mina" endpoint="{Properties.[path.game-server]}">
@@ -341,16 +343,4 @@
 	<Meters>
 		<Meter id="energy" amount="75" minAmount="0" maxAmount="100" updateFrequency="5000" updateAmount="1" updateOffline="false" offlineMultiplier="1" persist="true" />
 	</Meters>
-	
-	<ActivityBars>
-		<ActivityBar id="reading" skin="com.dubitplatform.views.ActivityBarView" targetContainer="shopContainer" target="{Rooms.currentRoom.player}" duration="4280">
-			<Triggers>
-				<OnActivityComplete>
-					<Call behaviourID="mouseOn" scope="{Rooms.currentRoom}"/>
-					<CloseActivityBar activityBar="reading" />
-				</OnActivityComplete>
-			</Triggers>
-		</ActivityBar>
-	</ActivityBars>
-	
 </SessionRoom>

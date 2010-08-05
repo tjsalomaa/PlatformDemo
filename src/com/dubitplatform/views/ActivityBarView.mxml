@@ -3,6 +3,7 @@
 	xmlns="uk.co.dubit.platform.components.activitybars.ui.*"
 	xmlns:mx="http://www.adobe.com/2006/mxml" >
 	
-	<mx:Label id="activityText" width="100%" textAlign="center" fontSize="16" color="#FFFFFF" text="Reading..." />
+	<!--mx:Label id="activityText" width="100%" textAlign="center" fontSize="16" color="#FFFFFF" text="Digging..." /-->
+
 	
 </ActivityBarSkinViewBase>
