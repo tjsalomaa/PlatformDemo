@@ -700,28 +700,47 @@
 	</Trigger>
 	
 	<Trigger event="OnRead" gameObject="{Room.bookshelf_two}">
-		<OpenActivityBar activityBar="" targettedObject="{Event.handler}"/>
-		<Call behaviourID="mouseOff" scope="{Rooms.currentRoom}"/>
+		<Call behaviourID="readAction" />
 	</Trigger>
 
 	<Trigger event="OnLookAt" gameObject="{Room.bookshelf_three}">
 		<ShowBubble gameObject="{Room.player}" message="It appears to be an extensive library of books relating to physics, engineering and philosophy"/>
 	</Trigger>
 	
+	<Trigger event="OnRead" gameObject="{Room.bookshelf_three}">
+		<Call behaviourID="readAction" />
+	</Trigger>
+	
 	<Trigger event="OnLookAt" gameObject="{Room.bookshelf_four}">
 		<ShowBubble gameObject="{Room.player}" message="It appears to be an extensive library of books relating to physics, engineering and philosophy"/>
+	</Trigger>
+	
+	<Trigger event="OnRead" gameObject="{Room.bookshelf_four}">
+		<Call behaviourID="readAction" />
 	</Trigger>
 		
 	<Trigger event="OnLookAt" gameObject="{Room.bookshelf_five}">
 		<ShowBubble gameObject="{Room.player}" message="It appears to be an extensive library of books relating to physics, engineering and philosophy"/>
 	</Trigger>
+	
+	<Trigger event="OnRead" gameObject="{Room.bookshelf_five}">
+		<Call behaviourID="readAction" />
+	</Trigger>
 
 	<Trigger event="OnLookAt" gameObject="{Room.bookshelf_six}">
 		<ShowBubble gameObject="{Room.player}" message="It appears to be an extensive library of books relating to physics, engineering and philosophy"/>
 	</Trigger>
+	
+	<Trigger event="OnRead" gameObject="{Room.bookshelf_six}">
+		<Call behaviourID="readAction" />
+	</Trigger>
 		
 	<Trigger event="OnLookAt" gameObject="{Room.bookshelf_seven}">
 		<ShowBubble gameObject="{Room.player}" message="It appears to be an extensive library of books relating to physics, engineering and philosophy"/>
+	</Trigger>
+	
+	<Trigger event="OnRead" gameObject="{Room.bookshelf_seven}">
+		<Call behaviourID="readAction" />
 	</Trigger>
 
 	<Trigger event="OnLookAt" gameObject="{Room.doc}">

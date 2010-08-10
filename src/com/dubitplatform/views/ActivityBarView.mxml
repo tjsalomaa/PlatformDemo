@@ -1,9 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ActivityBarSkinViewBase
 	xmlns="uk.co.dubit.platform.components.activitybars.ui.*"
-	xmlns:mx="http://www.adobe.com/2006/mxml" >
+	xmlns:mx="http://www.adobe.com/2006/mxml" 
+	creationComplete="onCreationComplete()">
 	
-	<!--mx:Label id="activityText" width="100%" textAlign="center" fontSize="16" color="#FFFFFF" text="Digging..." /-->
+	<mx:Script>
+		<![CDATA[			
+			private function onCreationComplete() : void
+			{
+				activityText.text = activityBar.getValue("actionText");
+			}
+			
+		]]>
+	</mx:Script>
+	
+	<mx:Label id="activityText" width="100%" textAlign="center" fontSize="16" color="#FFFFFF" text="Digging..." />
 
 	
 </ActivityBarSkinViewBase>

@@ -341,6 +341,6 @@
 	</Profiles>
 	
 	<Meters>
-		<Meter id="energy" amount="75" minAmount="0" maxAmount="100" updateFrequency="5000" updateAmount="1" updateOffline="false" offlineMultiplier="1" persist="true" />
+		<Meter id="energy" amount="75" minAmount="0" maxAmount="100" updateFrequency="5000" updateAmount="1" updateOffline="true" offlineMultiplier="1" persist="true" />
 	</Meters>
 </SessionRoom>

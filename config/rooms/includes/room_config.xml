@@ -136,6 +136,19 @@
 		</ForEach>
 	</BehaviourDefinition>
 	
+	<BehaviourDefinition id="readAction">
+		<If expression="({Meters.energy.amount} >= {15})">
+			<Then>
+				<SetValues target="{Meters.energy}" amount="({Meters.energy.amount} - {15})" />
+				<OpenActivityBar activityBar="reading" targettedObject="{Event.handler}"/>
+				<Call behaviourID="mouseOff" scope="{Rooms.currentRoom}"/>
+			</Then>
+			<Else>
+				<ShowBubble gameObject="{Room.player}" message="I'm too tired"/>
+			</Else>
+		</If>
+	</BehaviourDefinition>
+	
 	<Dialogue id="dialogue">
 		<Triggers>	
 			<OnMessage>
