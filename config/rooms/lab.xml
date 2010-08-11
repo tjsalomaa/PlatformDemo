@@ -2,6 +2,8 @@
 <ChatRoom id="lab" xmlns:xi="http://www.w3.org/2001/XInclude" startX="700" startY="470">
 
 	<Include href="config/rooms/includes/room_config.xml"/>
+	<Include href="config/rooms/includes/cds.xml"/>
+
 
 	<MouseMovementController yVelocityScale="0.5" directions="12" id="movement" />
 	<CollisionController target="{Room.player}" id="collision"/>
@@ -63,6 +65,13 @@
 		<DisplayObject2D name="A grandfather clock?" id="Grandfather clock" assetID="timemachine_asset" x="744" y="403" originX="61" originY="209" verbEnabled="true" clickThrough="true" mouseEnabled="true" alpha="0"/> <!-- Clock Hit -->
 		<DisplayObject2D name="The Fireplace" id="Fireplace" assetID="fireplace_asset" x="448" y="421" originX="36" originY="67" verbEnabled="true" clickThrough="true" mouseEnabled="true" alpha="0"/> <!-- Fire Hit -->
 		<DisplayObject2D name="A device of some sort" id="Cogs" assetID="cogs_asset" x="448" y="303" originX="49" originY="23" verbEnabled="true" clickThrough="true" mouseEnabled="true" alpha="0"/> <!-- Cogs Hit -->
+		
+		<DisplayObject2D id="cd1" definitionID="cd_collectable" assetURL="[base.url]images/lab/cd.png" x="528" y="408" visible="true" />
+		<DisplayObject2D id="cd2" definitionID="cd_collectable" assetURL="[base.url]images/lab/cd.png" x="1060" y="406" visible="true"/>
+		<DisplayObject2D id="cd3" definitionID="cd_collectable" assetURL="[base.url]images/lab/cd.png" x="1206" y="314" visible="true" />
+		<DisplayObject2D id="cd4" definitionID="cd_collectable" assetURL="[base.url]images/lab/cd.png" x="1141" y="472" visible="true" />
+		<DisplayObject2D id="cd5" definitionID="cd_collectable" assetURL="[base.url]images/lab/cd.png" x="257" y="446" visible="true" />
+		
 		
 		<!-- path finding room debug object -->
 		<!--DisplayObject2d name="Go to pathfinding" id="path_test" assetURL="[base.url]images/backpack/cog_three_backpack.swf" x="400" y="300" visible="true" mouseEnabled="true" useHandCursor="true" clickThrough="true"/-->

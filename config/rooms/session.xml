@@ -194,25 +194,20 @@
 	</Achievements>	
 	
 	<Collections>
-		<Collection id="animalCollection" name="Animal Collection" description="Collect all the animals hidden around the world and get something super awesome when you complete the collection!">
-			<Collectable id="dog" name="Dog" imageURL="images/collections/animals/dog.png" quantity="0"/>
-			<Collectable id="elephant" name="Elephant" imageURL="images/collections/animals/elephant.png" quantity="0"/>
-			<Collectable id="lion" name="Lion" imageURL="images/collections/animals/lion.png" quantity="0"/>
-			<Collectable id="fox" name="Fox" imageURL="images/collections/animals/fox.png" quantity="0"/>
-			<Collectable id="panda" name="Panda" imageURL="images/collections/animals/panda.png" quantity="0"/>
-		</Collection>
-		<Collection id="foodCollection" name="Food Collection" description="Collect all the food hidden around the world and get something super coolio when you've collected them all!">
-			<Collectable id="coffee" name="Coffee" imageURL="images/collections/food/coffee.png" quantity="0"/>
-			<Collectable id="muffin" name="Muffin" imageURL="images/collections/food/muffin.png" quantity="0"/>
-			<Collectable id="sugar" name="Sugar" imageURL="images/collections/food/sugar.png" quantity="0"/>
-			<Collectable id="toast" name="Toast" imageURL="images/collections/food/toast.png" quantity="0"/>
-		</Collection>			 
+		<Collection id="cdCollection" name="CD Collection" description="Data discs containing sensitive information have been scattered across the room! Collect all the discs to discover a secret!">
+			<Collectable id="cd1" name="Disc 1" imageURL="images/collections/cd.png" quantity="0"/>
+			<Collectable id="cd2" name="Disc 2" imageURL="images/collections/cd.png" quantity="0"/>
+			<Collectable id="cd3" name="Disc 3" imageURL="images/collections/cd.png" quantity="0"/>
+			<Collectable id="cd4" name="Disc 4" imageURL="images/collections/cd.png" quantity="0"/>
+			<Collectable id="cd5" name="Disc 5" imageURL="images/collections/cd.png" quantity="0"/>
+		</Collection> 
 		<Triggers>
 			<OnFoundCollectable>
 				<Trace message="Found collectable {Event.collection.name} : {Event.collectable.name}"/>
+				<AwardExperiencePoints points="10" />
 			</OnFoundCollectable>
 			<OnCompleteCollection>
-				<Trace message="Completed collection {Event.collection.name} : {Event.collectable.name}"/>
+				<CreateNotification title="Collection completed!" body="Congratulations! You completed your {Event.collection.name}!" can_remove="true"/>
 			</OnCompleteCollection>			
 		</Triggers>	
 	</Collections>
