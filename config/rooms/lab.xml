@@ -3,7 +3,7 @@
 
 	<Include href="config/rooms/includes/room_config.xml"/>
 
-	<MouseMovementController yVelocityScale="0.5" directions="12" id="movement"/>
+	<MouseMovementController yVelocityScale="0.5" directions="12" id="movement" />
 	<CollisionController target="{Room.player}" id="collision"/>
 	<Chat id="chatBox"/>
 	
@@ -13,6 +13,7 @@
 		<Verb id="OnTalkTo" name="Talk to"/>
 		<Verb id="OnUse" name="Use the"/>
 		<Verb id="OnRead" name="Read something from"/>
+		<Verb id="OnDig" name="Dig up"/>
 	</VerbController>
 
 	<Collision width="1400" height="546" id="walkableArea" solid="true">
@@ -26,12 +27,19 @@
 		</MultiplyFilter>
 	</Filters>
 	
+	<Filters id="helperFilters">
+		<DepthFilter id="helperDepthFilter" scaleBack="1" scaleFront="1"/>
+		<MultiplyFilter id="lightFilter">
+			<Image id="light_filter" assetID="light_filter_asset"/>
+		</MultiplyFilter>
+	</Filters>
+	
 	<Sounds target="{Room.player}" id="sounds">
 		<Sound id="background_music" assetID="background_music_asset" play="false" looping="true"/>
 	</Sounds>
 	
 	<Trackers>
-		<Tracker id="pet_follower" target="{Room.npc_elf_test}" source="{Room.player}" maxDistance="100" minDistance="40" trackingEnabled="true"/>
+		<Tracker id="pet_follower" target="{Room.helper}" source="{Room.player}" maxDistance="100" minDistance="40" trackingEnabled="true"/>
 	</Trackers>
 	
 	<Scene id="scene" target="{Room.player}" viewportWidth="850" viewportHeight="445" width="1400" height="546">
@@ -57,7 +65,7 @@
 		<DisplayObject2D name="A device of some sort" id="Cogs" assetID="cogs_asset" x="448" y="303" originX="49" originY="23" verbEnabled="true" clickThrough="true" mouseEnabled="true" alpha="0"/> <!-- Cogs Hit -->
 		
 		<!-- path finding room debug object -->
-		<DisplayObject2d name="Go to pathfinding" id="path_test" assetURL="[base.url]images/backpack/cog_three_backpack.swf" x="400" y="300" visible="true" mouseEnabled="true" useHandCursor="true" clickThrough="true"/>
+		<!--DisplayObject2d name="Go to pathfinding" id="path_test" assetURL="[base.url]images/backpack/cog_three_backpack.swf" x="400" y="300" visible="true" mouseEnabled="true" useHandCursor="true" clickThrough="true"/-->
 		
 		
 		<ZSortingDisplayObject id="furniture">
@@ -90,15 +98,17 @@
 			<DisplayObject2D name="A pendulum" id="wallPendulum3" assetID="Wallpendulum3_asset" x="730" y="305" originX="13" originY="42" visible="false"/> <!-- The pendulum after you have put them in the clock -->
 			<DisplayObject2D id="gramexp" culling="false" assetID="gramexp_asset" x="0" y="432" originX="0" originY="432"/> <!-- Animation for the gramophone -->
 			<DisplayObject2D id="blackout" culling="false" assetID="blackout_asset" x="0" y="546" originX="0" originY="546"/> <!-- Animation for the gramophone -->			
-		</ZSortingDisplayObject>
+			
+			<DisplayObject2D id="helper" displayObjectClass="uk.co.dubit.graphics.render2D.ActionPlayer" x="500" y="500" originX="0" originY="25" defaultSpeed="3">
+				<Attribute key="filters" value="{Room.helperFilters}" />
+				<Actions defaultAction="helper_stand">
+					<Stand id="helper_stand" path="[base.url]images/lab/doggie.swf"/>
+					<Walk id="helper_walk" path="[base.url]images/lab/doggie.swf"/>
+					<Action id="helper_dig" path="[base.url]images/helper/dig.swf"/>
+				</Actions>
+			</DisplayObject2D>			
 		
-		<DisplayObject2D id="npc_elf_test" displayObjectClass="uk.co.dubit.graphics.render2D.ActionPlayer" x="500" y="500" originX="0" originY="25" defaultSpeed="3">
-			<Attribute key="filters" value="{Room.helperFilters}" />
-			<Actions defaultAction="stand_test">
-				<Stand id="stand_test" path="[base.url]images/lab/npc_elf_stand.swf"/>
-				<Walk id="walk_test" path="[base.url]images/lab/npc_elf_walk.swf"/>
-			</Actions>
-		</DisplayObject2D>	
+		</ZSortingDisplayObject>
 
 		<ZSortingDisplayObject id="playerMessages"/>
 	</Scene>
@@ -544,6 +554,17 @@
 			</Complete>	
 		</MoveTo>
 	</Trigger>
+	
+	<Trigger event="OnDig" gameObject="{Room.Fireplace}">
+		<ShowBubble gameObject="{Room.helper}" message="Woof" yOffset="-20"/>
+		<DisableTracker tracker="pet_follower" />
+		<SetValues target="{Room.helper}" defaultSpeed="10" />
+		<MoveTo gameObject="{Room.helper}" targetX="{Room.Fireplace.x}" targetY="{Room.Fireplace.y}">
+			<Complete>
+				<OpenActivityBar activityBar="digging" targettedObject="{Room.helper}"/>
+			</Complete>
+		</MoveTo>
+	</Trigger>
 
 	<Trigger event="OnDragDrop" gameObject="{Room.cogs}">
 		<Switch value="{Event.dragInitiator.id}">
@@ -679,28 +700,71 @@
 	</Trigger>
 	
 	<Trigger event="OnRead" gameObject="{Room.bookshelf_two}">
-		<OpenActivityBar activityBar="reading" targettedObject="{Event.handler}"/>
-		<Call behaviourID="mouseOff" scope="{Rooms.currentRoom}"/>
+		<MoveTo gameObject="{Room.player}" x="{Room.player.x}" y="{Room.player.y}" targetX="619" targetY="400">
+			<Complete>
+				<Call behaviourID="readAction" />
+			</Complete>
+		</MoveTo>
 	</Trigger>
 
 	<Trigger event="OnLookAt" gameObject="{Room.bookshelf_three}">
 		<ShowBubble gameObject="{Room.player}" message="It appears to be an extensive library of books relating to physics, engineering and philosophy"/>
 	</Trigger>
 	
+	<Trigger event="OnRead" gameObject="{Room.bookshelf_three}">
+		<MoveTo gameObject="{Room.player}" x="{Room.player.x}" y="{Room.player.y}" targetX="682" targetY="400">
+			<Complete>
+				<Call behaviourID="readAction" />
+			</Complete>
+		</MoveTo>
+	</Trigger>
+	
 	<Trigger event="OnLookAt" gameObject="{Room.bookshelf_four}">
 		<ShowBubble gameObject="{Room.player}" message="It appears to be an extensive library of books relating to physics, engineering and philosophy"/>
+	</Trigger>
+	
+	<Trigger event="OnRead" gameObject="{Room.bookshelf_four}">
+		<MoveTo gameObject="{Room.player}" x="{Room.player.x}" y="{Room.player.y}" targetX="797" targetY="405">
+			<Complete>
+				<Call behaviourID="readAction" />
+			</Complete>
+		</MoveTo>
 	</Trigger>
 		
 	<Trigger event="OnLookAt" gameObject="{Room.bookshelf_five}">
 		<ShowBubble gameObject="{Room.player}" message="It appears to be an extensive library of books relating to physics, engineering and philosophy"/>
 	</Trigger>
+	
+	<Trigger event="OnRead" gameObject="{Room.bookshelf_five}">
+		<MoveTo gameObject="{Room.player}" x="{Room.player.x}" y="{Room.player.y}" targetX="846" targetY="403">
+			<Complete>
+				<Call behaviourID="readAction" />
+			</Complete>
+		</MoveTo>
+	</Trigger>
 
 	<Trigger event="OnLookAt" gameObject="{Room.bookshelf_six}">
 		<ShowBubble gameObject="{Room.player}" message="It appears to be an extensive library of books relating to physics, engineering and philosophy"/>
 	</Trigger>
+	
+	<Trigger event="OnRead" gameObject="{Room.bookshelf_six}">
+		<MoveTo gameObject="{Room.player}" x="{Room.player.x}" y="{Room.player.y}" targetX="1166" targetY="419">
+			<Complete>
+				<Call behaviourID="readAction" />
+			</Complete>
+		</MoveTo>
+	</Trigger>
 		
 	<Trigger event="OnLookAt" gameObject="{Room.bookshelf_seven}">
 		<ShowBubble gameObject="{Room.player}" message="It appears to be an extensive library of books relating to physics, engineering and philosophy"/>
+	</Trigger>
+	
+	<Trigger event="OnRead" gameObject="{Room.bookshelf_seven}">
+		<MoveTo gameObject="{Room.player}" x="{Room.player.x}" y="{Room.player.y}" targetX="1240" targetY="423">
+			<Complete>
+				<Call behaviourID="readAction" />
+			</Complete>
+		</MoveTo>
 	</Trigger>
 
 	<Trigger event="OnLookAt" gameObject="{Room.doc}">

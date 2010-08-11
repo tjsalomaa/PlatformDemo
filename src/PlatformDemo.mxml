@@ -203,9 +203,10 @@
 		
 		<mx:ControlBar id="bar" width="850" horizontalCenter="0" y="60" height="30" paddingLeft="5" resizeEffect="resizeEffect">
 			<mx:LinkButton label="Quests ({QuestModel.getInstance().activeQuestCount})" click="openControlPanel('quests');"/>
-			<mx:LinkButton label="Inventory ({Backpack.getInstance().count})" click="openControlPanel('inventory');"/>
+			<mx:LinkButton label="Inventory ({Backpack.getInstance().count})" click="openControlPanel('inventory');"/>			
+			<skills:SkillsSkinContainer width="110" height="30"/>
 			<mx:Spacer width="100%"/>
-			<mx:Label text="{Experience.getInstance().currentLevel.name}({Experience.getInstance().points}/{Experience.getInstance().nextLevel.points})"/>	
+			<mx:Label text="{Experience.getInstance().currentLevel.name} ({Experience.getInstance().points}/{Experience.getInstance().nextLevel.points}XP)"/>
 			<mx:Text id="energyDisplay"/>			
 		</mx:ControlBar>
 		
