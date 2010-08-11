@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Include>
 	<BehaviourDefinition id="ShowPlayerBubble">
-		<ShowBubble gameObject="{Room.player}" message="{Event.message}"/>
+		<ShowBubble gameObject="{Room.player}" message="{Event.message}" />
 	</BehaviourDefinition>
 	
 	<!-- Handles behaviours / data sent from the Nexus Game Server to the room -->

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <app:NexusBase 
-	width="100%" height="100%" layout="absolute" horizontalCenter="0" backgroundColor="black" horizontalScrollPolicy="off" verticalScrollPolicy="off" 
+	width="100%" height="100%" layout="absolute" horizontalCenter="0" backgroundColor="black" 
 	creationComplete="onCreationComplete();"
 	implements="uk.co.dubit.properties.IPropertiesListener, uk.co.dubit.platform.scriptEngine.gameObject.IGameObjectListener"
 	xmlns:mx="http://www.adobe.com/2006/mxml" 
@@ -18,19 +18,12 @@
 	
 	<mx:Script>
 		<![CDATA[
-			import uk.co.dubit.platform.components.session.SessionModel;
-			import uk.co.dubit.platform.components.experience.Experience;
-			import com.dubitplatform.views.game.CartoonChatBubble;
-			import uk.co.dubit.graphics.render2D.types.ChatBubble2D;
-			import uk.co.dubit.platform.components.backpack.Backpack;
-			import uk.co.dubit.platform.components.quest.QuestModel;
-			import com.dubitplatform.views.MapTitleWindow;
-			import uk.co.dubit.utils.StringUtils;
 			import com.adobe.utils.StringUtil;
 			import com.dubitplatform.views.AchievementsView;
 			import com.dubitplatform.views.ActivityBarView;
 			import com.dubitplatform.views.BackpackView;
 			import com.dubitplatform.views.BranchingConversationView;
+			import com.dubitplatform.views.CameraView;
 			import com.dubitplatform.views.ChatRoomPreloaderView;
 			import com.dubitplatform.views.ChatRoomView;
 			import com.dubitplatform.views.ChatView;
@@ -45,6 +38,7 @@
 			import com.dubitplatform.views.MinigameTitleWindow;
 			import com.dubitplatform.views.ProfileSkinTitleWindow;
 			import com.dubitplatform.views.QuestsView;
+			import com.dubitplatform.views.QuickChatView;
 			import com.dubitplatform.views.RoomListView;
 			import com.dubitplatform.views.ShopTitleWindow;
 			import com.dubitplatform.views.SkillsView;
@@ -58,15 +52,18 @@
 			import uk.co.dubit.logging.LoggingPopUp;
 			import uk.co.dubit.platform.components.backpack.Backpack;
 			import uk.co.dubit.platform.components.catalogue.Shops;
+			import uk.co.dubit.platform.components.experience.Experience;
 			import uk.co.dubit.platform.components.meters.IMeter;
 			import uk.co.dubit.platform.components.meters.Meter;
 			import uk.co.dubit.platform.components.meters.Meters;
 			import uk.co.dubit.platform.components.minigame.Minigame;
 			import uk.co.dubit.platform.components.quest.QuestModel;
+			import uk.co.dubit.platform.components.session.SessionModel;
 			import uk.co.dubit.platform.scriptEngine.gameObject.IGameObject;
 			import uk.co.dubit.properties.Properties;
 			import uk.co.dubit.sound.SoundManager;
 			import uk.co.dubit.utils.StringUtils;
+
 			
 			private var skillsView : SkillsView;
 			private var questsView : QuestsView;
@@ -77,6 +74,9 @@
 			private var loggingPanel : LoggingPanel;
 			private var map : MapTitleWindow;
 			private var energyMeter:IMeter;
+			
+			private var cameraView:CameraView
+			private var quickChatView:QuickChatView
 			
 			private var placeholders : Placeholders;
 					
@@ -187,10 +187,11 @@
 
 	<mx:Canvas width="100%" height="100%" verticalScrollPolicy="off">
 		<mx:Box id="roomBackground"  width="850" height="445" horizontalCenter="0" y="100" backgroundColor="black"/>
-		<ui:ChatRoomSkinContainer id="chatRoomSkinContainer" width="850" height="445" y="100" horizontalScrollPolicy="off" verticalScrollPolicy="off" horizontalCenter="0" resizeEffect="resizeEffect"/>
+		<ui:ChatRoomSkinContainer id="chatRoomSkinContainer" width="850" height="445" y="100" x="416" horizontalScrollPolicy="off" verticalScrollPolicy="off" horizontalCenter="0" resizeEffect="resizeEffect"/>
 		
 		<chat:ChatSkinContainer id="chatSkinContainer" width="850" height="30" y="515" horizontalCenter="0" resizeEffect="resizeEffect"/>			
 		<verb:VerbSkinContainer id="verbSkinContainer" width="850" height="30" y="470" horizontalCenter="0" resizeEffect="resizeEffect"/>	
+		<skin:BasicSkinContainer id="quickChatSkinContainer" containerID="quickChatContainer" width="850" height="400" y="100" horizontalCenter="0" resizeEffect="resizeEffect"/>	
 		
 		<video:VideosSkinContainer id="videoContainer" outEffect="{fadeOutEffect}" width="850" height="445" horizontalCenter="0" y="100"/>
 		
@@ -198,7 +199,7 @@
 		
 		<minigame:MinigameSkinContainer width="850" height="445" y="100" mouseEnabled="false" horizontalCenter="0" resizeEffect="resizeEffect"/>
 		
-		<growl:GrowlSkinContainer width="850" height="445" y="100" mouseEnabled="false" horizontalCenter="0" resizeEffect="resizeEffect"/>
+		<growl:GrowlSkinContainer width="100%" height="100%" y="100" mouseEnabled="false" horizontalCenter="0" resizeEffect="resizeEffect"/>
 		
 		<mx:ControlBar id="bar" width="850" horizontalCenter="0" y="60" height="30" paddingLeft="5" resizeEffect="resizeEffect">
 			<mx:LinkButton label="Quests ({QuestModel.getInstance().activeQuestCount})" click="openControlPanel('quests');"/>

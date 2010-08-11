@@ -40,6 +40,10 @@
 		<onChangeRoom>
 			<Call behaviourID="EnterRoom" roomName="{Event.roomName}"/>
 		</onChangeRoom>
+		<openQuickChatMenu>
+			<OpenQuickChat quickChat="global" />
+		</openQuickChatMenu>
+		
 	</Behaviour>	
 	
 	<BehaviourDefinition id="EnterRoom">
@@ -119,7 +123,8 @@
 		<Possession id="cog2" name="Medium Cog" description="A medium sized cog from some machinery" previewURL="images/backpack/cog_two_backpack.swf" quantity="1"/>
 		<Possession id="cog3" name="Small Cog" description="A small sized cog from some machinery" previewURL="images/backpack/cog_three_backpack.swf" quantity="1"/>
 		
-		<!-- The tool kit, spring, 3 lenses and shard of glass used for the telescope -->
+		<!-- The tool kit, spring, 3 lenses and shard of glass used for the telescope
+-->
 		<Possession id="toolsbp" name="Glass Crafting Tools" description="A glass crafting tool kit" previewURL="images/backpack/tools_backpack.swf" quantity="1"/>
 		<Possession id="glassbp" name="A shard of glass" description="A shard if glass from the broken window" previewURL="images/backpack/glass_backpack.swf" quantity="1"/>
 		<Possession id="lens_one_backpack" name="Telescopic lens" description="A telescopic lens" previewURL="images/backpack/lens_one_backpack.swf" quantity="1"/>
@@ -168,7 +173,8 @@
 	<Quest id="timeMachineQuest" name="Inspector" active="true" complete="false" description="The professor has gone missing! We think he's built a time machine but has got stuck in the past! Fix the time machine and search for the professor."> <!-- Quest to discover the time machine -->
 		<Objective name="1) Fix the fire place" id="fireplace" complete="false" active="false"/> <!-- This is complete when you add the 3 cogs to the fireplace -->
 		<Objective name="2) Find the thre lenses for the telescope" id="telescope" complete="false" active="false"/> <!-- This is complete when you add the 3 lenses to the telescope -->
-		<Objective name="3) Repair the grandfather clock with three missing pendulums" id="timemachine" complete="false" active="false"/> <!-- This is complete when you add the 3 pendulums to the grandfather clock -->
+		<Objective name="3) Repair the grandfather clock with three missing pendulums" id="timemachine" complete="false" active="false"/> <!-- This is complete when you add the 3 pendulums to the grandfather clock
+-->
 		<Triggers>
 			<OnBeginQuest>
 				<Trace message="Quest Begun"/>
@@ -352,5 +358,50 @@
 			</Triggers>
 		</ActivityBar>
 	</ActivityBars>
+	
+	<Cameras>
+		<Camera id="defaultCamera" cameraSkin="com.dubitplatform.views.CameraView" >
+			<Triggers>
+				<OnCameraOpened><Alert message="OnCameraOpened" /></OnCameraOpened>
+				<OnPhotoTaken><Alert message="OnPhotoTaken" /></OnPhotoTaken>
+				<OnCameraClosed><Alert message="OnCameraClosed" /></OnCameraClosed>
+			</Triggers>
+		</Camera>
+	</Cameras>
+
+	<QuickChats>
+	
+		<QuickChat id="global" skin="com.dubitplatform.views.QuickChatView" targetContainer="quickChatContainer">
+			
+			<!-- #### HI #### -->		
+			<Word text="Greetings" includeInPhrase="false"> 
+				<Word text="Good morning"/>
+				<Word text="Good afternoon"/>
+				<Word text="Good evening" />
+				<Word text="Welcome" />
+				<Word text="Nice to meet you" />
+			</Word>
+	
+			<!-- #### BYE #### -->
+			<Word text="Farewells" includeInPhrase="false">
+				<Word text="Be right back" />
+				<Word text="Be back soon" />
+				<Word text="I have to go">
+					<Word text="now" />
+					<Word text="soon" />
+					<Word text="later" />
+					<Word text="for dinner" />
+					<Word text="after this game" />
+					<Word text="after this quest" />
+				</Word>
+			</Word>
+			<Triggers>
+				<OnQuickChatWordSelected>
+ 					<ShowBubble gameObject="{Rooms.currentRoom.player}" message="{Event.message}" />
+					<CloseQuickChat quickChat="{Event.quickChat}" />
+				</OnQuickChatWordSelected>
+			</Triggers>
+		</QuickChat> 
+	</QuickChats> 
 	
 </SessionRoom>
