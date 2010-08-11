@@ -8,6 +8,7 @@
 					<Call behaviourID="mouseOn" scope="{Rooms.currentRoom}"/>
 					<CloseActivityBar activityBar="reading" />
 					<AwardExperiencePoints points="10" />
+					<UpdateAchievementScore score="({Achievements.booksRead.score} + {1})" achievement="{Achievements.booksRead}"/>
 				</OnActivityComplete>
 			</Triggers>
 		</ActivityBar>

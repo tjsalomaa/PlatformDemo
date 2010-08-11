@@ -78,7 +78,7 @@
 	</Map>
 		
 	<Experience points="0">
-		<Level points="0" name="Getting Started" message=""/>
+		<Level points="0" name="Newbie" message=""/>
 		<Level points="20" name="New Arrival" message="Congratulations!  You are now a new arrival, and we've awarded you a basic ball!"/>
 		<Level points="50" name="Learner" message="Blah blah"/>
 		<Level points="100" name="Playful" message="Blah blah"/>
@@ -174,24 +174,21 @@
 	</Quest>			
 	
 	<Achievements>
-		<Achievement id="visitsToFriends" name="Visits To Friends" score="0" suffix="Visits" description="How many times you have visited your friends">
-			<Trophy name="Pet About Towm" score="25" imageURL="images/trophies/visitsToFriends_1.png"/>
-			<Trophy name="Vizier of Visits" score="100" imageURL="images/trophies/visitsToFriends_2.png"/>
-			<Trophy name="Social Whirlwind" score="300" imageURL="images/trophies/visitsToFriends_3.png"/>
+		<Achievement id="friendsAdded" name="Friends Added" score="0" suffix="Friends Added" description="How many times you have added a friend">
+			<Trophy name="Not Alone" score="1" imageURL="images/trophies/friendsAdded_1.png" xp="5"/>
+			<Trophy name="Mr. Popular" score="5" imageURL="images/trophies/friendsAdded_2.png" xp="25"/>
+			<Trophy name="Famous" score="10" imageURL="images/trophies/friendsAdded_3.png" xp="50"/>
 		</Achievement>	
-		<Achievement id="playingCatch" name="Longest Sequence Of Ball Passes" score="15" suffix="Passes" description="How many times have you managed to catch the ball in a row">
-			<Trophy name="Playing Softball" score="15" imageURL="images/trophies/ballPasses_1.png"/>
-			<Trophy name="Playing Hardball" score="30" imageURL="images/trophies/ballPasses_2.png"/>
-			<Trophy name="Pro Baller" score="50" imageURL="images/trophies/ballPasses_3.png"/>
-		</Achievement>
-		<Achievement id="coinsSpent" name="Coins Spent" score="0" suffix="Spent Coins" description="The number of coins you've spent in the world">
-			<Trophy name="Window Shopper" score="500" imageURL="images/trophies/coinsSpent_1.png"/>
-			<Trophy name="Mall Rat" score="3000" imageURL="images/trophies/coinsSpent_2.png"/>
-			<Trophy name="Big Spender" score="10000" imageURL="images/trophies/coinsSpent_3.png"/>
-		</Achievement>		
+		<Achievement id="booksRead" name="Books Read" score="0" suffix="Books Read" description="How many times you have read a book">
+			<Trophy name="Book Reader" score="5" imageURL="images/trophies/booksRead_1.png" xp="5"/>
+			<Trophy name="Bookworm" score="25" imageURL="images/trophies/booksRead_2.png" xp="25"/>
+			<Trophy name="Librarian" score="100" imageURL="images/trophies/booksRead_3.png" xp="50"/>
+		</Achievement>	
 		<Triggers>
 			<OnAwardedTrophy>
-				<Trace message="Awarded trophy {Event.trophy.name} : {Event.achievement.name}"/>
+				<!--Trace message="Awarded trophy {Event.trophy.name} : {Event.achievement.name}"/-->
+				<CreateNotification title="Trophy earned!" body="You have earned the {Event.trophy.name} trophy. You have been awarded {Event.trophy.xp} experience points." can_remove="true"/>
+				<AwardExperiencePoints points="{Event.trophy.xp}" />
 			</OnAwardedTrophy>	
 		</Triggers>				
 	</Achievements>	

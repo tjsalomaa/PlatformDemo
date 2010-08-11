@@ -205,7 +205,7 @@
 			<mx:LinkButton label="Inventory ({Backpack.getInstance().count})" click="openControlPanel('inventory');"/>			
 			<skills:SkillsSkinContainer width="110" height="30"/>
 			<mx:Spacer width="100%"/>
-			<mx:Label text="{Experience.getInstance().currentLevel.name}({Experience.getInstance().points}/{Experience.getInstance().nextLevel.points})"/>
+			<mx:Label text="{Experience.getInstance().currentLevel.name} ({Experience.getInstance().points}/{Experience.getInstance().nextLevel.points}XP)"/>
 			<mx:Text id="energyDisplay"/>			
 		</mx:ControlBar>
 		
