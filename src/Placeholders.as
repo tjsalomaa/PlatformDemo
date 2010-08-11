@@ -3,6 +3,7 @@ package
 	import com.dubitplatform.views.AchievementsView;
 	import com.dubitplatform.views.ActivityBarView;
 	import com.dubitplatform.views.BranchingConversationView;
+	import com.dubitplatform.views.ChatPanelView;
 	import com.dubitplatform.views.ChatRoomPreloaderView;
 	import com.dubitplatform.views.ChatRoomView;
 	import com.dubitplatform.views.ChatView;
@@ -33,5 +34,6 @@ package
 		private var profileSkinTitleWindow:ProfileSkinTitleWindow;
 		private var chatBubble:CartoonChatBubble;
 		private var activityBarView:ActivityBarView;
+		private var chatPanelView:ChatPanelView;
 	}
 }

@@ -3,19 +3,6 @@
 
 	<Include href="config/rooms/includes/room_config.xml"/>
 
-	<MouseMovementController yVelocityScale="0.5" directions="12" id="movement" />
-	<CollisionController target="{Room.player}" id="collision"/>
-	<Chat id="chatBox"/>
-	
-	<VerbController>
-		<Verb id="OnLookAt" name="Look at"/>
-		<Verb id="OnPickUp" name="Pick up"/>
-		<Verb id="OnTalkTo" name="Talk to"/>
-		<Verb id="OnUse" name="Use the"/>
-		<Verb id="OnRead" name="Read something from"/>
-		<Verb id="OnDig" name="Dig up"/>
-	</VerbController>
-
 	<Collision width="1400" height="546" id="walkableArea" solid="true">
 		<Image assetID="hit_asset" id="hitAreaImage"/>
 	</Collision>
@@ -166,6 +153,9 @@
 
 	<Trigger event="OnClick" gameObject="{Room.path_test}">
 		<ChangeRoom roomName="path_test"/>
+	</Trigger>
+	<Trigger event="OnClick" gameObject="{Room.click}">
+		<MoveTo targetX="{Event.x}" targetY="{Event.y}" />
 	</Trigger>
 
 <!--Telescope-->

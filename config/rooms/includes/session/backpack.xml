@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Include xmlns:xi="http://www.w3.org/2001/XInclude">
+	<Backpack>
+		<Possession id="tornado" name="Tornado" description="A tornado" quantity="0" persist="false"
+			previewURL=""/>
+		<Possession id="house" name="House" description="A house" quantity="0" persist="false"
+			previewURL=""/>
+		<Possession id="tornado_house" name="Destroyed House" description="A destroyed house" quantity="0" persist="false"
+			previewURL=""/>
+	
+		<Combinations>
+			<Combination collectable1="{Backpack.tornado}" collectable2="{Backpack.house}" success="The tornado has destroyed the house" fail="The tornado has failed to destroy the house"/>
+		</Combinations>
+	
+		<Triggers>
+			<OnAdded>
+				<Trace message="OnAddedCollectable {Event.possession.id}"/>
+			</OnAdded>
+			<OnRemoved>
+				<Trace message="OnRemovedCollectable {Event.possession.id}"/>
+			</OnRemoved>
+			<OnSelected>
+				<Trace message="OnSelectedCollectable {Event.possession.id}"/>
+			</OnSelected>
+			<OnCombinationSuccess>
+				<Trace message="Successfully combined {Event.possession1.name} with {Event.possession2.name} message={Event.combination.success}"/>
+			</OnCombinationSuccess>
+			<OnCombinationFail>
+				<Trace message="Failed to combine {Event.possession1.name} with {Event.possession2.name} message={Event.combination.fail}"/>
+			</OnCombinationFail>
+			<OnCombinationUnknown>
+				<Trace message="I can't combinate a {Event.possession1.name} with a {Event.possession2.name}!"/>
+			</OnCombinationUnknown>
+		</Triggers>
+	</Backpack>
+</Include>

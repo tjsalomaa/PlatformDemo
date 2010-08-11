@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Include xmlns:xi="http://www.w3.org/2001/XInclude">
+	<Achievements>
+		<Achievement id="tutorial_complete_achievement" name="" category="" score="0" description="" persist="false">
+			<Trophy id="tutorial_complete_trophy" score="1" xp="0" money="0"/>
+		</Achievement>
+
+		<Triggers>
+			<OnAwardedTrophy>
+				<Trace message="Awarded trophy {Event.achievement.name} : {Event.trophy.xp} : {Event.trophy.money}"/>
+				<AwardExperiencePoints points="{Event.trophy.xp}"/>
+				<If expression="({Event.trophy.money} > {0})">
+					<Then>
+						<TransmitRequest method="addPoints" points="{Event.trophy.money}" message="{Event.achievement.name} - Achievements"/>
+					</Then>
+				</If>
+			</OnAwardedTrophy>
+		</Triggers>
+	</Achievements>
+</Include>

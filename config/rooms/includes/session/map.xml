@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Include xmlns:xi="http://www.w3.org/2001/XInclude">
+	<Map>
+		<Location name="Emerald City" roomID="emerald_city" id="emerald_city_location" visible="false" visited="false" persist="false"/>
+		<Location name="Kansas Farm" roomID="kansas_farm" id="kansas_farm_location" visible="false" visited="false" persist="false"/>
+		<Location name="Yellow Brick Road" roomID="yellow_brick_road" id="yellow_brick_road_location" visible="false" visited="false" persist="false"/>
+	
+		<Triggers>
+			<OnLocationVisible>
+				<Trace message="Location visible location={Event.location}"/>
+			</OnLocationVisible>
+			<OnLocationVisited>
+				<Trace message="Location visited location={Event.location}"/>
+				<UpdateLocationVisibility locationID="{Event.location.id}" visible="true"/>
+			</OnLocationVisited>
+		</Triggers>
+	</Map>
+</Include>

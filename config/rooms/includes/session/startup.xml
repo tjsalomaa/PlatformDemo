@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Include xmlns:xi="http://www.w3.org/2001/XInclude">
+	<Channel id="roomChannel" encoding="3" type="mina" endpoint="{Properties.[path.game-server]}">
+		<Triggers>
+			<connectionSuccess>
+				<Trace message="---Connected to the Nexus Game Server---" />
+
+				<EnterSession>
+					<Result>
+						<Trace message="Entered session" />
+						
+						<ChangeRoom roomName="{Properties.[setting.rooms.default-room]}"  />
+					</Result>
+					<Fault><Trace message="Failed to enter session" /></Fault>
+				</EnterSession>
+			</connectionSuccess>
+
+			<connectionFailed>
+				<Alert title="Connection failed" message="Unable to connect to the Nexus Game Server" />
+			</connectionFailed>
+
+			<connectionLost>
+				<Alert title="Connection lost" message="Connection to the Nexus Game Server has been lost" />
+			</connectionLost>
+
+			<connectionError>
+				<Alert title="Connection failed" message="Unable to connect to the Nexus Game Server" />
+			</connectionError>
+		</Triggers>
+	</Channel>
+
+	<NotificationHandler id="sessionHandler" namespace="session" channel="roomChannel">
+		<Triggers>
+			<acceptRequest>
+				<OnRemoteAcceptNotification notification="{Event.request_id}" />
+			</acceptRequest>
+
+			<!-- The following is not very nice at all. Bear with us.-->
+			<launchMinigame>
+				<RequestAddContact avatar_id="{Event.avatar_id}" />
+				<JoinMultiplayerMinigame minigame="{Event.game_type}" gameToken="{Event.game_token}" />
+			</launchMinigame>
+
+			<!-- Minigame instance match ready -->
+			<startInstantMatch>
+				<RequestAddContact avatar_id="{Event.avatar_id}" />
+				<JoinMultiplayerMinigame minigame="{Event.game_type}" gameToken="{Event.game_token}" />
+			</startInstantMatch>
+
+			<acceptRequest>
+				<Switch value="{Event.request_type}">
+					<inviteToRoom>
+					</inviteToRoom>
+				</Switch>
+			</acceptRequest>
+
+			<handlePoints>
+				<SetValues target="{Rooms.currentRoom.player}" points="({Session.user.currentAvatar.points}+{Event.packet.points_delta})" />
+				<SetValues target="{Session.user.currentAvatar}" points="({Session.user.currentAvatar.points}+{Event.packet.points_delta})" />
+
+				<SetValues target="{Rooms.currentRoom.player}" net_points="{Event.packet.points_balance}" />
+				<SetValues target="{Session.user.currentAvatar}" net_points="{Event.packet.points_balance}" />
+			</handlePoints>
+
+		</Triggers>
+	</NotificationHandler>
+</Include>

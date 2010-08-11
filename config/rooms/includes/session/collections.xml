@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Include xmlns:xi="http://www.w3.org/2001/XInclude">
+	<Collections>
+		<Collection id="yellow_brick_collection" name="Yellow Brick Collection" description="How many yellow bricks you have collected">
+			<Collectable id="yellow_brick_collectable_01" name="Yellow Brick 01" description="Yellow bricks" quantity="0" totalQuantity="1" persist="false"/>
+			<Collectable id="yellow_brick_collectable_02" name="Yellow Brick 02" description="Yellow bricks" quantity="0" totalQuantity="1" persist="false"/>
+			<Collectable id="yellow_brick_collectable_03" name="Yellow Brick 03" description="Yellow bricks" quantity="0" totalQuantity="1" persist="false"/>
+			<Collectable id="yellow_brick_collectable_04" name="Yellow Brick 04" description="Yellow bricks" quantity="0" totalQuantity="1" persist="false"/>
+		</Collection>
+
+		<Triggers>
+			<OnFoundCollectable>
+				<Trace message="Found collectable {Event.collection.name} : {Event.collectable.name}"/>
+			</OnFoundCollectable>
+			<OnCompleteCollection>
+				<Trace message="Completed collection {Event.collection.name} : {Event.collectable.name}"/>
+			</OnCompleteCollection>
+		</Triggers>
+	</Collections>
+</Include>
