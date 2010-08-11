@@ -140,6 +140,8 @@
 		<If expression="({Meters.energy.amount} >= {15})">
 			<Then>
 				<SetValues target="{Meters.energy}" amount="({Meters.energy.amount} - {15})" />
+				<SetValues target="{Event}" reduction="({Skills.bookreading.points}*{200})" />
+				<SetValues target="{ActivityBars.reading}" duration="({5000}-{Event.reduction})" />
 				<OpenActivityBar activityBar="reading" targettedObject="{Event.handler}"/>
 				<Call behaviourID="mouseOff" scope="{Rooms.currentRoom}"/>
 			</Then>

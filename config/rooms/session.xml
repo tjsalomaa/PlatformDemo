@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <SessionRoom id="session" xmlns:xi="http://www.w3.org/2001/XInclude">
 	<xi:include href="includes/session/activity_bars.xml"/>
-	
+	<xi:include href="includes/session/skills.xml"/>
 	
 	<Include xmlns:xi="http://www.w3.org/2001/XInclude" xml:base="../server/startup.xml">
 	<Channel id="roomChannel" encoding="3" type="mina" endpoint="{Properties.[path.game-server]}">
@@ -96,19 +96,6 @@
 			</OnAwardedExperience>
 		</Triggers>
 	</Experience>
-	
-	<Skills points="0">
-		<Skill id="exploring" name="Explorer" points="1" maximum="20" description="Increasing your exploring skill improves your chances of finding useful items."/>
-		<Skill id="inventing" name="Inventor" points="1" maximum="20" description="Increasing your invetor skill allows you to create and build more things."/>
-		<Triggers>
-			<OnAwardedSkillPoints>
-				<Trace message="OnSkillPointAwarded points={Skills.points}"/>
-			</OnAwardedSkillPoints>
-			<OnUsedSkillPoints>
-				<Trace message="OnUsedSkillPoints skill={Event.skill}"/>
-			</OnUsedSkillPoints>
-		</Triggers>
-	</Skills>	
 	
 	<GameObject id="questPersists"
 		cogsReady="false" cog1Ready="false" cog2Ready="false" cog3Ready="false" gramaphoneReady="false" cog3PickedUp="false" persist="true"

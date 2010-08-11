@@ -700,7 +700,11 @@
 	</Trigger>
 	
 	<Trigger event="OnRead" gameObject="{Room.bookshelf_two}">
-		<Call behaviourID="readAction" />
+		<MoveTo gameObject="{Room.player}" x="{Room.player.x}" y="{Room.player.y}" targetX="619" targetY="400">
+			<Complete>
+				<Call behaviourID="readAction" />
+			</Complete>
+		</MoveTo>
 	</Trigger>
 
 	<Trigger event="OnLookAt" gameObject="{Room.bookshelf_three}">
@@ -708,7 +712,11 @@
 	</Trigger>
 	
 	<Trigger event="OnRead" gameObject="{Room.bookshelf_three}">
-		<Call behaviourID="readAction" />
+		<MoveTo gameObject="{Room.player}" x="{Room.player.x}" y="{Room.player.y}" targetX="682" targetY="400">
+			<Complete>
+				<Call behaviourID="readAction" />
+			</Complete>
+		</MoveTo>
 	</Trigger>
 	
 	<Trigger event="OnLookAt" gameObject="{Room.bookshelf_four}">
@@ -716,7 +724,11 @@
 	</Trigger>
 	
 	<Trigger event="OnRead" gameObject="{Room.bookshelf_four}">
-		<Call behaviourID="readAction" />
+		<MoveTo gameObject="{Room.player}" x="{Room.player.x}" y="{Room.player.y}" targetX="797" targetY="405">
+			<Complete>
+				<Call behaviourID="readAction" />
+			</Complete>
+		</MoveTo>
 	</Trigger>
 		
 	<Trigger event="OnLookAt" gameObject="{Room.bookshelf_five}">
@@ -724,7 +736,11 @@
 	</Trigger>
 	
 	<Trigger event="OnRead" gameObject="{Room.bookshelf_five}">
-		<Call behaviourID="readAction" />
+		<MoveTo gameObject="{Room.player}" x="{Room.player.x}" y="{Room.player.y}" targetX="846" targetY="403">
+			<Complete>
+				<Call behaviourID="readAction" />
+			</Complete>
+		</MoveTo>
 	</Trigger>
 
 	<Trigger event="OnLookAt" gameObject="{Room.bookshelf_six}">
@@ -732,7 +748,11 @@
 	</Trigger>
 	
 	<Trigger event="OnRead" gameObject="{Room.bookshelf_six}">
-		<Call behaviourID="readAction" />
+		<MoveTo gameObject="{Room.player}" x="{Room.player.x}" y="{Room.player.y}" targetX="1166" targetY="419">
+			<Complete>
+				<Call behaviourID="readAction" />
+			</Complete>
+		</MoveTo>
 	</Trigger>
 		
 	<Trigger event="OnLookAt" gameObject="{Room.bookshelf_seven}">
@@ -740,7 +760,11 @@
 	</Trigger>
 	
 	<Trigger event="OnRead" gameObject="{Room.bookshelf_seven}">
-		<Call behaviourID="readAction" />
+		<MoveTo gameObject="{Room.player}" x="{Room.player.x}" y="{Room.player.y}" targetX="1240" targetY="423">
+			<Complete>
+				<Call behaviourID="readAction" />
+			</Complete>
+		</MoveTo>
 	</Trigger>
 
 	<Trigger event="OnLookAt" gameObject="{Room.doc}">

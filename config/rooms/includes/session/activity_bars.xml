@@ -7,6 +7,7 @@
 				<OnActivityComplete>
 					<Call behaviourID="mouseOn" scope="{Rooms.currentRoom}"/>
 					<CloseActivityBar activityBar="reading" />
+					<AwardExperiencePoints points="10" />
 				</OnActivityComplete>
 			</Triggers>
 		</ActivityBar>

@@ -14,7 +14,7 @@
 		]]>
 	</mx:Script>
 	
-	<mx:Label id="activityText" width="100%" textAlign="center" fontSize="16" color="#FFFFFF" text="Digging..." />
+	<mx:Label id="activityText" width="100%" textAlign="center" fontSize="16" color="#FFFFFF" />
 
 	
 </ActivityBarSkinViewBase>
