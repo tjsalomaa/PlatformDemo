@@ -5,7 +5,7 @@
 
 	<CollisionController target="{Room.player}" />
 	<MouseMovementController yVelocityScale="0.5" directions="12" id="movement" />
-
+	
 	<Trigger event="onClick" gameObject="{Room.click}">
 		<MoveTo targetX="{Event.x}" targetY="{Event.y}" />
 	</Trigger>
@@ -58,7 +58,7 @@
 	</BehaviourDefinition>
 	
 	<!-- Branching conversation dialogue -->
-	<Dialogue id="dialogue" skin="com.dubitplatform.views.BranchingConversationView" targetContainer="dialogueSkinContainer">
+	<Dialogue id="dialogue" skin="com.dubitplatform.views.BranchingConversationView" targetContainer="dialogue">
 		<Triggers>
 			<OnMessage></OnMessage>
 			<OnBeginDialogue>

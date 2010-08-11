@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <SessionRoom xmlns:xi="http://www.w3.org/2001/XInclude">
-
 	<xi:include href="includes/session/startup.xml"/>
 	
 	<xi:include href="includes/session/actions.xml"/>
@@ -26,10 +25,4 @@
 		<onFixup>
 		</onFixup>
 	</Triggers>
-		
-	<!-- This game object stores any random variables which shouldn't be persisted between sessions -->
-	<GameObject id="sessionVars" randomQuestReceived="false" />
-	
-	<!-- This game object stores persistent profile data -->
-	<GameObject id="profileData" persist="false" />
 </SessionRoom>

@@ -15,6 +15,7 @@ package
 	import com.dubitplatform.views.MinigameTitleWindow;
 	import com.dubitplatform.views.ProfileSkinTitleWindow;
 	import com.dubitplatform.views.QuestsView;
+	import com.dubitplatform.views.QuickChatView;
 	import com.dubitplatform.views.RoomListView;
 	import com.dubitplatform.views.ShopTitleWindow;
 	import com.dubitplatform.views.SkillsView;
@@ -43,5 +44,6 @@ package
 		private var questsView:QuestsView;
 		private var backpackView:BackpackView;
 		private var roomListView:RoomListView;
+		private var quickChatView:QuickChatView;
 	}
 }

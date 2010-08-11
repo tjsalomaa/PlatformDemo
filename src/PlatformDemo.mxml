@@ -24,6 +24,7 @@
 			import com.dubitplatform.views.CollectionsPanel;
 			import com.dubitplatform.views.ControlPanel;
 			import com.dubitplatform.views.MapTitleWindow;
+			import com.dubitplatform.views.QuickChatView;
 			
 			import mx.managers.PopUpManager;
 			
@@ -34,9 +35,11 @@
 			import uk.co.dubit.platform.components.meters.IMeter;
 			import uk.co.dubit.platform.components.meters.Meters;
 			import uk.co.dubit.platform.components.quest.QuestModel;
+			import uk.co.dubit.platform.components.session.SessionModel;
 			import uk.co.dubit.platform.scriptEngine.gameObject.IGameObject;
 			import uk.co.dubit.properties.Properties;
 			import uk.co.dubit.utils.StringUtils;
+
 			
 			private var map:MapTitleWindow;
 			private var controlPanel:ControlPanel;
@@ -146,10 +149,12 @@
 	<mx:Fade duration="1000" id="fadeOutEffect" alphaFrom="1" alphaTo="0" startDelay="1000"/>
 
 	<mx:Canvas width="100%" height="100%" verticalScrollPolicy="off">
+
 		<ui:ChatRoomSkinContainer id="chatRoomSkinContainer" width="850" height="445" y="100" backgroundColor="black" horizontalScrollPolicy="off" verticalScrollPolicy="off" horizontalCenter="0"/>
 		
 		<chat:ChatSkinContainer id="chatSkinContainer" width="850" height="30" y="515" horizontalCenter="0" />			
 		<verb:VerbSkinContainer id="verbSkinContainer" width="850" height="30" y="470" horizontalCenter="0" />	
+		<skin:BasicSkinContainer id="quickChatSkinContainer" containerID="quickChatContainer" width="850" height="400" y="100" horizontalCenter="0" resizeEffect="resizeEffect"/>	
 		
 		<video:VideosSkinContainer id="videoContainer" outEffect="{fadeOutEffect}" width="850" height="445" horizontalCenter="0" y="100"/>
 		
@@ -157,7 +162,7 @@
 		
 		<minigame:MinigameSkinContainer width="850" height="445" y="100" mouseEnabled="false" horizontalCenter="0" />
 		
-		<growl:GrowlSkinContainer width="850" height="445" y="100" mouseEnabled="false" horizontalCenter="0"/>
+		<growl:GrowlSkinContainer width="100%" height="100%" y="100" mouseEnabled="false" horizontalCenter="0" resizeEffect="resizeEffect"/>
 		
 		<mx:ControlBar id="bar" width="850" horizontalCenter="0" y="60" height="30" paddingLeft="5">
 			<mx:LinkButton label="Quests ({QuestModel.getInstance().activeQuestCount})" click="openControlPanel('quests');"/>
