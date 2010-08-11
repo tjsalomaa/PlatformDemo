@@ -58,9 +58,7 @@
 	</BehaviourDefinition>
 	
 	<!-- Branching conversation dialogue -->
-	<Dialogue id="npcChat"
-		skin="com.dubitplatform.views.BranchingConversationView"
-		targetContainer="branchingConvoSkin">
+	<Dialogue id="dialogue" skin="com.dubitplatform.views.BranchingConversationView" targetContainer="dialogueSkinContainer">
 		<Triggers>
 			<OnMessage></OnMessage>
 			<OnBeginDialogue>

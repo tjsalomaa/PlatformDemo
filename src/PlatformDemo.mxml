@@ -2,9 +2,7 @@
 <app:NexusBase
 	width="100%" height="100%" 
 	layout="absolute" 
-	horizontalCenter="0" 
 	backgroundColor="black" 
-	horizontalScrollPolicy="off" verticalScrollPolicy="off" 
 	creationComplete="onCreationComplete()"
 	implements="uk.co.dubit.properties.IPropertiesListener, uk.co.dubit.platform.scriptEngine.gameObject.IGameObjectListener"
 	xmlns:mx="http://www.adobe.com/2006/mxml" 
@@ -54,8 +52,6 @@
 				controlPanel.filters = [new DropShadowFilter(0, 0, 0, 0.7, 40, 40, 1, 3)];
 				controlPanel.visible = false;	
 				
-				roomBackground.filters = [new DropShadowFilter(0, 0, 0, 0.7, 40, 40, 1, 3)];
-				
 				loggingPanel = PopUpManager.createPopUp(this, LoggingPanel) as LoggingPanel;
 				loggingPanel.filters = [new DropShadowFilter(0, 0, 0, 0.7, 40, 40, 1, 3)];
 				loggingPanel.visible = false;
@@ -83,7 +79,6 @@
 			{
 				if (StringUtils.equals("scene-viewportHeight", property, true))
 				{
-					roomBackground.height = newValue;
 					chatRoomSkinContainer.height = newValue;
 					videoContainer.height = newValue;
 					chatRoomPreloaderContainer.height = newValue;
@@ -93,7 +88,6 @@
 				}
 				if (StringUtils.equals("scene-viewportWidth", property, true))
 				{
-					roomBackground.width = newValue;
 					chatRoomSkinContainer.width = newValue;
 					videoContainer.width = newValue;
 					chatSkinContainer.width = newValue;
@@ -148,27 +142,24 @@
 		]]>
 	</mx:Script>	
 
-	<mx:Resize duration="500" id="resizeEffect"/>
-
 	<mx:Fade duration="500" id="fadeInEffect" alphaFrom="0" alphaTo="1"/>
 	<mx:Fade duration="1000" id="fadeOutEffect" alphaFrom="1" alphaTo="0" startDelay="1000"/>
 
 	<mx:Canvas width="100%" height="100%" verticalScrollPolicy="off">
-		<mx:Box id="roomBackground"  width="850" height="445" horizontalCenter="0" y="100" backgroundColor="black"/>
-		<ui:ChatRoomSkinContainer id="chatRoomSkinContainer" width="850" height="445" y="100" horizontalScrollPolicy="off" verticalScrollPolicy="off" horizontalCenter="0" resizeEffect="resizeEffect"/>
+		<ui:ChatRoomSkinContainer id="chatRoomSkinContainer" width="850" height="445" y="100" backgroundColor="black" horizontalScrollPolicy="off" verticalScrollPolicy="off" horizontalCenter="0"/>
 		
-		<chat:ChatSkinContainer id="chatSkinContainer" width="850" height="30" y="515" horizontalCenter="0" resizeEffect="resizeEffect"/>			
-		<verb:VerbSkinContainer id="verbSkinContainer" width="850" height="30" y="470" horizontalCenter="0" resizeEffect="resizeEffect"/>	
+		<chat:ChatSkinContainer id="chatSkinContainer" width="850" height="30" y="515" horizontalCenter="0" />			
+		<verb:VerbSkinContainer id="verbSkinContainer" width="850" height="30" y="470" horizontalCenter="0" />	
 		
 		<video:VideosSkinContainer id="videoContainer" outEffect="{fadeOutEffect}" width="850" height="445" horizontalCenter="0" y="100"/>
 		
-		<ui:ChatRoomPreloaderSkinContainer id="chatRoomPreloaderContainer" width="850" height="445" y="100" mouseEnabled="false" horizontalCenter="0" resizeEffect="resizeEffect"/>
+		<ui:ChatRoomPreloaderSkinContainer id="chatRoomPreloaderContainer" width="850" height="445" y="100" mouseEnabled="false" horizontalCenter="0" />
 		
-		<minigame:MinigameSkinContainer width="850" height="445" y="100" mouseEnabled="false" horizontalCenter="0" resizeEffect="resizeEffect"/>
+		<minigame:MinigameSkinContainer width="850" height="445" y="100" mouseEnabled="false" horizontalCenter="0" />
 		
-		<growl:GrowlSkinContainer width="850" height="445" y="100" mouseEnabled="false" horizontalCenter="0" resizeEffect="resizeEffect"/>
+		<growl:GrowlSkinContainer width="850" height="445" y="100" mouseEnabled="false" horizontalCenter="0"/>
 		
-		<mx:ControlBar id="bar" width="850" horizontalCenter="0" y="60" height="30" paddingLeft="5" resizeEffect="resizeEffect">
+		<mx:ControlBar id="bar" width="850" horizontalCenter="0" y="60" height="30" paddingLeft="5">
 			<mx:LinkButton label="Quests ({QuestModel.getInstance().activeQuestCount})" click="openControlPanel('quests');"/>
 			<mx:LinkButton label="Inventory ({Backpack.getInstance().count})" click="openControlPanel('inventory');"/>			
 			<skills:SkillsSkinContainer width="110" height="30"/>
