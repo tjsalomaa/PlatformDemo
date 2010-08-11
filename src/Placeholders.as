@@ -2,6 +2,7 @@ package
 {
 	import com.dubitplatform.views.AchievementsView;
 	import com.dubitplatform.views.ActivityBarView;
+	import com.dubitplatform.views.BackpackView;
 	import com.dubitplatform.views.BranchingConversationView;
 	import com.dubitplatform.views.ChatPanelView;
 	import com.dubitplatform.views.ChatRoomPreloaderView;
@@ -13,7 +14,10 @@ package
 	import com.dubitplatform.views.GrowlView;
 	import com.dubitplatform.views.MinigameTitleWindow;
 	import com.dubitplatform.views.ProfileSkinTitleWindow;
+	import com.dubitplatform.views.QuestsView;
+	import com.dubitplatform.views.RoomListView;
 	import com.dubitplatform.views.ShopTitleWindow;
+	import com.dubitplatform.views.SkillsView;
 	import com.dubitplatform.views.VerbControllerView;
 	import com.dubitplatform.views.game.CartoonChatBubble;
 	
@@ -35,5 +39,9 @@ package
 		private var chatBubble:CartoonChatBubble;
 		private var activityBarView:ActivityBarView;
 		private var chatPanelView:ChatPanelView;
+		private var skillsView:SkillsView;
+		private var questsView:QuestsView;
+		private var backpackView:BackpackView;
+		private var roomListView:RoomListView;
 	}
 }

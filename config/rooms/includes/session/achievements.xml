@@ -1,20 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Include xmlns:xi="http://www.w3.org/2001/XInclude">
-	<Achievements>
-		<Achievement id="tutorial_complete_achievement" name="" category="" score="0" description="" persist="false">
-			<Trophy id="tutorial_complete_trophy" score="1" xp="0" money="0"/>
-		</Achievement>
-
+<Achievements>
+		<Achievement id="friendsAdded" name="Friends Added" score="0" suffix="Friends Added" description="How many times you have added a friend">
+			<Trophy name="Not Alone" score="1" imageURL="images/trophies/friendsAdded_1.png" xp="5"/>
+			<Trophy name="Mr. Popular" score="5" imageURL="images/trophies/friendsAdded_2.png" xp="25"/>
+			<Trophy name="Famous" score="10" imageURL="images/trophies/friendsAdded_3.png" xp="50"/>
+		</Achievement>	
+		<Achievement id="booksRead" name="Books Read" score="0" suffix="Books Read" description="How many times you have read a book">
+			<Trophy name="Book Reader" score="5" imageURL="images/trophies/booksRead_1.png" xp="5"/>
+			<Trophy name="Bookworm" score="25" imageURL="images/trophies/booksRead_2.png" xp="25"/>
+			<Trophy name="Librarian" score="100" imageURL="images/trophies/booksRead_3.png" xp="50"/>
+		</Achievement>	
 		<Triggers>
 			<OnAwardedTrophy>
-				<Trace message="Awarded trophy {Event.achievement.name} : {Event.trophy.xp} : {Event.trophy.money}"/>
-				<AwardExperiencePoints points="{Event.trophy.xp}"/>
-				<If expression="({Event.trophy.money} > {0})">
-					<Then>
-						<TransmitRequest method="addPoints" points="{Event.trophy.money}" message="{Event.achievement.name} - Achievements"/>
-					</Then>
-				</If>
-			</OnAwardedTrophy>
-		</Triggers>
-	</Achievements>
+				<!--Trace message="Awarded trophy {Event.trophy.name} : {Event.achievement.name}"/-->
+				<CreateNotification title="Trophy earned!" body="You have earned the {Event.trophy.name} trophy. You have been awarded {Event.trophy.xp} experience points." can_remove="true"/>
+				<AwardExperiencePoints points="{Event.trophy.xp}" />
+			</OnAwardedTrophy>	
+		</Triggers>				
+	</Achievements>	
 </Include>

@@ -1,20 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Include xmlns:xi="http://www.w3.org/2001/XInclude">
 	<Collections>
-		<Collection id="yellow_brick_collection" name="Yellow Brick Collection" description="How many yellow bricks you have collected">
-			<Collectable id="yellow_brick_collectable_01" name="Yellow Brick 01" description="Yellow bricks" quantity="0" totalQuantity="1" persist="false"/>
-			<Collectable id="yellow_brick_collectable_02" name="Yellow Brick 02" description="Yellow bricks" quantity="0" totalQuantity="1" persist="false"/>
-			<Collectable id="yellow_brick_collectable_03" name="Yellow Brick 03" description="Yellow bricks" quantity="0" totalQuantity="1" persist="false"/>
-			<Collectable id="yellow_brick_collectable_04" name="Yellow Brick 04" description="Yellow bricks" quantity="0" totalQuantity="1" persist="false"/>
+		<Collection id="animalCollection" name="Animal Collection" description="Collect all the animals hidden around the world and get something super awesome when you complete the collection!">
+			<Collectable id="dog" name="Dog" imageURL="images/collections/animals/dog.png" quantity="0"/>
+			<Collectable id="elephant" name="Elephant" imageURL="images/collections/animals/elephant.png" quantity="0"/>
+			<Collectable id="lion" name="Lion" imageURL="images/collections/animals/lion.png" quantity="0"/>
+			<Collectable id="fox" name="Fox" imageURL="images/collections/animals/fox.png" quantity="0"/>
+			<Collectable id="panda" name="Panda" imageURL="images/collections/animals/panda.png" quantity="0"/>
 		</Collection>
-
+		<Collection id="foodCollection" name="Food Collection" description="Collect all the food hidden around the world and get something super coolio when you've collected them all!">
+			<Collectable id="coffee" name="Coffee" imageURL="images/collections/food/coffee.png" quantity="0"/>
+			<Collectable id="muffin" name="Muffin" imageURL="images/collections/food/muffin.png" quantity="0"/>
+			<Collectable id="sugar" name="Sugar" imageURL="images/collections/food/sugar.png" quantity="0"/>
+			<Collectable id="toast" name="Toast" imageURL="images/collections/food/toast.png" quantity="0"/>
+		</Collection>			 
 		<Triggers>
 			<OnFoundCollectable>
 				<Trace message="Found collectable {Event.collection.name} : {Event.collectable.name}"/>
 			</OnFoundCollectable>
 			<OnCompleteCollection>
 				<Trace message="Completed collection {Event.collection.name} : {Event.collectable.name}"/>
-			</OnCompleteCollection>
-		</Triggers>
+			</OnCompleteCollection>			
+		</Triggers>	
 	</Collections>
 </Include>

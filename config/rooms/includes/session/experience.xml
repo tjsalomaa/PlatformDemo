@@ -1,16 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Include xmlns:xi="http://www.w3.org/2001/XInclude">
-	<Experience id="experience" points="0" persist="false">
-		<Level id="level_0" name="Level 1" points="0"/>
-		<Level id="level_1" name="Level 2" points="1"/>
-		<Level id="level_2" name="Level 3" points="2"/>
-		<Level id="level_3" name="Level 4" points="3"/>
-		<Level id="level_4" name="Level 5" points="4"/>
-		<Level id="level_5" name="Level 6" points="5"/>
-	
+	<Experience points="0">
+		<Level points="0" name="Newbie" message=""/>
+		<Level points="20" name="New Arrival" message="Congratulations!  You are now a new arrival, and we've awarded you a basic ball!"/>
+		<Level points="50" name="Learner" message="Blah blah"/>
+		<Level points="100" name="Playful" message="Blah blah"/>
+		<Level points="150" name="Playful 2" message="Blah blah"/>
+		<Level points="200" name="Playful 3" message="Blah blah"/>
+		<Level points="300" name="Playful 4" message="Blah blah"/>
 		<Triggers>
 			<OnLevelUp>
 				<Trace message="OnLevelUp level={Event.level}"/>
+				<AwardSkillPoints points="1"/>
+				<CreateNotification title="Level up!" body="{Event.level.message}" can_remove="true"/>
 			</OnLevelUp>
 			<OnAwardedExperience>
 				<Trace message="OnAwardedExperience level={Experience.level}"/>

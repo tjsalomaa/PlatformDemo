@@ -651,6 +651,7 @@
 			<Attribute name="moveTail" defaultValue="true" />
 			<Attribute name="screenBuffer" defaultValue="10" />
 			<Attribute name="bubbleClass" defaultValue="com.dubitplatform.views.game.CartoonChatBubble"/>
+			<Attribute name="embedFonts" required="false" type="Boolean" defaultValue="true"/>	
 			<Attribute name="useServer" defaultValue="false" />
 			<Attribute name="offsetX" defaultValue="0"/>	
 			<Attribute name="offsetY" defaultValue="0"/>

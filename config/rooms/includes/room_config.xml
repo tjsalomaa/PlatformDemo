@@ -42,6 +42,21 @@
 		<ShowPlayerBubble message="I don't want to talk to that" />
 	</BehaviourDefinition>
 	
+	<BehaviourDefinition id="readAction">
+		<If expression="({Meters.energy.amount} >= {15})">
+			<Then>
+				<SetValues target="{Meters.energy}" amount="({Meters.energy.amount} - {15})" />
+				<SetValues target="{Event}" reduction="({Skills.bookreading.points}*{200})" />
+				<SetValues target="{ActivityBars.reading}" duration="({5000}-{Event.reduction})" />
+				<OpenActivityBar activityBar="reading" targettedObject="{Event.handler}"/>
+				<Call behaviourID="mouseOff" scope="{Rooms.currentRoom}"/>
+			</Then>
+			<Else>
+				<ShowBubble gameObject="{Room.player}" message="I'm too tired"/>
+			</Else>
+		</If>
+	</BehaviourDefinition>
+	
 	<!-- Branching conversation dialogue -->
 	<Dialogue id="npcChat"
 		skin="com.dubitplatform.views.BranchingConversationView"
