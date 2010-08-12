@@ -162,12 +162,13 @@
 		
 		<minigame:MinigameSkinContainer width="850" height="445" y="100" mouseEnabled="false" horizontalCenter="0" />
 		
-		<growl:GrowlSkinContainer width="100%" height="100%" y="100" mouseEnabled="false" horizontalCenter="0" resizeEffect="resizeEffect"/>
+		<growl:StackingGrowlSkinContainer width="100%" height="100%" y="100" mouseEnabled="false" horizontalCenter="0" resizeEffect="resizeEffect"/>
 		
 		<mx:ControlBar id="bar" width="850" horizontalCenter="0" y="60" height="30" paddingLeft="5">
 			<mx:LinkButton label="Quests ({QuestModel.getInstance().activeQuestCount})" click="openControlPanel('quests');"/>
-			<mx:LinkButton label="Inventory ({Backpack.getInstance().count})" click="openControlPanel('inventory');"/>			
-			<skills:SkillsSkinContainer width="110" height="30"/>
+			<mx:LinkButton label="Inventory ({Backpack.getInstance().count})" click="openControlPanel('inventory');"/>	
+			<mx:LinkButton label="Collections" click="openCollectionsPanel();"/>	
+			<skills:SkillsSkinContainer width="110"/>
 			<mx:Spacer width="100%"/>
 			<mx:Label text="{Experience.getInstance().currentLevel.name} ({Experience.getInstance().points}/{Experience.getInstance().nextLevel.points}XP)"/>
 			<mx:Text id="energyDisplay"/>			

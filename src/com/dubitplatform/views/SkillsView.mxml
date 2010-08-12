@@ -20,7 +20,7 @@
 	</mx:Script>
 	
 	<mx:VBox width="100%" height="100%" horizontalAlign="right">
-		<mx:LinkButton id="skillButton" label="Skill Points ({skills.points})" click="showSkillsWindow();" paddingTop="6"/>		
+		<mx:LinkButton id="skillButton" label="Skill Points ({skills.points})" click="showSkillsWindow();" />		
 	</mx:VBox>
  	
 </SkillsViewBase>
