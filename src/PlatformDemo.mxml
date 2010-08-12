@@ -162,7 +162,7 @@
 		
 		<minigame:MinigameSkinContainer width="850" height="445" y="100" mouseEnabled="false" horizontalCenter="0" />
 		
-		<growl:GrowlSkinContainer width="100%" height="100%" y="100" mouseEnabled="false" horizontalCenter="0" resizeEffect="resizeEffect"/>
+		<growl:StackingGrowlSkinContainer width="100%" height="100%" y="100" mouseEnabled="false" horizontalCenter="0" resizeEffect="resizeEffect"/>
 		
 		<mx:ControlBar id="bar" width="850" horizontalCenter="0" y="60" height="30" paddingLeft="5">
 			<mx:LinkButton label="Quests ({QuestModel.getInstance().activeQuestCount})" click="openControlPanel('quests');"/>
