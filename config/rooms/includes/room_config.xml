@@ -57,6 +57,36 @@
 		</If>
 	</BehaviourDefinition>
 	
+		<BehaviourDefinition id="mouseOff">
+		<ForEach in="{Room.renderObjects}">
+			<If expression="({Event.iteration.mouseEnabled} == {true})">
+				<Then>
+					<SetValues target="{Event.iteration}" mouseEnabled="false" previousMouseEnabled="true"/>
+				</Then>
+			</If>
+			<If expression="({Event.iteration.verbEnabled} == {true})">
+				<Then>
+					<SetValues target="{Event.iteration}" verbEnabled="false" previousVerbEnabled="true"/>
+				</Then>
+			</If>
+		</ForEach>
+	</BehaviourDefinition>
+		
+	<BehaviourDefinition id="mouseOn">
+		<ForEach in="{Room.renderObjects}">
+			<If expression="({Event.iteration.previousMouseEnabled} == {true})">
+				<Then>
+					<SetValues target="{Event.iteration}" mouseEnabled="true" previousMouseEnabled=""/>
+				</Then>
+			</If>
+			<If expression="({Event.iteration.previousVerbEnabled} == {true})">
+				<Then>
+					<SetValues target="{Event.iteration}" verbEnabled="true" previousVerbEnabled=""/>
+				</Then>
+			</If>
+		</ForEach>
+	</BehaviourDefinition>
+	
 	<!-- Branching conversation dialogue -->
 	<Dialogue id="dialogue" skin="com.dubitplatform.views.BranchingConversationView" targetContainer="dialogue">
 		<Triggers>

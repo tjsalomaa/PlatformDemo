@@ -25,4 +25,39 @@
 			</OnCompleteObjective> 
 		</Triggers>
 	</Quest>	
+	
+	<Quest id="noteQuest" name="Hidden message" active="true" complete="false" description="There may be more to the gramophone than meets the eye...">
+		<Objective name="1) Read the strange note on the floor" id="readnote" complete="false" active="false"/> 
+		<Objective name="2) Listen to the gramophone" id="listengramophone" complete="false" active="false"/> 
+		<Triggers>
+			<OnBeginQuest>
+				<Trace message="Quest Begun"/>
+			</OnBeginQuest>
+			<OnCompleteQuest>
+				<Trace message="Quest Complete"/>
+			</OnCompleteQuest>
+			<OnBeginObjective>
+				<Trace message="Objective Begun '{Event.objective.name}'"/>
+			</OnBeginObjective>
+			<OnCompleteObjective>
+			</OnCompleteObjective> 
+		</Triggers>
+	</Quest>
+	
+	<Quest id="blackboardQuest" name="Hidden message part two" active="false" complete="false" description="Maybe the blackboard will provide further insight in to the hidden message contained in the gramophone">
+		<Objective name="1) Study the blackboard" id="readblackboard" complete="false" active="false"/> 
+		<Triggers>
+			<OnBeginQuest>
+				<Trace message="Quest Begun"/>
+			</OnBeginQuest>
+			<OnCompleteQuest>
+				<Trace message="Quest Complete"/>
+			</OnCompleteQuest>
+			<OnBeginObjective>
+				<Trace message="Objective Begun '{Event.objective.name}'"/>
+			</OnBeginObjective>
+			<OnCompleteObjective>
+			</OnCompleteObjective> 
+		</Triggers>
+	</Quest>
 </Include>

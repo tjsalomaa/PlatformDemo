@@ -66,11 +66,14 @@
 		<DisplayObject2D name="The Fireplace" id="Fireplace" assetID="fireplace_asset" x="448" y="421" originX="36" originY="67" verbEnabled="true" clickThrough="true" mouseEnabled="true" alpha="0"/> <!-- Fire Hit -->
 		<DisplayObject2D name="A device of some sort" id="Cogs" assetID="cogs_asset" x="448" y="303" originX="49" originY="23" verbEnabled="true" clickThrough="true" mouseEnabled="true" alpha="0"/> <!-- Cogs Hit -->
 		
-		<DisplayObject2D id="cd1" definitionID="cd_collectable" assetURL="[base.url]images/lab/cd.png" x="528" y="408" visible="true" />
-		<DisplayObject2D id="cd2" definitionID="cd_collectable" assetURL="[base.url]images/lab/cd.png" x="1060" y="406" visible="true"/>
-		<DisplayObject2D id="cd3" definitionID="cd_collectable" assetURL="[base.url]images/lab/cd.png" x="1206" y="314" visible="true" />
-		<DisplayObject2D id="cd4" definitionID="cd_collectable" assetURL="[base.url]images/lab/cd.png" x="1141" y="472" visible="true" />
-		<DisplayObject2D id="cd5" definitionID="cd_collectable" assetURL="[base.url]images/lab/cd.png" x="257" y="446" visible="true" />
+		<DisplayObject2D id="cd1" definitionID="cd_collectable" assetID="cd_asset" x="528" y="408" visible="true" />
+		<DisplayObject2D id="cd2" definitionID="cd_collectable" assetID="cd_asset" x="1060" y="406" visible="true"/>
+		<DisplayObject2D id="cd3" definitionID="cd_collectable" assetID="cd_asset" x="1206" y="314" visible="true" />
+		<DisplayObject2D id="cd4" definitionID="cd_collectable" assetID="cd_asset" x="1141" y="452" visible="true" />
+		<DisplayObject2D id="cd5" definitionID="cd_collectable" assetID="cd_asset" x="257" y="446" visible="true" />
+					
+		<DisplayObject2D  id="strange_note" name="A strange note" assetURL="[base.url]images/lab/page_white_text.png" x="970" y="440" verbEnabled="true" clickThrough="true" mouseEnabled="true" /> 
+				
 		
 		
 		<!-- path finding room debug object -->
@@ -106,7 +109,8 @@
 			<DisplayObject2D name="A pendulum" id="wallPendulum2" assetID="Wallpendulum2_asset" x="720" y="335" originX="7" originY="69" visible="false"/> <!-- The pendulum after you have put them in the clock -->
 			<DisplayObject2D name="A pendulum" id="wallPendulum3" assetID="Wallpendulum3_asset" x="730" y="305" originX="13" originY="42" visible="false"/> <!-- The pendulum after you have put them in the clock -->
 			<DisplayObject2D id="gramexp" culling="false" assetID="gramexp_asset" x="0" y="432" originX="0" originY="432"/> <!-- Animation for the gramophone -->
-			<DisplayObject2D id="blackout" culling="false" assetID="blackout_asset" x="0" y="546" originX="0" originY="546"/> <!-- Animation for the gramophone -->			
+			<DisplayObject2D id="blackout" culling="false" assetID="blackout_asset" x="0" y="546" originX="0" originY="546"/> <!-- Animation for the gramophone -->	
+			
 			
 			<DisplayObject2D id="helper" displayObjectClass="uk.co.dubit.graphics.render2D.ActionPlayer" x="500" y="500" originX="0" originY="25" defaultSpeed="3">
 				<Attribute key="filters" value="{Room.helperFilters}" />
@@ -170,6 +174,7 @@
         <Asset id="wallLens1_asset" url="images/lab/wallLens1.swf"/>
         <Asset id="wallLens2_asset" url="images/lab/wallLens2.swf"/>
         <Asset id="wallLens3_asset" url="images/lab/wallLens3.swf"/>
+        <Asset id="cd_asset" url="images/lab/cd.png"/>
         <!--><Asset id="clockanimation_asset" url="images/lab/clockanimation.swf"/>-->
     </Assets>
 
@@ -392,7 +397,16 @@
 				</MoveTo>		
 			</Then>
 			<Else>
-				<ShowBubble gameObject="{Room.player}" message="Purdy music"/>
+				<If expression="({Quests.noteQuest.readnote.complete} == {false})">
+					<Then>
+						<ShowBubble gameObject="{Room.player}" message="Purdy music"/>
+					</Then>
+					<Else>
+						<ShowBubble gameObject="{Room.player}" message="There really is something in this music, but it's still hard to figure out exactly what"/>
+						<CompleteObjective objective="{Quests.noteQuest.listengramophone}"/>
+						<BeginQuest questID="blackboardQuest" />
+					</Else>
+				</If>
 			</Else>
 		</If>
 	</Trigger>
@@ -781,11 +795,24 @@
 	</Trigger>
 
 	<Trigger event="OnLookAt" gameObject="{Room.chalkboard}">
-		<ShowBubble gameObject="{Room.player}" message="Notes and calculations made by Rothwell Ruskin-Horton II are scribbled on the blackboard. These are mostly half erased and illegible"/>
+		<If expression="({Quests.blackboardQuest.active} == {true})" >
+			<Then>
+				<ShowBubble gameObject="{Room.player}" message="There seems to be no information on the board about the secret message"/>
+				<CompleteObjective objective="{Quests.blackboardQuest.readblackboard}"/>
+			</Then>
+			<Else>
+				<ShowBubble gameObject="{Room.player}" message="Notes and calculations made by Rothwell Ruskin-Horton II are scribbled on the blackboard. These are mostly half erased and illegible"/>
+			</Else>
+		</If>
 	</Trigger>
-	
+		
 	<!-- DIALOGUE -->
 
+	<Trigger event="OnLookAt" gameObject="{Room.strange_note}">
+		<ShowBubble gameObject="{Room.player}" message="The note looks to have been hastily written, but suggests that the music that the gramophone produces contains a hidden message..." useServer="false"/>
+		<CompleteObjective objective="{Quests.noteQuest.readnote}"/>
+	</Trigger>
+		
 	<Trigger event="OnTalkTo" gameObject="{Room.doc}">
 		<MoveTo gameObject="{Room.player}" x="{Room.player.x}" y="{Room.player.y}" targetX="280" targetY="475">
 			<Complete>
@@ -793,7 +820,7 @@
 			</Complete>
 		</MoveTo>
 	</Trigger>
-	
+		
 	<Statement id="talkToTheDoc" message1=" Ah hello there lad. Inspector Lavigeur told me he'd send over some assistance. Peckham isn't it?">
 		<Response message="It's George, sir. George Peckham">
 			<Statement message=" Aren't you a little bit young for a Police Detective?">
