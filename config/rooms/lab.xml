@@ -945,6 +945,7 @@
 						</Response>
 						<Response message="The Inspector mentioned something about finding a missing person...?">
 							<Statement message="This is the laboratory and study of one Rothwell Ruskin-Horton II, inventor, alchemist and philosopher. Eight days ago he contacted me, he described making some breakthrough in the sciences, but did not elaborate any further. No one has heard anything from him since... The Inspector suspects foul play. And its up to us to find him.'">
+								
 							</Statement>
 						</Response>
 					</Statement>	
@@ -952,5 +953,10 @@
 			</Statement>		
 		</Response>
 	</Statement>
-
 </ChatRoom>
+
+<BehaviourDefinition id="questObjectiveOne">
+	<Statement message="This is the laboratory and study of one Rothwell Ruskin-Horton II, inventor, alchemist and philosopher. Eight days ago he contacted me, he described making some breakthrough in the sciences, but did not elaborate any further. No one has heard anything from him since... The Inspector suspects foul play. And its up to us to find him.'">
+		<CompleteObjective objective="{Quests.timeMachineQuest.conversation}"/>					
+	</Statement>
+</BehaviourDefinition>

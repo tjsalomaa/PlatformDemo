@@ -1,30 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Include xmlns:xi="http://www.w3.org/2001/XInclude">
 	<ActivityBars>
-		<ActivityBar id="reading" skin="com.dubitplatform.views.ActivityBarView" targetContainer="shopContainer" 
-			target="{Rooms.currentRoom.player}" duration="4280" actionText="Reading...">
+		<ActivityBar id="reading" skin="com.dubitplatform.views.ActivityBarView" targetContainer="shopContainer" target="{Rooms.currentRoom.player}" duration="4280">
 			<Triggers>
 				<OnActivityComplete>
 					<Call behaviourID="mouseOn" scope="{Rooms.currentRoom}"/>
 					<CloseActivityBar activityBar="reading" />
 					<AwardExperiencePoints points="10" />
 					<UpdateAchievementScore score="({Achievements.booksRead.score} + {1})" achievement="{Achievements.booksRead}"/>
-				</OnActivityComplete>
-			</Triggers>
-		</ActivityBar>
-		<ActivityBar id="digging" skin="com.dubitplatform.views.ActivityBarView" targetContainer="shopContainer" 
-			target="{Rooms.currentRoom.helper}" duration="4280" track="true" actionText="Digging...">
-			<Triggers>
-				<onActivityStart>
-					<DesireAction target="{Event.activityBar.targettedObject}" action="helper_dig" />
-				</onActivityStart>
-				<OnActivityComplete>
-					<DesireAction target="{Event.activityBar.targettedObject}" action="helper_stand" />
-					<ShowBubble gameObject="{Rooms.currentRoom.helper}" message="Wooof wooooooof" yOffset="-20"/>
-					<Call behaviourID="mouseOn" scope="{Rooms.currentRoom}"/>
-					<SetValues target="{Rooms.currentRoom.helper}" defaultSpeed="4" />
-					<CloseActivityBar activityBar="digging" />
-					<!--EnableTracker tracker="pet_follower" /-->
 				</OnActivityComplete>
 			</Triggers>
 		</ActivityBar>
