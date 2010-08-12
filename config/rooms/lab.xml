@@ -801,15 +801,20 @@
 					<Statement message="A good idea, young man. Lavigeur's more astute than he looks. Now, to business!'">
 						<Response message="What are we investigating, sir?">
 							<Statement message="This is the laboratory and study of one Rothwell Ruskin-Horton II, inventor, alchemist and philosopher. Eight days ago he contacted me, he described making some breakthrough in the sciences, but did not elaborate any further. No one has heard anything from him since... The Inspector suspects foul play. And its up to us to find him.'">
+								<Response message="OK">
+									<CompleteObjective objective="{Quests.timeMachineQuest.conversation}"/>
+								</Response>	
 							</Statement>
 						</Response>
 						<Response message="What is this place? I've never seen such baffling wonders!">
 							<Statement message="This is the laboratory and study of one Rothwell Ruskin-Horton II, inventor, alchemist and philosopher. Eight days ago he contacted me, he described making some breakthrough in the sciences, but did not elaborate any further. No one has heard anything from him since... The Inspector suspects foul play. And its up to us to find him.'">
+								<Response message="OK">
+									<CompleteObjective objective="{Quests.timeMachineQuest.conversation}"/>
+								</Response>	
 							</Statement>
 						</Response>
 						<Response message="The Inspector mentioned something about finding a missing person...?">
-							<Statement message="This is the laboratory and study of one Rothwell Ruskin-Horton II, inventor, alchemist and philosopher. Eight days ago he contacted me, he described making some breakthrough in the sciences, but did not elaborate any further. No one has heard anything from him since... The Inspector suspects foul play. And its up to us to find him.'">
-							</Statement>
+							<Call BehaviourID="questObjectiveOne"/>
 						</Response>
 					</Statement>
 				</Response>
@@ -817,14 +822,23 @@
 					<Statement message="A good idea, young man. Lavigeur's more astute than he looks. Now, to business!'">
 						<Response message="What are we investigating, sir?">
 							<Statement message="This is the laboratory and study of one Rothwell Ruskin-Horton II, inventor, alchemist and philosopher. Eight days ago he contacted me, he described making some breakthrough in the sciences, but did not elaborate any further. No one has heard anything from him since... The Inspector suspects foul play. And its up to us to find him.'">
+								<Response message="OK">
+									<CompleteObjective objective="{Quests.timeMachineQuest.conversation}"/>
+								</Response>	
 							</Statement>
 						</Response>
 						<Response message="What is this place? I've never seen such baffling wonders!">
 							<Statement message="This is the laboratory and study of one Rothwell Ruskin-Horton II, inventor, alchemist and philosopher. Eight days ago he contacted me, he described making some breakthrough in the sciences, but did not elaborate any further. No one has heard anything from him since... The Inspector suspects foul play. And its up to us to find him.'">
+								<Response message="OK">
+									<CompleteObjective objective="{Quests.timeMachineQuest.conversation}"/>
+								</Response>	
 							</Statement>
 						</Response>
 						<Response message="The Inspector mentioned something about finding a missing person...?">
 							<Statement message="This is the laboratory and study of one Rothwell Ruskin-Horton II, inventor, alchemist and philosopher. Eight days ago he contacted me, he described making some breakthrough in the sciences, but did not elaborate any further. No one has heard anything from him since... The Inspector suspects foul play. And its up to us to find him.'">
+								<Response message="OK">
+									<CompleteObjective objective="{Quests.timeMachineQuest.conversation}"/>
+								</Response>	
 							</Statement>
 						</Response>
 					</Statement>
@@ -833,14 +847,23 @@
 					<Statement message="I like the cut of your jib young fella! Wit is a more useful companion than a handgun or a cudgel Now, to business!'">
 						<Response message="What are we investigating, sir?">
 							<Statement message="This is the laboratory and study of one Rothwell Ruskin-Horton II, inventor, alchemist and philosopher. Eight days ago he contacted me, he described making some breakthrough in the sciences, but did not elaborate any further. No one has heard anything from him since... The Inspector suspects foul play. And its up to us to find him.'">
+								<Response message="OK">
+									<CompleteObjective objective="{Quests.timeMachineQuest.conversation}"/>
+								</Response>	
 							</Statement>
 						</Response>
 						<Response message="What is this place? I've never seen such baffling wonders!">
 							<Statement message="This is the laboratory and study of one Rothwell Ruskin-Horton II, inventor, alchemist and philosopher. Eight days ago he contacted me, he described making some breakthrough in the sciences, but did not elaborate any further. No one has heard anything from him since... The Inspector suspects foul play. And its up to us to find him.'">
+								<Response message="OK">
+									<CompleteObjective objective="{Quests.timeMachineQuest.conversation}"/>
+								</Response>	
 							</Statement>
 						</Response>
 						<Response message="The Inspector mentioned something about finding a missing person...?">
 							<Statement message="This is the laboratory and study of one Rothwell Ruskin-Horton II, inventor, alchemist and philosopher. Eight days ago he contacted me, he described making some breakthrough in the sciences, but did not elaborate any further. No one has heard anything from him since... The Inspector suspects foul play. And its up to us to find him.'">
+								<Response message="OK">
+									<CompleteObjective objective="{Quests.timeMachineQuest.conversation}"/>
+								</Response>	
 							</Statement>
 						</Response>
 					</Statement>	
@@ -853,14 +876,23 @@
 					<Statement message="A good idea, young man. Lavigeur's more astute than he looks. Now, to business!'">
 						<Response message="What are we investigating, sir?">
 							<Statement message="This is the laboratory and study of one Rothwell Ruskin-Horton II, inventor, alchemist and philosopher. Eight days ago he contacted me, he described making some breakthrough in the sciences, but did not elaborate any further. No one has heard anything from him since... The Inspector suspects foul play. And its up to us to find him.'">
+								<Response message="OK">
+									<CompleteObjective objective="{Quests.timeMachineQuest.conversation}"/>
+								</Response>	
 							</Statement>
 						</Response>
 						<Response message="What is this place? I've never seen such baffling wonders!">
 							<Statement message="This is the laboratory and study of one Rothwell Ruskin-Horton II, inventor, alchemist and philosopher. Eight days ago he contacted me, he described making some breakthrough in the sciences, but did not elaborate any further. No one has heard anything from him since... The Inspector suspects foul play. And its up to us to find him.'">
+								<Response message="OK">
+									<CompleteObjective objective="{Quests.timeMachineQuest.conversation}"/>
+								</Response>	
 							</Statement>
 						</Response>
 						<Response message="The Inspector mentioned something about finding a missing person...?">
 							<Statement message="This is the laboratory and study of one Rothwell Ruskin-Horton II, inventor, alchemist and philosopher. Eight days ago he contacted me, he described making some breakthrough in the sciences, but did not elaborate any further. No one has heard anything from him since... The Inspector suspects foul play. And its up to us to find him.'">
+								<Response message="OK">
+									<CompleteObjective objective="{Quests.timeMachineQuest.conversation}"/>
+								</Response>	
 							</Statement>
 						</Response>
 					</Statement>
@@ -869,14 +901,23 @@
 					<Statement message="A good idea, young man. Lavigeur's more astute than he looks. Now, to business!'">
 						<Response message="What are we investigating, sir?">
 							<Statement message="This is the laboratory and study of one Rothwell Ruskin-Horton II, inventor, alchemist and philosopher. Eight days ago he contacted me, he described making some breakthrough in the sciences, but did not elaborate any further. No one has heard anything from him since... The Inspector suspects foul play. And its up to us to find him.'">
+								<Response message="OK">
+									<CompleteObjective objective="{Quests.timeMachineQuest.conversation}"/>
+								</Response>	
 							</Statement>
 						</Response>
 						<Response message="What is this place? I've never seen such baffling wonders!">
 							<Statement message="This is the laboratory and study of one Rothwell Ruskin-Horton II, inventor, alchemist and philosopher. Eight days ago he contacted me, he described making some breakthrough in the sciences, but did not elaborate any further. No one has heard anything from him since... The Inspector suspects foul play. And its up to us to find him.'">
+								<Response message="OK">
+									<CompleteObjective objective="{Quests.timeMachineQuest.conversation}"/>
+								</Response>	
 							</Statement>
 						</Response>
 						<Response message="The Inspector mentioned something about finding a missing person...?">
 							<Statement message="This is the laboratory and study of one Rothwell Ruskin-Horton II, inventor, alchemist and philosopher. Eight days ago he contacted me, he described making some breakthrough in the sciences, but did not elaborate any further. No one has heard anything from him since... The Inspector suspects foul play. And its up to us to find him.'">
+								<Response message="OK">
+									<CompleteObjective objective="{Quests.timeMachineQuest.conversation}"/>
+								</Response>	
 							</Statement>
 						</Response>
 					</Statement>
@@ -885,14 +926,23 @@
 					<Statement message="I like the cut of your jib young fella! Wit is a more useful companion than a handgun or a cudgel Now, to business!'">
 						<Response message="What are we investigating, sir?">
 							<Statement message="This is the laboratory and study of one Rothwell Ruskin-Horton II, inventor, alchemist and philosopher. Eight days ago he contacted me, he described making some breakthrough in the sciences, but did not elaborate any further. No one has heard anything from him since... The Inspector suspects foul play. And its up to us to find him.'">
+								<Response message="OK">
+									<CompleteObjective objective="{Quests.timeMachineQuest.conversation}"/>
+								</Response>	
 							</Statement>
 						</Response>
 						<Response message="What is this place? I've never seen such baffling wonders!">
 							<Statement message="This is the laboratory and study of one Rothwell Ruskin-Horton II, inventor, alchemist and philosopher. Eight days ago he contacted me, he described making some breakthrough in the sciences, but did not elaborate any further. No one has heard anything from him since... The Inspector suspects foul play. And its up to us to find him.'">
+								<Response message="OK">
+									<CompleteObjective objective="{Quests.timeMachineQuest.conversation}"/>
+								</Response>	
 							</Statement>
 						</Response>
 						<Response message="The Inspector mentioned something about finding a missing person...?">
 							<Statement message="This is the laboratory and study of one Rothwell Ruskin-Horton II, inventor, alchemist and philosopher. Eight days ago he contacted me, he described making some breakthrough in the sciences, but did not elaborate any further. No one has heard anything from him since... The Inspector suspects foul play. And its up to us to find him.'">
+								<Response message="OK">
+									<CompleteObjective objective="{Quests.timeMachineQuest.conversation}"/>
+								</Response>	
 							</Statement>
 						</Response>
 					</Statement>	
@@ -905,14 +955,23 @@
 					<Statement message="A good idea, young man. Lavigeur's more astute than he looks. Now, to business!'">
 						<Response message="What are we investigating, sir?">
 							<Statement message="This is the laboratory and study of one Rothwell Ruskin-Horton II, inventor, alchemist and philosopher. Eight days ago he contacted me, he described making some breakthrough in the sciences, but did not elaborate any further. No one has heard anything from him since... The Inspector suspects foul play. And its up to us to find him.'">
+								<Response message="OK">
+									<CompleteObjective objective="{Quests.timeMachineQuest.conversation}"/>
+								</Response>	
 							</Statement>
 						</Response>
 						<Response message="What is this place? I've never seen such baffling wonders!">
 							<Statement message="This is the laboratory and study of one Rothwell Ruskin-Horton II, inventor, alchemist and philosopher. Eight days ago he contacted me, he described making some breakthrough in the sciences, but did not elaborate any further. No one has heard anything from him since... The Inspector suspects foul play. And its up to us to find him.'">
+								<Response message="OK">
+									<CompleteObjective objective="{Quests.timeMachineQuest.conversation}"/>
+								</Response>	
 							</Statement>
 						</Response>
 						<Response message="The Inspector mentioned something about finding a missing person...?">
 							<Statement message="This is the laboratory and study of one Rothwell Ruskin-Horton II, inventor, alchemist and philosopher. Eight days ago he contacted me, he described making some breakthrough in the sciences, but did not elaborate any further. No one has heard anything from him since... The Inspector suspects foul play. And its up to us to find him.'">
+								<Response message="OK">
+									<CompleteObjective objective="{Quests.timeMachineQuest.conversation}"/>
+								</Response>	
 							</Statement>
 						</Response>
 					</Statement>
@@ -921,15 +980,24 @@
 					<Statement message="A good idea, young man. Lavigeur's more astute than he looks. Now, to business!'">
 						<Response message="What are we investigating, sir?">
 							<Statement message="This is the laboratory and study of one Rothwell Ruskin-Horton II, inventor, alchemist and philosopher. Eight days ago he contacted me, he described making some breakthrough in the sciences, but did not elaborate any further. No one has heard anything from him since... The Inspector suspects foul play. And its up to us to find him.'">
-							</Statement>
+								<Response message="OK">
+									<CompleteObjective objective="{Quests.timeMachineQuest.conversation}"/>
+								</Response>	
+							</Statement>						
 						</Response>
 						<Response message="What is this place? I've never seen such baffling wonders!">
 							<Statement message="This is the laboratory and study of one Rothwell Ruskin-Horton II, inventor, alchemist and philosopher. Eight days ago he contacted me, he described making some breakthrough in the sciences, but did not elaborate any further. No one has heard anything from him since... The Inspector suspects foul play. And its up to us to find him.'">
-							</Statement>
+								<Response message="OK">
+									<CompleteObjective objective="{Quests.timeMachineQuest.conversation}"/>
+								</Response>	
+							</Statement>						
 						</Response>
 						<Response message="The Inspector mentioned something about finding a missing person...?">
 							<Statement message="This is the laboratory and study of one Rothwell Ruskin-Horton II, inventor, alchemist and philosopher. Eight days ago he contacted me, he described making some breakthrough in the sciences, but did not elaborate any further. No one has heard anything from him since... The Inspector suspects foul play. And its up to us to find him.'">
-							</Statement>
+								<Response message="OK">
+									<CompleteObjective objective="{Quests.timeMachineQuest.conversation}"/>
+								</Response>	
+							</Statement>						
 						</Response>
 					</Statement>
 				</Response>
@@ -937,15 +1005,23 @@
 					<Statement message="I like the cut of your jib young fella! Wit is a more useful companion than a handgun or a cudgel Now, to business!'">
 						<Response message="What are we investigating, sir?">
 							<Statement message="This is the laboratory and study of one Rothwell Ruskin-Horton II, inventor, alchemist and philosopher. Eight days ago he contacted me, he described making some breakthrough in the sciences, but did not elaborate any further. No one has heard anything from him since... The Inspector suspects foul play. And its up to us to find him.'">
-							</Statement>
+								<Response message="OK">
+									<CompleteObjective objective="{Quests.timeMachineQuest.conversation}"/>
+								</Response>	
+							</Statement>						
 						</Response>		
 						<Response message="What is this place? I've never seen such baffling wonders!">
 							<Statement message="This is the laboratory and study of one Rothwell Ruskin-Horton II, inventor, alchemist and philosopher. Eight days ago he contacted me, he described making some breakthrough in the sciences, but did not elaborate any further. No one has heard anything from him since... The Inspector suspects foul play. And its up to us to find him.'">
-							</Statement>
+								<Response message="OK">
+									<CompleteObjective objective="{Quests.timeMachineQuest.conversation}"/>
+								</Response>	
+							</Statement>						
 						</Response>
 						<Response message="The Inspector mentioned something about finding a missing person...?">
 							<Statement message="This is the laboratory and study of one Rothwell Ruskin-Horton II, inventor, alchemist and philosopher. Eight days ago he contacted me, he described making some breakthrough in the sciences, but did not elaborate any further. No one has heard anything from him since... The Inspector suspects foul play. And its up to us to find him.'">
-								
+								<Response message="OK">
+									<CompleteObjective objective="{Quests.timeMachineQuest.conversation}"/>
+								</Response>	
 							</Statement>
 						</Response>
 					</Statement>	
@@ -953,10 +1029,14 @@
 			</Statement>		
 		</Response>
 	</Statement>
+	
+	
+	<BehaviourDefinition id="questObjectiveOne">
+		<Statement message="This is the laboratory and study of one Rothwell Ruskin-Horton II, inventor, alchemist and philosopher. Eight days ago he contacted me, he described making some breakthrough in the sciences, but did not elaborate any further. No one has heard anything from him since... The Inspector suspects foul play. And its up to us to find him.'">
+			<Response message="OK">
+				<CompleteObjective objective="{Quests.timeMachineQuest.conversation}"/>
+			</Response>	
+		</Statement>
+	</BehaviourDefinition>
 </ChatRoom>
 
-<BehaviourDefinition id="questObjectiveOne">
-	<Statement message="This is the laboratory and study of one Rothwell Ruskin-Horton II, inventor, alchemist and philosopher. Eight days ago he contacted me, he described making some breakthrough in the sciences, but did not elaborate any further. No one has heard anything from him since... The Inspector suspects foul play. And its up to us to find him.'">
-		<CompleteObjective objective="{Quests.timeMachineQuest.conversation}"/>					
-	</Statement>
-</BehaviourDefinition>
