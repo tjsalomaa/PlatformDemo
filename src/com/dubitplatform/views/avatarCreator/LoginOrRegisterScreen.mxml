@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ui:AvatarCreatorSkinViewBase 
+	xmlns:mx="http://www.adobe.com/2006/mxml" 
+	xmlns:ui="uk.co.dubit.platform.components.avatarEditor.ui.*" >
+	
+	<mx:Metadata>
+		[Event(name="registerClicked", type="flash.events.Event")]
+	</mx:Metadata>
+	
+	<mx:Script>
+		<![CDATA[
+			
+			private function onLoginClicked() : void
+			{
+				avatarEditor.dispatchGAMLEvent("onLogin", { "username": username.text, "password": password.text });
+			}
+			
+			private function onRegisterClicked() : void
+			{
+				dispatchEvent(new Event("registerClicked"));
+			}
+		]]>
+	</mx:Script>
+	
+	<mx:HBox horizontalCenter="0" verticalCenter="-50">
+		<mx:Form>
+			<mx:FormHeading label="Login" />
+			<mx:FormItem label="Username">
+				<mx:TextInput id="username" width="190" />
+			</mx:FormItem>
+			<mx:FormItem label="Password">
+				<mx:TextInput id="password" width="190" displayAsPassword="true" />
+			</mx:FormItem>
+			
+			<mx:FormItem >
+				<mx:Button label="Login" click="onLoginClicked()" />
+			</mx:FormItem>
+		</mx:Form>
+		
+		<mx:Form>
+			<mx:FormHeading label="Register" />
+			<mx:FormItem>
+				<mx:Button label="Create new user" click="onRegisterClicked()" />
+			</mx:FormItem>
+		</mx:Form>
+	</mx:HBox>
+	
+</ui:AvatarCreatorSkinViewBase>

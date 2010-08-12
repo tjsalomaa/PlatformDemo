@@ -154,7 +154,7 @@
 		
 		<chat:ChatSkinContainer id="chatSkinContainer" width="850" height="30" y="515" horizontalCenter="0" />			
 		<verb:VerbSkinContainer id="verbSkinContainer" width="850" height="30" y="470" horizontalCenter="0" />	
-		<skin:BasicSkinContainer id="quickChatSkinContainer" containerID="quickChatContainer" width="850" height="400" y="100" horizontalCenter="0" resizeEffect="resizeEffect"/>	
+		<skin:BasicSkinContainer id="quickChatSkinContainer" containerID="quickChatContainer" width="850" height="400" y="100" horizontalCenter="0"/>	
 		
 		<video:VideosSkinContainer id="videoContainer" outEffect="{fadeOutEffect}" width="850" height="445" horizontalCenter="0" y="100"/>
 		
@@ -172,10 +172,13 @@
 			<mx:Label text="{Experience.getInstance().currentLevel.name} ({Experience.getInstance().points}/{Experience.getInstance().nextLevel.points}XP)"/>
 			<mx:Text id="energyDisplay"/>			
 		</mx:ControlBar>
-		
+				
 		<skin:PopupSkinContainer containerID="shopContainer" width="100%" height="100%" />
 					
 		<dialogue:DialogueSkinContainer id="dialogueSkinContainer" outEffect="{fadeOutEffect}" inEffect="{fadeInEffect}" horizontalCenter="0" width="850" height="445" y="100"/>				
+	
+		<skin:BasicSkinContainer containerID="worldOverlay" width="840" height="398" y="100" horizontalCenter="0" />
+	
 	</mx:Canvas>
 		
 </app:NexusBase>

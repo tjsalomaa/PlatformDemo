@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ui:AvatarCreatorSkinViewBase 
+	width="100%" height="100%"
+	xmlns:mx="http://www.adobe.com/2006/mxml" 
+	xmlns:ui="uk.co.dubit.platform.components.avatarEditor.ui.*" >
+	
+	<mx:Metadata>
+		[Event(name="backClicked", type="flash.events.Event")]
+		[Event(name="nextClicked", type="flash.events.Event")]
+	</mx:Metadata>
+	
+	<mx:Script>
+		<![CDATA[						
+			private function onBackClicked() : void
+			{
+				dispatchEvent(new Event("backClicked"));
+			}
+		]]>
+	</mx:Script>
+	
+	<mx:Form horizontalCenter="0" verticalCenter="0">
+		<mx:FormHeading label="Register" />
+		<mx:FormItem label="Username">
+			<mx:TextInput id="username" width="190" />
+		</mx:FormItem>
+		<mx:FormItem label="Password">
+			<mx:TextInput id="password" width="190" displayAsPassword="true" />
+		</mx:FormItem>
+		
+		<mx:FormItem >
+			<mx:Button label="Register" />
+		</mx:FormItem>
+	</mx:Form>
+	
+	<mx:Button bottom="0" left="0" label="Back" click="onBackClicked()" />
+	
+</ui:AvatarCreatorSkinViewBase>

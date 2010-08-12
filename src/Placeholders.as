@@ -2,6 +2,7 @@ package
 {
 	import com.dubitplatform.views.AchievementsView;
 	import com.dubitplatform.views.ActivityBarView;
+	import com.dubitplatform.views.AvatarCreatorView;
 	import com.dubitplatform.views.BackpackView;
 	import com.dubitplatform.views.BranchingConversationView;
 	import com.dubitplatform.views.ChatPanelView;
@@ -22,6 +23,10 @@ package
 	import com.dubitplatform.views.VerbControllerView;
 	import com.dubitplatform.views.game.CartoonChatBubble;
 	
+	/**
+	 *  This file should include references to your custom GAML skins which otherwise would not
+	 *  automatically be included in the Flex compile process
+	 */
 	public class Placeholders
 	{
 		private var experienceView:ExperienceView;
@@ -45,5 +50,6 @@ package
 		private var backpackView:BackpackView;
 		private var roomListView:RoomListView;
 		private var quickChatView:QuickChatView;
+		private var avatarCreatorView:AvatarCreatorView;
 	}
 }

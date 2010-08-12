@@ -2993,5 +2993,28 @@
 	<Binding name="CloseQuickChat" class="uk.co.dubit.platform.components.chat.quickChat.behaviours.CloseQuickChat" />
 	<Binding name="CloseAllQuickChats" class="uk.co.dubit.platform.components.chat.quickChat.behaviours.CloseAllQuickChats" />
 	
+	<!-- AvatarEditor ++ -->
+	<Binding name="AvatarEditors" 
+		class="uk.co.dubit.platform.components.avatarEditor.AvatarEditors" 
+		factory="uk.co.dubit.platform.scriptEngine.gameObject.GameObjectFactory" />
+		
+	<Binding name="AvatarEditor"
+		class="uk.co.dubit.platform.components.avatarEditor.AvatarEditor" 
+		factory="uk.co.dubit.platform.scriptEngine.gameObject.GameObjectFactory" />
+		
+	<Binding name="OpenAvatarEditor"
+		class="uk.co.dubit.platform.components.avatarEditor.behaviours.OpenAvatarEditor" />
+		
+	<Binding name="CloseAvatarEditor"
+		class="uk.co.dubit.platform.components.avatarEditor.behaviours.CloseAvatarEditor" />
+		
+	<Binding name="CloseAllAvatarEditors"
+		class="uk.co.dubit.platform.components.avatarEditor.behaviours.CloseAllAvatarEditors" />
+		
+	<Binding name="CreateAvatar" class="uk.co.dubit.platform.components.avatarEditor.behaviours.CreateAvatar" />
+	<Binding name="GetDefaultPackages" class="uk.co.dubit.platform.components.avatarEditor.behaviours.GetDefaultPackages" />
+	<Binding name="GetAvatarEditorProductGroups" class="uk.co.dubit.platform.components.avatarEditor.behaviours.GetAvatarEditorProductGroups" />
+	<Binding name="GetOwnedItemsInProductGroup" class="uk.co.dubit.platform.components.avatarEditor.behaviours.GetOwnedItemsInProductGroup" />
+	
 
 </Bindings>
