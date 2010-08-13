@@ -18,7 +18,6 @@
 		<Binding name="NotificationHandler" factory="uk.co.dubit.platform.scriptEngine.gameObject.GameObjectFactory" class="uk.co.dubit.platform.scriptEngine.gameObject.types.net.NotificationHandler" nodoc="true"/>
 		<Binding name="Localizator" factory="uk.co.dubit.platform.scriptEngine.gameObject.GameObjectFactory" class="uk.co.dubit.platform.scriptEngine.gameObject.types.locale.Localizator" nodoc="true"/>
 		<Binding name="EventMediator" factory="uk.co.dubit.platform.scriptEngine.eventMediation.EventMediatorFactory" nodoc="true"/>
-		<Binding name="CreateFirstAvatar" class="uk.co.dubit.platform.components.avatar.editor.CreateFirstAvatar" nodoc="true"/>	
 		<Binding name="SetResolverInstance" class="uk.co.dubit.platform.scriptEngine.behaviour.types.misc.SetResolverInstance" nodoc="true"/>
 		<Binding name="LoadClothingLayers" class="uk.co.dubit.platform.components.avatar.editor.behaviours.LoadClothingLayers" nodoc="true"/>
 		<Binding name="EnterSession" class="uk.co.dubit.platform.scriptEngine.behaviour.types.net.EnterSession" />	
@@ -34,9 +33,6 @@
 		<Binding name="StopLoader" class="uk.co.dubit.platform.scriptEngine.behaviour.types.assets.StopLoader"/>	
 		<Binding name="LoadAvatarPoints" class="uk.co.dubit.platform.components.shop.behaviours.LoadAvatarPoints"/>	
 		<Binding name="Call" class="uk.co.dubit.platform.scriptEngine.behaviour.types.core.Call"/>
-		<Binding name="CreateContact" class="uk.co.dubit.platform.components.contacts.behaviors.CreateContact"/>
-		<Binding name="DestroyContact" class="uk.co.dubit.platform.components.contacts.behaviors.DestroyContact"/>
-		<Binding name="UpdateContact" class="uk.co.dubit.platform.components.contacts.behaviors.UpdateContact"/>
 	</Package>
 
 	<!-- Flash Movie Clip -->
@@ -70,22 +66,19 @@
 					</code>
 				]]>
 			</Example>
-			<Attribute required="true" name="gameObject" type="gameobject"
-				description="The DisplayObject with a .swf file animation" />
-			<Attribute required="true" name="frame" type="number"
-				description="The frame to begin playing from" />
+			<Attribute required="true" name="gameObject" type="gameobject" description="The DisplayObject with a .swf file animation" />
+			<Attribute required="true" name="frame" type="number" description="The frame to begin playing from" />
 			<Branches>
 				<Branch name="Frame"
 					description="Called for every frame of the animation. Used to detect when the animation has reached a specific frame">
-					<Atttribute name="frame" type="Number"
-						description="The animation frame number" />
+					<Atttribute name="frame" type="Number" description="The animation frame number" />
 				</Branch>
 				<Branch name="Complete" description="Called when the animation has finished">
-					<Atttribute name="frame" type="Number"
-						description="The animation frame number" />
+					<Atttribute name="frame" type="Number" description="The animation frame number" />
 				</Branch>
 			</Branches>
 		</Binding>
+		
 		<Binding type="Behaviour" name="GotoAndStop"
 			class="uk.co.dubit.platform.scriptEngine.behaviour.types.world.GotoAndStop">
 			<Description>
@@ -110,13 +103,10 @@
 					</code>
 				]]>
 			</Example>
-			<Attribute required="true" name="gameObject" type="GameObject"
-				description="The DisplayObject with a .swf file animation" />
-			<Attribute required="true" name="frame" type="number"
-				description="The frame to begin playing from" />
+			<Attribute required="true" name="gameObject" type="GameObject" description="The DisplayObject with a .swf file animation" />
+			<Attribute required="true" name="frame" type="number" description="The frame to begin playing from" />
 		</Binding>
-		<Binding type="Behaviour" name="Play"
-			class="uk.co.dubit.platform.scriptEngine.behaviour.types.world.Play">
+		<Binding type="Behaviour" name="Play" class="uk.co.dubit.platform.scriptEngine.behaviour.types.world.Play">
 			<Description>
 				<![CDATA[
 					Instructs a <DisplayObject> to play it's animation. Animations are loaded as .swf files, the behaviour instructs the loaded .swf file to begin playing, or resume playing, the animation. The Play behaviour begins playing from the where ever the animation last stopped. If the animation has not played before it will begin from the first frame, if the animation has been paused with the Stop behaviour calling Play will resume the animation from the current frame.
@@ -139,11 +129,9 @@
 					</code>
 				]]>
 			</Example>
-			<Attribute required="true" name="gameObject" type="GameObject"
-				description="The DisplayObject with a .swf file animation" />
+			<Attribute required="true" name="gameObject" type="GameObject" description="The DisplayObject with a .swf file animation" />
 		</Binding>
-		<Binding type="Behaviour" name="Stop"
-			class="uk.co.dubit.platform.scriptEngine.behaviour.types.world.Stop">
+		<Binding type="Behaviour" name="Stop" class="uk.co.dubit.platform.scriptEngine.behaviour.types.world.Stop">
 			<Description>
 				<![CDATA[
 					Instructs a <DisplayObject> to stop playing it's animation. Animations are loaded as .swf files, the behaviour instructs the loaded .swf file to stop playing, or resume playing.
@@ -228,13 +216,13 @@
 				</code>					
 				]]>
 			</Example>
-			<Attribute required="true" name="expression" type="expression"
-				description="An expression the evaluates to true or false. An expression usually takes the form expression='({Room.test}=={Room.test})'" />
+			<Attribute required="true" name="expression" type="expression" description="An expression the evaluates to true or false. An expression usually takes the form expression='({Room.test}=={Room.test})'" />
 			<Branches>
 				<Branch name="Then" description="Called when the expression evaluates to true" />
 				<Branch name="Else" description="Called when the expression evaluates to false" />
 			</Branches>
 		</Binding>
+		
 		<Binding name="Switch"
 			class="uk.co.dubit.platform.scriptEngine.behaviour.types.conditional.Switch">
 			<Description>
@@ -430,18 +418,31 @@
 
 	<!-- Avatar -->
 	<Package name="Avatar" nodoc="true">
-		<Binding name="CloneAvatar" nodoc="true"
-			class="uk.co.dubit.platform.components.avatar.selection.behaviors.CloneAvatar" />
-		<Binding name="LoadFirstAvatar" nodoc="true"
-			class="uk.co.dubit.platform.components.avatar.selection.behaviors.LoadFirstAvatar" />
-		<Binding name="SetAvatar" nodoc="true"
-			class="uk.co.dubit.platform.components.avatar.selection.behaviors.SetAvatar" />
-		<Binding name="UpdateAvatarClothes" nodoc="true"
-			class="uk.co.dubit.platform.components.avatar.editor.behaviours.UpdateAvatarClothes" />
-		<Binding name="CreateAvatarClothes" nodoc="true"
-			class="uk.co.dubit.platform.components.avatar.editor.behaviours.CreateAvatarClothes" />
+		<Binding name="CloneAvatar" nodoc="true" class="uk.co.dubit.platform.components.avatar.selection.behaviors.CloneAvatar" />
+		<Binding name="LoadFirstAvatar" nodoc="true" class="uk.co.dubit.platform.components.avatar.selection.behaviors.LoadFirstAvatar" />
+		<Binding name="SetAvatar" nodoc="true" class="uk.co.dubit.platform.components.avatar.selection.behaviors.SetAvatar" />
+		<Binding name="UpdateAvatarClothes" nodoc="true" class="uk.co.dubit.platform.components.avatar.editor.behaviours.UpdateAvatarClothes" />
+		<Binding name="CreateAvatarClothes" nodoc="true" class="uk.co.dubit.platform.components.avatar.editor.behaviours.CreateAvatarClothes" />
+		<Binding name="CreateAvatar" class="uk.co.dubit.platform.components.avatarEditor.behaviours.CreateAvatar" />
 	</Package>
-
+	
+	<Package name="Authentication">
+		<Binding name="Login" class="uk.co.dubit.platform.scriptEngine.behaviour.types.webservice.Login">
+			<Attribute name="username" description="The username to login with" />
+			<Attribute name="password" description="The corresponding password of the username" />
+			<Attribute name="serviceURL" defaultValue="{Properties.[path.web-services]}/user_sessions.nexus" description="Path to the login webservices" />
+		</Binding>
+		
+		<Binding name="CreateUser" class="uk.co.dubit.platform.components.avatarEditor.behaviours.CreateUser">
+			<Attribute name="username" description="Unique username to create" />
+			<Attribute name="password" description="Password of the user" />
+			<Attribute name="passwordConfirmation" description="Optional passwordConfirmation" required="false" />
+			<Attribute name="email" description="Email address of the user" required="false" />
+			<Attribute name="dateOfBirth" description="The date of birth of the user" required="false" />
+			<Attribute name="serviceURL" defaultValue="{Properties.[path.web-services]}/users.nexus" />
+		</Binding>
+	</Package>
+	
 	<!-- TRIGGER BINDINGS -->
 	<Package name="Events">
 		<Binding name="Trigger"
@@ -473,8 +474,7 @@
 			<Attribute required="true" name="event" type="Event"
 				description="The event name. Look up the event name for each feature in the documentation" />
 		</Binding>
-		<Binding name="Triggers" nodoc="true"
-			factory="uk.co.dubit.platform.scriptEngine.behaviour.BehaviourFactory" />
+		<Binding name="Triggers" nodoc="true" factory="uk.co.dubit.platform.scriptEngine.behaviour.BehaviourFactory" />
 	</Package>
 
 	<!-- Notification++ -->
@@ -492,20 +492,12 @@
 				required="true" />
 			<Attribute name="request_type" type="Integer" description="Type of notification"
 				required="true" />
-			<Attribute name="read" type="Integer"
-				description="Whether the message has been read" required="false"
-				defaultValue="false" />
-			<Attribute name="sender_avatar_id" type="Integer"
-				description="Avatar id of the sender" />
-			<Attribute name="sender_name" type="Integer"
-				description="Avatar name of the sender" />
-			<Attribute name="recipient_id" type="Integer"
-				description="Avatar id of the recipient" />
-			<Attribute name="recipient_name" type="Integer"
-				description="Avatar name of the recipient" />
-			<Attribute name="can_accept" type="Boolean"
-				description="Whether the notification can be accepted" required="false"
-				defaultValue="false" />
+			<Attribute name="read" type="Integer" description="Whether the message has been read" required="false" defaultValue="false" />
+			<Attribute name="sender_avatar_id" type="Integer" description="Avatar id of the sender" />
+			<Attribute name="sender_name" type="Integer" description="Avatar name of the sender" />
+			<Attribute name="recipient_id" type="Integer" description="Avatar id of the recipient" />
+			<Attribute name="recipient_name" type="Integer" description="Avatar name of the recipient" />
+			<Attribute name="can_accept" type="Boolean" description="Whether the notification can be accepted" required="false" defaultValue="false" />
 			<Attribute name="can_reject" type="Boolean"
 				description="Whether the notification can be rejected" required="false"
 				defaultValue="false" />

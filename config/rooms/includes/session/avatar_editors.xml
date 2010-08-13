@@ -4,13 +4,35 @@
 		<AvatarEditor id="create" skin="com.dubitplatform.views.AvatarCreatorView" targetContainer="worldOverlay">
 			<Triggers>
 				<onLogin>
-				
+					<Login username="{Event.username}" password="{Event.password}">
+						<Result>
+							<CloseAvatarEditor avatarEditor="create" />
+							<Call behaviourID="joinWorld" />
+						</Result>
+						<Fault>
+							<Alert message="Your username/password was incorrect" />
+						</Fault>
+					</Login>
 				</onLogin>
 				
 				<onRegisterUser>
-				
+					<CreateUser username="{Event.username}" password="{Event.password}">
+						<Result>
+							<CreateAvatar avatar="{AvatarEditors.create.avatar}">
+								<Result>
+									<CloseAvatarEditor avatarEditor="create" />
+									<Call behaviourID="joinWorld" />
+								</Result>
+								<Fault>
+								</Fault>
+							</CreateAvatar>
+						</Result>
+						<Fault>
+							<Alert message="Your username may already be taken." />
+						</Fault>
+					</CreateUser>
 				</onRegisterUser>			
-			</Triggers>	
+			</Triggers>
 		</AvatarEditor>
 	</AvatarEditors>
 </Include>
