@@ -1,28 +1,24 @@
 <!-- Definition of players in the room -->
 <PlayerDefinition id="playerDefinition"
 	x="{Room.startX}" y="{Room.startY}" 
-	originX="90" originY="310" 
+	originX="264" originY="600"
 	nameOriginX="0" nameOriginY="0" 
 	mouseEnabled="true" mouseChildren="false" clickThrough="true" useHandCursor="true"
 	clothingLayers="{AvatarEditors.clothingLayers}" 
 	location="furniture.{This.id}" 
 	filters="{Room.playerFilters}" 
-	defaultSpeed="7"
+	defaultSpeed="36"
 	culling="false"
-	flip="true"  
+	flip="true"
 	cacheAsBitmap="false"
 	preloaderOriginX="0" preloaderOriginY="-70"
 	preloaderScaleX="4" preloaderScaleY="4"
 	satMin="0.95" satMax="0.95" lumMin="0.7" lumMax="0.7"
-	displayObjectClass="uk.co.dubit.graphics.render2D.ActionPlayer" 
+	displayObjectClass="uk.co.dubit.graphics.render2D.IKActionPlayer"
 	nameBubbleClass="" 
 	speechBubbleClass="uk.co.dubit.application.view.render2D.FloatingSpeechBubble" 
 	loaderClass="">
-	
-	<Actions id="actions" defaultAction="stand">
-		<Stand id="stand" path="avatar/stand12.swf"/>
-		<Walk id="walk" path="avatar/walk12.swf"/>
-	</Actions>
+
 
 	<Triggers>
 		<onFixup>

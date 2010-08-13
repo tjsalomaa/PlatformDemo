@@ -9,7 +9,7 @@
 					<Result>
 						<Trace message="Entered session" />
 						
-						<ChangeRoom roomName="{Properties.[setting.rooms.default-room]}"  />
+						<Call behaviourID="joinWorld" />
 					</Result>
 					<Fault><Trace message="Failed to enter session" /></Fault>
 				</EnterSession>
@@ -34,16 +34,13 @@
 			<acceptRequest>
 				<OnRemoteAcceptNotification notification="{Event.request_id}" />
 			</acceptRequest>
-
-			<!-- The following is not very nice at all. Bear with us.-->
+			
 			<launchMinigame>
-				<RequestAddContact avatar_id="{Event.avatar_id}" />
 				<JoinMultiplayerMinigame minigame="{Event.game_type}" gameToken="{Event.game_token}" />
 			</launchMinigame>
 
 			<!-- Minigame instance match ready -->
 			<startInstantMatch>
-				<RequestAddContact avatar_id="{Event.avatar_id}" />
 				<JoinMultiplayerMinigame minigame="{Event.game_type}" gameToken="{Event.game_token}" />
 			</startInstantMatch>
 
@@ -64,4 +61,69 @@
 
 		</Triggers>
 	</NotificationHandler>
+	
+	<BehaviourDefinition id="joinWorld">	
+	
+		<LoadClothingLayers>
+			<Result>
+				<If expression="{Session.isLoggedIn}">
+					<Then>			
+						<LoadFirstAvatar>
+							<Result>
+								<EnterSession>
+									<Result>
+										<Call behaviourID="loadResources" />
+																 
+										<ChangeRoom roomName="{Properties.[setting.rooms.default-room]}" />
+									</Result>
+									<Fault>
+										<Alert message="Unable to enter session" />
+									</Fault>
+								</EnterSession>
+							</Result>
+							<Fault>
+								<!-- Take action depending on the type of error -->
+								<Switch value="error{Event.httpStatusError.errorID}">
+									<error204>
+										<!-- Unable to load avatar.  Likely that they just don't have an avatar yet.  
+										     Proceed to setup and open an avatar editor which has the ability to create avatars -->					
+										<Call behaviourID="loginOrCreateAvatar" />
+									</error204>
+									<default>
+										<Alert message="Unhandled load first avatar fault" />
+									</default>
+								</Switch>
+							</Fault>
+						</LoadFirstAvatar>
+					</Then>
+					<Else>
+						<Call behaviourID="loginOrCreateAvatar" />
+					</Else>
+				</If>
+			</Result>
+			<Fault>
+				<Alert message="Load clothing layers fault" />
+			</Fault>
+		</LoadClothingLayers>
+	</BehaviourDefinition>
+	
+	<BehaviourDefinition id="loginOrCreateAvatar">
+		<GetDefaultPackages>
+			<Result>
+				<OpenAvatarEditor avatarEditor="create" />
+			</Result>
+			<Fault>
+				<Alert message="Unable to load the default packages" />
+			</Fault>
+		</GetDefaultPackages>
+	</BehaviourDefinition>
+	
+	<BehaviourDefinition id="loadResources">
+		<!-- Config data for AvatarEditor, Shops, and RoomEditor -->
+		<!-- GetProductGroups />
+		<GetOwnedProducts />
+		<GetAvatarEditorProductGroups />
+		<SetGlobalSoundVolume volume="0" if="({Properties.[environment]} == {local})" />
+		<GetContactList /-->
+	</BehaviourDefinition>
 </Include>

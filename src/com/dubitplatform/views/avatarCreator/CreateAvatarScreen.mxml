@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ui:AvatarCreatorSkinViewBase 
+	width="100%" height="100%"
+	show="{ if(avatarEditor.avatar == null) avatarSelector.selectedIndex = 0 }"
+	xmlns:mx="http://www.adobe.com/2006/mxml" 
+	xmlns:ui="uk.co.dubit.platform.components.avatarEditor.ui.*" 
+	xmlns:avatarCreator="com.dubitplatform.views.avatarCreator.*" 
+	xmlns:editor="uk.co.dubit.platform.components.avatar.editor.*">
+	
+	<mx:Metadata>
+		[Event(name="backClicked", type="flash.events.Event")]
+		[Event(name="nextClicked", type="flash.events.Event")]
+	</mx:Metadata>
+	
+	<mx:Script>
+		<![CDATA[			
+			import mx.effects.Fade;
+			import mx.events.ListEvent;
+			
+			import uk.co.dubit.platform.components.catalogue.IProduct;
+			import uk.co.dubit.platform.components.catalogue.IProductGroup;
+			import uk.co.dubit.platform.data.IAvatar;
+			
+			private function onAvatarChanged() : void
+			{
+				avatarEditor.avatar = IAvatar(avatarSelector.selectedItem);
+				
+				productGroupView.customURLParams = { "creation": true, "gender": avatarEditor.avatar.gender };
+				
+				productGroupView.reloadProductGroup();
+			}
+			
+			private function onProductGroupSelected() : void
+			{
+				var selectedIndex:int = productGroupTabs.selectedIndex;
+				
+				productGroupView.productGroup = IProductGroup(defaultProductGroups.getItemAt(selectedIndex))
+			}
+			
+			private function onProductSelected(e:ListEvent) : void
+			{
+				avatarEditor.avatar.clothes.addProduct(e.itemRenderer.data as IProduct);
+			}
+			
+			private function onBackClicked() : void
+			{
+				dispatchEvent(new Event("backClicked"));
+			}
+			
+			private function onNextClicked() : void
+			{
+				dispatchEvent(new Event("nextClicked"));
+			}
+		]]>
+	</mx:Script>
+	
+	<mx:HBox width="100%" height="100%" horizontalCenter="0" y="10">
+		
+		<mx:Form>
+			<mx:FormHeading label="Your avatar" />
+			
+			<mx:FormItem label="Type">
+				<mx:ComboBox id="avatarSelector" labelField="gender"  selectedIndex="0"
+							 dataProvider="{ editorsModel.defaultAvatars }" 
+							 change="onAvatarChanged()" />
+			</mx:FormItem>
+
+			<mx:FormItem label="Preview">
+				<editor:TintablePose id="avatarPreview"  cacheAsBitmap="true"
+									 width="400" height="600" 
+									 scaleX="0.5" scaleY="0.5"
+									 actionID="stand_front_female"  avatar="{ avatarEditor.avatar }" />
+			</mx:FormItem>
+		</mx:Form>
+
+		<mx:Form>
+			<mx:FormHeading label="Customize your avatar" />
+			<mx:FormItem>
+				<mx:VBox horizontalCenter="0" horizontalAlign="center" verticalCenter="0">
+					<mx:TabBar id="productGroupTabs" toggleOnClick="true"
+							   dataProvider="{ editorsModel.defaultProductGroups }" 
+							   labelField="name" 
+							   itemClick="onProductGroupSelected()" />
+					<avatarCreator:ProductGroupView id="productGroupView" itemClick="onProductSelected(event)"  />
+				</mx:VBox>
+			</mx:FormItem>
+		</mx:Form>
+	</mx:HBox>
+
+	
+	<mx:Button bottom="0" left="0" label="Back" click="onBackClicked()" />
+	
+	<mx:Button bottom="0" right="0" label="Next" click="onNextClicked()" />
+	
+</ui:AvatarCreatorSkinViewBase>
