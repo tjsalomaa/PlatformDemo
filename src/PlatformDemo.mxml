@@ -130,7 +130,7 @@
             
             private function openShop() : void
             {
-            	Shops.getInstance().getShopByID("default").open();
+            	Shops.getInstance().getShopByID("1").open();
             }      
             
             private function openMap () : void
@@ -175,7 +175,7 @@
 			<mx:Text id="energyDisplay"/>			
 		</mx:ControlBar>
 				
-		<skin:PopupSkinContainer containerID="shopContainer" width="100%" height="100%" />
+		<skin:BasicSkinContainer containerID="shopContainer" width="100%" height="100%" />
 					
 		<dialogue:DialogueSkinContainer id="dialogueSkinContainer" outEffect="{fadeOutEffect}" inEffect="{fadeInEffect}" horizontalCenter="0" width="850" height="445" y="100"/>				
 	

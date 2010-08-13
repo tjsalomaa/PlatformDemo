@@ -4,15 +4,7 @@
 		<Triggers>
 			<connectionSuccess>
 				<Trace message="---Connected to the Nexus Game Server---" />
-
-				<EnterSession>
-					<Result>
-						<Trace message="Entered session" />
-						
-						<Call behaviourID="joinWorld" />
-					</Result>
-					<Fault><Trace message="Failed to enter session" /></Fault>
-				</EnterSession>
+				<Call behaviourID="joinWorld" />
 			</connectionSuccess>
 
 			<connectionFailed>
@@ -63,7 +55,6 @@
 	</NotificationHandler>
 	
 	<BehaviourDefinition id="joinWorld">	
-	
 		<LoadClothingLayers>
 			<Result>
 				<If expression="{Session.isLoggedIn}">

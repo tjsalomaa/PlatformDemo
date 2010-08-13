@@ -41,7 +41,7 @@
 	</Sounds>
 	
 	<Trackers>
-		<Tracker id="pet_follower" target="{Room.helper}" source="{Room.player}" maxDistance="100" minDistance="40" trackingEnabled="true"/>
+		<!--Tracker id="pet_follower" target="{Room.helper}" source="{Room.player}" maxDistance="100" minDistance="40" trackingEnabled="true"/-->
 	</Trackers>
 	
 	<Scene id="scene" target="{Room.player}" viewportWidth="850" viewportHeight="445" width="1400" height="546">
@@ -112,14 +112,14 @@
 			<DisplayObject2D id="blackout" culling="false" assetID="blackout_asset" x="0" y="546" originX="0" originY="546"/> <!-- Animation for the gramophone -->	
 			
 			
-			<DisplayObject2D id="helper" displayObjectClass="uk.co.dubit.graphics.render2D.ActionPlayer" x="500" y="500" originX="0" originY="25" defaultSpeed="3">
+			<!--DisplayObject2D id="helper" displayObjectClass="uk.co.dubit.graphics.render2D.ActionPlayer" x="500" y="500" originX="0" originY="25" defaultSpeed="3">
 				<Attribute key="filters" value="{Room.helperFilters}" />
 				<Actions defaultAction="helper_stand">
 					<Stand id="helper_stand" path="[base.url]images/lab/doggie.swf"/>
 					<Walk id="helper_walk" path="[base.url]images/lab/doggie.swf"/>
 					<Action id="helper_dig" path="[base.url]images/helper/dig.swf"/>
 				</Actions>
-			</DisplayObject2D>			
+			</DisplayObject2D-->			
 		
 		</ZSortingDisplayObject>
 

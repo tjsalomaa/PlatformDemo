@@ -35,5 +35,9 @@
 				</Else>
 			</If>
 		</onClick>
+		
+		<onShowProfile>
+			<OpenProfile profile="playerProfile" avatar="{Event.handler}" />	
+		</onShowProfile>
 	</Triggers>
 </PlayerDefinition>

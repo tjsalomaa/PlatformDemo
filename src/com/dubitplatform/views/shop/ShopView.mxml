@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ShopSkinViewBase 
+	width="100%" height="100%"
 	xmlns="uk.co.dubit.platform.components.catalogue.ui.*" 
 	xmlns:mx="http://www.adobe.com/2006/mxml" 
 	xmlns:shop="com.dubitplatform.views.shop.*">
 	
 	<mx:Script>
 		<![CDATA[
-			import uk.co.dubit.platform.components.catalogue.IShop;
 			import uk.co.dubit.platform.components.catalogue.IProductGroup;
+			import uk.co.dubit.platform.components.catalogue.IShop;
+			import uk.co.dubit.platform.components.session.SessionModel;
 			
 			[Bindable]
 			override public function set shop(value:IShop) : void
@@ -20,7 +22,7 @@
 			private function onProductGroupChanged() : void
 			{
 				var selectedProductGroup:IProductGroup = groupSelector.selectedItem as IProductGroup;
-				
+				selectedProductGroup.loadProducts( {gender:SessionModel.getInstance().currentAvatar.gender});
 				if(selectedProductGroup) products.dataProvider = selectedProductGroup.products;
 			}
 		]]>
@@ -28,7 +30,7 @@
 	
 	<mx:VBox width="100%" height="100%">
 		<mx:HBox width="100%" verticalAlign="middle">
-			<mx:Label text="Select ye wares!" />
+			<mx:Label text="Select a product category." />
 			<mx:ComboBox id="groupSelector" labelField="name" dataProvider="{ shop.productGroups }" change="onProductGroupChanged()" />		
 		</mx:HBox>
 		<mx:TileList id="products" 

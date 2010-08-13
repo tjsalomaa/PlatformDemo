@@ -1,14 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Include xmlns:xi="http://www.w3.org/2001/XInclude">
 	<Shops>
-		<Shop id="default" name="Local shop" skin="com.dubitplatform.views.ShopTitleWindow" targetContainer="shopContainer">
-			<ProductGroup display_name="Food">
-				<Product id="shop_apple" name="Apple" preview_url="[base.url]images/backpack/apple.png" points_price="10" credits_price="2" useServer="false"/>
-			</ProductGroup>
-			<ProductGroup display_name="Drink">
-				<Product id="shop_rum" name="Rum" preview_url="[base.url]images/backpack/rum.png" points_price="35" credits_price="7" useServer="false"/>
-				<Product id="shop_grog" name="Grog" preview_url="[base.url]images/backpack/grog.png" points_price="20" credits_price="4" useServer="false"/>
-			</ProductGroup>
+		<Shop id="1" name="Test Store" skin="com.dubitplatform.views.ShopTitleWindow" targetContainer="shopContainer">
+			<Triggers>
+				<OnShopOpened>
+					<GetShopProductGroups shop="{Shops.1}" />
+				</OnShopOpened>
+			</Triggers>
 		</Shop>
 		
 		<Triggers>

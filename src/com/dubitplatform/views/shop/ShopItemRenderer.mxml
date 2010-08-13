@@ -15,8 +15,8 @@
 		<mx:Label text="{ product.points } points" />
 		<mx:Label text="{ product.credits } credits" />
 		<mx:HBox>
-			<mx:Button label="Buy " toolTip="This costs {product.points} points" enabled="{ !product.owned }" click="{ product.purchase(1, PaymentType.POINTS) }" />
-			<mx:Button label="Buy (CR)" toolTip="This costs {product.credits} credits" enabled="{ !product.owned }" click="{ product.purchase(1, PaymentType.CREDITS) }" />
+			<mx:Button label="Buy" toolTip="This costs {product.points} points" enabled="{ !product.owned }" click="{ product.purchase() }" />
+			<!--mx:Button label="Buy (CR)" toolTip="This costs {product.credits} credits" enabled="{ !product.owned }" click="{ product.purchase(1, PaymentType.CREDITS) }" /-->
 		</mx:HBox>
 
 	</mx:VBox>	

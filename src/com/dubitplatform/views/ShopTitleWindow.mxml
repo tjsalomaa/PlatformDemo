@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <TitleWindowSkin
-	width="400" height="300" title="{ IShop(node).name }" showCloseButton="true" close="{ IShop(node).close() }"
+	width="500" height="400" title="{ IShop(node).name }" showCloseButton="true" close="{ IShop(node).close() }"
 	xmlns="uk.co.dubit.platform.components.skin.*" 
 	xmlns:mx="http://www.adobe.com/2006/mxml" xmlns:shop="com.dubitplatform.views.shop.*">
 	
