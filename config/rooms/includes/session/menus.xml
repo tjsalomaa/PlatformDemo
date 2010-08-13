@@ -9,6 +9,16 @@
 					<OpenMinigame minigame="{Minigame.single}"/>
 				</onMenuItemSelected>	
 			</Triggers>	
-		</ContextMenu>		
+		</ContextMenu>	
+		<ContextMenu id="otherPlayerMenu" track="true" offsetX="0" offsetY="0">
+			<MenuItem id="showProfile" text="Show Profile" toolTip="Shows the player's profile information"/>
+			<MenuItem id="addToContacts" text="Add To Contacts" toolTip="Adds the player to your contact list"/>
+			<Triggers>
+				<onMenuItemSelected>
+					<Trace message="onMenuItemSelected {Event.menuItem.id}"/>
+					<OpenMinigame minigame="{Minigame.single}"/>
+				</onMenuItemSelected>	
+			</Triggers>	
+		</ContextMenu>			
 	</Menus>
 </Include>

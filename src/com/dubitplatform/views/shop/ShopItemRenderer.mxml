@@ -4,10 +4,20 @@
 	xmlns="uk.co.dubit.platform.components.catalogue.ui.*" 
 	xmlns:mx="http://www.adobe.com/2006/mxml" 
 	xmlns:shared="uk.co.dubit.platform.components.shared.*">
+	<mx:Script>
+		<![CDATA[
+			import uk.co.dubit.platform.components.catalogue.PaymentType;
+		]]>
+	</mx:Script>
 	
 	<mx:VBox width="100%" height="100%" verticalAlign="middle" horizontalAlign="center" enabled="{ !product.owned }" >
 		<mx:Label text="{ product.name }" />
-		<shared:CachedImage width="100%" height="100%" source="{ product.previewURL }" toolTip="{ product.name }" horizontalAlign="center" />
-		<mx:Button label="Buy" toolTip="This costs {product.points} points" enabled="{ !product.owned }" click="{ product.purchase() }" />
+		<mx:Label text="{ product.points } points" />
+		<mx:Label text="{ product.credits } credits" />
+		<mx:HBox>
+			<mx:Button label="Buy " toolTip="This costs {product.points} points" enabled="{ !product.owned }" click="{ product.purchase(1, PaymentType.POINTS) }" />
+			<mx:Button label="Buy (CR)" toolTip="This costs {product.credits} credits" enabled="{ !product.owned }" click="{ product.purchase(1, PaymentType.CREDITS) }" />
+		</mx:HBox>
+
 	</mx:VBox>	
 </ProductViewBase>

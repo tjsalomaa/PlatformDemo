@@ -30,7 +30,14 @@
 		</onFixup>
 		
 		<onClick>
-			<OpenMenu menu="{Menus.playerMenu}" target="{Room.player}" if="({Event.handler} == {Room.player})" />
+			<If expression="({Event.handler} == {Room.player})">
+				<Then>
+					<OpenMenu menu="{Menus.playerMenu}" target="{Room.player}"/>
+				</Then>
+				<Else>
+					<OpenMenu menu="{Menus.otherPlayerMenu}" target="{Event.handler}" />
+				</Else>
+			</If>
 		</onClick>
 	</Triggers>
 </PlayerDefinition>
