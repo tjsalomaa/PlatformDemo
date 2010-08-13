@@ -24,7 +24,6 @@
 		<property name="path.clothing-modes" value="[path.web-services]/clothing_modes.nexus" />
 		
 		<property name="path.anim-server" value="[path.swf-server]/anim/{asset_group_ids}.zip" />
-		
 		<property name="path.profile.stand_front_male" value="[path.swf-server]/fronts/anim/{asset_group_ids}.zip" />
 		<property name="path.profile.stand_front_female" value="[path.swf-server]/fronts/anim/{asset_group_ids}.zip" />
 		

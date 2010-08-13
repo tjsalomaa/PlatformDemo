@@ -5,25 +5,15 @@
 	<Include href="config/rooms/includes/cds.xml"/>
 
 
-	<MouseMovementController yVelocityScale="0.5" directions="12" id="movement" />
 	<CollisionController target="{Room.player}" id="collision"/>
 	<Chat id="chatBox"/>
-	
-	<VerbController>
-		<Verb id="OnLookAt" name="Look at"/>
-		<Verb id="OnPickUp" name="Pick up"/>
-		<Verb id="OnTalkTo" name="Talk to"/>
-		<Verb id="OnUse" name="Use the"/>
-		<Verb id="OnRead" name="Read something from"/>
-		<Verb id="OnDig" name="Dig up"/>
-	</VerbController>
 
 	<Collision width="1400" height="546" id="walkableArea" solid="true">
 		<Image assetID="hit_asset" id="hitAreaImage"/>
 	</Collision>
 
 	<Filters id="playerFilters">
-		<DepthFilter id="playerDepthFilter" scaleBack="-1.1" scaleFront="0.48"/>
+		<DepthFilter id="playerDepthFilter" scaleBack="-1" scaleFront="0.2"/>
 		<MultiplyFilter id="lightFilter">
 			<Image id="light_filter" assetID="light_filter_asset"/>
 		</MultiplyFilter>

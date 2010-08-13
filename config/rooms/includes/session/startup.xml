@@ -4,15 +4,8 @@
 		<Triggers>
 			<connectionSuccess>
 				<Trace message="---Connected to the Nexus Game Server---" />
-
-				<EnterSession>
-					<Result>
-						<Trace message="Entered session" />
 						
-						<Call behaviourID="joinWorld" />
-					</Result>
-					<Fault><Trace message="Failed to enter session" /></Fault>
-				</EnterSession>
+				<Call behaviourID="joinWorld" />
 			</connectionSuccess>
 
 			<connectionFailed>
@@ -121,7 +114,7 @@
 	<BehaviourDefinition id="loadResources">
 		<!-- Config data for AvatarEditor, Shops, and RoomEditor -->
 		<!-- GetProductGroups />
-		<GetOwnedProducts />
+		<GetOwnedProducts />l
 		<GetAvatarEditorProductGroups />
 		<SetGlobalSoundVolume volume="0" if="({Properties.[environment]} == {local})" />
 		<GetContactList /-->

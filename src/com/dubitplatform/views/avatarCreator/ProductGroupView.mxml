@@ -8,10 +8,38 @@
 		[Event(name="itemClick", type="mx.events.ListEvent")]
 	</mx:Metadata>
 	
-	<mx:TileList width="100%" height="100%" 
-				 rowCount="3" columnCount="3" 
-				 dataProvider="{ productGroup.products }"
-				 itemClick="{ dispatchEvent(event) }"
-				 itemRenderer="{ new ClassFactory(ProductItemRenderer) }" />
+	<mx:Script>
+		<![CDATA[
+			import mx.effects.Fade;
+
+			override protected function loadProductGroup():void
+			{
+				super.loadProductGroup();
+				
+				viewStack.selectedIndex = 1;
+			}
+			
+			override protected function onProductsLoaded() : void
+			{
+				viewStack.selectedIndex = 0;
+			}
+		]]>
+	</mx:Script>
 	
+	<mx:ViewStack id="viewStack" width="100%" height="100%">
+		<mx:Canvas width="100%" height="100%" showEffect="{ new Fade() }" hideEffect="{ new Fade() }">
+			<mx:TileList width="100%" height="100%" 
+						 backgroundAlpha="0" borderStyle="none"
+						 useRollOver="false"
+						 rowCount="3" columnCount="3" 
+						 rowHeight="80" columnWidth="80"
+						 dataProvider="{ productGroup.products }"
+						 itemClick="{ dispatchEvent(event) }"
+						 itemRenderer="{ new ClassFactory(ProductItemRenderer) }" />	
+		</mx:Canvas>
+		
+		<mx:Canvas width="100%" height="100%">
+			<mx:Label text="Loading products..." horizontalCenter="0" verticalCenter="0" />
+		</mx:Canvas>
+	</mx:ViewStack>
 </ui:ProductGroupViewBase>
