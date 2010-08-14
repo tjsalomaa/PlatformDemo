@@ -2,33 +2,33 @@
 <ChatRoom id="lab" xmlns:xi="http://www.w3.org/2001/XInclude" startX="700" startY="470">
 
 	<Include href="config/rooms/includes/room_config.xml"/>
-
-	<MouseMovementController yVelocityScale="0.5" directions="12" id="movement"/>
-	<CollisionController target="{Room.player}" id="collision"/>
-	<Chat id="chatBox"/>
-	
-	<VerbController>
-		<Verb id="OnLookAt" name="Look at"/>
-		<Verb id="OnPickUp" name="Pick up"/>
-		<Verb id="OnTalkTo" name="Talk to"/>
-		<Verb id="OnUse" name="Use the"/>
-		<Verb id="OnRead" name="Read something from"/>
-	</VerbController>
+	<Include href="config/rooms/includes/cds.xml"/>
 
 	<Collision width="1400" height="546" id="walkableArea" solid="true">
 		<Image assetID="hit_asset" id="hitAreaImage"/>
 	</Collision>
 
 	<Filters id="playerFilters">
-		<DepthFilter id="playerDepthFilter" scaleBack="-1.1" scaleFront="0.48"/>
+		<DepthFilter id="playerDepthFilter" scaleBack="-1" scaleFront="0.2"/>
 		<MultiplyFilter id="lightFilter">
 			<Image id="light_filter" assetID="light_filter_asset"/>
 		</MultiplyFilter>
 	</Filters>
-
+	
+	<Filters id="helperFilters">
+		<DepthFilter id="helperDepthFilter" scaleBack="1" scaleFront="1"/>
+		<MultiplyFilter id="lightFilter">
+			<Image id="light_filter" assetID="light_filter_asset"/>
+		</MultiplyFilter>
+	</Filters>
+	
 	<Sounds target="{Room.player}" id="sounds">
 		<Sound id="background_music" assetID="background_music_asset" play="false" looping="true"/>
 	</Sounds>
+	
+	<Trackers>
+		<Tracker id="pet_follower" target="{Room.helper}" source="{Room.player}" maxDistance="100" minDistance="40" trackingEnabled="true"/>
+	</Trackers>
 	
 	<Scene id="scene" target="{Room.player}" viewportWidth="850" viewportHeight="445" width="1400" height="546">
 		
@@ -51,6 +51,20 @@
 		<DisplayObject2D name="A grandfather clock?" id="Grandfather clock" assetID="timemachine_asset" x="744" y="403" originX="61" originY="209" verbEnabled="true" clickThrough="true" mouseEnabled="true" alpha="0"/> <!-- Clock Hit -->
 		<DisplayObject2D name="The Fireplace" id="Fireplace" assetID="fireplace_asset" x="448" y="421" originX="36" originY="67" verbEnabled="true" clickThrough="true" mouseEnabled="true" alpha="0"/> <!-- Fire Hit -->
 		<DisplayObject2D name="A device of some sort" id="Cogs" assetID="cogs_asset" x="448" y="303" originX="49" originY="23" verbEnabled="true" clickThrough="true" mouseEnabled="true" alpha="0"/> <!-- Cogs Hit -->
+		
+		<DisplayObject2D id="cd1" definitionID="cd_collectable" assetID="cd_asset" x="528" y="408" visible="true" />
+		<DisplayObject2D id="cd2" definitionID="cd_collectable" assetID="cd_asset" x="1060" y="406" visible="true"/>
+		<DisplayObject2D id="cd3" definitionID="cd_collectable" assetID="cd_asset" x="1206" y="314" visible="true" />
+		<DisplayObject2D id="cd4" definitionID="cd_collectable" assetID="cd_asset" x="1141" y="452" visible="true" />
+		<DisplayObject2D id="cd5" definitionID="cd_collectable" assetID="cd_asset" x="257" y="446" visible="true" />
+					
+		<DisplayObject2D  id="strange_note" name="A strange note" assetURL="[base.url]images/lab/page_white_text.png" x="970" y="440" verbEnabled="true" clickThrough="true" mouseEnabled="true" /> 
+				
+		
+		
+		<!-- path finding room debug object -->
+		<!--DisplayObject2d name="Go to pathfinding" id="path_test" assetURL="[base.url]images/backpack/cog_three_backpack.swf" x="400" y="300" visible="true" mouseEnabled="true" useHandCursor="true" clickThrough="true"/-->
+		
 		
 		<ZSortingDisplayObject id="furniture">
 						
@@ -81,7 +95,18 @@
 			<DisplayObject2D name="A pendulum" id="wallPendulum2" assetID="Wallpendulum2_asset" x="720" y="335" originX="7" originY="69" visible="false"/> <!-- The pendulum after you have put them in the clock -->
 			<DisplayObject2D name="A pendulum" id="wallPendulum3" assetID="Wallpendulum3_asset" x="730" y="305" originX="13" originY="42" visible="false"/> <!-- The pendulum after you have put them in the clock -->
 			<DisplayObject2D id="gramexp" culling="false" assetID="gramexp_asset" x="0" y="432" originX="0" originY="432"/> <!-- Animation for the gramophone -->
-			<DisplayObject2D id="blackout" culling="false" assetID="blackout_asset" x="0" y="546" originX="0" originY="546"/> <!-- Animation for the gramophone -->			
+			<DisplayObject2D id="blackout" culling="false" assetID="blackout_asset" x="0" y="546" originX="0" originY="546"/> <!-- Animation for the gramophone -->	
+			
+			
+			<DisplayObject2D id="helper" displayObjectClass="uk.co.dubit.graphics.render2D.ActionPlayer" x="500" y="500" originX="0" originY="25" defaultSpeed="3">
+				<Attribute key="filters" value="{Room.helperFilters}" />
+				<Actions defaultAction="helper_stand">
+					<Stand id="helper_stand" path="[base.url]images/lab/doggie.swf"/>
+					<Walk id="helper_walk" path="[base.url]images/lab/doggie.swf"/>
+					<Action id="helper_dig" path="[base.url]images/helper/dig.swf"/>
+				</Actions>
+			</DisplayObject2D>			
+		
 		</ZSortingDisplayObject>
 
 		<ZSortingDisplayObject id="playerMessages"/>
@@ -135,8 +160,13 @@
         <Asset id="wallLens1_asset" url="images/lab/wallLens1.swf"/>
         <Asset id="wallLens2_asset" url="images/lab/wallLens2.swf"/>
         <Asset id="wallLens3_asset" url="images/lab/wallLens3.swf"/>
+        <Asset id="cd_asset" url="images/lab/cd.png"/>
         <!--><Asset id="clockanimation_asset" url="images/lab/clockanimation.swf"/>-->
     </Assets>
+
+	<Trigger event="OnClick" gameObject="{Room.path_test}">
+		<ChangeRoom roomName="path_test"/>
+	</Trigger>
 
 <!--Telescope-->
 	<Trigger event="OnLookAt" gameObject="{Room.telescope}">
@@ -353,7 +383,16 @@
 				</MoveTo>		
 			</Then>
 			<Else>
-				<ShowBubble gameObject="{Room.player}" message="Purdy music"/>
+				<If expression="({Quests.noteQuest.readnote.complete} == {false})">
+					<Then>
+						<ShowBubble gameObject="{Room.player}" message="Purdy music"/>
+					</Then>
+					<Else>
+						<ShowBubble gameObject="{Room.player}" message="There really is something in this music, but it's still hard to figure out exactly what"/>
+						<CompleteObjective objective="{Quests.noteQuest.listengramophone}"/>
+						<BeginQuest questID="blackboardQuest" />
+					</Else>
+				</If>
 			</Else>
 		</If>
 	</Trigger>
@@ -524,6 +563,17 @@
 			</Complete>	
 		</MoveTo>
 	</Trigger>
+	
+	<Trigger event="OnDig" gameObject="{Room.Fireplace}">
+		<ShowBubble gameObject="{Room.helper}" message="Woof" yOffset="-20"/>
+		<DisableTracker tracker="pet_follower" />
+		<SetValues target="{Room.helper}" defaultSpeed="10" />
+		<MoveTo gameObject="{Room.helper}" targetX="{Room.Fireplace.x}" targetY="{Room.Fireplace.y}">
+			<Complete>
+				<OpenActivityBar activityBar="digging" targettedObject="{Room.helper}"/>
+			</Complete>
+		</MoveTo>
+	</Trigger>
 
 	<Trigger event="OnDragDrop" gameObject="{Room.cogs}">
 		<Switch value="{Event.dragInitiator.id}">
@@ -659,28 +709,71 @@
 	</Trigger>
 	
 	<Trigger event="OnRead" gameObject="{Room.bookshelf_two}">
-		<OpenActivityBar activityBar="reading" targettedObject="{Event.handler}"/>
-		<Call behaviourID="mouseOff" scope="{Rooms.currentRoom}"/>
+		<MoveTo gameObject="{Room.player}" x="{Room.player.x}" y="{Room.player.y}" targetX="619" targetY="400">
+			<Complete>
+				<Call behaviourID="readAction" />
+			</Complete>
+		</MoveTo>
 	</Trigger>
 
 	<Trigger event="OnLookAt" gameObject="{Room.bookshelf_three}">
 		<ShowBubble gameObject="{Room.player}" message="It appears to be an extensive library of books relating to physics, engineering and philosophy"/>
 	</Trigger>
 	
+	<Trigger event="OnRead" gameObject="{Room.bookshelf_three}">
+		<MoveTo gameObject="{Room.player}" x="{Room.player.x}" y="{Room.player.y}" targetX="682" targetY="400">
+			<Complete>
+				<Call behaviourID="readAction" />
+			</Complete>
+		</MoveTo>
+	</Trigger>
+	
 	<Trigger event="OnLookAt" gameObject="{Room.bookshelf_four}">
 		<ShowBubble gameObject="{Room.player}" message="It appears to be an extensive library of books relating to physics, engineering and philosophy"/>
+	</Trigger>
+	
+	<Trigger event="OnRead" gameObject="{Room.bookshelf_four}">
+		<MoveTo gameObject="{Room.player}" x="{Room.player.x}" y="{Room.player.y}" targetX="797" targetY="405">
+			<Complete>
+				<Call behaviourID="readAction" />
+			</Complete>
+		</MoveTo>
 	</Trigger>
 		
 	<Trigger event="OnLookAt" gameObject="{Room.bookshelf_five}">
 		<ShowBubble gameObject="{Room.player}" message="It appears to be an extensive library of books relating to physics, engineering and philosophy"/>
 	</Trigger>
+	
+	<Trigger event="OnRead" gameObject="{Room.bookshelf_five}">
+		<MoveTo gameObject="{Room.player}" x="{Room.player.x}" y="{Room.player.y}" targetX="846" targetY="403">
+			<Complete>
+				<Call behaviourID="readAction" />
+			</Complete>
+		</MoveTo>
+	</Trigger>
 
-	<Trigger event="OnLookAt" gameObject="{Room.bookshelf_six">
+	<Trigger event="OnLookAt" gameObject="{Room.bookshelf_six}">
 		<ShowBubble gameObject="{Room.player}" message="It appears to be an extensive library of books relating to physics, engineering and philosophy"/>
+	</Trigger>
+	
+	<Trigger event="OnRead" gameObject="{Room.bookshelf_six}">
+		<MoveTo gameObject="{Room.player}" x="{Room.player.x}" y="{Room.player.y}" targetX="1166" targetY="419">
+			<Complete>
+				<Call behaviourID="readAction" />
+			</Complete>
+		</MoveTo>
 	</Trigger>
 		
 	<Trigger event="OnLookAt" gameObject="{Room.bookshelf_seven}">
 		<ShowBubble gameObject="{Room.player}" message="It appears to be an extensive library of books relating to physics, engineering and philosophy"/>
+	</Trigger>
+	
+	<Trigger event="OnRead" gameObject="{Room.bookshelf_seven}">
+		<MoveTo gameObject="{Room.player}" x="{Room.player.x}" y="{Room.player.y}" targetX="1240" targetY="423">
+			<Complete>
+				<Call behaviourID="readAction" />
+			</Complete>
+		</MoveTo>
 	</Trigger>
 
 	<Trigger event="OnLookAt" gameObject="{Room.doc}">
@@ -688,11 +781,24 @@
 	</Trigger>
 
 	<Trigger event="OnLookAt" gameObject="{Room.chalkboard}">
-		<ShowBubble gameObject="{Room.player}" message="Notes and calculations made by Rothwell Ruskin-Horton II are scribbled on the blackboard. These are mostly half erased and illegible"/>
+		<If expression="({Quests.blackboardQuest.active} == {true})" >
+			<Then>
+				<ShowBubble gameObject="{Room.player}" message="There seems to be no information on the board about the secret message"/>
+				<CompleteObjective objective="{Quests.blackboardQuest.readblackboard}"/>
+			</Then>
+			<Else>
+				<ShowBubble gameObject="{Room.player}" message="Notes and calculations made by Rothwell Ruskin-Horton II are scribbled on the blackboard. These are mostly half erased and illegible"/>
+			</Else>
+		</If>
 	</Trigger>
-	
+		
 	<!-- DIALOGUE -->
 
+	<Trigger event="OnLookAt" gameObject="{Room.strange_note}">
+		<ShowBubble gameObject="{Room.player}" message="The note looks to have been hastily written, but suggests that the music that the gramophone produces contains a hidden message..." useServer="false"/>
+		<CompleteObjective objective="{Quests.noteQuest.readnote}"/>
+	</Trigger>
+		
 	<Trigger event="OnTalkTo" gameObject="{Room.doc}">
 		<MoveTo gameObject="{Room.player}" x="{Room.player.x}" y="{Room.player.y}" targetX="280" targetY="475">
 			<Complete>
@@ -700,7 +806,7 @@
 			</Complete>
 		</MoveTo>
 	</Trigger>
-	
+		
 	<Statement id="talkToTheDoc" message1=" Ah hello there lad. Inspector Lavigeur told me he'd send over some assistance. Peckham isn't it?">
 		<Response message="It's George, sir. George Peckham">
 			<Statement message=" Aren't you a little bit young for a Police Detective?">
@@ -708,15 +814,20 @@
 					<Statement message="A good idea, young man. Lavigeur's more astute than he looks. Now, to business!'">
 						<Response message="What are we investigating, sir?">
 							<Statement message="This is the laboratory and study of one Rothwell Ruskin-Horton II, inventor, alchemist and philosopher. Eight days ago he contacted me, he described making some breakthrough in the sciences, but did not elaborate any further. No one has heard anything from him since... The Inspector suspects foul play. And its up to us to find him.'">
+								<Response message="OK">
+									<CompleteObjective objective="{Quests.timeMachineQuest.conversation}"/>
+								</Response>	
 							</Statement>
 						</Response>
 						<Response message="What is this place? I've never seen such baffling wonders!">
 							<Statement message="This is the laboratory and study of one Rothwell Ruskin-Horton II, inventor, alchemist and philosopher. Eight days ago he contacted me, he described making some breakthrough in the sciences, but did not elaborate any further. No one has heard anything from him since... The Inspector suspects foul play. And its up to us to find him.'">
+								<Response message="OK">
+									<CompleteObjective objective="{Quests.timeMachineQuest.conversation}"/>
+								</Response>	
 							</Statement>
 						</Response>
 						<Response message="The Inspector mentioned something about finding a missing person...?">
-							<Statement message="This is the laboratory and study of one Rothwell Ruskin-Horton II, inventor, alchemist and philosopher. Eight days ago he contacted me, he described making some breakthrough in the sciences, but did not elaborate any further. No one has heard anything from him since... The Inspector suspects foul play. And its up to us to find him.'">
-							</Statement>
+							<Call BehaviourID="questObjectiveOne"/>
 						</Response>
 					</Statement>
 				</Response>
@@ -724,14 +835,23 @@
 					<Statement message="A good idea, young man. Lavigeur's more astute than he looks. Now, to business!'">
 						<Response message="What are we investigating, sir?">
 							<Statement message="This is the laboratory and study of one Rothwell Ruskin-Horton II, inventor, alchemist and philosopher. Eight days ago he contacted me, he described making some breakthrough in the sciences, but did not elaborate any further. No one has heard anything from him since... The Inspector suspects foul play. And its up to us to find him.'">
+								<Response message="OK">
+									<CompleteObjective objective="{Quests.timeMachineQuest.conversation}"/>
+								</Response>	
 							</Statement>
 						</Response>
 						<Response message="What is this place? I've never seen such baffling wonders!">
 							<Statement message="This is the laboratory and study of one Rothwell Ruskin-Horton II, inventor, alchemist and philosopher. Eight days ago he contacted me, he described making some breakthrough in the sciences, but did not elaborate any further. No one has heard anything from him since... The Inspector suspects foul play. And its up to us to find him.'">
+								<Response message="OK">
+									<CompleteObjective objective="{Quests.timeMachineQuest.conversation}"/>
+								</Response>	
 							</Statement>
 						</Response>
 						<Response message="The Inspector mentioned something about finding a missing person...?">
 							<Statement message="This is the laboratory and study of one Rothwell Ruskin-Horton II, inventor, alchemist and philosopher. Eight days ago he contacted me, he described making some breakthrough in the sciences, but did not elaborate any further. No one has heard anything from him since... The Inspector suspects foul play. And its up to us to find him.'">
+								<Response message="OK">
+									<CompleteObjective objective="{Quests.timeMachineQuest.conversation}"/>
+								</Response>	
 							</Statement>
 						</Response>
 					</Statement>
@@ -740,14 +860,23 @@
 					<Statement message="I like the cut of your jib young fella! Wit is a more useful companion than a handgun or a cudgel Now, to business!'">
 						<Response message="What are we investigating, sir?">
 							<Statement message="This is the laboratory and study of one Rothwell Ruskin-Horton II, inventor, alchemist and philosopher. Eight days ago he contacted me, he described making some breakthrough in the sciences, but did not elaborate any further. No one has heard anything from him since... The Inspector suspects foul play. And its up to us to find him.'">
+								<Response message="OK">
+									<CompleteObjective objective="{Quests.timeMachineQuest.conversation}"/>
+								</Response>	
 							</Statement>
 						</Response>
 						<Response message="What is this place? I've never seen such baffling wonders!">
 							<Statement message="This is the laboratory and study of one Rothwell Ruskin-Horton II, inventor, alchemist and philosopher. Eight days ago he contacted me, he described making some breakthrough in the sciences, but did not elaborate any further. No one has heard anything from him since... The Inspector suspects foul play. And its up to us to find him.'">
+								<Response message="OK">
+									<CompleteObjective objective="{Quests.timeMachineQuest.conversation}"/>
+								</Response>	
 							</Statement>
 						</Response>
 						<Response message="The Inspector mentioned something about finding a missing person...?">
 							<Statement message="This is the laboratory and study of one Rothwell Ruskin-Horton II, inventor, alchemist and philosopher. Eight days ago he contacted me, he described making some breakthrough in the sciences, but did not elaborate any further. No one has heard anything from him since... The Inspector suspects foul play. And its up to us to find him.'">
+								<Response message="OK">
+									<CompleteObjective objective="{Quests.timeMachineQuest.conversation}"/>
+								</Response>	
 							</Statement>
 						</Response>
 					</Statement>	
@@ -760,14 +889,23 @@
 					<Statement message="A good idea, young man. Lavigeur's more astute than he looks. Now, to business!'">
 						<Response message="What are we investigating, sir?">
 							<Statement message="This is the laboratory and study of one Rothwell Ruskin-Horton II, inventor, alchemist and philosopher. Eight days ago he contacted me, he described making some breakthrough in the sciences, but did not elaborate any further. No one has heard anything from him since... The Inspector suspects foul play. And its up to us to find him.'">
+								<Response message="OK">
+									<CompleteObjective objective="{Quests.timeMachineQuest.conversation}"/>
+								</Response>	
 							</Statement>
 						</Response>
 						<Response message="What is this place? I've never seen such baffling wonders!">
 							<Statement message="This is the laboratory and study of one Rothwell Ruskin-Horton II, inventor, alchemist and philosopher. Eight days ago he contacted me, he described making some breakthrough in the sciences, but did not elaborate any further. No one has heard anything from him since... The Inspector suspects foul play. And its up to us to find him.'">
+								<Response message="OK">
+									<CompleteObjective objective="{Quests.timeMachineQuest.conversation}"/>
+								</Response>	
 							</Statement>
 						</Response>
 						<Response message="The Inspector mentioned something about finding a missing person...?">
 							<Statement message="This is the laboratory and study of one Rothwell Ruskin-Horton II, inventor, alchemist and philosopher. Eight days ago he contacted me, he described making some breakthrough in the sciences, but did not elaborate any further. No one has heard anything from him since... The Inspector suspects foul play. And its up to us to find him.'">
+								<Response message="OK">
+									<CompleteObjective objective="{Quests.timeMachineQuest.conversation}"/>
+								</Response>	
 							</Statement>
 						</Response>
 					</Statement>
@@ -776,14 +914,23 @@
 					<Statement message="A good idea, young man. Lavigeur's more astute than he looks. Now, to business!'">
 						<Response message="What are we investigating, sir?">
 							<Statement message="This is the laboratory and study of one Rothwell Ruskin-Horton II, inventor, alchemist and philosopher. Eight days ago he contacted me, he described making some breakthrough in the sciences, but did not elaborate any further. No one has heard anything from him since... The Inspector suspects foul play. And its up to us to find him.'">
+								<Response message="OK">
+									<CompleteObjective objective="{Quests.timeMachineQuest.conversation}"/>
+								</Response>	
 							</Statement>
 						</Response>
 						<Response message="What is this place? I've never seen such baffling wonders!">
 							<Statement message="This is the laboratory and study of one Rothwell Ruskin-Horton II, inventor, alchemist and philosopher. Eight days ago he contacted me, he described making some breakthrough in the sciences, but did not elaborate any further. No one has heard anything from him since... The Inspector suspects foul play. And its up to us to find him.'">
+								<Response message="OK">
+									<CompleteObjective objective="{Quests.timeMachineQuest.conversation}"/>
+								</Response>	
 							</Statement>
 						</Response>
 						<Response message="The Inspector mentioned something about finding a missing person...?">
 							<Statement message="This is the laboratory and study of one Rothwell Ruskin-Horton II, inventor, alchemist and philosopher. Eight days ago he contacted me, he described making some breakthrough in the sciences, but did not elaborate any further. No one has heard anything from him since... The Inspector suspects foul play. And its up to us to find him.'">
+								<Response message="OK">
+									<CompleteObjective objective="{Quests.timeMachineQuest.conversation}"/>
+								</Response>	
 							</Statement>
 						</Response>
 					</Statement>
@@ -792,14 +939,23 @@
 					<Statement message="I like the cut of your jib young fella! Wit is a more useful companion than a handgun or a cudgel Now, to business!'">
 						<Response message="What are we investigating, sir?">
 							<Statement message="This is the laboratory and study of one Rothwell Ruskin-Horton II, inventor, alchemist and philosopher. Eight days ago he contacted me, he described making some breakthrough in the sciences, but did not elaborate any further. No one has heard anything from him since... The Inspector suspects foul play. And its up to us to find him.'">
+								<Response message="OK">
+									<CompleteObjective objective="{Quests.timeMachineQuest.conversation}"/>
+								</Response>	
 							</Statement>
 						</Response>
 						<Response message="What is this place? I've never seen such baffling wonders!">
 							<Statement message="This is the laboratory and study of one Rothwell Ruskin-Horton II, inventor, alchemist and philosopher. Eight days ago he contacted me, he described making some breakthrough in the sciences, but did not elaborate any further. No one has heard anything from him since... The Inspector suspects foul play. And its up to us to find him.'">
+								<Response message="OK">
+									<CompleteObjective objective="{Quests.timeMachineQuest.conversation}"/>
+								</Response>	
 							</Statement>
 						</Response>
 						<Response message="The Inspector mentioned something about finding a missing person...?">
 							<Statement message="This is the laboratory and study of one Rothwell Ruskin-Horton II, inventor, alchemist and philosopher. Eight days ago he contacted me, he described making some breakthrough in the sciences, but did not elaborate any further. No one has heard anything from him since... The Inspector suspects foul play. And its up to us to find him.'">
+								<Response message="OK">
+									<CompleteObjective objective="{Quests.timeMachineQuest.conversation}"/>
+								</Response>	
 							</Statement>
 						</Response>
 					</Statement>	
@@ -812,14 +968,23 @@
 					<Statement message="A good idea, young man. Lavigeur's more astute than he looks. Now, to business!'">
 						<Response message="What are we investigating, sir?">
 							<Statement message="This is the laboratory and study of one Rothwell Ruskin-Horton II, inventor, alchemist and philosopher. Eight days ago he contacted me, he described making some breakthrough in the sciences, but did not elaborate any further. No one has heard anything from him since... The Inspector suspects foul play. And its up to us to find him.'">
+								<Response message="OK">
+									<CompleteObjective objective="{Quests.timeMachineQuest.conversation}"/>
+								</Response>	
 							</Statement>
 						</Response>
 						<Response message="What is this place? I've never seen such baffling wonders!">
 							<Statement message="This is the laboratory and study of one Rothwell Ruskin-Horton II, inventor, alchemist and philosopher. Eight days ago he contacted me, he described making some breakthrough in the sciences, but did not elaborate any further. No one has heard anything from him since... The Inspector suspects foul play. And its up to us to find him.'">
+								<Response message="OK">
+									<CompleteObjective objective="{Quests.timeMachineQuest.conversation}"/>
+								</Response>	
 							</Statement>
 						</Response>
 						<Response message="The Inspector mentioned something about finding a missing person...?">
 							<Statement message="This is the laboratory and study of one Rothwell Ruskin-Horton II, inventor, alchemist and philosopher. Eight days ago he contacted me, he described making some breakthrough in the sciences, but did not elaborate any further. No one has heard anything from him since... The Inspector suspects foul play. And its up to us to find him.'">
+								<Response message="OK">
+									<CompleteObjective objective="{Quests.timeMachineQuest.conversation}"/>
+								</Response>	
 							</Statement>
 						</Response>
 					</Statement>
@@ -828,15 +993,24 @@
 					<Statement message="A good idea, young man. Lavigeur's more astute than he looks. Now, to business!'">
 						<Response message="What are we investigating, sir?">
 							<Statement message="This is the laboratory and study of one Rothwell Ruskin-Horton II, inventor, alchemist and philosopher. Eight days ago he contacted me, he described making some breakthrough in the sciences, but did not elaborate any further. No one has heard anything from him since... The Inspector suspects foul play. And its up to us to find him.'">
-							</Statement>
+								<Response message="OK">
+									<CompleteObjective objective="{Quests.timeMachineQuest.conversation}"/>
+								</Response>	
+							</Statement>						
 						</Response>
 						<Response message="What is this place? I've never seen such baffling wonders!">
 							<Statement message="This is the laboratory and study of one Rothwell Ruskin-Horton II, inventor, alchemist and philosopher. Eight days ago he contacted me, he described making some breakthrough in the sciences, but did not elaborate any further. No one has heard anything from him since... The Inspector suspects foul play. And its up to us to find him.'">
-							</Statement>
+								<Response message="OK">
+									<CompleteObjective objective="{Quests.timeMachineQuest.conversation}"/>
+								</Response>	
+							</Statement>						
 						</Response>
 						<Response message="The Inspector mentioned something about finding a missing person...?">
 							<Statement message="This is the laboratory and study of one Rothwell Ruskin-Horton II, inventor, alchemist and philosopher. Eight days ago he contacted me, he described making some breakthrough in the sciences, but did not elaborate any further. No one has heard anything from him since... The Inspector suspects foul play. And its up to us to find him.'">
-							</Statement>
+								<Response message="OK">
+									<CompleteObjective objective="{Quests.timeMachineQuest.conversation}"/>
+								</Response>	
+							</Statement>						
 						</Response>
 					</Statement>
 				</Response>
@@ -844,14 +1018,23 @@
 					<Statement message="I like the cut of your jib young fella! Wit is a more useful companion than a handgun or a cudgel Now, to business!'">
 						<Response message="What are we investigating, sir?">
 							<Statement message="This is the laboratory and study of one Rothwell Ruskin-Horton II, inventor, alchemist and philosopher. Eight days ago he contacted me, he described making some breakthrough in the sciences, but did not elaborate any further. No one has heard anything from him since... The Inspector suspects foul play. And its up to us to find him.'">
-							</Statement>
+								<Response message="OK">
+									<CompleteObjective objective="{Quests.timeMachineQuest.conversation}"/>
+								</Response>	
+							</Statement>						
 						</Response>		
 						<Response message="What is this place? I've never seen such baffling wonders!">
 							<Statement message="This is the laboratory and study of one Rothwell Ruskin-Horton II, inventor, alchemist and philosopher. Eight days ago he contacted me, he described making some breakthrough in the sciences, but did not elaborate any further. No one has heard anything from him since... The Inspector suspects foul play. And its up to us to find him.'">
-							</Statement>
+								<Response message="OK">
+									<CompleteObjective objective="{Quests.timeMachineQuest.conversation}"/>
+								</Response>	
+							</Statement>						
 						</Response>
 						<Response message="The Inspector mentioned something about finding a missing person...?">
 							<Statement message="This is the laboratory and study of one Rothwell Ruskin-Horton II, inventor, alchemist and philosopher. Eight days ago he contacted me, he described making some breakthrough in the sciences, but did not elaborate any further. No one has heard anything from him since... The Inspector suspects foul play. And its up to us to find him.'">
+								<Response message="OK">
+									<CompleteObjective objective="{Quests.timeMachineQuest.conversation}"/>
+								</Response>	
 							</Statement>
 						</Response>
 					</Statement>	
@@ -859,5 +1042,14 @@
 			</Statement>		
 		</Response>
 	</Statement>
-
+	
+	
+	<BehaviourDefinition id="questObjectiveOne">
+		<Statement message="This is the laboratory and study of one Rothwell Ruskin-Horton II, inventor, alchemist and philosopher. Eight days ago he contacted me, he described making some breakthrough in the sciences, but did not elaborate any further. No one has heard anything from him since... The Inspector suspects foul play. And its up to us to find him.'">
+			<Response message="OK">
+				<CompleteObjective objective="{Quests.timeMachineQuest.conversation}"/>
+			</Response>	
+		</Statement>
+	</BehaviourDefinition>
 </ChatRoom>
+

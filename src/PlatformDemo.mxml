@@ -1,81 +1,50 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<app:NexusBase 
-	width="100%" height="100%" layout="absolute" horizontalCenter="0" backgroundColor="black" horizontalScrollPolicy="off" verticalScrollPolicy="off" 
-	creationComplete="onCreationComplete();"
+<app:NexusBase
+	width="100%" height="100%" 
+	layout="absolute" 
+	backgroundColor="black" 
+	creationComplete="onCreationComplete()"
 	implements="uk.co.dubit.properties.IPropertiesListener, uk.co.dubit.platform.scriptEngine.gameObject.IGameObjectListener"
 	xmlns:mx="http://www.adobe.com/2006/mxml" 
-	xmlns:app="uk.co.dubit.platform.app.*" 
-	xmlns:skin="uk.co.dubit.platform.components.skin.*" 
-	xmlns:ui="uk.co.dubit.platform.components.rooms.ui.*" 
-	xmlns:backpack="uk.co.dubit.platform.components.backpack.*" 
-	xmlns:quest="uk.co.dubit.platform.components.quest.*"
+	xmlns:app="uk.co.dubit.platform.app.*"
 	xmlns:dialogue="uk.co.dubit.platform.components.dialogue.*" 
-	xmlns:experience="uk.co.dubit.platform.components.experience.*" 
-	xmlns:skills="uk.co.dubit.platform.components.skills.*"
-	xmlns:verb="uk.co.dubit.platform.components.verb.*" xmlns:editor="uk.co.dubit.platform.components.editor.*" xmlns:chat="uk.co.dubit.platform.components.chat.*" xmlns:video="uk.co.dubit.platform.components.video.*" xmlns:minigame="uk.co.dubit.platform.components.minigame.*" xmlns:growl="uk.co.dubit.platform.components.growl.*">
+	xmlns:skin="uk.co.dubit.platform.components.skin.*" 
+	xmlns:skills="uk.co.dubit.platform.components.skills.*" 
+	xmlns:growl="uk.co.dubit.platform.components.growl.*" 
+	xmlns:minigame="uk.co.dubit.platform.components.minigame.*" 
+	xmlns:ui="uk.co.dubit.platform.components.rooms.ui.*" 
+	xmlns:video="uk.co.dubit.platform.components.video.*" 
+	xmlns:verb="uk.co.dubit.platform.components.verb.*" 
+	xmlns:chat="uk.co.dubit.platform.components.chat.*" >
 	
 	<mx:Style source="style/style.css"/>
 	
 	<mx:Script>
 		<![CDATA[
-			import uk.co.dubit.platform.components.session.SessionModel;
-			import uk.co.dubit.platform.components.experience.Experience;
-			import com.dubitplatform.views.game.CartoonChatBubble;
-			import uk.co.dubit.graphics.render2D.types.ChatBubble2D;
-			import uk.co.dubit.platform.components.backpack.Backpack;
-			import uk.co.dubit.platform.components.quest.QuestModel;
-			import com.dubitplatform.views.MapTitleWindow;
-			import uk.co.dubit.utils.StringUtils;
-			import com.adobe.utils.StringUtil;
-			import com.dubitplatform.views.AchievementsView;
-			import com.dubitplatform.views.ActivityBarView;
-			import com.dubitplatform.views.BackpackView;
-			import com.dubitplatform.views.BranchingConversationView;
-			import com.dubitplatform.views.ChatRoomPreloaderView;
-			import com.dubitplatform.views.ChatRoomView;
-			import com.dubitplatform.views.ChatView;
-			import com.dubitplatform.views.CollectionView;
 			import com.dubitplatform.views.CollectionsPanel;
-			import com.dubitplatform.views.ContextMenuSkin;
 			import com.dubitplatform.views.ControlPanel;
-			import com.dubitplatform.views.ExperienceView;
-			import com.dubitplatform.views.GrowlView;
 			import com.dubitplatform.views.MapTitleWindow;
-			import com.dubitplatform.views.MinigameSkin;
-			import com.dubitplatform.views.MinigameTitleWindow;
-			import com.dubitplatform.views.ProfileSkinTitleWindow;
-			import com.dubitplatform.views.QuestsView;
-			import com.dubitplatform.views.RoomListView;
-			import com.dubitplatform.views.ShopTitleWindow;
-			import com.dubitplatform.views.SkillsView;
-			import com.dubitplatform.views.VerbControllerView;
-			import com.dubitplatform.views.game.CartoonChatBubble;
+			import com.dubitplatform.views.QuickChatView;
 			
 			import mx.managers.PopUpManager;
 			
-			import uk.co.dubit.graphics.render2D.types.ChatBubble2D;
 			import uk.co.dubit.logging.LoggingPanel;
-			import uk.co.dubit.logging.LoggingPopUp;
 			import uk.co.dubit.platform.components.backpack.Backpack;
 			import uk.co.dubit.platform.components.catalogue.Shops;
+			import uk.co.dubit.platform.components.experience.Experience;
 			import uk.co.dubit.platform.components.meters.IMeter;
-			import uk.co.dubit.platform.components.meters.Meter;
 			import uk.co.dubit.platform.components.meters.Meters;
-			import uk.co.dubit.platform.components.minigame.Minigame;
 			import uk.co.dubit.platform.components.quest.QuestModel;
+			import uk.co.dubit.platform.components.session.SessionModel;
 			import uk.co.dubit.platform.scriptEngine.gameObject.IGameObject;
 			import uk.co.dubit.properties.Properties;
-			import uk.co.dubit.sound.SoundManager;
 			import uk.co.dubit.utils.StringUtils;
+
 			
-			private var skillsView : SkillsView;
-			private var questsView : QuestsView;
-			private var controlPanel : ControlPanel;
-			private var collectionsPanel : CollectionsPanel;
-			private var backpackView : BackpackView;
-			private var roomListView : RoomListView;
-			private var loggingPanel : LoggingPanel;
-			private var map : MapTitleWindow;
+			private var map:MapTitleWindow;
+			private var controlPanel:ControlPanel;
+			private var loggingPanel:LoggingPanel;
+			private var collectionsPanel:CollectionsPanel;
 			private var energyMeter:IMeter;
 			
 			private var placeholders : Placeholders;
@@ -85,8 +54,6 @@
 				controlPanel = PopUpManager.createPopUp(this, ControlPanel) as ControlPanel;
 				controlPanel.filters = [new DropShadowFilter(0, 0, 0, 0.7, 40, 40, 1, 3)];
 				controlPanel.visible = false;	
-				
-				roomBackground.filters = [new DropShadowFilter(0, 0, 0, 0.7, 40, 40, 1, 3)];
 				
 				loggingPanel = PopUpManager.createPopUp(this, LoggingPanel) as LoggingPanel;
 				loggingPanel.filters = [new DropShadowFilter(0, 0, 0, 0.7, 40, 40, 1, 3)];
@@ -115,7 +82,6 @@
 			{
 				if (StringUtils.equals("scene-viewportHeight", property, true))
 				{
-					roomBackground.height = newValue;
 					chatRoomSkinContainer.height = newValue;
 					videoContainer.height = newValue;
 					chatRoomPreloaderContainer.height = newValue;
@@ -125,7 +91,6 @@
 				}
 				if (StringUtils.equals("scene-viewportWidth", property, true))
 				{
-					roomBackground.width = newValue;
 					chatRoomSkinContainer.width = newValue;
 					videoContainer.width = newValue;
 					chatSkinContainer.width = newValue;
@@ -180,37 +145,42 @@
 		]]>
 	</mx:Script>	
 
-	<mx:Resize duration="500" id="resizeEffect"/>
-
 	<mx:Fade duration="500" id="fadeInEffect" alphaFrom="0" alphaTo="1"/>
 	<mx:Fade duration="1000" id="fadeOutEffect" alphaFrom="1" alphaTo="0" startDelay="1000"/>
 
 	<mx:Canvas width="100%" height="100%" verticalScrollPolicy="off">
-		<mx:Box id="roomBackground"  width="850" height="445" horizontalCenter="0" y="100" backgroundColor="black"/>
-		<ui:ChatRoomSkinContainer id="chatRoomSkinContainer" width="850" height="445" y="100" horizontalScrollPolicy="off" verticalScrollPolicy="off" horizontalCenter="0" resizeEffect="resizeEffect"/>
+
+		<ui:ChatRoomSkinContainer id="chatRoomSkinContainer" width="850" height="445" y="100" backgroundColor="black" horizontalScrollPolicy="off" verticalScrollPolicy="off" horizontalCenter="0"/>
 		
-		<chat:ChatSkinContainer id="chatSkinContainer" width="850" height="30" y="515" horizontalCenter="0" resizeEffect="resizeEffect"/>			
-		<verb:VerbSkinContainer id="verbSkinContainer" width="850" height="30" y="470" horizontalCenter="0" resizeEffect="resizeEffect"/>	
+		<chat:ChatSkinContainer id="chatSkinContainer" width="850" height="30" y="515" horizontalCenter="0" />			
+		<verb:VerbSkinContainer id="verbSkinContainer" width="850" height="30" y="470" horizontalCenter="0" />	
+		<skin:BasicSkinContainer id="quickChatSkinContainer" containerID="quickChatContainer" width="850" height="400" y="100" horizontalCenter="0"/>	
 		
 		<video:VideosSkinContainer id="videoContainer" outEffect="{fadeOutEffect}" width="850" height="445" horizontalCenter="0" y="100"/>
 		
-		<ui:ChatRoomPreloaderSkinContainer id="chatRoomPreloaderContainer" width="850" height="445" y="100" mouseEnabled="false" horizontalCenter="0" resizeEffect="resizeEffect"/>
+		<ui:ChatRoomPreloaderSkinContainer id="chatRoomPreloaderContainer" width="850" height="445" y="100" mouseEnabled="false" horizontalCenter="0" />
 		
-		<minigame:MinigameSkinContainer width="850" height="445" y="100" mouseEnabled="false" horizontalCenter="0" resizeEffect="resizeEffect"/>
+		<minigame:MinigameSkinContainer width="850" height="445" y="100" mouseEnabled="false" horizontalCenter="0" />
 		
-		<growl:GrowlSkinContainer width="850" height="445" y="100" mouseEnabled="false" horizontalCenter="0" resizeEffect="resizeEffect"/>
+		<growl:StackingGrowlSkinContainer width="100%" height="100%" y="100" mouseEnabled="false" horizontalCenter="0" resizeEffect="resizeEffect"/>
 		
-		<mx:ControlBar id="bar" width="850" horizontalCenter="0" y="60" height="30" paddingLeft="5" resizeEffect="resizeEffect">
+		<mx:ControlBar id="bar" width="850" horizontalCenter="0" y="60" height="30" paddingLeft="5">
 			<mx:LinkButton label="Quests ({QuestModel.getInstance().activeQuestCount})" click="openControlPanel('quests');"/>
-			<mx:LinkButton label="Inventory ({Backpack.getInstance().count})" click="openControlPanel('inventory');"/>
+			<mx:LinkButton label="Inventory ({Backpack.getInstance().count})" click="openControlPanel('inventory');"/>	
+			<mx:LinkButton label="Collections" click="openCollectionsPanel();"/>	
+			<skills:SkillsSkinContainer width="110"/>
 			<mx:Spacer width="100%"/>
-			<mx:Label text="{Experience.getInstance().currentLevel.name}({Experience.getInstance().points}/{Experience.getInstance().nextLevel.points})"/>	
+			<mx:Label text="{Experience.getInstance().currentLevel.name} ({Experience.getInstance().points}/{Experience.getInstance().nextLevel.points}XP)"/>
 			<mx:Text id="energyDisplay"/>			
 		</mx:ControlBar>
-		
+				
 		<skin:PopupSkinContainer containerID="shopContainer" width="100%" height="100%" />
 					
 		<dialogue:DialogueSkinContainer id="dialogueSkinContainer" outEffect="{fadeOutEffect}" inEffect="{fadeInEffect}" horizontalCenter="0" width="850" height="445" y="100"/>				
+	
+		<skin:BasicSkinContainer containerID="worldOverlay" width="840" height="398" y="100" horizontalCenter="0" />
 	</mx:Canvas>
+	
+	<skin:BasicSkinContainer containerID="appOverlay" width="100%" height="100%"/>
 		
 </app:NexusBase>

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Include xmlns:xi="http://www.w3.org/2001/XInclude">
+
+	<GameObject id="questPersists"
+		cogsReady="false" cog1Ready="false" cog2Ready="false" cog3Ready="false" gramaphoneReady="false" cog3PickedUp="false" persist="true"
+		lensReady="false" lens1Ready="false" lens2Ready="false" lens3Ready="false"
+		pendulumReady="false" pendulum1Ready="false" pendulum2Ready="false" pendulum3Ready="false" pendulum3PickedUp="false"/>
+	
+	<Quest id="timeMachineQuest" name="Inspector" active="true" complete="false" description="The professor has gone missing! We think he's built a time machine but has got stuck in the past! Fix the time machine and search for the professor."> <!-- Quest to discover the time machine -->
+		<Objective name="1) Talk to Karlheinz Fotheringay" id="conversation" complete="false" active="false"/> <!-- This is complete when you talk to karlheinz -->
+		<Objective name="2) Fix the fire place" id="fireplace" complete="false" active="false"/> <!-- This is complete when you add the 3 cogs to the fireplace -->
+		<Objective name="3) Find the thre lenses for the telescope" id="telescope" complete="false" active="false"/> <!-- This is complete when you add the 3 lenses to the telescope -->
+		<Objective name="4) Repair the grandfather clock with three missing pendulums" id="timemachine" complete="false" active="false"/> <!-- This is complete when you add the 3 pendulums to the grandfather clock -->
+		<Triggers>
+			<OnBeginQuest>
+				<Trace message="Quest Begun"/>
+			</OnBeginQuest>
+			<OnCompleteQuest>
+				<Trace message="Quest Complete"/>
+			</OnCompleteQuest>
+			<OnBeginObjective>
+				<Trace message="Objective Begun '{Event.objective.name}'"/>
+			</OnBeginObjective>
+			<OnCompleteObjective>
+			</OnCompleteObjective> 
+		</Triggers>
+	</Quest>	
+	
+	<Quest id="noteQuest" name="Hidden message" active="true" complete="false" description="There may be more to the gramophone than meets the eye...">
+		<Objective name="1) Read the strange note on the floor" id="readnote" complete="false" active="false"/> 
+		<Objective name="2) Listen to the gramophone" id="listengramophone" complete="false" active="false"/> 
+		<Triggers>
+			<OnBeginQuest>
+				<Trace message="Quest Begun"/>
+			</OnBeginQuest>
+			<OnCompleteQuest>
+				<Trace message="Quest Complete"/>
+			</OnCompleteQuest>
+			<OnBeginObjective>
+				<Trace message="Objective Begun '{Event.objective.name}'"/>
+			</OnBeginObjective>
+			<OnCompleteObjective>
+			</OnCompleteObjective> 
+		</Triggers>
+	</Quest>
+	
+	<Quest id="blackboardQuest" name="Hidden message part two" active="false" complete="false" description="Maybe the blackboard will provide further insight in to the hidden message contained in the gramophone">
+		<Objective name="1) Study the blackboard" id="readblackboard" complete="false" active="false"/> 
+		<Triggers>
+			<OnBeginQuest>
+				<Trace message="Quest Begun"/>
+			</OnBeginQuest>
+			<OnCompleteQuest>
+				<Trace message="Quest Complete"/>
+			</OnCompleteQuest>
+			<OnBeginObjective>
+				<Trace message="Objective Begun '{Event.objective.name}'"/>
+			</OnBeginObjective>
+			<OnCompleteObjective>
+			</OnCompleteObjective> 
+		</Triggers>
+	</Quest>
+</Include>

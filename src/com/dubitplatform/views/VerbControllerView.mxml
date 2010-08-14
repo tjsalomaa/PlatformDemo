@@ -1,23 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <VerbControllerViewBase
 	 xmlns="uk.co.dubit.platform.components.verb.*" 
-	 xmlns:mx="http://www.adobe.com/2006/mxml" width="100%" height="100%" visible="false" backgroundColor="black" backgroundAlpha="0.7" creationComplete="init();">
+	 xmlns:mx="http://www.adobe.com/2006/mxml" 
+	 width="100%" height="100%" visible="false" backgroundColor="black" backgroundAlpha="0.7">
 	
 	<mx:Script>
 		<![CDATA[
 			import mx.binding.utils.ChangeWatcher;
-			import uk.co.dubit.platform.components.verb.IVerb;
 			
-			private function init () : void
+			import uk.co.dubit.platform.components.verb.IVerb;
+			import uk.co.dubit.utils.IAttributes;			
+			override public function set node(value:IAttributes):void
 			{
-				ChangeWatcher.watch(verbController, "targettedGameObject", function (e : Event) : void
+				super.node = value;
+				
+				if(verbController)
 				{
-					visible = verbController.targettedGameObject != null; 
-				});
-				ChangeWatcher.watch(verbController.activeVerbs, "length", function (e : Event) : void
-				{
-					visible = verbController.activeVerbs.length > 0;; 
-				});				
+					ChangeWatcher.watch(verbController, "targettedGameObject", function (e : Event) : void
+					{
+						visible = verbController.targettedGameObject != null; 
+					});
+					ChangeWatcher.watch(verbController.activeVerbs, "length", function (e : Event) : void
+					{
+						visible = verbController.activeVerbs.length > 0;; 
+					});	
+				}
 			}
 			
 			private function labelFunction (item : Object) : String 
