@@ -23,15 +23,18 @@ package com.dubitplatform.behaviours
 		
 		override protected function runBehaviour () : void
 		{
+			// getValue gets the value of an attribute on the <Contains/> node.
 			var str : String = getValue("string"); 
 			var value : String = getValue("value");
 			
 			if (str.indexOf(value) >= 0)
 			{
+				// Calls the <Then> node
 				notifyBranch("then");
 			} 
 			else
 			{
+				// Calls the <Else> node
 				notifyBranch("else");
 			}
 		}		
