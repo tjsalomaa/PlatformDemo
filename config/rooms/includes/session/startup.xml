@@ -56,7 +56,7 @@
 	</NotificationHandler>
 	
 	<BehaviourDefinition id="joinWorld">	
-	
+		<ShowBusyCursor/>
 		<LoadClothingLayers>
 			<Result>
 				<If expression="{Session.isLoggedIn}">
@@ -65,9 +65,11 @@
 							<Result>
 								<EnterSession>
 									<Result>
-										<Call behaviourID="loadResources" />
-																 
-										<ChangeRoom roomName="{Properties.[setting.rooms.default-room]}" />
+										<ChangeRoom roomName="{Properties.[setting.rooms.default-room]}">
+											<onJoinRoomComplete>
+												<HideCustomCursor/>
+											</onJoinRoomComplete>	
+										</ChangeRoom>	
 									</Result>
 									<Fault>
 										<Alert message="Unable to enter session" />
@@ -103,6 +105,7 @@
 	<BehaviourDefinition id="loginOrCreateAvatar">
 		<GetDefaultPackages>
 			<Result>
+				<HideCustomCursor/>
 				<OpenAvatarEditor avatarEditor="create" />
 			</Result>
 			<Fault>
@@ -110,13 +113,5 @@
 			</Fault>
 		</GetDefaultPackages>
 	</BehaviourDefinition>
-	
-	<BehaviourDefinition id="loadResources">
-		<!-- Config data for AvatarEditor, Shops, and RoomEditor -->
-		<!-- GetProductGroups />
-		<GetOwnedProducts />l
-		<GetAvatarEditorProductGroups />
-		<SetGlobalSoundVolume volume="0" if="({Properties.[environment]} == {local})" />
-		<GetContactList /-->
-	</BehaviourDefinition>
+
 </Include>

@@ -7,18 +7,13 @@
 	clothingLayers="{AvatarEditors.clothingLayers}" 
 	location="furniture.{This.id}" 
 	filters="{Room.playerFilters}" 
-	defaultSpeed="36"
+	defaultSpeed="18"
 	culling="false"
 	flip="true"
 	cacheAsBitmap="false"
-	preloaderOriginX="0" preloaderOriginY="-70"
-	preloaderScaleX="4" preloaderScaleY="4"
-	satMin="0.95" satMax="0.95" lumMin="0.7" lumMax="0.7"
-	displayObjectClass="uk.co.dubit.graphics.render2D.IKActionPlayer"
-	nameBubbleClass="" 
-	speechBubbleClass="uk.co.dubit.application.view.render2D.FloatingSpeechBubble" 
+	displayObjectClass="com.dubitplatform.game.Avatar"
+	nameBubbleClass="com.dubitplatform.game.CartoonNameBubble" 
 	loaderClass="">
-
 
 	<Triggers>
 		<onFixup>

@@ -3,9 +3,17 @@
 	<xi:include href="player_definition.xml" />	
 	<xi:include href="room_notification_handler.xml" />	
 
+	<Chat id="chatBox"/>
 	<CollisionController target="{Room.player}" />
-	<MouseMovementController yVelocityScale="0.5" directions="4" id="movement" />
+	<MouseMovementController yVelocityScale="0.3" directions="4" id="movement" />
+
+
+	<!-- Chat messages -->
+	<Trigger event="onSendChatMessage" gameObject="{Room}">
+        <ShowChatBubble gameObject="{Room.player}" message="{Event.message}" displayTime="5000"/>
+	</Trigger>
 	
+	<!-- Move the player when he clicks -->
 	<Trigger event="onClick" gameObject="{Room.click}">
 		<MoveTo targetX="{Event.x}" targetY="{Event.y}" />
 	</Trigger>
@@ -57,7 +65,7 @@
 		</If>
 	</BehaviourDefinition>
 	
-		<BehaviourDefinition id="mouseOff">
+	<BehaviourDefinition id="mouseOff">
 		<ForEach in="{Room.renderObjects}">
 			<If expression="({Event.iteration.mouseEnabled} == {true})">
 				<Then>

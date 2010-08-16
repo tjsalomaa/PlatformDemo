@@ -5,23 +5,11 @@
 		<Notification title="Free stuff!" body="Hey, since you're new here maybe you'd like this free apple?" can_accept="true" can_reject="true">
 			<Triggers>
 				<onNotificationAccepted>
-					<CreateNotification title="Item accepted" body="You've received an apple!  Use it wisely" can_remove="true"/>
+					<CreateNotification title="Item accepted" body="You've received an apple! Use it wisely" can_remove="true"/>
+					<!-- Need to bee added to the inventory -->
 				</onNotificationAccepted>
 			</Triggers>
-		</Notification>
-		
-		<Notification title="Game" body="Fancy a game? Accept = Flex | Reject = Flash" can_accept="true" can_reject="true">
-			<Triggers>
-				<onNotificationAccepted>
-					<OpenMinigame minigame="{Minigames.flex}"/>
-				</onNotificationAccepted>
-				
-				<onNotificationRejected>
-					<OpenMinigame minigame="{Minigames.flash}"/>
-				</onNotificationRejected>
-			</Triggers>
-		</Notification>
-		
+		</Notification>		
 		<Triggers>
 			<onNotificationReceived>
 				<ShowGrowl notification="{Event.notification}" skin="com.dubitplatform.views.GrowlView" targetContainer="growlContainer" duration="6000"/>

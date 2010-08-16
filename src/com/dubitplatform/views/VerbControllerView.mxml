@@ -6,53 +6,94 @@
 	
 	<mx:Script>
 		<![CDATA[
+			import uk.co.dubit.platform.scriptEngine.room.IChatRoom;
+			import mx.effects.easing.Sine;
+			import uk.co.dubit.utils.ArrayUtils;
+			import mx.collections.ArrayCollection;
+			import mx.events.MenuEvent;
+			import mx.controls.Menu;
+			import mx.events.CollectionEvent;
 			import mx.binding.utils.ChangeWatcher;
 			
 			import uk.co.dubit.platform.components.verb.IVerb;
-			import uk.co.dubit.utils.IAttributes;			
+			import uk.co.dubit.utils.IAttributes;	
+			
+			private var menu : Menu;
+					
 			override public function set node(value:IAttributes):void
 			{
 				super.node = value;
 				
+				menu = Menu.createMenu(null, null, true);
+				menu.labelField = "name";
+				
+				menu.filters = [new GlowFilter(000000,1,4,4,10,1), new DropShadowFilter(0, 45, 0x000000, 0.7, 5, 5, 1, 2)];
+				menu.addEventListener(MenuEvent.ITEM_CLICK, handleMenuClick);
+				
+				menu.setStyle("fontFamily", "Deeko");
+				menu.setStyle("openDuration", 0);
+				
 				if(verbController)
 				{
-					ChangeWatcher.watch(verbController, "targettedGameObject", function (e : Event) : void
-					{
-						visible = verbController.targettedGameObject != null; 
-					});
-					ChangeWatcher.watch(verbController.activeVerbs, "length", function (e : Event) : void
-					{
-						visible = verbController.activeVerbs.length > 0;; 
-					});	
+					// Fired usually when the player clicks on an object that is verb enabled
+					verbController.activeVerbs.addEventListener(CollectionEvent.COLLECTION_CHANGE, handleActiveVerbCollectionChange);
 				}
 			}
 			
-			private function labelFunction (item : Object) : String 
+			private function handleActiveVerbCollectionChange (event : CollectionEvent) : void
 			{
-				var verb : IVerb = item as IVerb;
-				return createActionMessage(verb); 
+				if (menu) hideMenu();
+				if (event.items.length) showMenu();
+			}
+
+			private function hideMenu () : void
+			{
+				menu.hide();				
+				removeEventListener(Event.ENTER_FRAME, handleEnterFrame);
 			}
 			
-			private function clickFunction (item : Object) : void
+			private function showMenu () : void
 			{
-				fireVerb(item as IVerb);
+				var p : Point = calculateMenuPosition();
+				menu.dataProvider = toArrayOfNames(verbController.activeVerbs);	
+				menu.show(p.x, p.y);
+				
+				// If the object moves calulate its new position
+				addEventListener(Event.ENTER_FRAME, handleEnterFrame);
+			}
+						
+			private function handleEnterFrame (event : Event) : void
+			{
+				var p : Point = calculateMenuPosition();
+				
+				menu.x = p.x;
+				menu.y = p.y;
 			}
 			
-			private function handleLinkClick (label : String) : void
+			private function handleMenuClick (event : MenuEvent) : void
 			{
-				for each (var verb : IVerb in verbController.activeVerbs) if (labelFunction(verb) == label) return fireVerb(verb);
+				var verb : IVerb = ArrayUtils.findByProperty(verbController.activeVerbs.toArray(), "name", event.item); 
+				if (verb) fireVerb(verb);	
+				
+				hideMenu();
+			}
+			
+			private function toArrayOfNames (array : ArrayCollection) : Array
+			{
+				var a : Array = [];
+				for each (var v : IVerb in array) a.push(v.name);
+				return a;
+			} 
+
+			private function calculateMenuPosition () : Point
+			{
+				var p : Point = new Point(verbController.targettedGameObject.x, verbController.targettedGameObject.y);
+				p = verbController.targettedGameObject.displayObject.scene.sprite.localToGlobal(p);
+				p.x -= menu.width / 2;
+				
+				return p;
 			}
 		]]>
 	</mx:Script>
-	
-	<mx:HBox id="verbBox" horizontalAlign="center" width="100%" height="100%" visible="{verbController.activeVerbs.length > 0}">
-		<mx:Repeater id="linkRepeater" dataProvider="{verbController.activeVerbs}">
-			<mx:LinkButton label="{labelFunction(linkRepeater.currentItem)}" click="{handleLinkClick(event.target.label)}" paddingTop="7"/>
-		</mx:Repeater>  
-	</mx:HBox>
-	
-	<mx:VBox verticalAlign="middle" width="100%" height="100%" visible="{verbController.activeVerbs.length == 0}" paddingTop="2">
-		<mx:Label text="{getGameObjectName(verbController.targettedGameObject)}" width="100%" textAlign="center" />		
-	</mx:VBox>	
-	
+		
 </VerbControllerViewBase>

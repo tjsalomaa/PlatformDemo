@@ -1,5 +1,10 @@
 package
 {
+	import com.dubitplatform.behaviours.Contains;
+	import com.dubitplatform.game.Avatar;
+	import com.dubitplatform.game.AwardXPEffect;
+	import com.dubitplatform.game.CartoonChatBubble;
+	import com.dubitplatform.game.CartoonNameBubble;
 	import com.dubitplatform.views.AchievementsView;
 	import com.dubitplatform.views.ActivityBarView;
 	import com.dubitplatform.views.AvatarCreatorView;
@@ -8,7 +13,6 @@ package
 	import com.dubitplatform.views.ChatPanelView;
 	import com.dubitplatform.views.ChatRoomPreloaderView;
 	import com.dubitplatform.views.ChatRoomView;
-	import com.dubitplatform.views.ChatView;
 	import com.dubitplatform.views.CollectionView;
 	import com.dubitplatform.views.ContextMenuSkin;
 	import com.dubitplatform.views.ExperienceView;
@@ -21,7 +25,6 @@ package
 	import com.dubitplatform.views.ShopTitleWindow;
 	import com.dubitplatform.views.SkillsView;
 	import com.dubitplatform.views.VerbControllerView;
-	import com.dubitplatform.views.game.CartoonChatBubble;
 	
 	/**
 	 *  This file should include references to your custom GAML skins which otherwise would not
@@ -40,10 +43,11 @@ package
 		private var shopTitleView:ShopTitleWindow;
 		private var contextMenuSkin:ContextMenuSkin;
 		private var chatRoomSkin:ChatRoomView;
-		private var chatView:ChatView;
 		private var profileSkinTitleWindow:ProfileSkinTitleWindow;
 		private var chatBubble:CartoonChatBubble;
+		private var nameBubble:CartoonNameBubble;
 		private var activityBarView:ActivityBarView;
+		private var contains: Contains;
 		private var chatPanelView:ChatPanelView;
 		private var skillsView:SkillsView;
 		private var questsView:QuestsView;
@@ -51,5 +55,7 @@ package
 		private var roomListView:RoomListView;
 		private var quickChatView:QuickChatView;
 		private var avatarCreatorView:AvatarCreatorView;
+		private var avatar:Avatar;
+		private var awardXPEffect:AwardXPEffect;
 	}
 }

@@ -1,8 +1,8 @@
-package com.dubitplatform.views.game
+package com.dubitplatform.game
 {
+	import flash.filters.DropShadowFilter;
 	import flash.text.TextFormat;
 	
-	import uk.co.dubit.graphics.render2D.IRenderObject;
 	import uk.co.dubit.graphics.render2D.types.DefaultChatBubble2D;
 
 	public class CartoonChatBubble extends DefaultChatBubble2D
@@ -15,6 +15,8 @@ package com.dubitplatform.views.game
 			super(name);
 			
 			textFormat = new TextFormat("Deeko", 11, 0);
+			
+			sprite.filters = [new DropShadowFilter(0, 45, 0x000000, 0.7, 5, 5, 1, 2)]
 		}		
 	}
 }

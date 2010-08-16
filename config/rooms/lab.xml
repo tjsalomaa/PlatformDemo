@@ -4,10 +4,6 @@
 	<Include href="config/rooms/includes/room_config.xml"/>
 	<Include href="config/rooms/includes/cds.xml"/>
 
-
-	<CollisionController target="{Room.player}" id="collision"/>
-	<Chat id="chatBox"/>
-
 	<Collision width="1400" height="546" id="walkableArea" solid="true">
 		<Image assetID="hit_asset" id="hitAreaImage"/>
 	</Collision>

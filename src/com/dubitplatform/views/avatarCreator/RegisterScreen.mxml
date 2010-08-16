@@ -11,32 +11,36 @@
 	
 	<mx:Script>
 		<![CDATA[						
-			private function onBackClicked() : void
-			{
-				dispatchEvent(new Event("backClicked"));
-			}
 			
 			private function onRegisterClicked() : void
 			{
+				username.enabled = false;
+				password.enabled = false;
+				password2.enabled = false;
+				registerButton.enabled = false;
+				
+				// Notify GAML so that we can start the login process
 				avatarEditor.dispatchGAMLEvent("onRegisterUser", { "username": username.text, "password": password.text });
 			}
 		]]>
 	</mx:Script>
 	
 	<mx:Form horizontalCenter="0" verticalCenter="0">
-		<mx:FormHeading label="Register" />
+		<mx:FormItem>
+			<mx:Label text="Almost there..."/>
+		</mx:FormItem>	
 		<mx:FormItem label="Username">
-			<mx:TextInput id="username" width="190" />
+			<mx:TextInput id="username" width="190" />	
 		</mx:FormItem>
 		<mx:FormItem label="Password">
 			<mx:TextInput id="password" width="190" displayAsPassword="true" />
 		</mx:FormItem>
-		
+		<mx:FormItem label="Confirm Password">
+			<mx:TextInput id="password2" width="190" displayAsPassword="true" />
+		</mx:FormItem>		
 		<mx:FormItem >
-			<mx:Button label="Register" click="onRegisterClicked()" />
+			<mx:Button id="registerButton" label="Finally, let me in!" click="onRegisterClicked()" width="190" />
 		</mx:FormItem>
 	</mx:Form>
-	
-	<mx:Button bottom="0" left="0" label="Back" click="onBackClicked()" />
-	
+
 </ui:AvatarCreatorSkinViewBase>
