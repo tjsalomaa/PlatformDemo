@@ -4,6 +4,7 @@
 		<Triggers>
 			<connectionSuccess>
 				<Trace message="---Connected to the Nexus Game Server---" />
+						
 				<Call behaviourID="joinWorld" />
 			</connectionSuccess>
 
@@ -55,6 +56,7 @@
 	</NotificationHandler>
 	
 	<BehaviourDefinition id="joinWorld">	
+	
 		<LoadClothingLayers>
 			<Result>
 				<If expression="{Session.isLoggedIn}">
@@ -112,7 +114,7 @@
 	<BehaviourDefinition id="loadResources">
 		<!-- Config data for AvatarEditor, Shops, and RoomEditor -->
 		<!-- GetProductGroups />
-		<GetOwnedProducts />
+		<GetOwnedProducts />l
 		<GetAvatarEditorProductGroups />
 		<SetGlobalSoundVolume volume="0" if="({Properties.[environment]} == {local})" />
 		<GetContactList /-->
