@@ -9,7 +9,7 @@
 		<property name="path.swf-server" value="http://imagebaker.dubitplatform.com" />
 		
 	    <property name="setting.rooms.path" value="config/rooms/"/>
-		<property name="setting.rooms.default-room" value="lab"/>
+		<property name="setting.rooms.default-room" value="village"/>
 		
 		<property name="setting.alert.xOffset" value="0" />
 		<property name="setting.alert.yOffset" value="0" />
