@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <app:NexusBase
-	width="100%" height="100%" 
+	width="100%" height="100%" minHeight="550" minWidth="1000" 
 	layout="absolute" 
 	backgroundColor="black" 
 	creationComplete="onCreationComplete()"
-	implements="uk.co.dubit.properties.IPropertiesListener, uk.co.dubit.platform.scriptEngine.gameObject.IGameObjectListener"
 	xmlns:mx="http://www.adobe.com/2006/mxml" 
 	xmlns:app="uk.co.dubit.platform.app.*"
 	xmlns:dialogue="uk.co.dubit.platform.components.dialogue.*" 
@@ -21,6 +20,7 @@
 	
 	<mx:Script>
 		<![CDATA[
+			import uk.co.dubit.platform.scriptEngine.gameObject.GameObjectListener;
 			import com.dubitplatform.views.CollectionsPanel;
 			import com.dubitplatform.views.ControlPanel;
 			import com.dubitplatform.views.MapTitleWindow;
@@ -40,8 +40,6 @@
 			import uk.co.dubit.properties.Properties;
 			import uk.co.dubit.utils.StringUtils;
 
-			
-			private var map:MapTitleWindow;
 			private var controlPanel:ControlPanel;
 			private var loggingPanel:LoggingPanel;
 			private var collectionsPanel:CollectionsPanel;
@@ -62,45 +60,20 @@
 				collectionsPanel = PopUpManager.createPopUp(this, CollectionsPanel) as CollectionsPanel;
 				collectionsPanel.filters = [new DropShadowFilter(0, 0, 0, 0.7, 40, 40, 1, 3)];
 				collectionsPanel.visible = false;
-				
-				map = PopUpManager.createPopUp(this, MapTitleWindow) as MapTitleWindow;
-				PopUpManager.centerPopUp(map);
-				map.visible = false;
-				
-				Properties.getInstance().addListener(this);
-
 			}
 			
 			override public function setupComplete () : void 
 			{
-				energyMeter = Meters.getInstance().getMeterByID("energy");	
-				energyMeter.gameObjectListeners.addListener(this);
+				energyMeter = Meters.getInstance().getMeterByID("energy");
+				// Note - this class will be refactored shortly. This method of event listenig is a shortcut
+				// that should not be used for production code. Leaves lingering anonymous inner functions	
+				energyMeter.gameObjectListeners.addListener(new GameObjectListener(function (go:IGameObject, property:String, oldVal:*, newVal:*) : void
+				{
+					updateEnergyLabel();
+				}));
 				updateEnergyLabel();		
 			}
-						
-			public function onPropertyChange (property : String, oldValue : *, newValue : *) : void
-			{
-				if (StringUtils.equals("scene-viewportHeight", property, true))
-				{
-					chatRoomSkinContainer.height = newValue;
-					videoContainer.height = newValue;
-					chatRoomPreloaderContainer.height = newValue;
-					chatSkinContainer.y = newValue + chatRoomSkinContainer.y + 10// verbSkinContainer.height;
-					//verbSkinContainer.y = newValue + chatRoomSkinContainer.y - verbSkinContainer.height;
-					dialogueSkinContainer.height = newValue;  
-				}
-				if (StringUtils.equals("scene-viewportWidth", property, true))
-				{
-					chatRoomSkinContainer.width = newValue;
-					videoContainer.width = newValue;
-					chatSkinContainer.width = newValue;
-					//verbSkinContainer.width = newValue;
-					chatRoomPreloaderContainer.width = newValue; 
-					bar.width = newValue;
-					dialogueSkinContainer.width = newValue;
-				}				
-			}
-			
+					
 			public function onAttributeChange(go:IGameObject, property:String, oldVal:*, newVal:*) : void
 			{
 				updateEnergyLabel();
@@ -132,12 +105,7 @@
             {
             	Shops.getInstance().getShopByID("default").open();
             }      
-            
-            private function openMap () : void
-            {
-            	map.visible = !map.visible;
-            }    
-			
+
 			private function updateEnergyLabel() : void
 			{
 				if (energyMeter) energyDisplay.text = "Energy: (" + energyMeter.amount + "/" + energyMeter.maxAmount + ")";
@@ -150,23 +118,17 @@
 
 	<mx:Canvas width="100%" height="100%" verticalScrollPolicy="off">
 
-		<ui:ChatRoomSkinContainer id="chatRoomSkinContainer" width="850" height="445" y="100" backgroundColor="black" horizontalScrollPolicy="off" verticalScrollPolicy="off" horizontalCenter="0"/>
-		
+		<ui:ChatRoomSkinContainer id="chatRoomSkinContainer" width="850" height="400" y="100" backgroundColor="black" horizontalScrollPolicy="off" verticalScrollPolicy="off" horizontalCenter="0"/>
 		<chat:ChatSkinContainer id="chatSkinContainer" width="850" height="30" y="515" horizontalCenter="0" />			
-		<verb:VerbSkinContainer id="verbSkinContainer" width="850" height="30" y="470" horizontalCenter="0" />	
+		<verb:VerbSkinContainer id="verbSkinContainer" width="850" height="400" y="100" horizontalCenter="0" />	
 		<skin:BasicSkinContainer id="quickChatSkinContainer" containerID="quickChatContainer" width="850" height="400" y="100" horizontalCenter="0"/>	
-		
-		<video:VideosSkinContainer id="videoContainer" outEffect="{fadeOutEffect}" width="850" height="445" horizontalCenter="0" y="100"/>
-		
-		<ui:ChatRoomPreloaderSkinContainer id="chatRoomPreloaderContainer" width="850" height="445" y="100" mouseEnabled="false" horizontalCenter="0" />
-		
+		<video:VideosSkinContainer id="videoContainer" outEffect="{fadeOutEffect}" width="850" height="400" horizontalCenter="0" y="100"/>
+		<ui:ChatRoomPreloaderSkinContainer id="chatRoomPreloaderContainer" width="850" height="400" y="100" mouseEnabled="false" horizontalCenter="0" />
 		<minigame:MinigameSkinContainer width="850" height="445" y="100" mouseEnabled="false" horizontalCenter="0" />
-		
-		<growl:StackingGrowlSkinContainer width="100%" height="100%" y="100" mouseEnabled="false" horizontalCenter="0" resizeEffect="resizeEffect"/>
+		<growl:StackingGrowlSkinContainer width="800" height="350" y="125" horizontalCenter="0" mouseEnabled="false" />
 		
 		<mx:ControlBar id="bar" width="850" horizontalCenter="0" y="60" height="30" paddingLeft="5">
-			<mx:LinkButton label="Quests ({QuestModel.getInstance().activeQuestCount})" click="openControlPanel('quests');"/>
-			<mx:LinkButton label="Inventory ({Backpack.getInstance().count})" click="openControlPanel('inventory');"/>	
+			<mx:LinkButton label="Menu" click="openControlPanel('quests');"/>	
 			<mx:LinkButton label="Collections" click="openCollectionsPanel();"/>	
 			<skills:SkillsSkinContainer width="110"/>
 			<mx:Spacer width="100%"/>
@@ -175,9 +137,7 @@
 		</mx:ControlBar>
 				
 		<skin:PopupSkinContainer containerID="shopContainer" width="100%" height="100%" />
-					
-		<dialogue:DialogueSkinContainer id="dialogueSkinContainer" outEffect="{fadeOutEffect}" inEffect="{fadeInEffect}" horizontalCenter="0" width="850" height="445" y="100"/>				
-	
+		<dialogue:DialogueSkinContainer id="dialogueSkinContainer" outEffect="{fadeOutEffect}" inEffect="{fadeInEffect}" horizontalCenter="0" width="850" height="400" y="100"/>				
 		<skin:BasicSkinContainer containerID="worldOverlay" width="840" height="398" y="100" horizontalCenter="0" />
 	</mx:Canvas>
 	

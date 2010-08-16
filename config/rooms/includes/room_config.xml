@@ -5,7 +5,7 @@
 
 	<Chat id="chatBox"/>
 	<CollisionController target="{Room.player}" />
-	<MouseMovementController yVelocityScale="0.5" directions="4" id="movement" />
+	<MouseMovementController yVelocityScale="0.3" directions="4" id="movement" />
 
 
 	<!-- Chat messages -->
@@ -65,7 +65,7 @@
 		</If>
 	</BehaviourDefinition>
 	
-		<BehaviourDefinition id="mouseOff">
+	<BehaviourDefinition id="mouseOff">
 		<ForEach in="{Room.renderObjects}">
 			<If expression="({Event.iteration.mouseEnabled} == {true})">
 				<Then>

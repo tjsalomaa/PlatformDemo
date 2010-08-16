@@ -2,13 +2,14 @@
 <Include xmlns:xi="http://www.w3.org/2001/XInclude">
 	<Menus>
 		<ContextMenu id="playerMenu" track="true" offsetX="0" offsetY="0">
-			<MenuItem id="playGame" text="Play Game" toolTip="Starts the Sample Flex Mini Game"/>
-			<Triggers>
-				<onMenuItemSelected>
-					<Trace message="onMenuItemSelected {Event.menuItem.id}"/>
-					<OpenMinigame minigame="{Minigame.single}"/>
-				</onMenuItemSelected>	
-			</Triggers>	
+			<MenuItem id="playGame" text="Play Game" toolTip="Start the sample mini game">
+				<Triggers>
+					<onMenuItemSelected>
+						<OpenMinigame minigame="{Minigame.single}"/>
+					</onMenuItemSelected>	
+				</Triggers>			
+			</MenuItem>	
+			<MenuItem id="closeMenu" text="Close Menu" toolTip="Close the menu"/>
 		</ContextMenu>		
 	</Menus>
 </Include>

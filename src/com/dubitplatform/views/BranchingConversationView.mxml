@@ -1,8 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<DialogueViewBase xmlns="uk.co.dubit.platform.components.dialogue.*" xmlns:mx="http://www.adobe.com/2006/mxml" width="100%" height="100%" verticalScrollPolicy="off" horizontalScrollPolicy="off" creationComplete="onCreationComplete();" backgroundColor="black" backgroundAlpha="0.4" xmlns:view="uk.co.dubit.view.*">
+<DialogueViewBase xmlns="uk.co.dubit.platform.components.dialogue.*" xmlns:mx="http://www.adobe.com/2006/mxml" width="100%" height="100%" verticalScrollPolicy="off" horizontalScrollPolicy="off" creationComplete="onCreationComplete();" backgroundColor="black" backgroundAlpha="0.4" xmlns:view="uk.co.dubit.view.*" xmlns:editor="uk.co.dubit.platform.components.avatar.editor.*">
 	
 	<mx:Script>
 		<![CDATA[
+			import uk.co.dubit.platform.components.rooms.RoomModel;
+			import uk.co.dubit.platform.components.avatarEditor.AvatarEditors;
+			import uk.co.dubit.platform.components.avatar.editor.AvatarEditorModel;
+			import uk.co.dubit.platform.scriptEngine.node.IScriptNode;
+			import uk.co.dubit.platform.data.IAvatar;
 			import uk.co.dubit.asset.AssetManager;
 			import uk.co.dubit.graphics.render2D.IRenderObject;
 			import com.gskinner.utils.StringUtils;
@@ -15,33 +20,13 @@
 			private function onCreationComplete () : void
 			{
 				filters = [new DropShadowFilter(0, 0, 0, 0.7, 40, 40, 1, 3)];
-			}
-			
-			private function getNPCName (npc : IGameObject) : String
-			{
-				if (npc.hasAttribute(ScriptKeyword.NAME)) return npc.getValue(ScriptKeyword.NAME);
-				return StringUtils.properCase(npc.id);
-			}
-			
-			private function getNPCImage (npc : IGameObject) : String
-			{
-				if (npc.hasAttribute(ScriptKeyword.PREVIEW_URL)) return npc.getValue(ScriptKeyword.PREVIEW_URL);
 				
-				if (npc is IRenderObject) 
-				{
-					var renderObject : IRenderObject = npc as IRenderObject
-					var assetID : String = renderObject.displayObject.material.assetID;
+				var avatar : IAvatar = RoomModel.getInstance().currentRoom.player;
+				
+				avatarPreview.actionID = "stand_front_" + avatar.gender.toLowerCase();
+				avatarPreview.avatar = avatar;
+			}
 					
-					if (assetID)
-					{
-						return AssetManager.getInstance().getAsset(assetID).url;
-					}
-				}
-				
-				return null;
-			}
-			
-			
 			private function handleResponseClick (event : Event) : void
 			{
 				for each (var response : IResponse in responses)
@@ -49,7 +34,6 @@
 					if (response.message == event.currentTarget.text)
 					{
 						response.play();
-						//dispatchEvent(new DialogueEvent(DialogueEvent.PLAY_RESPONSE, response ));
 					}
 				}
 			}
@@ -69,18 +53,15 @@
 	<mx:Fade duration="500" id="fadeInEffect" alphaFrom="0" alphaTo="1" startDelay="500"/>
 	
 	<mx:VBox width="100%" height="100%">
-	
 		<mx:Spacer height="100%"/>
-	
 		<mx:HBox width="100%" height="100%" paddingBottom="20">
 			
 			<mx:VBox paddingLeft="5" paddingRight="5" paddingTop="40" paddingBottom="5" height="100%">
 				<mx:Spacer height="100%"/>
-				<mx:Image source="{getNPCImage(DialogueModel.getInstance().activeDialogue.player)}" height="150" width="120" scaleContent="true" smoothBitmapContent="true"/>			
+				<editor:TintablePose id="avatarPreview" width="400" height="600" scaleX="0.25" scaleY="0.25" filters="{[new DropShadowFilter(0, 45, 0x000000, 0.7, 5, 5, 1, 2)]}"/>			
 			</mx:VBox>
 			
 			<mx:VBox width="100%" height="100%" paddingLeft="5" paddingRight="5" paddingTop="10">
-			
 				<mx:HBox width="100%">
 					<mx:Spacer width="20%"/>
 					<mx:VBox width="80%" horizontalAlign="right" backgroundSize="100%" backgroundImage="@Embed(source='/../assets/gui_images/bubble.png',scaleGridLeft='9',scaleGridTop='6',scaleGridRight='34',scaleGridBottom='21')">
@@ -92,9 +73,7 @@
 						</mx:filters>						
 					</mx:VBox>								
 				</mx:HBox>
-
 				<mx:Spacer height="10"/>
-
 				<mx:VBox width="80%">
 					<mx:Repeater id="responsesRepeater" dataProvider="{responses}">
 						<mx:VBox width="100%" horizontalAlign="right" backgroundSize="100%" backgroundImage="@Embed(source='/../assets/gui_images/bubble.png',scaleGridLeft='9',scaleGridTop='6',scaleGridRight='34',scaleGridBottom='21')" dropShadowEnabled="true">
@@ -105,17 +84,15 @@
 							</mx:filters>
 						</mx:VBox>						
 					</mx:Repeater>					
-				</mx:VBox>
-				
+				</mx:VBox>				
 			</mx:VBox>
-			
+
 			<mx:VBox paddingLeft="5" paddingRight="5" paddingTop="40" paddingBottom="5" height="100%">
 				<mx:Spacer height="100%"/>
 				<mx:Image source="{getNPCImage(DialogueModel.getInstance().activeDialogue.npc)}" height="150" width="120" scaleContent="true" smoothBitmapContent="true"/>			
 			</mx:VBox>			
 			
 		</mx:HBox>
-		
 	</mx:VBox>
 
 </DialogueViewBase>

@@ -22,25 +22,22 @@
 		]]>
 	</mx:Script>
 	
-	<mx:HBox horizontalCenter="0" verticalCenter="-50">
+	<mx:HBox horizontalCenter="0" verticalCenter="0">
 		<mx:Form>
-			<mx:FormHeading label="Login" />
+			<mx:FormItem>
+				<mx:Label text="Have you been here before?"/>
+			</mx:FormItem>
 			<mx:FormItem label="Username">
-				<mx:TextInput id="username" width="190" />
+				<mx:TextInput id="username" text="Dubit" width="190" />
 			</mx:FormItem>
 			<mx:FormItem label="Password">
-				<mx:TextInput id="password" width="190" displayAsPassword="true" />
+				<mx:TextInput id="password" text="password" width="190" displayAsPassword="true" />
 			</mx:FormItem>
-			
-			<mx:FormItem >
-				<mx:Button label="Login" click="onLoginClicked()" />
-			</mx:FormItem>
-		</mx:Form>
-		
-		<mx:Form>
-			<mx:FormHeading label="Register" />
 			<mx:FormItem>
-				<mx:Button label="Create new user" click="onRegisterClicked()" />
+				<mx:HBox width="190">
+					<mx:Button label="Login" click="onLoginClicked()" width="100%" />
+					<mx:Button label="Register" click="onRegisterClicked()" />	
+				</mx:HBox>
 			</mx:FormItem>
 		</mx:Form>
 	</mx:HBox>

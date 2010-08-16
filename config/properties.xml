@@ -9,14 +9,11 @@
 		<property name="path.swf-server" value="http://imagebaker.dubitplatform.com" />
 		
 	    <property name="setting.rooms.path" value="config/rooms/"/>
-		<property name="setting.rooms.default-room" value="lab"/>
+		<property name="setting.rooms.default-room" value="village"/>
 		
 		<property name="setting.alert.xOffset" value="0" />
 		<property name="setting.alert.yOffset" value="0" />
-		
-	    <property name="scene-viewportHeight" value="400"/>
-	    <property name="scene-viewportWidth" value="850"/>		
-	
+
 		<property name="app.name" value="1"/>
 		
 		<property name="path.create-avatar" value="[path.web-services]/users/{userID}/avatars.nexus"/>

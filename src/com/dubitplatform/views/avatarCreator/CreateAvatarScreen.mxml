@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ui:AvatarCreatorSkinViewBase 
 	width="100%" height="100%"
-	show="{ if(avatarEditor.avatar == null) avatarSelector.selectedIndex = 0, onAvatarChanged() }"
+	show="{ onAvatarChanged(); onProductGroupSelected(); }"
 	xmlns:mx="http://www.adobe.com/2006/mxml" 
 	xmlns:ui="uk.co.dubit.platform.components.avatarEditor.ui.*" 
 	xmlns:avatarCreator="com.dubitplatform.views.avatarCreator.*" 
@@ -23,23 +23,19 @@
 			
 			private function onAvatarChanged() : void
 			{
-				var avatar:IAvatar = IAvatar(avatarSelector.selectedItem);
-				
-				avatarEditor.avatar = avatar;
 				editorsModel.unloadDefaultProductGroups();
-				
-				
-				avatarPreview.actionID = "stand_front_" + avatar.gender.toLowerCase();
+					
+				avatarPreview.actionID = "stand_front_" + avatarEditor.avatar.gender.toLowerCase();
 				avatarPreview.avatar = avatarEditor.avatar;
 				
 				productGroupView.customURLParams = { "creation": true, "gender": avatarEditor.avatar.gender };
-				
 				productGroupView.reloadProductGroup();
 			}
 			
 			private function onProductGroupSelected() : void
 			{
 				var selectedIndex:int = productGroupSelector.selectedIndex;
+				if (selectedIndex == -1) selectedIndex = 0;
 				
 				productGroupView.productGroup = IProductGroup(defaultProductGroups.getItemAt(selectedIndex))
 			}
@@ -47,70 +43,28 @@
 			private function onProductSelected(e:ListEvent) : void
 			{
 				avatarEditor.avatar.clothes.addProduct(e.itemRenderer.data as IProduct);
-				
 				avatarPreview.loadPose();
-			}
-			
-			private function onBackClicked() : void
-			{
-				dispatchEvent(new Event("backClicked"));
 			}
 			
 			private function onNextClicked() : void
 			{
-				var avatarName:String = firstName.text + " " + secondName.text + " " + lastName.text;
-				
-				avatarEditor.avatar.avatarName = avatarName;
-				
 				dispatchEvent(new Event("nextClicked"));
 			}
 		]]>
 	</mx:Script>
 	
-	<mx:HBox width="100%" height="100%" horizontalGap="0">
-		<mx:Form width="50%">
-			<mx:FormHeading label="Your avatar" />
-			
-			<mx:FormItem label="Type">
-				<mx:ComboBox id="avatarSelector" labelField="gender"  selectedIndex="0" enabled="{ !avatarPreview.isLoading }"
-							 dataProvider="{ editorsModel.defaultAvatars }" 
-							 change="onAvatarChanged()" />
-			</mx:FormItem>
-			
-			<mx:FormItem label="Name">
-				<mx:HBox>
-					<mx:ComboBox id="firstName" width="100" 
-								 labelField="name" dataProvider="{ editorsModel.avatarNameGroups['First'] }" />
-					<mx:ComboBox id="secondName" width="100" 
-								 labelField="name" dataProvider="{ editorsModel.avatarNameGroups['Second'] }" />
-					<mx:ComboBox id="lastName" width="100" 
-								 labelField="name" dataProvider="{ editorsModel.avatarNameGroups['Last'] }" />
-				</mx:HBox>
-			</mx:FormItem>
-
-			<mx:FormItem label="Preview">
-				<editor:TintablePose id="avatarPreview" width="400" height="600" scaleX="0.45" scaleY="0.45" />
-			</mx:FormItem>
-		</mx:Form>
-
-		<mx:Form width="50%">
-			<mx:FormHeading label="Customize your appearance" />
-			<mx:FormItem>
-				<mx:VBox horizontalCenter="0" horizontalAlign="center" verticalCenter="0">
-					<mx:ComboBox id="productGroupSelector" width="350"
-							   dataProvider="{ editorsModel.defaultProductGroups }" 
-							   labelField="name" 
-							   change="onProductGroupSelected()" />
-					<avatarCreator:ProductGroupView id="productGroupView" mouseChildren="{ !avatarPreview.isLoading }"
-													width="350" height="300"
-													itemClick="onProductSelected(event)"  />
-				</mx:VBox>
-			</mx:FormItem>
-		</mx:Form>
-	</mx:HBox>
-
-	<mx:Button bottom="0" left="0" label="Back" click="onBackClicked()" />
 	
-	<mx:Button bottom="0" right="0" label="Next" click="onNextClicked()" />
+	<mx:HBox left="100" paddingTop="10">
+		<mx:Box paddingTop="10">
+			<editor:TintablePose id="avatarPreview" width="400" height="600" scaleX="0.45" scaleY="0.45" filters="{[new DropShadowFilter(0, 45, 0x000000, 0.7, 5, 5, 1, 2)]}"/>	
+		</mx:Box>
+		<mx:VBox horizontalCenter="0" verticalCenter="0" paddingTop="20" paddingLeft="20">
+			<mx:VBox borderStyle="solid" borderColor="black">
+				<mx:TabBar id="productGroupSelector" dataProvider="{ editorsModel.defaultProductGroups }" itemClick="onProductGroupSelected()" labelField="name" width="450"/>
+				<avatarCreator:ProductGroupView id="productGroupView" width="450" height="200" itemClick="onProductSelected(event)" filters="{[new DropShadowFilter(0, 45, 0x000000, 0.7, 5, 5, 1, 2)]}"/>	
+			</mx:VBox>
+			<mx:Button label="I've finished choosing my clothes" click="onNextClicked()" width="100%" paddingTop="5"/>
+		</mx:VBox>
+	</mx:HBox>
 	
 </ui:AvatarCreatorSkinViewBase>

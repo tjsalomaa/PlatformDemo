@@ -11,21 +11,39 @@
 		]]>
 	</mx:Script>
 	
-	<mx:ViewStack id="viewStack" width="100%" height="100%">
-		<avatarCreator:LoginOrRegisterScreen id="loginOrRegisterScreen"
-											 showEffect="{ new Fade() }"
-											 avatarEditor="{ avatarEditor }" 
-											 registerClicked="{ viewStack.selectedChild = createScreen }" />
-		
-		<avatarCreator:CreateAvatarScreen id="createScreen" 
-										  avatarEditor="{ avatarEditor }"
-										  showEffect="{ new Fade() }"
-										  backClicked="{ viewStack.selectedChild = loginOrRegisterScreen }"
-										  nextClicked="{ viewStack.selectedChild = registerScreen }" />
-		
-		<avatarCreator:RegisterScreen id="registerScreen" 
-									  avatarEditor="{ avatarEditor }" 
-									  showEffect="{ new Fade() }"
-									  backClicked="{ viewStack.selectedChild = createScreen }"/>
-	</mx:ViewStack>
+	<mx:Box width="100%" height="100%" paddingLeft="10" paddingTop="10" paddingRight="10" paddingBottom="10">
+			
+		<mx:TitleWindow width="100%" height="100%" showCloseButton="false">
+			<mx:ViewStack id="viewStack" width="100%" height="100%">
+				<avatarCreator:LoginOrRegisterScreen id="loginOrRegisterScreen"
+													 showEffect="{ new Fade() }"
+													 avatarEditor="{ avatarEditor }" 
+													 registerClicked="{ viewStack.selectedChild = genderScreen }" />
+				
+				<avatarCreator:ChooseGenderScreen id="genderScreen"
+												avatarEditor="{ avatarEditor }"
+												showEffect="{ new Fade() }"
+												backClicked="{ viewStack.selectedChild = loginOrRegisterScreen }"
+												nextClicked="{ viewStack.selectedChild = createScreen }" />
+								
+				<avatarCreator:CreateAvatarScreen id="createScreen" 
+												  avatarEditor="{ avatarEditor }"
+												  showEffect="{ new Fade() }"
+												  backClicked="{ viewStack.selectedChild = genderScreen }"
+												  nextClicked="{ viewStack.selectedChild = nameScreen }" />
+				
+				<avatarCreator:NameAvatarScreen id="nameScreen"
+												avatarEditor="{ avatarEditor }"
+												showEffect="{ new Fade() }"
+												backClicked="{ viewStack.selectedChild = createScreen }"
+												nextClicked="{ viewStack.selectedChild = registerScreen }" />				
+				
+				<avatarCreator:RegisterScreen id="registerScreen" 
+											  avatarEditor="{ avatarEditor }" 
+											  showEffect="{ new Fade() }"
+											  backClicked="{ viewStack.selectedChild = nameScreen }"/>
+			</mx:ViewStack>
+		</mx:TitleWindow>
+	
+	</mx:Box>
 </ui:AvatarCreatorSkinViewBase>
