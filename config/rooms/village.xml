@@ -12,7 +12,7 @@
 	</Filters>
 	
 	<Sounds target="{Room.player}" id="sounds">
-		<Sound id="background_music" assetID="background_music_asset" play="true" looping="true"/>
+		<Sound id="background_music" assetID="background_music_asset" play="false" looping="true"/>
 		<Sound id="pop_effect" assetID="pop_effect_asset" play="false" looping="false"/>
 	</Sounds>
 
