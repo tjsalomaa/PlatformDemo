@@ -20,7 +20,7 @@
 		
 		</onFixup>
 		
-		<onClick>
+		<onClick>			
 			<If expression="({Event.handler} == {Room.player})">
 				<Then>
 					<OpenMenu menu="{Menus.playerMenu}" target="{Room.player}"/>
@@ -30,6 +30,10 @@
 				</Else>
 			</If>
 		</onClick>
+		
+		<onShowAvatarEditor>
+			<OpenAvatarEditor avatarEditor="edit" avatar="{Event.handler}" />
+		</onShowAvatarEditor>
 		
 		<onShowProfile>
 			<OpenProfile profile="playerProfile" avatar="{Event.handler}" />	

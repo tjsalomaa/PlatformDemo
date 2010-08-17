@@ -7,35 +7,31 @@
 	
 	<mx:Script>
 		<![CDATA[
+			import mx.events.ItemClickEvent;
+			
 			import uk.co.dubit.platform.components.catalogue.IProductGroup;
-			import uk.co.dubit.platform.components.catalogue.IShop;
+			import uk.co.dubit.platform.components.catalogue.ui.ProductGroupLoadMode;
 			import uk.co.dubit.platform.components.session.SessionModel;
 			
-			[Bindable]
-			override public function set shop(value:IShop) : void
+			private function onProductGroupChanged(e:ItemClickEvent) : void
 			{
-				super.shop = value;
-				
-				if(shop) onProductGroupChanged();
+				productGroupView.productGroup = IProductGroup(e.item);
 			}
-			
-			private function onProductGroupChanged() : void
-			{
-				var selectedProductGroup:IProductGroup = groupSelector.selectedItem as IProductGroup;
-				selectedProductGroup.loadProducts( {gender:SessionModel.getInstance().currentAvatar.gender});
-				if(selectedProductGroup) products.dataProvider = selectedProductGroup.products;
-			}
+
 		]]>
 	</mx:Script>
 	
-	<mx:VBox width="100%" height="100%">
-		<mx:HBox width="100%" verticalAlign="middle">
-			<mx:Label text="Select a product category." />
-			<mx:ComboBox id="groupSelector" labelField="name" dataProvider="{ shop.productGroups }" change="onProductGroupChanged()" />		
-		</mx:HBox>
-		<mx:TileList id="products" 
-			width="100%" height="100%" columnWidth="150" rowHeight="150"
-			backgroundAlpha="0" borderStyle="none" selectable="false"
-			itemRenderer="{ new ClassFactory(ShopItemRenderer) }" />	
-	</mx:VBox>
+	<mx:Form width="100%" height="100%">
+		<mx:FormItem label="Select a category:" width="100%" height="100%">				
+			<mx:VBox width="100%" height="100%">
+				<mx:TabBar labelField="name" toolTipField="description"
+						   dataProvider="{ shop.productGroups }" itemClick="onProductGroupChanged(event)" />
+				
+				<shop:ShopProductView id="productGroupView"
+									  width="100%" height="100%"
+									  avatar="{ SessionModel.getInstance().currentAvatar }"
+									  loadMode="{ ProductGroupLoadMode.ALL }" />
+			</mx:VBox>			
+		</mx:FormItem>
+	</mx:Form>
 </ShopSkinViewBase>
