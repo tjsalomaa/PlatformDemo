@@ -1,18 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Include xmlns:xi="http://www.w3.org/2001/XInclude">
 	<Shops>
-		<Shop id="1" name="Test Store" skin="com.dubitplatform.views.ShopTitleWindow" targetContainer="shopContainer">
+		<Shop id="1" name="Dubit Superstore" skin="com.dubitplatform.views.ShopTitleWindow" targetContainer="worldOverlay">
 			<Triggers>
 				<OnShopOpened>
-					<GetShopProductGroups shop="{Shops.1}" />
+					<GetShopProductGroups shop="1" if="({Shops.1.productGroups.length} == {0})" />
 				</OnShopOpened>
 			</Triggers>
 		</Shop>
 		
 		<Triggers>
-			<OnPurchaseProduct>				
-				<AddToBackpack collectableID="{Event.product.name}"/>
-				<SetValues target="{Event.product}" owned="true"/>
+			<OnPurchaseProduct>
+				<PurchaseProduct product="{Event.product}" />	
 			</OnPurchaseProduct>
 		</Triggers>
 	</Shops>

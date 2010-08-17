@@ -8,6 +8,7 @@ package
 	import com.dubitplatform.views.AchievementsView;
 	import com.dubitplatform.views.ActivityBarView;
 	import com.dubitplatform.views.AvatarCreatorView;
+	import com.dubitplatform.views.AvatarEditorView;
 	import com.dubitplatform.views.BackpackView;
 	import com.dubitplatform.views.BranchingConversationView;
 	import com.dubitplatform.views.ChatPanelView;
@@ -57,5 +58,6 @@ package
 		private var avatarCreatorView:AvatarCreatorView;
 		private var avatar:Avatar;
 		private var awardXPEffect:AwardXPEffect;
+		private var avatarEditorView:AvatarEditorView;
 	}
 }

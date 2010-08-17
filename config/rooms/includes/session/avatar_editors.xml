@@ -34,5 +34,29 @@
 				</onRegisterUser>			
 			</Triggers>
 		</AvatarEditor>
+		
+		<AvatarEditor id="edit" skin="com.dubitplatform.views.AvatarEditorView" targetContainer="worldOverlay">
+			<Triggers>				
+				<onAvatarEditorSave>
+					<UpdateAvatarClothes avatar="{Event.avatarEditor.avatar}">
+					<Result>
+						<!-- Dress both the player in the current room and the SessionModel current avatar reference  -->
+						<DressAvatarWithClothes avatar="{Session.user.currentAvatar}" clothes="{Event.avatarEditor.avatar.clothes}" />
+						<DressAvatarWithClothes avatar="{Rooms.currentRoom.player}" clothes="{Event.avatarEditor.avatar.clothes}" />						
+						
+						<!-- Tell the nexus server to notify players we've changed our clothes -->
+						<TransmitRequest method="SetAvatarLayers" 
+						  clothing_mode="{Event.avatarEditor.avatar.clothingModeID}"
+						  layers="{Event.avatarEditor.avatar.clothes.wornHash}"/>
+						  
+						<CloseAvatarEditor avatarEditor="{Event.avatarEditor}" />
+					</Result>
+					<Fault>
+						<Alert message="We're sorry, something went wrong and we couldn't change your clothes" />
+					</Fault>
+				</UpdateAvatarClothes>
+				</onAvatarEditorSave>
+			</Triggers>
+		</AvatarEditor>
 	</AvatarEditors>
 </Include>

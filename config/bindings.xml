@@ -339,6 +339,7 @@
 		<Binding name="LoadFirstAvatar" nodoc="true" class="uk.co.dubit.platform.components.avatar.selection.behaviors.LoadFirstAvatar"/>
 		<Binding name="SetAvatar" nodoc="true" class="uk.co.dubit.platform.components.avatar.selection.behaviors.SetAvatar"/>
 		<Binding name="UpdateAvatarClothes" nodoc="true" class="uk.co.dubit.platform.components.avatar.editor.behaviours.UpdateAvatarClothes"/>
+		<Binding name="DressAvatarWithClothes" class="uk.co.dubit.platform.components.avatar.editor.behaviours.DressAvatarWithClothes" />
 		<Binding name="CreateAvatarClothes" nodoc="true" class="uk.co.dubit.platform.components.avatar.editor.behaviours.CreateAvatarClothes"/>
 		<Binding name="CreateAvatar" class="uk.co.dubit.platform.components.avatarEditor.behaviours.CreateAvatar"/>
 	</Package>
@@ -714,6 +715,8 @@
 		<Binding name="RedeemCoupon" class="uk.co.dubit.platform.components.catalogue.behaviours.RedeemCoupon">
 			<Attribute name="coupon_code" description="The coupon code to redeem" type="String"/>
 		</Binding>
+		
+		<Binding name="GetOwnedProducts" class="uk.co.dubit.platform.components.products.behaviours.GetOwnedProducts" />
 	</Package>
 	<!-- VERB BINDINGS -->
 	<Package name="Verb">

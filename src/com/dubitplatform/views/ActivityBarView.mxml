@@ -12,10 +12,15 @@
 			private var deeko:String;		
 					
 			private function onCreationComplete() : void
-			{
-				updateBar();
-				
+			{				
 				bar.filters = [new GlowFilter(000000,1,4,4,10,1), new DropShadowFilter(0, 45, 0x000000, 0.7, 5, 5, 1, 2)];
+			}
+			
+			override public function set activityBar(value:IActivityBar) : void
+			{
+				super.activityBar = value;
+				
+				if(activityBar) updateBar();
 			}
 			
 			override public function onActivityUpdate(activity:IActivityBar) : void
