@@ -8,7 +8,6 @@
 			import mx.core.SoundAsset;
 			import mx.core.UIComponent;
 			import uk.co.dubit.platform.components.rooms.RoomModel;
-			import uk.co.dubit.platform.components.chat.chatpanel.IChatPanel;
 			import mx.events.ListEvent;
 			import uk.co.dubit.platform.components.chat.quickChat.IQuickChatWord;
 			import mx.controls.listClasses.ListBase;

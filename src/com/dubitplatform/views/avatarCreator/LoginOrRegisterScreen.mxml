@@ -28,10 +28,10 @@
 				<mx:Label text="Have you been here before?"/>
 			</mx:FormItem>
 			<mx:FormItem label="Username">
-				<mx:TextInput id="username" text="Dubit" width="190" />
+				<mx:TextInput id="username" width="190" />
 			</mx:FormItem>
 			<mx:FormItem label="Password">
-				<mx:TextInput id="password" text="password" width="190" displayAsPassword="true" />
+				<mx:TextInput id="password" width="190" displayAsPassword="true" />
 			</mx:FormItem>
 			<mx:FormItem>
 				<mx:HBox width="190">
