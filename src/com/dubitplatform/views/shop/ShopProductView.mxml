@@ -6,23 +6,26 @@
 	<mx:Script>
 		<![CDATA[
 			import mx.effects.Fade;
-			override protected function loadProductGroup() : void
+			
+			import uk.co.dubit.platform.components.catalogue.IProductGroup;
+			
+			override public function onProductGroupLoadStarted(productGroup:IProductGroup) : void
 			{
-				viewStack.selectedChild = loadingProductsView;
-				
-				super.loadProductGroup();
+				viewStack.selectedChild = loadingView;
 			}
 			
-			override protected function onProductsLoaded() : void
+			override public function onProductGroupLoadComplete(productGroup:IProductGroup) : void
 			{
-				viewStack.selectedChild = productGroup.products.length > 0 ? productView : noProductsView;
+				viewStack.selectedChild = productGroup.products.length > 0 ? productsView : noProductsView
 			}
 		]]>
 	</mx:Script>
+	
+	<mx:Fade id="fadeEffect" />
 		
 	<mx:ViewStack id="viewStack" width="100%" height="100%">
 		
-		<mx:Canvas id="productView" width="100%" height="100%" showEffect="{ new Fade() }" hideEffect="{ new Fade() }">
+		<mx:Canvas id="productsView" width="100%" height="100%" showEffect="{ fadeEffect }" hideEffect="{ fadeEffect }">
 			<mx:TileList width="100%" height="100%" 
 						 columnWidth="130" rowHeight="130"
 						 backgroundAlpha="0" borderStyle="none" selectable="false"
@@ -30,12 +33,12 @@
 						 dataProvider="{ productGroup.products }"/>	
 		</mx:Canvas>
 		
-		<mx:Canvas id="loadingProductsView" width="100%" height="100%" showEffect="{ new Fade() }" hideEffect="{ new Fade() }">
+		<mx:Canvas id="loadingView" width="100%" height="100%" showEffect="{ fadeEffect }" hideEffect="{ fadeEffect }">
 			<mx:Label horizontalCenter="0" verticalCenter="0"
 					  text="Loading your products..." />
 		</mx:Canvas>
 		
-		<mx:Canvas id="noProductsView" width="100%" height="100%" showEffect="{ new Fade() }" hideEffect="{ new Fade() }">
+		<mx:Canvas id="noProductsView" width="100%" height="100%" showEffect="{ fadeEffect }" hideEffect="{ fadeEffect }">
 			<mx:Label horizontalCenter="0" verticalCenter="0"
 					  text="We're sorry, there are currently no products in this category" />
 		</mx:Canvas>

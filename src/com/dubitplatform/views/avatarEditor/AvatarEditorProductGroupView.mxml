@@ -6,6 +6,7 @@
 	<mx:Metadata>
 		[Event(name="clothingChanged", type="flash.events.Event")]
 	</mx:Metadata>
+	
 	<mx:Script>
 		<![CDATA[
 			import mx.events.ListEvent;
@@ -14,26 +15,23 @@
 			import uk.co.dubit.platform.components.avatarEditor.AvatarEditor;
 			import uk.co.dubit.platform.components.avatarEditor.AvatarEditors;
 			import uk.co.dubit.platform.components.catalogue.IProduct;
+			import uk.co.dubit.platform.components.catalogue.IProductGroup;
 			import uk.co.dubit.platform.components.catalogue.ui.ProductGroupLoadMode;
 			import uk.co.dubit.platform.data.IAvatar;
 
 			protected function onProductSelected(e:ListEvent):void
 			{				
-				var avatar:IAvatar = AvatarEditors.getInstance().currentEditor.avatar;
-				
 				avatar.clothes.addProduct(IProduct(e.itemRenderer.data));
 				
 				dispatchEvent(new Event("clothingChanged"));
 			}
 			
-			override protected function loadProductGroup():void
+			override public function onProductGroupLoadStarted(productGroup:IProductGroup) : void
 			{
 				viewStack.selectedChild = loadingView;
-				
-				super.loadProductGroup();
 			}
 			
-			override protected function onProductsLoaded():void
+			override public function onProductGroupLoadComplete(productGroup:IProductGroup) : void
 			{
 				viewStack.selectedChild = productGroup.products.length > 0 ? productsView : noProductsView
 			}
@@ -41,8 +39,10 @@
 		]]>
 	</mx:Script>
 	
+	<mx:Fade id="fadeEffect" />
+	
 	<mx:ViewStack id="viewStack" width="100%" height="100%">
-		<mx:Canvas id="productsView" width="100%" height="100%">
+		<mx:Canvas id="productsView" width="100%" height="100%" showEffect="{ fadeEffect }" hideEffect="{ fadeEffect }">
 			<mx:TileList width="100%" height="100%" rowHeight="125" columnWidth="125"
 						 backgroundAlpha="0" borderStyle="none" selectable="false" useRollOver="false"
 						 itemClick="onProductSelected(event)"
@@ -50,11 +50,11 @@
 						 dataProvider="{ productGroup.products }" />
 		</mx:Canvas>
 		
-		<mx:Canvas id="loadingView" width="100%" height="100%">
+		<mx:Canvas id="loadingView" width="100%" height="100%" showEffect="{ fadeEffect }" hideEffect="{ fadeEffect }">
 			<mx:Label horizontalCenter="0" verticalCenter="0" text="Loading your products" />
 		</mx:Canvas>
 		
-		<mx:Canvas id="noProductsView" width="100%" height="100%">
+		<mx:Canvas id="noProductsView" width="100%" height="100%" showEffect="{ fadeEffect }" hideEffect="{ fadeEffect }">
 			<mx:Label horizontalCenter="0" verticalCenter="0" text="Sorry, you don't own any { productGroup.name }" />
 		</mx:Canvas>
 		
