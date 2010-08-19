@@ -35,7 +35,7 @@
 			
 			override protected function onProductsLoaded():void
 			{
-				viewStack.selectedChild = productGroup.products.length > 0 ? productsView : noProductsView
+				viewStack.selectedChild = productGroup.products.length > 0 ? productsView : noProductsView;
 			}
 
 		]]>

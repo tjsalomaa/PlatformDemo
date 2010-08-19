@@ -62,23 +62,6 @@
 				collectionsPanel.visible = false;
 			}
 			
-			override public function setupComplete () : void 
-			{
-				energyMeter = Meters.getInstance().getMeterByID("energy");
-				// Note - this class will be refactored shortly. This method of event listenig is a shortcut
-				// that should not be used for production code. Leaves lingering anonymous inner functions	
-				energyMeter.gameObjectListeners.addListener(new GameObjectListener(function (go:IGameObject, property:String, oldVal:*, newVal:*) : void
-				{
-					updateEnergyLabel();
-				}));
-				updateEnergyLabel();		
-			}
-					
-			public function onAttributeChange(go:IGameObject, property:String, oldVal:*, newVal:*) : void
-			{
-				updateEnergyLabel();
-			}
-			
             public function openControlPanel (view : String = null) : void
             {            	
             	if (!controlPanel.visible) PopUpManager.centerPopUp(controlPanel);
@@ -106,10 +89,6 @@
             	Shops.getInstance().getShopByID("1").open();
             }      
 
-			private function updateEnergyLabel() : void
-			{
-				if (energyMeter) energyDisplay.text = "Energy: (" + energyMeter.amount + "/" + energyMeter.maxAmount + ")";
-			}
 		]]>
 	</mx:Script>	
 
