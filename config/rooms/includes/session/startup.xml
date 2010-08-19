@@ -65,6 +65,8 @@
 							<Result>
 								<EnterSession>
 									<Result>
+										<GetOwnedProducts />
+										<GetAvatarEditorProductGroups />										
 										<ChangeRoom roomName="{Properties.[setting.rooms.default-room]}">
 											<onJoinRoomComplete>
 												<HideCustomCursor/>
