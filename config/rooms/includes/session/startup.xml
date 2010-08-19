@@ -57,6 +57,7 @@
 	
 	<BehaviourDefinition id="joinWorld">	
 		<ShowBusyCursor/>
+
 		<LoadClothingLayers>
 			<Result>
 				<If expression="{Session.isLoggedIn}">
@@ -65,6 +66,8 @@
 							<Result>
 								<EnterSession>
 									<Result>
+										<GetOwnedProducts />
+										<GetAvatarEditorProductGroups />
 										<ChangeRoom roomName="{Properties.[setting.rooms.default-room]}">
 											<onJoinRoomComplete>
 												<HideCustomCursor/>
@@ -100,6 +103,7 @@
 				<Alert message="Load clothing layers fault" />
 			</Fault>
 		</LoadClothingLayers>
+		
 	</BehaviourDefinition>
 	
 	<BehaviourDefinition id="loginOrCreateAvatar">
