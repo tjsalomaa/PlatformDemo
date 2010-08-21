@@ -33,7 +33,7 @@
 			
 			override public function onProductGroupLoadComplete(productGroup:IProductGroup) : void
 			{
-				viewStack.selectedChild = productGroup.products.length > 0 ? productsView : noProductsView
+				viewStack.selectedChild = productGroup.products.length > 0 ? productsView : noProductsView;
 			}
 
 		]]>
