@@ -2107,7 +2107,9 @@
 	<Binding name="CloseAvatarEditor" class="uk.co.dubit.platform.components.avatarEditor.behaviours.CloseAvatarEditor"/>
 	<Binding name="Contains" class="com.dubitplatform.behaviours.Contains"/>
 	<Binding name="CloseAllAvatarEditors" class="uk.co.dubit.platform.components.avatarEditor.behaviours.CloseAllAvatarEditors"/>
-	<Binding name="CreateAvatar" class="uk.co.dubit.platform.components.avatarEditor.behaviours.CreateAvatar"/>
+	<Binding name="CreateAvatar" class="uk.co.dubit.platform.components.avatarEditor.behaviours.CreateAvatar">
+		<Attribute name="serviceURL" defaultValue="{Properties.[path.web-services]}/users/{userID}/avatars.nexus"/>		
+	</Binding>	
 	<Binding name="GetDefaultPackages" class="uk.co.dubit.platform.components.avatarEditor.behaviours.GetDefaultPackages"/>
 	<Binding name="GetAvatarEditorProductGroups" class="uk.co.dubit.platform.components.avatarEditor.behaviours.GetAvatarEditorProductGroups"/>
 	<Binding name="GetOwnedItemsInProductGroup" class="uk.co.dubit.platform.components.avatarEditor.behaviours.GetOwnedItemsInProductGroup"/>
