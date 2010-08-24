@@ -2,11 +2,9 @@ h1. Dubit Platform Lite
 
 Our goal for the Dubit Platform is to create the easiest and fastest way to create feature rich virtual worlds. We believe that creating a world should not be just a programmers job, and with the right tools a team of creatives can build something special. We'll know when we've done our job when creatives can start creating the content, games, and adventures without the help of programmers. 
 
-Download the first release of the "Dubit Platform Editor":http://dubitplatform.com/platform-beta and for fellow code monkeys this very git hub repository has a template virtual world for dirtying your hands.
-
 h2. Supported Features
 
-The Lite version of the Platform supports the following core features. Full platform installation includes Admin website, shops, payment gateway integration, customizable avatars, persistence, and more.
+The Demo project supports the following core features. Full platform installation includes Admin website, shops, payment gateway integration, customizable avatars, persistence, and more.
 
 * Basic avatars, see assets/avatar directory for example avatar. Full platform supports customizable avatars using Cutout and Layering engines, "find out more":http://dubitplatform.com/blog/2010/3/6/avatars-the-most-important-decision-youll-ever-make.html
 * Multiplayer rooms, with parallax scrolling, depth swapping, lighting effects, collision detection, sound effects, and more.
