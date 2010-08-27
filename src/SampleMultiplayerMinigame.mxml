@@ -16,12 +16,12 @@
 				<mx:Button label="Print keys" 
 					click="{
 						appendOutput('Available minigame data keys:');
-						for each(var key:String in minigameBridge.minigameDataKeys) { appendOutput(' ' + key) };
+						for each(var key:String in minigameBridge.getNodeDataKeys()) { appendOutput(' ' + key) };
 					}" />
 				
 				<mx:Button label="Get minigame data" 
 					click="{ 
-						appendOutput(minigameBridge.getMinigameData(minigameDataKey.text)); 
+						appendOutput(minigameBridge.getNodeData(minigameDataKey.text)); 
 						minigameDataKey.text = '';
 					}" />
 			</mx:HBox>
@@ -98,7 +98,7 @@
 		</mx:VBox>			
 		<mx:HBox width="100%" horizontalAlign="right">
 			<mx:Button label="Clear output" click=" { output.text = '' }" />
-			<mx:Button label="Award points" toolTip="Awards 10 points to the user" click="{ minigameBridge.setGameScore(10) }" />
+			<mx:Button label="Award points" toolTip="Awards 10 points to the user" click="{ minigameBridge.awardGameScore(10) }" />
 			<mx:Button label="Ping once" enabled="{ canPing }" click=" { sendPing() }" />
 			<mx:Button label="Ping constantly" enabled="{ canPing }"  toggle="true" click="{ repeatPing = !repeatPing; if(repeatPing) sendPing() }" />
 			<mx:Button label="Ping constantly (With CPU Load)" enabled="{ canPing }"  toggle="true" click="{ repeatPing = !repeatPing; enableCPULoad = !enableCPULoad; if(repeatPing) sendPing() }" />
@@ -173,8 +173,8 @@
 			
 			private function outputMinigameDetails() : void
 			{
-				appendOutput("Minigame is: " + minigameBridge.getMinigameData("name"));
-				appendOutput("Loaded from: " + minigameBridge.getMinigameData("url"));
+				appendOutput("Minigame is: " + minigameBridge.getNodeData("name"));
+				appendOutput("Loaded from: " + minigameBridge.getNodeData("url"));
 			}
 			
 			/**
