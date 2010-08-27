@@ -1960,7 +1960,7 @@
 			<Attribute required="false" name="targetContainer" type="ISkinContainer" description="Named MXML component used to display the minigame skin" defaultValue="minigameContainer"/>
 			<Attribute required="false" name="attachSkin" type="boolean" description="True if the skin should be attached immediately" defaultValue="false"/>
 		</Binding>
-		<Binding name="MutiplayerMinigame" class="uk.co.dubit.platform.components.minigame.MultiplayerMinigame" factory="uk.co.dubit.platform.scriptEngine.gameObject.GameObjectFactory">
+		<Binding name="MultiplayerMinigame" class="uk.co.dubit.platform.components.minigame.MultiplayerMinigame" factory="uk.co.dubit.platform.scriptEngine.gameObject.GameObjectFactory">
 			<Attribute required="true" name="id" type="GameObjectID" description="A unique mini game ID"/>
 			<Attribute required="true" name="url" type="FilePath" description="The url to the mini game"/>
 			<Attribute required="true" name="name" type="String" description="Name of the mini game"/>
@@ -1975,6 +1975,11 @@
 		<Binding name="CloseMinigame" class="uk.co.dubit.platform.components.minigame.behaviours.CloseMinigame">
 			<Attribute required="true" name="minigame" type="MiniGameID" description="The unique ID of the mini game"/>
 		</Binding>
+		
+		<Binding name="InviteToMultiplayerMinigame" alias="InviteToMinigame" class="uk.co.dubit.platform.components.minigame.behaviours.InviteToMinigame" />
+		<Binding name="RequestMinigameInstantMatch" class="uk.co.dubit.platform.components.minigame.behaviours.RequestMinigameInstantMatch" />
+		<Binding name="JoinMultiplayerMinigame" class="uk.co.dubit.platform.components.minigame.behaviours.JoinMultiplayerMinigame" />
+		
 	</Package>
 	<!-- EDITOR -->
 	<Package name="Editor" nodoc="true">

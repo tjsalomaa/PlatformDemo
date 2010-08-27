@@ -43,7 +43,7 @@
 					</inviteToRoom>
 				</Switch>
 			</acceptRequest>
-
+			
 			<handlePoints>
 				<SetValues target="{Rooms.currentRoom.player}" points="({Session.user.currentAvatar.points}+{Event.packet.points_delta})" />
 				<SetValues target="{Session.user.currentAvatar}" points="({Session.user.currentAvatar.points}+{Event.packet.points_delta})" />

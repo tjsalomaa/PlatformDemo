@@ -14,7 +14,6 @@
 	</Policies>
 	
     <Policies type="all">
-	    <AllowInsecureDomain URL="*"/>	        
-	    <LoadPolicyFile URL="/crossdomain.xml"/>
+	    <AllowInsecureDomain URL="*"/>
     </Policies>
 </Security>

@@ -20,14 +20,10 @@
 		
 		</onFixup>
 		
-		<onClick>			
+		<onClick>
 			<If expression="({Event.handler} == {Room.player})">
-				<Then>
-					<OpenMenu menu="{Menus.playerMenu}" target="{Room.player}"/>
-				</Then>
-				<Else>
-					<OpenMenu menu="{Menus.otherPlayerMenu}" target="{Event.handler}" />
-				</Else>
+				<Then><OpenMenu menu="playerMenu" target="{Event.handler}"/></Then>
+				<Else><OpenMenu menu="otherPlayerMenu" target="{Event.handler}"/></Else>
 			</If>
 		</onClick>
 		

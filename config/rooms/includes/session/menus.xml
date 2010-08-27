@@ -1,21 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Include xmlns:xi="http://www.w3.org/2001/XInclude">
 	<Menus>
-		<ContextMenu id="playerMenu" track="true" offsetX="0" offsetY="0">
-			<MenuItem id="playGame" text="Play Single Player Game" toolTip="Starts the Sample Flex Mini Game"/>
-			<MenuItem id="onShowProfile" text="Show Profile" toolTip="Shows the player's profile information"/>
+		<ContextMenu id="playerMenu" track="true" offsetX="0" offsetY="0">			
+			<MenuItem text="Start minigame API Tester">
+				<Triggers>
+					<onMenuItemSelected><OpenMinigame minigame="apiTester" /></onMenuItemSelected>
+				</Triggers>
+			</MenuItem>
+			
 			<MenuItem id="onShowAvatarEditor" text="Change clothes" toolTip="Customize your character"/>
-		</ContextMenu>	
-		<ContextMenu id="otherPlayerMenu" track="true" offsetX="0" offsetY="0">
-			<MenuItem id="showProfile" text="Show Profile" toolTip="Shows the player's profile information"/>
-			<MenuItem id="addToContacts" text="Add To Contacts" toolTip="Adds the player to your contact list"/>
-			<MenuItem id="inviteToMinigame" text="Invite to Minigame" toolTip="Invite the player to a minigame"/>
-			<Triggers>
-				<onMenuItemSelected>
-					<Trace message="onMenuItemSelected {Event.menuItem.id}"/>
-					<OpenMinigame minigame="{Minigame.single}"/>
-				</onMenuItemSelected>	
-			</Triggers>	
+		</ContextMenu>
+			
+		<ContextMenu id="otherPlayerMenu" track="true" offsetX="0" offsetY="0">			
+			<MenuItem text="Start minigame API Tester (Multiplayer mode)">
+				<Triggers>
+					<onMenuItemSelected>
+						<InviteToMinigame minigame="apiTester" avatar="{Event.menu.target}" />
+					</onMenuItemSelected>	
+				</Triggers>	
+			</MenuItem>
 		</ContextMenu>			
 	</Menus>
 </Include>
