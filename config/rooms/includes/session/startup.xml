@@ -118,4 +118,10 @@
 		</GetDefaultPackages>
 	</BehaviourDefinition>
 
+	<Behaviour>
+		<onChangeRoom>
+			<ChangeRoom roomName="{Event.roomName}"/>
+		</onChangeRoom>
+	</Behaviour>
+
 </Include>

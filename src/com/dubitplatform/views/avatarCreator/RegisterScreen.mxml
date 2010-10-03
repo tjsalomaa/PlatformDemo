@@ -14,11 +14,6 @@
 			
 			private function onRegisterClicked() : void
 			{
-				username.enabled = false;
-				password.enabled = false;
-				password2.enabled = false;
-				registerButton.enabled = false;
-				
 				// Notify GAML so that we can start the login process
 				avatarEditor.dispatchGAMLEvent("onRegisterUser", { "username": username.text, "password": password.text });
 			}
@@ -34,10 +29,7 @@
 		</mx:FormItem>
 		<mx:FormItem label="Password">
 			<mx:TextInput id="password" width="190" displayAsPassword="true" />
-		</mx:FormItem>
-		<mx:FormItem label="Confirm Password">
-			<mx:TextInput id="password2" width="190" displayAsPassword="true" />
-		</mx:FormItem>		
+		</mx:FormItem>	
 		<mx:FormItem >
 			<mx:Button id="registerButton" label="Finally, let me in!" click="onRegisterClicked()" width="190" />
 		</mx:FormItem>

@@ -13,7 +13,7 @@
 				<CreateNotification title="Woop! Level up!" body="{Event.level.message}" can_remove="true"/>
 			</OnLevelUp>
 			<OnAwardedExperience>
-				<Trace message="OnAwardedExperience level={Experience.level}"/>
+				<Trace message="OnAwardedExperience level={Event.level}"/>
 			</OnAwardedExperience>
 		</Triggers>
 	</Experience>
