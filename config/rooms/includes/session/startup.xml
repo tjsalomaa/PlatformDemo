@@ -56,20 +56,25 @@
 	</NotificationHandler>
 	
 	<BehaviourDefinition id="joinWorld">	
+		<Trace message="Join world called" />
 		<ShowBusyCursor/>
 
 		<LoadClothingLayers>
 			<Result>
 				<If expression="{Session.isLoggedIn}">
-					<Then>			
+					<Then>		
+						<Trace message="Logged in!" />	
 						<LoadFirstAvatar>
 							<Result>
+								<Trace message="Loaded first avatar" />
 								<EnterSession>
 									<Result>
+										<Trace message="Entered session" />
 										<GetOwnedProducts />
 										<GetAvatarEditorProductGroups />
 										<ChangeRoom roomName="{Properties.[setting.rooms.default-room]}">
 											<onJoinRoomComplete>
+												<Trace message="Joined room" />
 												<HideCustomCursor/>
 											</onJoinRoomComplete>	
 										</ChangeRoom>	
@@ -107,8 +112,10 @@
 	</BehaviourDefinition>
 	
 	<BehaviourDefinition id="loginOrCreateAvatar">
+		<Trace message="LoginOrCreateAvatar called" />
 		<GetDefaultPackages>
 			<Result>
+				<Trace message="Loaded default packages" />
 				<HideCustomCursor/>
 				<OpenAvatarEditor avatarEditor="create" />
 			</Result>

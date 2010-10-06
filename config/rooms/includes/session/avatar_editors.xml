@@ -3,9 +3,15 @@
 	<AvatarEditors>
 		<AvatarEditor id="create" skin="com.dubitplatform.views.AvatarCreatorView" targetContainer="worldOverlay">
 			<Triggers>
+				<onAvatarEditorOpened>
+					<Trace message="Create avatar editor opened" />
+				</onAvatarEditorOpened>
+				
 				<onLogin>
+					<Trace message="Login called" />
 					<Login username="{Event.username}" password="{Event.password}">
 						<Result>
+							<Trace message="Succesfully logged in" />
 							<CloseAvatarEditor avatarEditor="create" />
 							<Call behaviourID="joinWorld" />
 						</Result>
@@ -16,14 +22,18 @@
 				</onLogin>
 				
 				<onRegisterUser>
+					<Trace message="RegisterUser called" />
 					<CreateUser username="{Event.username}" password="{Event.password}">
 						<Result>
+							<Trace message="User successfully created" />
 							<CreateAvatar avatar="{AvatarEditors.create.avatar}">
 								<Result>
+									<Trace message="Avatar created" />
 									<CloseAvatarEditor avatarEditor="create" />
 									<Call behaviourID="joinWorld" />
 								</Result>
 								<Fault>
+									<Trace message="Avatar creation failed!" />
 								</Fault>
 							</CreateAvatar>
 						</Result>
