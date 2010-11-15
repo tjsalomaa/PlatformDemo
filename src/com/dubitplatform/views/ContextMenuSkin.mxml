@@ -3,9 +3,14 @@
 	width="120" height="{ menu.menuItems.length * 30 }" horizontalScrollPolicy="off" verticalScrollPolicy="off"
 	xmlns="uk.co.dubit.platform.components.menu.ui.*"
 	xmlns:mx="http://www.adobe.com/2006/mxml">
+	<mx:Script>
+		<![CDATA[
+			import uk.co.dubit.platform.components.menu.IMenuItem;
+		]]>
+	</mx:Script>
 	
 	<mx:Box width="100%" height="100%" horizontalScrollPolicy="off" verticalScrollPolicy="off">
-		<mx:List id="menuItemList" dataProvider="{ menu.menuItems}" labelField="text"  width="120" height="100%" itemClick="{ menu.selectAndClose(menuItemList.selectedIndex) }">
+		<mx:List id="menuItemList" dataProvider="{ menu.menuItems}" labelField="text"  width="120" height="100%" itemClick="{ menu.selectAndClose(menuItemList.selectedItem as IMenuItem) }">
 			<mx:itemRenderer>
         		<mx:Component>
         	    	<mx:Button label="{data.text}" width="100"/>

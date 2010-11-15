@@ -6,6 +6,7 @@
 	<xi:include href="includes/session/achievements.xml"/>
 	<xi:include href="includes/session/activity_bars.xml"/>
 	<xi:include href="includes/session/avatar_editors.xml"/>
+	<xi:include href="includes/session/contact_list.xml"/>
 	<xi:include href="includes/session/backpack.xml"/>
 	<xi:include href="includes/session/chat_panels.xml"/>
 	<xi:include href="includes/session/collections.xml"/>

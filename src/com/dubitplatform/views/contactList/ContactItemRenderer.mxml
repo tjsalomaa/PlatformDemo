@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ui:ContactViewBase 
+	width="100%" height="30"
+	xmlns:mx="http://www.adobe.com/2006/mxml" 
+	xmlns:ui="uk.co.dubit.platform.components.contactList.ui.*">
+	
+	<mx:Script>
+		<![CDATA[
+			import uk.co.dubit.platform.data.IAvatar;
+			
+			[Bindable] private var isFriend:Boolean;
+			[Bindable] private var isBlocked:Boolean;
+			[Bindable] private var isKnown:Boolean;
+			
+			
+			[Bindable]
+			override public function set contact(value:IAvatar) : void
+			{
+				super.contact = value;
+				
+				if(contact)
+				{
+					isFriend = contactList.isFriend(contact);
+					isBlocked = contactList.isBlocked(contact);
+					isKnown = isFriend || isBlocked;
+				}
+			}
+		]]>
+	</mx:Script>
+	
+	<mx:HBox width="100%" height="100%" >
+		<mx:Label text="{ contact.avatarName }" />
+		<mx:Label text="(In room)" includeInLayout="{ !isKnown }" visible="{ !isKnown }" />
+		<mx:Spacer width="100%" />
+		
+		<mx:LinkButton label="ADD" includeInLayout="{ !isFriend }" visible="{ !isFriend }" click="{ contactList.addFriend(contact) }" />
+		<mx:LinkButton label="REMOVE" includeInLayout="{ isKnown }" visible="{ isKnown }" click="{ contactList.removeContact(contact) }" /> 
+		<mx:LinkButton label="BLOCK" includeInLayout="{ isFriend }" visible="{ isFriend }" click="{ contactList.blockContact(contact) }" /> 
+	</mx:HBox>
+</ui:ContactViewBase>

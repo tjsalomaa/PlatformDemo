@@ -11,12 +11,8 @@
 		<Binding name="BehaviourDefinition" factory="uk.co.dubit.platform.scriptEngine.behaviour.BehaviourDefinitionFactory" nodoc="true"/>
 		<Binding name="GameObject" factory="uk.co.dubit.platform.scriptEngine.gameObject.GameObjectFactory" nodoc="true"/>
 		<Binding name="PlayerDefinition" factory="uk.co.dubit.platform.scriptEngine.gameObject.GameObjectDefinitionFactory" class="uk.co.dubit.platform.scriptEngine.gameObject.types.avatar.Character" nodoc="true"/>
-		<Binding name="PlayerKeyboardMovementProxy" factory="uk.co.dubit.platform.scriptEngine.gameObject.GameObjectFactory" class="uk.co.dubit.platform.scriptEngine.gameObject.types.avatar.PlayerKeyboardMovementProxy" nodoc="true"/>
-		<Binding name="PlayerMouseMovementProxy" factory="uk.co.dubit.platform.scriptEngine.gameObject.GameObjectFactory" class="uk.co.dubit.platform.scriptEngine.gameObject.types.avatar.PlayerMouseMovementProxy" nodoc="true"/>
 		<Binding name="Channel" factory="uk.co.dubit.platform.scriptEngine.gameObject.GameObjectFactory" class="uk.co.dubit.platform.scriptEngine.gameObject.types.net.ConnectionProxy" nodoc="true"/>
 		<Binding name="NotificationHandler" factory="uk.co.dubit.platform.scriptEngine.gameObject.GameObjectFactory" class="uk.co.dubit.platform.scriptEngine.gameObject.types.net.NotificationHandler" nodoc="true"/>
-		<Binding name="Localizator" factory="uk.co.dubit.platform.scriptEngine.gameObject.GameObjectFactory" class="uk.co.dubit.platform.scriptEngine.gameObject.types.locale.Localizator" nodoc="true"/>
-		<Binding name="EventMediator" factory="uk.co.dubit.platform.scriptEngine.eventMediation.EventMediatorFactory" nodoc="true"/>
 		<Binding name="SetResolverInstance" class="uk.co.dubit.platform.scriptEngine.behaviour.types.misc.SetResolverInstance" nodoc="true"/>
 		<Binding name="LoadClothingLayers" class="uk.co.dubit.platform.components.avatar.editor.behaviours.LoadClothingLayers" nodoc="true"/>
 		<Binding name="EnterSession" class="uk.co.dubit.platform.scriptEngine.behaviour.types.net.EnterSession"/>
@@ -27,8 +23,6 @@
 		<Binding name="CreateGameObjects" class="uk.co.dubit.platform.scriptEngine.behaviour.types.node.CreateGameObjects"/>
 		<Binding name="DestroyGameObject" class="uk.co.dubit.platform.scriptEngine.behaviour.types.node.DestroyGameObject"/>
 		<Binding name="ExecuteBehaviour" class="uk.co.dubit.platform.scriptEngine.behaviour.types.core.ExecuteBehaviour"/>
-		<Binding name="RelayMovement" class="uk.co.dubit.platform.world.movement.RelayMovement"/>
-		<Binding name="TransmitMovement" class="uk.co.dubit.platform.world.movement.TransmitMovement"/>
 		<Binding name="StopLoader" class="uk.co.dubit.platform.scriptEngine.behaviour.types.assets.StopLoader"/>
 		<Binding name="LoadAvatarPoints" class="uk.co.dubit.platform.components.shop.behaviours.LoadAvatarPoints"/>
 		<Binding name="Call" class="uk.co.dubit.platform.scriptEngine.behaviour.types.core.Call"/>
@@ -327,22 +321,16 @@
 			<Attribute required="false" name="title" type="String" description="The title of the alert window"/>
 		</Binding>
 	</Package>
-	<!-- Transaction History -->
-	<Package name="TransactionHistory" nodoc="true">
-		<Binding name="ShowTransactionHistory" nodoc="true" class="uk.co.dubit.platform.components.transaction.transactionHistory.behaviours.ShowTransactionHistory"/>
-		<Binding name="HideTransactionHistory" nodoc="true" class="uk.co.dubit.platform.components.transaction.transactionHistory.behaviours.HideTransactionHistory"/>
-		<Binding name="SavePoints" nodoc="true" class="uk.co.dubit.platform.components.transaction.transactionHistory.behaviours.SavePoints"/>
-	</Package>
+
 	<!-- Avatar -->
 	<Package name="Avatar" nodoc="true">
 		<Binding name="CloneAvatar" nodoc="true" class="uk.co.dubit.platform.components.avatar.selection.behaviors.CloneAvatar"/>
 		<Binding name="LoadFirstAvatar" nodoc="true" class="uk.co.dubit.platform.components.avatar.selection.behaviors.LoadFirstAvatar"/>
-		<Binding name="SetAvatar" nodoc="true" class="uk.co.dubit.platform.components.avatar.selection.behaviors.SetAvatar"/>
 		<Binding name="UpdateAvatarClothes" nodoc="true" class="uk.co.dubit.platform.components.avatar.editor.behaviours.UpdateAvatarClothes"/>
 		<Binding name="DressAvatarWithClothes" class="uk.co.dubit.platform.components.avatar.editor.behaviours.DressAvatarWithClothes" />
-		<Binding name="CreateAvatarClothes" nodoc="true" class="uk.co.dubit.platform.components.avatar.editor.behaviours.CreateAvatarClothes"/>
 		<Binding name="CreateAvatar" class="uk.co.dubit.platform.components.avatarEditor.behaviours.CreateAvatar"/>
 	</Package>
+	
 	<Package name="Authentication">
 		<Binding name="Login" class="uk.co.dubit.platform.scriptEngine.behaviour.types.webservice.Login">
 			<Attribute name="username" description="The username to login with"/>
@@ -358,6 +346,7 @@
 			<Attribute name="serviceURL" defaultValue="{Properties.[path.web-services]}/users.nexus"/>
 		</Binding>
 	</Package>
+	
 	<!-- TRIGGER BINDINGS -->
 	<Package name="Events">
 		<Binding name="Trigger" class="uk.co.dubit.platform.scriptEngine.behaviour.types.trigger.Trigger" factory="uk.co.dubit.platform.scriptEngine.behaviour.BehaviourFactory">
@@ -401,16 +390,20 @@
 			<Attribute name="can_cancel" type="Boolean" description="Whether the notification can be cancelled" required="false" defaultValue="false"/>
 			<Attribute name="can_remove" type="Boolean" description="Whether the notification can be removed (Use for client created notifications only)" required="false" defaultValue="false"/>
 		</Binding>
-		<!--
-			This binding exists so CRUD operations from the game server work
-		-->
-		<Binding name="Request" class="uk.co.dubit.platform.components.notifications.Notification" factory="uk.co.dubit.platform.scriptEngine.gameObject.GameObjectFactory"/>
+		
+		<Binding name="Request" class="uk.co.dubit.platform.components.notifications.Notification" factory="uk.co.dubit.platform.scriptEngine.gameObject.GameObjectFactory" />
+
 		<Binding name="CreateNotification" class="uk.co.dubit.platform.components.notifications.behaviours.CreateNotification"/>
 		<Binding name="GetNotifications" class="uk.co.dubit.platform.components.notifications.behaviours.GetNotifications"/>
 		<Binding name="AcceptNotification" class="uk.co.dubit.platform.components.notifications.behaviours.AcceptNotification"/>
 		<Binding name="RejectNotification" class="uk.co.dubit.platform.components.notifications.behaviours.RejectNotification"/>
 		<Binding name="CancelNotification" class="uk.co.dubit.platform.components.notifications.behaviours.CancelNotification"/>
 		<Binding name="RemoveNotification" class="uk.co.dubit.platform.components.notifications.behaviours.RemoveNotification"/>
+		
+		<Binding name="NotificationDefinition" 
+			class="uk.co.dubit.platform.components.notifications.Notification"
+			factory="uk.co.dubit.platform.scriptEngine.gameObject.GameObjectDefinitionFactory"/>
+		
 		<!-- Growl -->
 		<Binding name="ShowGrowl" class="uk.co.dubit.platform.components.growl.behaviours.ShowGrowl">
 			<Attribute name="targetContainer" type="ISkinContainer" description="Named MXML component used to display the growl" defaultValue="growlContainer"/>
@@ -419,6 +412,7 @@
 			<Attribute name="skin" type="IGrowlSkin" description="Growl skin" required="false" defaultValue="com.dubitplatform.views.GrowlView"/>
 		</Binding>
 	</Package>
+	
 	<!-- CHAT BINDINGS -->
 	<Package name="Room">
 		<Binding name="ChatRoom" factory="uk.co.dubit.platform.scriptEngine.room.RoomFactory" class="uk.co.dubit.platform.components.rooms.ChatRoom">
@@ -428,6 +422,9 @@
 			<Attribute required="true" name="attachSkin" type="boolean" description="True if the skin should be attached immediately" defaultValue="true"/>
 		</Binding>
 		<Binding name="SessionRoom" factory="uk.co.dubit.platform.scriptEngine.room.RoomFactory" class="uk.co.dubit.platform.scriptEngine.room.SessionRoom"/>
+	</Package>
+	
+	<Package name="Chat">
 		<Binding name="ChatPanels" class="uk.co.dubit.platform.components.chat.chatPanels.ChatPanels" factory="uk.co.dubit.platform.scriptEngine.gameObject.GameObjectFactory"/>
 		<Binding name="ChatPanel" class="uk.co.dubit.platform.components.chat.chatPanels.ChatPanel" factory="uk.co.dubit.platform.scriptEngine.gameObject.GameObjectFactory"/>
 		<Binding name="OpenChatPanel" class="uk.co.dubit.platform.components.chat.chatPanels.behaviours.OpenChatPanel"/>
@@ -435,13 +432,12 @@
 		<Binding name="SetChatPanelMessage" alias="SetChatMessage" class="uk.co.dubit.platform.components.chat.chatPanels.behaviours.SetChatMessage"/>
 		<Binding name="SetChatPanelDefaultText" alias="SetDefaultText" class="uk.co.dubit.platform.components.chat.chatPanels.behaviours.SetChatPanelDefautText"/>
 	</Package>
+	
 	<!-- WORLD BINDINGS -->
 	<Package name="World">
 		<Binding nodoc="true" name="AddToWorld" class="uk.co.dubit.platform.scriptEngine.behaviour.types.world.AddToWorld">
 			<Description><![CDATA[
 					Adds a game object into the world. Often used to drop items that have been previously picked up in another room.
-					
-					
 				]]></Description>
 			<Example><![CDATA[
 
@@ -569,6 +565,7 @@
 			<Attribute required="false" nodoc="true" name="useServer" defaultValue="{Properties.[setting.useServer]}" description="Whether to broadcast this message to other users in the room"/>
 			<Attribute name="offsetY" defaultValue="-600"/>
 		</Binding>
+		
 		<!-- ShowBubble alias with different gameObject and x/y offset default values for use with the player in the room-->
 		<Binding name="ShowPlayerBubble" class="uk.co.dubit.platform.scriptEngine.behaviour.types.world.ShowBubble">
 			<Attribute name="gameObject" defaultValue="{Rooms.currentRoom.player}"/>
@@ -583,6 +580,7 @@
 			<Attribute name="offsetX" defaultValue="0"/>
 			<Attribute name="offsetY" defaultValue="-600"/>
 		</Binding>
+		
 		<Binding name="MoveTo" type="Behaviour" alias="MovePlayerTo" class="uk.co.dubit.platform.world.movement.MoveTo">
 			<Description><![CDATA[
 					Slides a graphic to a new position in the world. Any DisplayObject can be moved, Characters will animated while moving.
@@ -642,7 +640,7 @@
 		<Binding name="PauseClock" class="uk.co.dubit.platform.scriptEngine.behaviour.types.world.PauseClock"/>
 		<Binding name="ResumeClock" class="uk.co.dubit.platform.scriptEngine.behaviour.types.world.ResumeClock"/>
 	</Package>
-	<Binding nodoc="true" name="SendMovePlayerTo" alias="SendMoveTo" class="uk.co.dubit.platform.world.movement.SendMoveTo"/>
+
 	<Binding nodoc="true" name="MovementController" class="uk.co.dubit.platform.scriptEngine.gameObject.types.avatar.ActorMouseMovementProxy" factory="uk.co.dubit.platform.scriptEngine.gameObject.GameObjectFactory" alias="MouseMovementController">
 		<Description><![CDATA[
 				The MovementController is used in conjunction with the MoveTo behaviour. The MovementController is responsible for moving objects around the world, and determines what direction the player faces when he moves. 
@@ -655,6 +653,7 @@
 		<Attribute name="yVelocityScale" defaultValue="0.5" description="For rooms with perspective, when walking up the screen the avatars should move more slowly. This value determines how much slower. A value of 0.5 moves at half the speed." type="Number" required="false"/>
 		<Attribute nodoc="true" name="id" defaultValue="movementController" type="String" required="false"/>
 	</Binding>
+	
 	<!-- SHOP - NOT DOCUMENTED -->
 	<Package name="Shops" nodoc="true">
 		<Binding name="Shops" class="uk.co.dubit.platform.components.catalogue.Shops" factory="uk.co.dubit.platform.scriptEngine.gameObject.GameObjectFactory">
@@ -1992,7 +1991,8 @@
 	<!-- MENU BINDINGS -->
 	<Package name="Menu" nodoc="true">
 		<Binding name="Menus" class="uk.co.dubit.platform.components.menu.Menus" factory="uk.co.dubit.platform.scriptEngine.gameObject.GameObjectFactory"/>
-		<Binding name="ContextMenu" class="uk.co.dubit.platform.components.menu.PopupMenu" factory="uk.co.dubit.platform.scriptEngine.gameObject.GameObjectFactory">
+		<Binding name="ContextMenu" class="uk.co.dubit.platform.components.menu.GAMLMenu" factory="uk.co.dubit.platform.scriptEngine.gameObject.GameObjectFactory">
+			<Attribute name="skinContainer" defaultValue="menuContainer" />
 			<Attribute required="false" name="skin" defaultValue="com.dubitplatform.views.ContextMenuSkin" type="class" description="Menu skin"/>
 		</Binding>
 		<Binding name="MenuItem" class="uk.co.dubit.platform.components.menu.MenuItem" factory="uk.co.dubit.platform.scriptEngine.gameObject.GameObjectFactory"/>
@@ -2069,8 +2069,9 @@
 		<Attribute name="trackingEnabled" type="Boolean" defaultValue="true" description="Whether this object is enabled"/>
 	</Binding>
 	<Binding name="Trackers" factory="uk.co.dubit.platform.scriptEngine.gameObject.GameObjectFactory" class="uk.co.dubit.platform.components.tracker.Trackers"/>
-	<Binding name="EnableTracker" class="uk.co.dubit.platform.components.activitybars.behaviours.EnableTracker"/>
-	<Binding name="DisableTracker" class="uk.co.dubit.platform.components.activitybars.behaviours.DisableTracker"/>
+	<Binding name="EnableTracker" class="uk.co.dubit.platform.components.tracker.behaviours.EnableTracker"/>
+	<Binding name="DisableTracker" class="uk.co.dubit.platform.components.tracker.behaviours.DisableTracker"/>
+	
 	<!-- CAMERA BINDINGS -->
 	<Binding name="Cameras" class="uk.co.dubit.platform.components.camera.Cameras" factory="uk.co.dubit.platform.scriptEngine.gameObject.GameObjectFactory"/>
 	<Binding name="Camera" class="uk.co.dubit.platform.components.camera.Camera" factory="uk.co.dubit.platform.scriptEngine.gameObject.GameObjectFactory">
@@ -2129,4 +2130,35 @@
 	</Binding>	
 	<Binding name="ShowBusyCursor" class="uk.co.dubit.platform.scriptEngine.behaviour.types.mouse.ShowBusyCursor"/>
 	<Binding name="HideCustomCursor" class="uk.co.dubit.platform.scriptEngine.behaviour.types.mouse.HideCustomCursor"/>
+	
+	<Package name="Contacts">
+		<Binding name="ContactList"
+			class="uk.co.dubit.platform.components.contactList.ContactList" 
+			factory="uk.co.dubit.platform.scriptEngine.gameObject.GameObjectFactory" />
+			
+		<Binding name="Contact"
+			class="uk.co.dubit.platform.scriptEngine.gameObject.types.avatar.Character"
+			factory="uk.co.dubit.platform.scriptEngine.gameObject.GameObjectFactory" />
+			
+		<Binding name="OpenContactList" class="uk.co.dubit.platform.components.contactList.behaviours.OpenContactList" />
+		<Binding name="CloseContactList" class="uk.co.dubit.platform.components.contactList.behaviours.CloseContactList" />
+			
+		<Binding name="GetContactList" class="uk.co.dubit.platform.components.contactList.behaviours.GetContactList" />
+	
+		<Binding name="RequestAddContact" class="uk.co.dubit.platform.components.contactList.behaviours.RequestAddContact">
+			<Attribute name="avatar" type="IAvatar" description="The avatar to add as a friend" required="true" />
+		</Binding>
+	
+		<Binding name="BlockContact" class="uk.co.dubit.platform.components.contactList.behaviours.BlockContact">
+			<Attribute name="avatar" type="IAvatar" description="The avatar to add to the user's blocked list" />
+		</Binding>
+	
+		<Binding name="RemoveContact" class="uk.co.dubit.platform.components.contactList.behaviours.RemoveContact">
+			<Attribute name="avatar" type="IAvatar" description="The avatar to remove from the user's contact list" />
+		</Binding>
+		
+		<Binding name="InviteToRoom" class="uk.co.dubit.platform.components.contactList.behaviours.InviteToRoom">
+			<Attribute name="avatar" type="IAvatar" description="The avatar to add as a friend" required="true" />
+		</Binding>
+	</Package>
 </Bindings>

@@ -15,6 +15,7 @@ package
 	import com.dubitplatform.views.ChatRoomPreloaderView;
 	import com.dubitplatform.views.ChatRoomView;
 	import com.dubitplatform.views.CollectionView;
+	import com.dubitplatform.views.ContactListTitleWindow;
 	import com.dubitplatform.views.ContextMenuSkin;
 	import com.dubitplatform.views.ExperienceView;
 	import com.dubitplatform.views.GrowlView;
@@ -26,6 +27,7 @@ package
 	import com.dubitplatform.views.ShopTitleWindow;
 	import com.dubitplatform.views.SkillsView;
 	import com.dubitplatform.views.VerbControllerView;
+	import com.dubitplatform.views.contactList.ContactListView;
 	
 	/**
 	 *  This file should include references to your custom GAML skins which otherwise would not
@@ -35,6 +37,8 @@ package
 	{
 		private var experienceView:ExperienceView;
 		private var colletionView:CollectionView;
+		private var contactListView:ContactListView;
+		private var contactListTitleWindow:ContactListTitleWindow;
 		private var achievementView:AchievementsView;
 		private var verbControllerView:VerbControllerView;
 		private var chatRoomPreloaderView:ChatRoomPreloaderView;

@@ -14,8 +14,7 @@
 	
 	<mx:Script>
 		<![CDATA[
-			import uk.co.dubit.utils.NumberUtils;
-			import ws.tink.utils.MathUtil;			
+			import uk.co.dubit.utils.NumberUtils;	
 			import mx.effects.Fade;
 			import mx.events.ListEvent;
 			

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<BackpackViewBase xmlns="uk.co.dubit.platform.components.backpack.*" xmlns:platform="uk.co.dubit.platform.components.shared.*" xmlns:mx="http://www.adobe.com/2006/mxml" width="100%" height="100%" borderStyle="none" xmlns:views="com.dubitplatform.views.*">
+<BackpackViewBase xmlns="uk.co.dubit.platform.components.backpack.ui.*" xmlns:platform="uk.co.dubit.platform.components.shared.*" xmlns:mx="http://www.adobe.com/2006/mxml" width="100%" height="100%" borderStyle="none" xmlns:views="com.dubitplatform.views.*">
 	
 	<mx:Script>
 	    <![CDATA[

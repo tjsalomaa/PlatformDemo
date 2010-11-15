@@ -6,7 +6,6 @@
 	<mx:Script>
 		<![CDATA[
 			import com.gskinner.motion.easing.Sine;
-			import com.gskinner.motion.GTweener;
 			import com.gskinner.motion.GTween;
 			import mx.events.EffectEvent;
 			import fl.transitions.easing.Regular;

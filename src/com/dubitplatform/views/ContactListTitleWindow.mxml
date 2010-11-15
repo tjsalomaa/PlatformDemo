@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<skin:TitleWindowSkin 
+	layout="absolute" 
+	title="Contacts"
+	showCloseButton="true" close="{ ContactList(node).close() }"
+	horizontalCenter="0" verticalCenter="0"
+	width="400" height="300"
+	xmlns:mx="http://www.adobe.com/2006/mxml"
+	xmlns:skin="uk.co.dubit.platform.components.skin.*" 
+	xmlns:contactList="com.dubitplatform.views.contactList.*">
+	
+	<mx:Script>
+		<![CDATA[
+			import uk.co.dubit.platform.components.contactList.ContactList;
+		]]>
+	</mx:Script>
+	
+	<contactList:ContactListView width="100%" height="100%" node="{ node }" />
+	
+</skin:TitleWindowSkin>

@@ -72,6 +72,7 @@
 										<Trace message="Entered session" />
 										<GetOwnedProducts />
 										<GetAvatarEditorProductGroups />
+										<GetContactList />
 										<ChangeRoom roomName="{Properties.[setting.rooms.default-room]}">
 											<onJoinRoomComplete>
 												<Trace message="Joined room" />

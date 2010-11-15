@@ -20,7 +20,6 @@
 	
 	<mx:Script>
 		<![CDATA[
-			import uk.co.dubit.platform.scriptEngine.gameObject.GameObjectListener;
 			import com.dubitplatform.views.CollectionsPanel;
 			import com.dubitplatform.views.ControlPanel;
 			import com.dubitplatform.views.MapTitleWindow;
@@ -31,11 +30,13 @@
 			import uk.co.dubit.logging.LoggingPanel;
 			import uk.co.dubit.platform.components.backpack.Backpack;
 			import uk.co.dubit.platform.components.catalogue.Shops;
+			import uk.co.dubit.platform.components.contactList.ContactList;
 			import uk.co.dubit.platform.components.experience.Experience;
 			import uk.co.dubit.platform.components.meters.IMeter;
 			import uk.co.dubit.platform.components.meters.Meters;
 			import uk.co.dubit.platform.components.quest.QuestModel;
 			import uk.co.dubit.platform.components.session.SessionModel;
+			import uk.co.dubit.platform.scriptEngine.gameObject.GameObjectListener;
 			import uk.co.dubit.platform.scriptEngine.gameObject.IGameObject;
 			import uk.co.dubit.properties.Properties;
 			import uk.co.dubit.utils.StringUtils;
@@ -98,7 +99,8 @@
 	<mx:Canvas width="100%" height="100%" verticalScrollPolicy="off">
 
 		<ui:ChatRoomSkinContainer id="chatRoomSkinContainer" width="850" height="400" y="100" backgroundColor="black" horizontalScrollPolicy="off" verticalScrollPolicy="off" horizontalCenter="0"/>
-		<chat:ChatSkinContainer id="chatSkinContainer" width="850" height="30" y="515" horizontalCenter="0" />			
+		<chat:ChatSkinContainer id="chatSkinContainer" width="850" height="30" y="515" horizontalCenter="0" />
+		<skin:BasicSkinContainer containerID="menuContainer" width="850" height="400" y="100" horizontalCenter="0" />
 		<verb:VerbSkinContainer id="verbSkinContainer" width="850" height="400" y="100" horizontalCenter="0" />	
 		<skin:BasicSkinContainer id="quickChatSkinContainer" containerID="quickChatContainer" width="850" height="400" y="100" horizontalCenter="0"/>	
 		<video:VideosSkinContainer id="videoContainer" outEffect="{fadeOutEffect}" width="850" height="400" horizontalCenter="0" y="100"/>
@@ -111,12 +113,13 @@
 			<mx:LinkButton label="Collections" click="openCollectionsPanel();"/>	
 			<skills:SkillsSkinContainer width="110"/>
 			<mx:LinkButton label="Shop" click="openShop();"/>
+			<!--mx:LinkButton label="Contacts" click="{ ContactList.getInstance().open() }" /-->
 			<mx:Spacer width="100%"/>
 			<mx:Label text="{Experience.getInstance().currentLevel.name} ({Experience.getInstance().points}/{Experience.getInstance().nextLevel.points}XP)"/>
 			<mx:Text id="energyDisplay"/>			
 		</mx:ControlBar>
 				
-		<skin:PopupSkinContainer containerID="shopContainer" width="100%" height="100%" />
+		<skin:BasicSkinContainer containerID="shopContainer" width="100%" height="100%"/>
 		<dialogue:DialogueSkinContainer id="dialogueSkinContainer" outEffect="{fadeOutEffect}" inEffect="{fadeInEffect}" horizontalCenter="0" width="850" height="400" y="100"/>				
 		<skin:BasicSkinContainer containerID="worldOverlay" width="840" height="398" y="100" horizontalCenter="0" />
 	</mx:Canvas>

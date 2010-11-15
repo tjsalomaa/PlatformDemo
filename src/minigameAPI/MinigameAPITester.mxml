@@ -139,7 +139,7 @@
 			 */
 			public function onMessageReceived(type:String, message:Object) : void
 			{
-				
+				appendOutputToTextArea("Message recieved [type=" + type + "]", multiplayerPanel.outputTextColour);
 			}
 			
 			/* Util functions */	

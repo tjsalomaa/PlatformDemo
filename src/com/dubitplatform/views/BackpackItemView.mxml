@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dubit:CollectableViewBase xmlns:mx="http://www.adobe.com/2006/mxml" xmlns:dubit="uk.co.dubit.platform.components.backpack.*" xmlns:platform="uk.co.dubit.platform.components.shared.*">
+<dubit:CollectableViewBase xmlns:mx="http://www.adobe.com/2006/mxml" xmlns:dubit="uk.co.dubit.platform.components.backpack.ui.*" xmlns:platform="uk.co.dubit.platform.components.shared.*">
 
 	<mx:VBox width="110" height="110" paddingRight="5" paddingLeft="5" horizontalAlign="center">
 		<mx:Box borderColor="black" borderStyle="solid" paddingBottom="4" paddingTop="5" paddingLeft="5" paddingRight="4">

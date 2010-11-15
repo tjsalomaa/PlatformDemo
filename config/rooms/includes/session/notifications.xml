@@ -2,20 +2,13 @@
 <Include xmlns:xi="http://www.w3.org/2001/XInclude">
 	<Notifications>
 		<Notification title="Welcome!" body="Check back here to read messages you have received" can_remove="true"/>
-		<Notification title="Free stuff!" body="Hey, since you're new here maybe you'd like this free apple?" can_accept="true" can_reject="true">
-			<Triggers>
-				<onNotificationAccepted>
-					<CreateNotification title="Item accepted" body="You've received an apple! Use it wisely" can_remove="true"/>
-					<!-- Need to bee added to the inventory -->
-				</onNotificationAccepted>
-			</Triggers>
-		</Notification>		
+		
 		<Triggers>
 			<onNotificationReceived>
-				<If expression="({Event.notification.requestType} == {acceptMinigame})">
+				<If expression="{Event.notification.type} == {acceptMinigame})">
 					<Then>
 						<AcceptNotification notification="{Event.notification}">
-							<Result>									
+							<Result>							
 								<JoinMultiplayerMinigame minigame="{Event.notification.game_type}" gameToken="{Event.notification.game_token}" />
 							</Result>
 							<Fault>
@@ -46,4 +39,40 @@
 			</onNotificationRemoved>
 		</Triggers>
 	</Notifications>
+	
+	<!-- Definitions of server created notifications -->
+	
+	<NotificationDefinition id="confirmFriend" box="in" body="{This.sender_name} wants to be your friend!" can_reject="true" can_accept="true">
+		<Triggers>
+			<onNotificationAccepted><GetContactList /></onNotificationAccepted>
+			<onNotificationRejected><Trace message="Confirm friend rejected" /></onNotificationRejected>
+			<onNotificationCancelled><Trace message="Confirm friend cancelled" /></onNotificationCancelled>
+			<onNotificationRemoved><Trace message="Confirm friend removed" /></onNotificationRemoved>
+		</Triggers>
+	</NotificationDefinition>
+	
+	<NotificationDefinition id="requestFriend" box="in" body="You've sent a friend request to {This.recipient_name}" can_cancel="true" can_remove="true">
+		<Triggers>
+			<onNotificationAccepted><Trace message="Request friend accepted" /></onNotificationAccepted>
+			<onNotificationRejected><Trace message="Request friend rejected" /></onNotificationRejected>
+			<onNotificationCancelled><Trace message="Request friend cancelled" /></onNotificationCancelled>
+			<onNotificationRemoved><Trace message="Request friend removed" /></onNotificationRemoved>
+		</Triggers>
+	</NotificationDefinition>
+	
+	<NotificationDefinition id="acceptMinigame">
+		<Triggers>
+			<!--  As soon as we receive this notification we can accept it, and launch the minigame -->
+			<onFixup>
+				<AcceptNotification>
+					<Result>							
+						<JoinMultiplayerMinigame minigame="{Event.notification.game_type}" gameToken="{Event.notification.game_token}" />
+					</Result>
+					<Fault>
+						<Alert message="{Event.errorMessage}" />
+					</Fault>
+				</AcceptNotification>
+			</onFixup>
+		</Triggers>
+	</NotificationDefinition>
 </Include>
