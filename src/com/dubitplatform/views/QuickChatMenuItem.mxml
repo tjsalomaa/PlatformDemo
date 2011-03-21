@@ -83,7 +83,7 @@
 	<mx:Canvas id="quickChatItem" width="82%" height="100%" 
 			   click="showSubMenu()"
 			   mouseOver="showHitArea(quickChatItem)" mouseOut="hideHitArea(quickChatItem)" 
-			   cornerRadius="2" borderStyle="solid" borderColor="black" borderThickness="0"
+			   cornerRadius="2" borderStyle="solid" borderColor="black"
 			   backgroundColor="black" backgroundAlpha="0.5" alpha="0"
 			   buttonMode="true" useHandCursor="true"/>
 	

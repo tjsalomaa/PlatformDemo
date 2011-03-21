@@ -14,7 +14,7 @@
 					<mx:Text text="{collectionsRepeater.currentItem.description}" width="100%" paddingLeft="5" paddingRight="5"/>
 					<mx:Text text="You have {collectionsRepeater.currentItem.remainingCollectables} left to collect!" width="100%" paddingLeft="5" paddingRight="5"/>
 						
-					<mx:TileList dataProvider="{collectionsRepeater.currentItem.collectableList}" verticalScrollPolicy="on" width="100%" height="100%" backgroundAlpha="0" borderStyle="none" useRollOver="false" paddingLeft="5">
+					<mx:TileList dataProvider="{collectionsRepeater.currentItem.collectableList}" verticalScrollPolicy="on" width="100%" height="100%" borderStyle="none" useRollOver="false" paddingLeft="5">
 				
 						<mx:itemRenderer>
 							<mx:Component>
