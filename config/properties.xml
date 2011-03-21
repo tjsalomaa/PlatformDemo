@@ -1,19 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<environments current="local">
-    
-    <environment type="local">
-		<property name="path.game-server" value="10.0.0.51:1950" />	
-		<property name="path.web-services" value="http://10.0.0.50:17000" />
-		<property name="path.swf-server" value="http://10.0.0.51:300" />
-		
-		<property name="environment" value="local" />
-		<property name="setting.rooms.default-room" value="village"/>
-	</environment>	
+<environments current="dev">
     
 	<environment type="all">
 		<property name="setting.useServer" value="true" />
 		
-		<property name="path.game-server" value="10.0.0.51:1950" />	
+		<property name="path.game-server" value="worldhub.dubitplatform.com:1938" />	
 		<property name="path.web-services" value="http://sandbox.dubitplatform.com" />
 		<property name="path.swf-server" value="http://imagebaker.dubitplatform.com" />
 		
@@ -23,7 +14,7 @@
 		<property name="setting.alert.xOffset" value="0" />
 		<property name="setting.alert.yOffset" value="0" />
 
-<!--		<property name="app.name" value="1"/>-->
+		<property name="app.name" value="1"/>
 		
 		<property name="path.create-avatar" value="[path.web-services]/users/{userID}/avatars.nexus"/>
 		<property name="path.first-avatar" value="[path.web-services]/users/{userID}/avatars/first.nexus" />  

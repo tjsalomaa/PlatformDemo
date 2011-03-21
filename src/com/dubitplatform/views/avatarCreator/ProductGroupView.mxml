@@ -33,7 +33,7 @@
 		<mx:Canvas id="productsView" width="100%" height="100%" showEffect="{ fadeEffect }" hideEffect="{ fadeEffect }">
 			
 			<mx:TileList width="100%" height="100%"
-						 borderStyle="none"
+						 backgroundAlpha="0" borderStyle="none"
 						 useRollOver="false"
 						 rowCount="3" columnCount="3" 
 						 rowHeight="80" columnWidth="80"
