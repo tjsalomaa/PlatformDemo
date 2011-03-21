@@ -487,6 +487,7 @@
 						</Trigger>	
 					</code>
 				]]></Example>
+			<Attribute required="true" name="roomXML" type="String" defaultValue="config/rooms/{roomID}.xml" />
 			<Attribute required="true" name="roomName" type="String" description="The target room name. The room name is the name of the GAML file without the .xml suffix, for example, to travel to the huts.xml room use roomName='huts'."/>
 			<Attribute required="false" nodoc="true" name="useServer" defaultValue="{Properties.[setting.useServer]}" description="If set to false the client will change room without attempting to speak to the server"/>
 			<Attribute required="true" nodoc="true" name="skin" type="String" description="The skin class" defaultValue="uk.co.dubit.platform.components.rooms.ui.ChatRoomPreloaderView"/>
