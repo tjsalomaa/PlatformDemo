@@ -10,17 +10,12 @@
 	<mx:Script>
 		<![CDATA[
 			import mx.containers.Canvas;
-			import mx.controls.Alert;
 			import mx.controls.List;
 			import mx.core.UIComponent;
 			import mx.effects.Fade;
 			import mx.events.ListEvent;
 			
-			import uk.co.dubit.platform.components.chat.quickChat.IQuickChat;
 			import uk.co.dubit.platform.components.chat.quickChat.IQuickChatWord;
-			import uk.co.dubit.platform.components.chat.quickChat.QuickChats;
-			import uk.co.dubit.platform.components.rooms.RoomState;
-			import uk.co.dubit.platform.scriptEngine.room.Room;
 			import uk.co.dubit.utils.IAttributes;
 
 			override public function set node(value:IAttributes):void

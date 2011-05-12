@@ -5,7 +5,6 @@
 		<!-- Each trigger is a behaviour which is sent from the server -->
 		<Triggers>
 			<!-- Game objects are created / destroyed when players enter / exit rooms -->
-			<createGameObjects><CreateGameObjects gameObjects="{Event.gameObjects}" /></createGameObjects>
 			<createGameObject><CreateGameObject gameObject="{Event.gameObject}" /></createGameObject>
 			<destroyGameObject><DestroyGameObject gameObject="{Event.gameObject}" /></destroyGameObject>
 

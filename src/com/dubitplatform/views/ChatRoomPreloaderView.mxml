@@ -5,13 +5,10 @@
 	
 	<mx:Script>
 		<![CDATA[
-			import com.gskinner.motion.easing.Sine;
 			import com.gskinner.motion.GTween;
-			import mx.events.EffectEvent;
-			import fl.transitions.easing.Regular;
-			import mx.effects.Dissolve;
+			import com.gskinner.motion.easing.Sine;
+			
 			import uk.co.dubit.platform.components.rooms.RoomState;
-			import uk.co.dubit.platform.components.rooms.IRoomState;
 			
 
 			override public function showPreloader (completeCallBack : Function) : void

@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<QuestViewBase xmlns="uk.co.dubit.platform.components.quest.*" xmlns:views="com.dubitplatform.views.*" xmlns:mx="http://www.adobe.com/2006/mxml" width="100%" height="100%">
+<QuestViewBase width="100%" height="100%"
+			   xmlns="uk.co.dubit.platform.components.quest.*"
+			   xmlns:views="com.dubitplatform.views.*" 
+			   xmlns:mx="http://www.adobe.com/2006/mxml">
 
 	<mx:Script>
 		<![CDATA[
 			import uk.co.dubit.platform.components.quest.IObjective;
-			import uk.co.dubit.platform.components.quest.IQuest;
+			import uk.co.dubit.platform.components.quest.QuestModel;
 		]]>
 	</mx:Script>	
 	
@@ -30,4 +33,8 @@
 			</mx:Repeater>
 		</mx:Accordion>
 	</mx:VBox>
+	
+	
+	<mx:Text horizontalCenter="0" verticalCenter="0" width="100%" height="50" textAlign="center" text="You don't have any active quests!  Try exploring the world - There's bound to be someone who needs a hand!" visible="{ QuestModel.getInstance().activeQuests.length == 0 }" />
+
 </QuestViewBase>

@@ -7,7 +7,6 @@
 	<mx:Script>
 		<![CDATA[
 			import uk.co.dubit.platform.components.profile.IProfile;
-			import uk.co.dubit.utils.IAttributes;
 			
 			override public function set profile(value:IProfile):void
 			{

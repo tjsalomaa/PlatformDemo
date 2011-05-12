@@ -3,8 +3,8 @@
 	
 	<mx:Script>
 		<![CDATA[
-			import uk.co.dubit.platform.components.achievements.ITrophy;
 			import uk.co.dubit.platform.components.achievements.IAchievement;
+			import uk.co.dubit.platform.components.achievements.ITrophy;
 			
 			private function makeDescriptionText (achievement : IAchievement) : String
 			{

@@ -5,12 +5,11 @@
 	
 	<mx:Script>
 		<![CDATA[
-			import mx.core.SoundAsset;
-			import mx.core.UIComponent;
-			import uk.co.dubit.platform.components.rooms.RoomModel;
-			import mx.events.ListEvent;
-			import uk.co.dubit.platform.components.chat.quickChat.IQuickChatWord;
 			import mx.controls.listClasses.ListBase;
+			import mx.core.UIComponent;
+			import mx.events.ListEvent;
+			
+			import uk.co.dubit.platform.components.chat.quickChat.IQuickChatWord;
 			
 			[Bindable]
 			private var text:String;
@@ -83,7 +82,7 @@
 	<mx:Canvas id="quickChatItem" width="82%" height="100%" 
 			   click="showSubMenu()"
 			   mouseOver="showHitArea(quickChatItem)" mouseOut="hideHitArea(quickChatItem)" 
-			   cornerRadius="2" borderStyle="solid" borderColor="black" borderThickness="0"
+			   cornerRadius="2" borderStyle="solid" borderColor="black"
 			   backgroundColor="black" backgroundAlpha="0.5" alpha="0"
 			   buttonMode="true" useHandCursor="true"/>
 	

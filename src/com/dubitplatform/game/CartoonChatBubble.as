@@ -7,7 +7,7 @@ package com.dubitplatform.game
 
 	public class CartoonChatBubble extends DefaultChatBubble2D
 	{
-		[Embed(source="/../assets/fonts/Deeko_Comic.ttf", fontFamily="Deeko")]
+		[Embed(source="/../assets/fonts/Deeko_Comic.ttf", fontFamily="Deeko", embedAsCFF="false")]
 		private var deeko:String;		
 		
 		public function CartoonChatBubble(name:String)

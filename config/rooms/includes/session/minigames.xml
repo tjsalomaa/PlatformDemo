@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Include xmlns:xi="http://www.w3.org/2001/XInclude">
-	<Minigames>
-		<Minigame id="single" name="Single Player Sample Game" url="[base.url]games/MinigameAPITester.swf" />
-		<Minigame id="flex" name="Flex Sample Game" url="[base.url]games/SampleMinigame.swf" />
-		<Minigame id="flash" name="Flash Mini Game" url="[base.url]games/FlashMinigame.swf"/>
-		
-		<MultiplayerMinigame id="apiTester" name="Dubit Minigame API Tester" url="games/MinigameAPITester.swf" />
+	<Minigames>		
+		<MultiplayerMinigame id="apiTester" name="Dubit Minigame API Tester" url="games/MinigameAPITester.swf" skin="com.dubitplatform.views.MinigameView" skinContainer="minigameContainer" />
 		
 		<Triggers>
 			<onMinigameClosed>

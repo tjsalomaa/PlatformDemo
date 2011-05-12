@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Include xmlns:xi="http://www.w3.org/2001/XInclude">
 
-	<ContactList skin="com.dubitplatform.views.ContactListTitleWindow" skinContainer="shopContainer">
-		<Contact id="Le' Chuck" contactType="Poop Pirate" />
+	<ContactList skin="com.dubitplatform.views.contactList.ContactListView" skinContainer="shopContainer">
+		<Contact id="lechuck_contact" name="Le' Chuck" contactType="unknown" />
+		<Contact id="doc_contact" name="Karlheinz Fotheringay" contactType="unknown" />
+		
 		<Triggers>
 			<onContactAdded />
 			<onContactRemoved />

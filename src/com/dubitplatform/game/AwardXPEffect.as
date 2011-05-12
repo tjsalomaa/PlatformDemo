@@ -25,7 +25,7 @@ package com.dubitplatform.game
 		 	effect.scaleX = target.displayObject.scaleX;
 			effect.scaleY = target.displayObject.scaleY; 
 					
-			setMaterial(new Material())		
+			material = new Material();
 			material.addChild(effect);
 			material.filters = [new GlowFilter(000000,1,4,4,10,1)];
 		

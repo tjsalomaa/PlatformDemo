@@ -7,8 +7,7 @@
 	<mx:Script>
 		<![CDATA[
 			import uk.co.dubit.utils.IAttributes;
-			import uk.co.dubit.platform.scriptEngine.node.IScriptNode;
-			import uk.co.dubit.utils.IAttributes;
+
 			
 			private function updateLevel () : void
 			{

@@ -9,7 +9,7 @@
 	<Quest id="timeMachineQuest" name="Inspector" active="false" complete="false" description="The professor has gone missing! We think he's built a time machine but has got stuck in the past! Fix the time machine and search for the professor."> <!-- Quest to discover the time machine -->
 		<Objective name="1) Talk to Karlheinz Fotheringay" id="conversation" complete="false" active="false"/> <!-- This is complete when you talk to karlheinz -->
 		<Objective name="2) Fix the fire place" id="fireplace" complete="false" active="false"/> <!-- This is complete when you add the 3 cogs to the fireplace -->
-		<Objective name="3) Find the thre lenses for the telescope" id="telescope" complete="false" active="false"/> <!-- This is complete when you add the 3 lenses to the telescope -->
+		<Objective name="3) Find the three lenses for the telescope" id="telescope" complete="false" active="false"/> <!-- This is complete when you add the 3 lenses to the telescope -->
 		<Objective name="4) Repair the grandfather clock with three missing pendulums" id="timemachine" complete="false" active="false"/> <!-- This is complete when you add the 3 pendulums to the grandfather clock -->
 		<Triggers>
 			<OnBeginQuest>

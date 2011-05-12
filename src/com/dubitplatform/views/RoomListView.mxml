@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<MapViewBase xmlns="uk.co.dubit.platform.components.map.*" xmlns:mx="http://www.adobe.com/2006/mxml" width="100%" height="100%">
+<MapViewBase xmlns="uk.co.dubit.platform.components.map.ui.*" xmlns:mx="http://www.adobe.com/2006/mxml" width="100%" height="100%">
 	
 	<mx:VBox width="100%" height="100%" paddingTop="15">
 

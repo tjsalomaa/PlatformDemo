@@ -42,8 +42,6 @@
 	
 	<mx:Script>
 		<![CDATA[
-			import minigameAPI.components.FeatureDescriptions;
-			
 			import uk.co.dubit.platform.components.minigame.client.IMinigameBridge;
 			import uk.co.dubit.platform.components.minigame.client.multiplayer.IMultiplayerMinigameBridge;
 			
@@ -59,6 +57,21 @@
 			public function set minigameBridge(value:IMinigameBridge) : void
 			{
 				_minigameBridge = value;
+				
+				var req:URLRequest = new URLRequest("/test.xml");
+				
+				var loader:URLLoader = new URLLoader();
+				loader.addEventListener(Event.COMPLETE, function(e:Event) : void
+				{
+					trace(loader.data); 
+				});
+				
+				loader.addEventListener(IOErrorEvent.IO_ERROR, function(e:Event) : void
+				{
+					
+				});
+				
+				loader.load(req);
 			}
 			
 			/* IMultiplayerMinigameClient interface implementation */		

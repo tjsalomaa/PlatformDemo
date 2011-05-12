@@ -15,9 +15,7 @@
 	xmlns:video="uk.co.dubit.platform.components.video.*" 
 	xmlns:verb="uk.co.dubit.platform.components.verb.*" 
 	xmlns:chat="uk.co.dubit.platform.components.chat.*" >
-	
-	<mx:Style source="style/style.css"/>
-	
+		
 	<mx:Script>
 		<![CDATA[
 			import com.dubitplatform.views.CollectionsPanel;
@@ -113,10 +111,9 @@
 			<mx:LinkButton label="Collections" click="openCollectionsPanel();"/>	
 			<skills:SkillsSkinContainer width="110"/>
 			<mx:LinkButton label="Shop" click="openShop();"/>
-			<!--mx:LinkButton label="Contacts" click="{ ContactList.getInstance().open() }" /-->
+			<mx:LinkButton label="Contacts ({ ContactList.getInstance().friends.length })" click="{ ContactList.getInstance().open() }" />
 			<mx:Spacer width="100%"/>
-			<mx:Label text="{Experience.getInstance().currentLevel.name} ({Experience.getInstance().points}/{Experience.getInstance().nextLevel.points}XP)"/>
-			<mx:Text id="energyDisplay"/>			
+			<mx:Label text="{Experience.getInstance().currentLevel.name} ({Experience.getInstance().points}/{Experience.getInstance().nextLevel.points}XP)"/>		
 		</mx:ControlBar>
 				
 		<skin:BasicSkinContainer containerID="shopContainer" width="100%" height="100%"/>

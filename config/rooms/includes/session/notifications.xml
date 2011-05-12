@@ -5,20 +5,10 @@
 		
 		<Triggers>
 			<onNotificationReceived>
-				<If expression="{Event.notification.type} == {acceptMinigame})">
+				<If expression="({Event.notification.type} != {acceptMinigame})">
 					<Then>
-						<AcceptNotification notification="{Event.notification}">
-							<Result>							
-								<JoinMultiplayerMinigame minigame="{Event.notification.game_type}" gameToken="{Event.notification.game_token}" />
-							</Result>
-							<Fault>
-								<Alert message="{Event.errorMessage}" />
-							</Fault>
-						</AcceptNotification>
-					</Then>
-					<Else>
 						<ShowGrowl notification="{Event.notification}" skin="com.dubitplatform.views.GrowlView" targetContainer="growlContainer" duration="6000"/>
-					</Else>
+					</Then>
 				</If>
 			</onNotificationReceived>
 			

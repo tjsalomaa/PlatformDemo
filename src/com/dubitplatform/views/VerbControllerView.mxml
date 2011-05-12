@@ -6,16 +6,13 @@
 	
 	<mx:Script>
 		<![CDATA[
-			import uk.co.dubit.platform.scriptEngine.room.IChatRoom;
-			import mx.effects.easing.Sine;
-			import uk.co.dubit.utils.ArrayUtils;
 			import mx.collections.ArrayCollection;
-			import mx.events.MenuEvent;
 			import mx.controls.Menu;
 			import mx.events.CollectionEvent;
-			import mx.binding.utils.ChangeWatcher;
+			import mx.events.MenuEvent;
 			
 			import uk.co.dubit.platform.components.verb.IVerb;
+			import uk.co.dubit.utils.ArrayUtils;
 			import uk.co.dubit.utils.IAttributes;	
 			
 			private var menu : Menu;
@@ -27,7 +24,7 @@
 				menu = Menu.createMenu(null, null, true);
 				menu.labelField = "name";
 				
-				menu.filters = [new GlowFilter(000000,1,4,4,10,1), new DropShadowFilter(0, 45, 0x000000, 0.7, 5, 5, 1, 2)];
+				menu.filters = [new GlowFilter(000000,1,4,4,2,1), new DropShadowFilter(0, 45, 0x000000, 0.7, 5, 5, 1, 2)];
 				menu.addEventListener(MenuEvent.ITEM_CLICK, handleMenuClick);
 				
 				menu.setStyle("fontFamily", "Deeko");

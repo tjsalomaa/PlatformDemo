@@ -14,11 +14,6 @@
 	
 	<mx:Script>
 		<![CDATA[			
-			import mx.effects.Fade;
-			import mx.events.ListEvent;
-			
-			import uk.co.dubit.platform.components.catalogue.IProduct;
-			import uk.co.dubit.platform.components.catalogue.IProductGroup;
 			import uk.co.dubit.platform.data.IAvatar;
 			
 			private function loadAvatars() : void

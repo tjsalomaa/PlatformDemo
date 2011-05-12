@@ -1,34 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Include xmlns:xi="http://www.w3.org/2001/XInclude">
 	<ActivityBars>
-		<ActivityBar id="reading" skin="com.dubitplatform.views.ActivityBarView" targetContainer="shopContainer" target="{Rooms.currentRoom.player}" duration="4280" name="Reading...">
+		<ActivityBar id="reading" skin="com.dubitplatform.views.ActivityBarView" targetContainer="worldOverlay" target="{Rooms.currentRoom.player}" duration="4280" name="Reading...">
 			<Triggers>
-				<OnActivityComplete>
+				<onActivityStart>
+					<BlockMouse />
+					<SetValues target="{Meters.energy}" amount="({Meters.energy.amount} - {15})" />
+				</onActivityStart>
+				
+				<onActivityComplete>
 					<Call behaviourID="mouseOn" scope="{Rooms.currentRoom}"/>
 					<CloseActivityBar activityBar="reading" />
 					<AwardExperiencePoints points="10" />
 					<UpdateAchievementScore score="({Achievements.booksRead.score} + {1})" achievement="{Achievements.booksRead}"/>
-				</OnActivityComplete>
+					<UnBlockMouse />
+				</onActivityComplete>
 			</Triggers>
 		</ActivityBar>
-		<ActivityBar id="digging" skin="com.dubitplatform.views.ActivityBarView" targetContainer="shopContainer" target="{Rooms.currentRoom.helper}" duration="4280" track="true" name="Digging...">
+
+		<ActivityBar id="collecting" skin="com.dubitplatform.views.ActivityBarView" targetContainer="worldOverlay" target="{Rooms.currentRoom.player}" duration="4280" track="true" offsetY="200" name="Collecting...">
 			<Triggers>
 				<onActivityStart>
-					<DesireAction target="{Event.activityBar.targettedObject}" action="helper_dig" />
+					<BlockMouse />
 				</onActivityStart>
-				<OnActivityComplete>
-					<DesireAction target="{Event.activityBar.targettedObject}" action="helper_stand" />
-					<ShowBubble gameObject="{Rooms.currentRoom.helper}" message="Wooof wooooooof" yOffset="-20"/>
-					<SetValues target="{Rooms.currentRoom.helper}" defaultSpeed="4" />
-					<CloseActivityBar activityBar="digging" />
-				</OnActivityComplete>
-			</Triggers>
-		</ActivityBar>
-		<ActivityBar id="collecting" skin="com.dubitplatform.views.ActivityBarView" targetContainer="shopContainer" target="{Rooms.currentRoom.player}" duration="4280" track="true" offsetY="200" name="Collecting...">
-			<Triggers>
-				<onActivityStart>
-				</onActivityStart>				
-				<OnActivityComplete>
+								
+				<onActivityComplete>
 					<!-- Close the bar -->
 					<CloseActivityBar activityBar="collecting" />
 					<!-- Give the fruit - this works because the fruit and the collection have the same ids, a clever fudge -->
@@ -42,7 +38,9 @@
 					<ShowAwardXPEffect />
 					<!-- Hide the fruit -->
 					<SetValues target="{Event.activityBar.targettedGameObject}" visible="false"/>
-				</OnActivityComplete>
+					
+					<UnBlockMouse />
+				</onActivityComplete>
 			</Triggers>
 		</ActivityBar>		
 	</ActivityBars>

@@ -10,7 +10,7 @@
 			<OnLevelUp>
 				<Trace message="OnLevelUp level={Event.level}"/>
 				<AwardSkillPoints points="1"/>
-				<CreateNotification title="Woop! Level up!" body="{Event.level.message}" can_remove="true"/>
+				<CreateNotification title="You've levelled up!" body="{Event.level.message}" can_remove="true"/>
 			</OnLevelUp>
 			<OnAwardedExperience>
 				<Trace message="OnAwardedExperience level={Event.level}"/>

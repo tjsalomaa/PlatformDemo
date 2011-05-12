@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<environments current="dev">
+<environments current="all">
     
 	<environment type="all">
 		<property name="setting.useServer" value="true" />
@@ -10,9 +10,6 @@
 		
 	    <property name="setting.rooms.path" value="config/rooms/"/>
 		<property name="setting.rooms.default-room" value="village"/>
-		
-		<property name="setting.alert.xOffset" value="0" />
-		<property name="setting.alert.yOffset" value="0" />
 
 		<property name="app.name" value="1"/>
 		

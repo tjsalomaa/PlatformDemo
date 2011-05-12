@@ -108,8 +108,10 @@
 	
 	<mx:Script>
 		<![CDATA[
-			import mx.utils.UIDUtil;
 			import flash.utils.getTimer;
+			
+			import mx.utils.UIDUtil;
+			
 			import uk.co.dubit.platform.components.minigame.client.IMinigameBridge;
 			import uk.co.dubit.platform.components.minigame.client.multiplayer.IMultiplayerMinigameBridge;
 	 	
@@ -164,6 +166,16 @@
 				multiplayerMinigameControls.includeInLayout = false;
 				
 				appendOutput("Player ID is " + minigameBridge.player["id"]);
+				
+				var req:URLRequest = new URLRequest("test.xml");
+				
+				var loader:URLLoader = new URLLoader();
+				loader.addEventListener(Event.COMPLETE, function(e:Event) : void
+				{
+					trace(loader.data);
+				});
+				
+				loader.load(req);
 			}
 			
 			public function get minigameBridge() : IMinigameBridge

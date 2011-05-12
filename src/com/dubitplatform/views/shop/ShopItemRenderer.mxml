@@ -17,8 +17,6 @@
 				preview.x = (container.width / 2) - (preview.contentWidth / 2)
 				preview.y = (container.height / 2) - (preview.contentHeight / 2)
 			}
-			
-			
 		]]>
 	</mx:Script>
 	
@@ -32,16 +30,19 @@
 		
  		<mx:VBox id="productInfo" width="100%" height="100%" mouseOver="{ if(!product.owned) productInfo.visible = true }"
 				 backgroundAlpha="0.2" backgroundColor="black" borderStyle="solid"
-				 showEffect="{ new Fade() }" hideEffect="{ new Fade() }" filters="{ [ new DropShadowFilter() ] }"
+				 showEffect="{ new Fade() }" hideEffect="{ new Fade() }"
 				 verticalAlign="middle" horizontalAlign="center" visible="false">
 			
-			<mx:Label text="{ product.name }" maxWidth="100" truncateToFit="true" />
+			<mx:Label text="{ product.name }" maxWidth="100" truncateToFit="true" filters="{ [ new DropShadowFilter() ] }" />
 			
-			<mx:Label text="Buy for:" />
+			<mx:Label text="Buy for:" filters="{ [ new DropShadowFilter() ] }" />
 			
 			<mx:HBox width="100%" horizontalGap="0" horizontalAlign="center">
-				<mx:LinkButton label="{product.points} points" toolTip="Buy now" paddingLeft="0" paddingRight="0" fontSize="9" visible="{ product.points > -1 }" enabled="{ !product.owned }" click="{ product.purchase() }"  />
-				<mx:LinkButton label="{product.credits} credits" toolTip="Buy now" paddingLeft="0" paddingRight="0" fontSize="9" visible="{ product.credits > -1 }" enabled="{ !product.owned }" click="{ product.purchase() }"  />
+				<mx:LinkButton label="{product.points} points" toolTip="Buy now" paddingLeft="0" paddingRight="0" filters="{ [ new DropShadowFilter() ] }"
+							   fontSize="9" visible="{ product.points > -1 }" enabled="{ !product.owned }" click="{ product.purchase() }"  />
+				
+				<mx:LinkButton label="{product.credits} credits" toolTip="Buy now" paddingLeft="0" paddingRight="0" filters="{ [ new DropShadowFilter() ] }"
+							   fontSize="9" visible="{ product.credits > -1 }" enabled="{ !product.owned }" click="{ product.purchase() }"  />
 			</mx:HBox>
 		</mx:VBox>
 	</mx:Canvas>

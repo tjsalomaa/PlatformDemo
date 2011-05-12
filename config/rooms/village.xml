@@ -2,16 +2,14 @@
 <ChatRoom id="village" xmlns:xi="http://www.w3.org/2001/XInclude" startX="1667" startY="442">
 
 	<Include href="config/rooms/includes/room_config.xml"/>
-
-	<Collision id="walkableArea" width="2000" height="540" solid="true">
-		<Image id="hitAreaImage" assetID="hit_asset" />
-	</Collision>
+		
+	<CollisionMap assetID="hit_asset" />
 
 	<Filters id="playerFilters">
 		<DepthFilter id="playerDepthFilter" scaleBack="-0.5" scaleFront="0.15"/>
 	</Filters>
 	
-	<Sounds target="{Room.player}" id="sounds">
+	<Sounds target="{Room.player}">
 		<Sound id="background_music" assetID="background_music_asset" play="true" looping="true"/>
 		<Sound id="pop_effect" assetID="pop_effect_asset" play="false" looping="false"/>
 	</Sounds>
@@ -34,7 +32,7 @@
 		<ZSortingDisplayObject id="playerMessages"/>
 	</Scene>
 	
-	<Assets id="assets">
+	<Assets>
 		<Asset id="background_music_asset" url="sounds/village/music.mp3"/>		
 		<Asset id="pop_effect_asset" url="sounds/pop.mp3"/>
         <Asset id="hit_asset" url="images/village/hit.png"/>
@@ -120,6 +118,7 @@
 		<MoveTo targetX="({Event.gameObject.x}+{50})" targetY="({Event.gameObject.y}+{30})">
 			<Complete>
 				<BeginDialogue statement="{Room.talkToLeChuck}" npc="{Event.gameObject}"/>
+				<AddContactAsFriend contact="{Contacts.lechuck_contact}" useServer="false" />
 			</Complete>
 		</MoveTo>
 	</Trigger>
@@ -147,5 +146,4 @@
 			</Statement>		
 		</Response>			
 	</Statement>
-
 </ChatRoom>	

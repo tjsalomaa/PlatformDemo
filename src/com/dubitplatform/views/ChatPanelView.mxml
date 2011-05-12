@@ -7,6 +7,7 @@
 	
 	<mx:Script>
 		<![CDATA[
+			import mx.managers.FocusManager;
 			
 			private function onSendClicked() : void
 			{
@@ -24,16 +25,21 @@
 			
 			private function onFocusOut() : void
 			{
-				if(chatInput.text == "") chatPanel.message = chatPanel.defaultText;
+				if(chatInput.text == "") 
+				{
+					chatInput.text = chatPanel.defaultText;
+					chatInput.focusManager.deactivate();
+				}
 			}
 		]]>
 	</mx:Script>
 	
 	<mx:HBox width="100%" verticalAlign="middle"> 
 		
-		<mx:TextInput id="chatInput" 
+		<mx:TextInput id="chatInput"
 					  width="100%" height="30" textIndent="5" paddingTop="6"
 					  text="{ chatPanel.message }"
+					  enter="onSendClicked(); chatInput.text = ''"
 					  click="onFocusIn()" mouseFocusChange="onFocusOut()"  
 					  focusIn="onFocusIn()" focusOut="onFocusOut()" />
 		

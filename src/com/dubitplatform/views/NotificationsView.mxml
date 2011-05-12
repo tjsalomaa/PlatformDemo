@@ -3,8 +3,8 @@
 
 	<mx:Script>
 		<![CDATA[
-			import uk.co.dubit.platform.components.notifications.Notifications;
 			import uk.co.dubit.platform.components.notifications.INotifications;
+			import uk.co.dubit.platform.components.notifications.Notifications;
 			
 			private var notifications:INotifications = Notifications.getInstance();
 		]]>

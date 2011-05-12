@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <mx:TitleWindow
-	layout="absolute"
 	width="360" height="450" title="My Stuff" 
 	showCloseButton="true" close="{ visible = false }" 
 	xmlns:mx="http://www.adobe.com/2006/mxml"
@@ -9,7 +8,7 @@
 	xmlns:views="com.dubitplatform.views.*"
 	xmlns:map="uk.co.dubit.platform.components.map.*"
 	xmlns:achievements="uk.co.dubit.platform.components.achievements.*"
-	 xmlns:collections="uk.co.dubit.platform.components.collections.*">
+	xmlns:collections="uk.co.dubit.platform.components.collections.*" xmlns:s="library://ns.adobe.com/flex/spark">
 	
 	<mx:Script>
         <![CDATA[
@@ -25,12 +24,12 @@
        
 	</mx:Script>
 	
-	<mx:TabNavigator id="tabNavigator" x="0" y="0" width="100%" height="100%" creationPolicy="all">
+	<mx:TabNavigator id="tabNavigator" x="0" y="40" width="100%" height="100%" creationPolicy="all">
 		<quest:QuestSkinContainer label="Quests" width="100%" height="100%"/>
 		<backpack:BackpackSkinContainer label="Stuff" width="100%" height="100%"/>
 		<views:NotificationsView label="Notifications" width="100%" height="100%"/>
 		<map:MapSkinContainer label="Rooms" width="100%" height="100%"/>
-		<achievements:AchievementsSkinContainer label="Trophies" width="100%" height="100%"/>			
+		<achievements:AchievementsSkinContainer label="Trophies" width="100%" height="100%"/>
 	</mx:TabNavigator>
 
 </mx:TitleWindow>

@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ChatRoomViewBase width="100%" height="100%" xmlns="uk.co.dubit.platform.components.rooms.ui.*" xmlns:mx="http://www.adobe.com/2006/mxml" horizontalScrollPolicy="off" verticalScrollPolicy="off">
+<ChatRoomViewBase width="100%" height="100%" backgroundAlpha="0"
+				  xmlns="uk.co.dubit.platform.components.rooms.ui.*" 
+				  xmlns:mx="http://www.adobe.com/2006/mxml">
+
 	
 </ChatRoomViewBase>

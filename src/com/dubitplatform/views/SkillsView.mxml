@@ -4,8 +4,9 @@
 	<mx:Script>
 		<![CDATA[
 
-			import uk.co.dubit.utils.ApplicationUtils;
 			import mx.managers.PopUpManager;
+			
+			import uk.co.dubit.utils.ApplicationUtils;
 	
 			private var window : EditSkillsWindow;
 
