@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml">
+<mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml" 
+		   xmlns:s="library://ns.adobe.com/flex/spark">
 
 	<mx:Script>
 		<![CDATA[
@@ -12,4 +13,10 @@
 	
 	<mx:List id="notificationsList" width="100%" height="100%" useRollOver="false"
 		dataProvider="{ notifications.notifications }" itemRenderer="{ new ClassFactory(NotificationView) }" />	
+	
+	<s:TextArea width="200" height="50" verticalCenter="0" horizontalCenter="0"
+				selectable="false" editable="false" borderVisible="false"
+				textAlign="center" text="You don't have any notifications" 
+				visible="{ notifications.notifications.length == 0 }" />
+	
 </mx:Canvas>

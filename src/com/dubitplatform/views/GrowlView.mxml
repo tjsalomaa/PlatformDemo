@@ -7,7 +7,7 @@
 	xmlns:mx="http://www.adobe.com/2006/mxml"
 	xmlns:skin="uk.co.dubit.platform.components.skin.*" xmlns:s="library://ns.adobe.com/flex/spark">
 	
-	<s:TextArea id="textArea" width="100%" height="100%" verticalAlign="middle" selectable="false" text="{ growl.notification.body }" borderVisible="false" />
+	<s:TextArea id="textArea" width="100%" height="100%" verticalAlign="middle" selectable="false" editable="false" text="{ growl.notification.body }" borderVisible="false" />
 	
 	<mx:Script>
 		<![CDATA[

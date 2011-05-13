@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Include xmlns:xi="http://www.w3.org/2001/XInclude">
 	<QuickChats>
-		<QuickChat id="global" skin="com.dubitplatform.views.QuickChatView" targetContainer="quickChatContainer">
+		<QuickChat id="global" skin="com.dubitplatform.views.quickChat.QuickChatView" targetContainer="quickChatContainer">
 			
 			<Word text="Greetings" includeInPhrase="false"> 
 				<Word text="Good morning"/>

@@ -49,7 +49,11 @@
 			
 			<mx:VBox paddingLeft="5" paddingRight="5" paddingTop="40" paddingBottom="5" height="100%">
 				<mx:Spacer height="100%"/>
-				<editor:TintablePose id="avatarPreview" width="400" height="600" scaleX="0.25" scaleY="0.25" filters="{[new DropShadowFilter(0, 45, 0x000000, 0.7, 5, 5, 1, 2)]}"/>			
+				<editor:TintablePose id="avatarPreview" 
+									 width="400" height="600" 
+									 scaleX="0.25" scaleY="0.25"
+									 horizontalScrollPolicy="off" verticalScrollPolicy="off"
+									 filters="{[new DropShadowFilter(0, 45, 0x000000, 0.7, 5, 5, 1, 2)]}"/>			
 			</mx:VBox>
 			
 			<mx:VBox width="100%" height="100%" paddingLeft="5" paddingRight="5" paddingTop="10">

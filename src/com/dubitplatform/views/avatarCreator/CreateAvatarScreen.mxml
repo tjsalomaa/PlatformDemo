@@ -55,6 +55,7 @@
 			<editor:TintablePose id="avatarPreview" 
 								 width="400" height="600" 
 								 scaleX="0.45" scaleY="0.45" 
+								 horizontalScrollPolicy="off" verticalScrollPolicy="off"
 								 filters="{[new DropShadowFilter(0, 45, 0x000000, 0.7, 5, 5, 1, 2)]}"/>	
 		</mx:Box>
 		<mx:VBox horizontalCenter="0" verticalCenter="0" paddingTop="20" paddingLeft="20">

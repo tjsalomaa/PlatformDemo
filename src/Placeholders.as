@@ -18,13 +18,13 @@ package
 	import com.dubitplatform.views.ExperienceView;
 	import com.dubitplatform.views.GrowlView;
 	import com.dubitplatform.views.MinigameView;
-	import com.dubitplatform.views.ProfileSkinTitleWindow;
+	import com.dubitplatform.views.ProfileView;
 	import com.dubitplatform.views.QuestsView;
-	import com.dubitplatform.views.QuickChatView;
 	import com.dubitplatform.views.RoomListView;
 	import com.dubitplatform.views.SkillsView;
 	import com.dubitplatform.views.VerbControllerView;
 	import com.dubitplatform.views.contactList.ContactListView;
+	import com.dubitplatform.views.quickChat.QuickChatView;
 	import com.dubitplatform.views.shop.ShopView;
 	
 	/**
@@ -44,7 +44,7 @@ package
 		private var minigameView:MinigameView;
 		private var contextMenuSkin:ContextMenuSkin;
 		private var chatRoomSkin:ChatRoomView;
-		private var profileSkinTitleWindow:ProfileSkinTitleWindow;
+		private var profileView:ProfileView;
 		private var chatBubble:CartoonChatBubble;
 		private var nameBubble:CartoonNameBubble;
 		private var activityBarView:ActivityBarView;

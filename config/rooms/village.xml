@@ -17,6 +17,7 @@
 	<Scene id="scene" target="{Room.player}" viewportWidth="850" viewportHeight="400" width="2000" height="540">
 		<DisplayObject2D id="background" assetID="background_asset" mouseEnabled="false"/>
 		<DisplayObject2D id="click" assetID="click_asset" mouseEnabled="true" clickThrough="true" alpha="0"/>
+		
 		<ZSortingDisplayObject id="furniture">
 			<DisplayObject2D id="arch" assetID="arch_asset" x="0" y="408" originX="0" originY="408" mouseEnabled="false"/>
 			<DisplayObject2D id="foliageright" assetID="foliageright_asset" x="0" y="508" originX="0" originY="508" mouseEnabled="false"/>
@@ -28,6 +29,7 @@
 			<DisplayObject2D id="orange" assetID="orange_asset" x="1275" y="425" originX="25" originY="50" mouseEnabled="true" useHandCursor="true" clickThrough="true" verbEnabled="true" filters="{Room.playerFilters}" />
 			<DisplayObject2D id="lechuck" name="Le Chuck" assetID="lechuck_asset" x="930" y="496" originX="62" originY="184" mouseEnabled="true" verbEnabled="true" clickThrough="true"/>
 		</ZSortingDisplayObject>
+		
 		<DisplayObject2D id="foreground" assetID="foreground_asset" x="0" y="0" originX="0" originY="0" mouseEnabled="false"/>
 		<ZSortingDisplayObject id="playerMessages"/>
 	</Scene>
@@ -35,10 +37,10 @@
 	<Assets>
 		<Asset id="background_music_asset" url="sounds/village/music.mp3"/>		
 		<Asset id="pop_effect_asset" url="sounds/pop.mp3"/>
-        <Asset id="hit_asset" url="images/village/hit.png"/>
-        <Asset id="click_asset" url="images/village/click.png"/>
+        <Asset id="hit_asset" url="images/village/hit.gif"/>
+        <Asset id="click_asset" url="images/village/click.gif"/>
         <Asset id="light_filter_asset" url="images/village/light.jpg"/>		
-		<Asset id="background_asset" url="images/village/background.png"/>
+		<Asset id="background_asset" url="images/village/background.jpg"/>
 		<Asset id="foreground_asset" url="images/village/foreground.png"/>	
 		<Asset id="foliageright_asset" url="images/village/foliageright.png"/>	
 		<Asset id="posts_asset" url="images/village/posts.png"/>	

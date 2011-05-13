@@ -52,6 +52,7 @@
 					<mx:FormItem>
 						<mx:VBox>
 							<editor:TintablePose id="avatarPreview"
+												 horizontalScrollPolicy="off" verticalScrollPolicy="off"
 												 width="400" height="600"
 												 scaleX="0.4" scaleY="0.4" />
 							<mx:HBox width="100%" paddingLeft="10">

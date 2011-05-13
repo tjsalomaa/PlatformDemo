@@ -21,7 +21,7 @@
 		<Verb id="OnPickUp" name="Pick up"/>
 		<Verb id="OnTalkTo" name="Talk to"/>
 		<Verb id="OnUse" name="Use the"/>
-		<Verb id="OnRead" name="Read something from"/>
+		<Verb id="OnRead" name="Read a book"/>
 		
 		<Triggers>
 			<onVerbBarOpened>

@@ -2,7 +2,7 @@
 <QuestViewBase width="100%" height="100%"
 			   xmlns="uk.co.dubit.platform.components.quest.*"
 			   xmlns:views="com.dubitplatform.views.*" 
-			   xmlns:mx="http://www.adobe.com/2006/mxml">
+			   xmlns:mx="http://www.adobe.com/2006/mxml" xmlns:s="library://ns.adobe.com/flex/spark">
 
 	<mx:Script>
 		<![CDATA[
@@ -34,7 +34,9 @@
 		</mx:Accordion>
 	</mx:VBox>
 	
-	
-	<mx:Text horizontalCenter="0" verticalCenter="0" width="100%" height="50" textAlign="center" text="You don't have any active quests!  Try exploring the world - There's bound to be someone who needs a hand!" visible="{ QuestModel.getInstance().activeQuests.length == 0 }" />
+	<s:TextArea width="100%" height="50" verticalCenter="0"
+				selectable="false" editable="false" borderVisible="false"
+				textAlign="center" text="You don't have any active quests!  Try exploring the world - There's bound to be someone who needs a hand!" 
+				visible="{ QuestModel.getInstance().activeQuests.length == 0 }" />
 
 </QuestViewBase>

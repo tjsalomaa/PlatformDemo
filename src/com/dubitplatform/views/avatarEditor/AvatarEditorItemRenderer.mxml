@@ -21,7 +21,7 @@
 	</mx:Script>
 	
 	<mx:Canvas id="container" top="5" bottom="5" left="5" right="5" horizontalScrollPolicy="off" verticalScrollPolicy="off">
-		<mx:Image id="preview" source="{ product.previewURL }"
+		<mx:Image id="preview" source="{ product.previewURL }" mouseEnabled="false" mouseChildren="false"
 				  alpha="{ product.owned ? 0.5 : 1 }" complete="centerPreviewImage()" />
 		
 		<mx:VBox id="productInfo" width="100%" height="100%"

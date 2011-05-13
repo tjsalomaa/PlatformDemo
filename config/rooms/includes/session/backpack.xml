@@ -2,16 +2,16 @@
 <Include xmlns:xi="http://www.w3.org/2001/XInclude">
 	<Backpack>
 		<!-- The 3 cogs used on the fireplace -->
-		<Possession id="cog1" name="Large Cog" description="A large sized cog from some machinery" previewURL="images/backpack/cog_one_backpack.swf" quantity="1"/>
-		<Possession id="cog2" name="Medium Cog" description="A medium sized cog from some machinery" previewURL="images/backpack/cog_two_backpack.swf" quantity="1"/>
-		<Possession id="cog3" name="Small Cog" description="A small sized cog from some machinery" previewURL="images/backpack/cog_three_backpack.swf" quantity="1"/>
+		<Possession id="cog1" name="Large Cog" description="A large sized cog from some machinery" previewURL="images/backpack/cog_one_backpack.swf" quantity="0"/>
+		<Possession id="cog2" name="Medium Cog" description="A medium sized cog from some machinery" previewURL="images/backpack/cog_two_backpack.swf" quantity="0"/>
+		<Possession id="cog3" name="Small Cog" description="A small sized cog from some machinery" previewURL="images/backpack/cog_three_backpack.swf" quantity="0"/>
 		
 		<!-- The tool kit, spring, 3 lenses and shard of glass used for the telescope -->
-		<Possession id="toolsbp" name="Glass Crafting Tools" description="A glass crafting tool kit" previewURL="images/backpack/tools_backpack.swf" quantity="1"/>
-		<Possession id="glassbp" name="A shard of glass" description="A shard if glass from the broken window" previewURL="images/backpack/glass_backpack.swf" quantity="1"/>
-		<Possession id="lens_one_backpack" name="Telescopic lens" description="A telescopic lens" previewURL="images/backpack/lens_one_backpack.swf" quantity="1"/>
-		<Possession id="lens_two_backpack" name="Telescopic lens" description="A telescopic lens" previewURL="images/backpack/lens_two_backpack.swf" quantity="1"/>
-		<Possession id="toolsbp_glassbp" name="Telescopic lens" description="A telescopic lens" previewURL="images/backpack/lens_three_backpack.swf" quantity="1"/>
+		<Possession id="toolsbp" name="Glass Crafting Tools" description="A glass crafting tool kit" previewURL="images/backpack/tools_backpack.swf" quantity="0"/>
+		<Possession id="glassbp" name="A shard of glass" description="A shard if glass from the broken window" previewURL="images/backpack/glass_backpack.swf" quantity="0"/>
+		<Possession id="lens_one_backpack" name="Telescopic lens" description="A telescopic lens" previewURL="images/backpack/lens_one_backpack.swf" quantity="0"/>
+		<Possession id="lens_two_backpack" name="Telescopic lens" description="A telescopic lens" previewURL="images/backpack/lens_two_backpack.swf" quantity="0"/>
+		<Possession id="toolsbp_glassbp" name="Telescopic lens" description="A telescopic lens" previewURL="images/backpack/lens_three_backpack.swf" quantity="0"/>
 		<Possession id="spring_backpack" name="A tungsten spring" description="A sproingy bouncy spring, made from high tensile tungsten, a good way of storing energy" previewURL="images/backpack/spring_backpack.swf" quantity="0"/>
 		
 		<!-- The 3 pendulums for the grandfather clock -->

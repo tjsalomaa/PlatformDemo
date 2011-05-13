@@ -27,8 +27,12 @@
 		</onFixup>
 		
 		<!-- Here we handle any GAML events dispatched from Flex UI components -->
-		<onOpenShop>
+		<onOpenShop> <!-- Dispatched from PlatfromDemo.mxml -->
 			<OpenShop shop="1" />
 		</onOpenShop>
+		
+		<onToggleQuickChat>
+			<ToggleQuickChat quickChat="global" />
+		</onToggleQuickChat>
 	</Triggers>
 </SessionRoom>

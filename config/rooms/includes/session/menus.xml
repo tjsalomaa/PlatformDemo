@@ -2,7 +2,7 @@
 <Include xmlns:xi="http://www.w3.org/2001/XInclude">
 	<Menus>
 		<ContextMenu id="playerMenu" track="true" offsetX="400" closeOnTargetMove="true" offsetY="0">			
-			<MenuItem text="Start minigame API Tester">
+			<MenuItem text="Start Minigame API Tester">
 				<Triggers>
 					<onMenuItemSelected><OpenMinigame minigame="apiTester" /></onMenuItemSelected>
 				</Triggers>
@@ -16,11 +16,9 @@
 		</ContextMenu>
 			
 		<ContextMenu id="otherPlayerMenu" track="true" offsetX="100" offsetY="0">
-			<MenuItem text="Start minigame API Tester (Multiplayer mode)">
+			<MenuItem text="Start Minigame API Tester (Multiplayer mode)">
 				<Triggers>
-					<onMenuItemSelected>
-						<InviteToMinigame minigame="apiTester" avatar="{Event.menu.target}" />
-					</onMenuItemSelected>	
+					<onMenuItemSelected><InviteToMinigame minigame="apiTester" avatar="{Event.menu.target}" /></onMenuItemSelected>	
 				</Triggers>
 			</MenuItem>
 		</ContextMenu>			

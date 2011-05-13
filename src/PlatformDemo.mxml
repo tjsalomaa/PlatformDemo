@@ -20,24 +20,14 @@
 		<![CDATA[
 			import com.dubitplatform.views.CollectionsPanel;
 			import com.dubitplatform.views.ControlPanel;
-			import com.dubitplatform.views.MapTitleWindow;
-			import com.dubitplatform.views.QuickChatView;
 			
 			import mx.managers.PopUpManager;
 			
 			import uk.co.dubit.logging.LoggingPanel;
-			import uk.co.dubit.platform.components.backpack.Backpack;
 			import uk.co.dubit.platform.components.catalogue.Shops;
 			import uk.co.dubit.platform.components.contactList.ContactList;
 			import uk.co.dubit.platform.components.experience.Experience;
 			import uk.co.dubit.platform.components.meters.IMeter;
-			import uk.co.dubit.platform.components.meters.Meters;
-			import uk.co.dubit.platform.components.quest.QuestModel;
-			import uk.co.dubit.platform.components.session.SessionModel;
-			import uk.co.dubit.platform.scriptEngine.gameObject.GameObjectListener;
-			import uk.co.dubit.platform.scriptEngine.gameObject.IGameObject;
-			import uk.co.dubit.properties.Properties;
-			import uk.co.dubit.utils.StringUtils;
 
 			private var controlPanel:ControlPanel;
 			private var loggingPanel:LoggingPanel;

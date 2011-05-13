@@ -11,16 +11,11 @@
 		<LightMapFilter assetID="light_filter_asset" />
 	</Filters>
 	
-	<Filters id="helperFilters">
-		<DepthFilter id="helperDepthFilter" scaleBack="1" scaleFront="1"/>
-		<LightMapFilter assetID="light_filter_asset" />
-	</Filters>
-	
-	<Sounds target="{Room.player}" id="sounds">
+	<Sounds target="{Room.player}">
 		<Sound id="background_music" assetID="background_music_asset" play="false" looping="true"/>
 	</Sounds>
 	
-	<Scene id="scene" target="{Room.player}" viewportWidth="850" viewportHeight="445" width="1400" height="546">
+	<Scene id="scene" target="{Room.player}" viewportWidth="850" viewportHeight="400" width="1400" height="546">
 		
 		<DisplayObject2D id="sky" assetID="sky_asset"/>
 		<DisplayObject2D id="background" assetID="background_asset"/>
@@ -49,12 +44,6 @@
 		<DisplayObject2D id="cd5" definitionID="cd_collectable" assetID="cd_asset" x="257" y="446" visible="true" />
 					
 		<DisplayObject2D  id="strange_note" name="A strange note" assetURL="[base.url]images/lab/page_white_text.png" x="970" y="440" verbEnabled="true" clickThrough="true" mouseEnabled="true" /> 
-				
-		
-		
-		<!-- path finding room debug object -->
-		<!--DisplayObject2d name="Go to pathfinding" id="path_test" assetURL="[base.url]images/backpack/cog_three_backpack.swf" x="400" y="300" visible="true" mouseEnabled="true" useHandCursor="true" clickThrough="true"/-->
-		
 		
 		<ZSortingDisplayObject id="furniture">
 						
@@ -92,15 +81,13 @@
 		<ZSortingDisplayObject id="playerMessages"/>
 	</Scene>
 
-	<Assets id="assets">
+	<Assets>
         <Asset id="background_music_asset" url="sounds/lab/music.mp3"/>
         <Asset id="hit_asset" url="images/lab/hit.png"/>
         <Asset id="click_asset" url="images/lab/click.png"/>
         <Asset id="light_filter_asset" url="images/lab/light.jpg"/>
         <Asset id="blackout_asset" url="images/lab/blackout.swf"/>
         <Asset id="background_asset" url="images/lab/background.jpg"/>
-        <Asset id="walk" url="images/lab/walk12.swf"/>
-        <Asset id="stand" url="images/lab/stand12.swf"/>
         <Asset id="fire_asset" url="images/lab/fire.swf"/>
         <Asset id="fireout_asset" url="images/lab/fireout.swf"/>
         <Asset id="doc_asset" url="images/lab/doc.png"/>
@@ -141,12 +128,7 @@
         <Asset id="wallLens2_asset" url="images/lab/wallLens2.swf"/>
         <Asset id="wallLens3_asset" url="images/lab/wallLens3.swf"/>
         <Asset id="cd_asset" url="images/lab/cd.png"/>
-        <!--><Asset id="clockanimation_asset" url="images/lab/clockanimation.swf"/>-->
     </Assets>
-
-	<Trigger event="OnClick" gameObject="{Room.path_test}">
-		<ChangeRoom roomName="path_test"/>
-	</Trigger>
 
 <!--Telescope-->
 	<Trigger event="OnLookAt" gameObject="{Room.telescope}">
@@ -163,7 +145,7 @@
 	<Trigger event="OnDragDrop" gameObject="{Room.telescope}">
 		<Switch value="{Event.dragInitiator.id}">
 			<lens_one_backpack>		
-				<MoveTo gameObject="{Room.player}" x="{Room.player.x}" y="{Room.player.y}" targetX="900" targetY="438">
+				<MoveTo gameObject="{Room.player}" targetX="900" targetY="438">
 					<Complete>
 						<RemoveFromBackpack possession="{Backpack.lens_one_backpack.id}"/>
 						<SetValues target="{Rooms.session.questPersists}" lens1Ready="true"/>
@@ -173,7 +155,7 @@
 				</MoveTo>
 			</lens_one_backpack>
 			<lens_two_backpack>
-				<MoveTo gameObject="{Room.player}" x="{Room.player.x}" y="{Room.player.y}" targetX="900" targetY="438">
+				<MoveTo gameObject="{Room.player}" targetX="900" targetY="438">
 					<Complete>
 						<RemoveFromBackpack possession="{Backpack.lens_two_backpack.id}"/>
 						<SetValues target="{Rooms.session.questPersists}" lens2Ready="true"/>
@@ -183,7 +165,7 @@
 				</MoveTo>
 			</lens_two_backpack>
 			<toolsbp_glassbp>
-				<MoveTo gameObject="{Room.player}" x="{Room.player.x}" y="{Room.player.y}" targetX="900" targetY="438">
+				<MoveTo gameObject="{Room.player}" targetX="900" targetY="438">
 					<Complete>
 						<RemoveFromBackpack possession="{Backpack.toolsbp_glassbp.id}"/>							
 						<SetValues target="{Rooms.session.questPersists}" lens3Ready="true"/>
@@ -225,7 +207,7 @@
 	</BehaviourDefinition>
 
 	<Trigger event="OnPickUp" gameObject="{Room.lens1}">
-		<MoveTo gameObject="{Room.player}" x="{Room.player.x}" y="{Room.player.y}" targetX="982" targetY="438">
+		<MoveTo gameObject="{Room.player}" targetX="982" targetY="438">
 			<Complete>
 				<AddToBackpack possession="lens_two_backpack"/>
 				<ShowBubble gameObject="{Room.player}" message="Could this have anything to do with the telescope?"/>
@@ -239,7 +221,7 @@
 	</Trigger>
 
 	<Trigger event="OnPickUp" gameObject="{Room.lens2}">
-		<MoveTo gameObject="{Room.player}" x="{Room.player.x}" y="{Room.player.y}" targetX="581" targetY="481">
+		<MoveTo gameObject="{Room.player}" targetX="581" targetY="481">
 			<Complete>
 				<AddToBackpack possession="lens_one_backpack"/>
 				<ShowBubble gameObject="{Room.player}" message="I wonder where it belongs"/>
@@ -253,7 +235,7 @@
 	</Trigger>
 
 	<Trigger event="OnPickUp" gameObject="{Room.tools}">
-		<MoveTo gameObject="{Room.player}" x="{Room.player.x}" y="{Room.player.y}" targetX="230" targetY="458">
+		<MoveTo gameObject="{Room.player}" targetX="230" targetY="458">
 			<Complete>
 				<AddToBackpack possession="toolsbp"/>
 				<ShowBubble gameObject="{Room.player}" message="I wonder what these tools could be used for"/>
@@ -267,7 +249,7 @@
 	</Trigger>
 
 	<Trigger event="OnPickUp" gameObject="{Room.glass}">
-		<MoveTo gameObject="{Room.player}" x="{Room.player.x}" y="{Room.player.y}" targetX="662" targetY="438">
+		<MoveTo gameObject="{Room.player}" targetX="662" targetY="438">
 			<Complete>
 				<AddToBackpack possession="glassbp"/>
 				<ShowBubble gameObject="{Room.player}" message="I should take this so that nobody hurts themselfs on its sharp edges"/>
@@ -281,7 +263,7 @@
 	</Trigger>
 
 	<Trigger event="OnPickUp" gameObject="{Room.Gramophone}">
-		<MoveTo gameObject="{Room.player}" x="{Room.player.x}" y="{Room.player.y}" targetX="407" targetY="444">
+		<MoveTo gameObject="{Room.player}" targetX="407" targetY="444">
 			<Complete>
 				<ShowBubble gameObject="{Room.player}" message="It's too heavy!"/>
 			</Complete>
@@ -293,7 +275,7 @@
 	</Trigger>
 
 	<Trigger event="OnDragDrop" gameObject="{Room.Gramophone}">
-		<MoveTo gameObject="{Room.player}" x="{Room.player.x}" y="{Room.player.y}" targetX="407" targetY="444">
+		<MoveTo gameObject="{Room.player}"  targetX="407" targetY="444">
 			<Complete>
 				<Switch value="{Event.dragInitiator.id}">
 					<spring_backpack>
@@ -314,7 +296,7 @@
 	<Trigger event="OnUse" gameObject="{Room.Gramophone}">
 		<If expression="({Rooms.session.questPersists.gramaphoneReady} == {true})">
 			<Then>
-				<MoveTo gameObject="{Room.player}" x="{Room.player.x}" y="{Room.player.y}" targetX="407" targetY="444">
+				<MoveTo gameObject="{Room.player}" targetX="407" targetY="444">
 					<Complete>
 												
 						<!-- Play animation and trigger events -->
@@ -324,7 +306,7 @@
 								
 								<!-- Move player out of the way -->
 								<ShowBubble gameObject="{Room.player}" message="Oooer this doesn't look good, better stand back!" if="({Event.frame}=={80})" displayTime="3000"/>
-								<MoveTo gameObject="{Room.player}" x="{Room.player.x}" y="{Room.player.y}" targetX="589" targetY="430" if="({Event.frame}=={85})"/>
+								<MoveTo gameObject="{Room.player}" targetX="589" targetY="430" if="({Event.frame}=={85})"/>
 								
 								<!-- Pause the explosion -->
 								<GotoAndStop gameObject="{Room.gramexp}" frame="155" if="({Event.frame}=={155})"/>
@@ -343,7 +325,7 @@
 												<SetValues target="{Room.Glass}" visible="true"/>
 
 												<!-- Face the player left -->
-												<MoveTo gameObject="{Room.player}" x="{Room.player.x}" y="{Room.player.y}" targetX="588" targetY="430"/>
+												<MoveTo gameObject="{Room.player}" targetX="588" targetY="430"/>
 
 												<!-- Show the gramophone again -->
 												<SetValues target="{Room.Gramophone}" visible="true"/>											
@@ -378,7 +360,7 @@
 	</Trigger>
 
 	<Trigger event="OnPickUp" gameObject="{Room.spring}">
-		<MoveTo gameObject="{Room.player}" x="{Room.player.x}" y="{Room.player.y}" targetX="362" targetY="460">
+		<MoveTo gameObject="{Room.player}" targetX="362" targetY="460">
 			<Complete>
 				<AddToBackpack possession="spring_backpack"/>
 				<ShowBubble gameObject="{Room.player}" message="Using this as a component for a machine could make it dangerously volatile, I better be carful where i put it"/>
@@ -399,7 +381,7 @@
 	<Trigger event="OnDragDrop" gameObject="{Room.Grandfather clock}">
 		<Switch value="{Event.dragInitiator.id}">
 			<pendulum1bp>		
-				<MoveTo gameObject="{Room.player}" x="{Room.player.x}" y="{Room.player.y}" targetX="730" targetY="413">
+				<MoveTo gameObject="{Room.player}" targetX="730" targetY="413">
 					<Complete>
 						<RemoveFromBackpack possession="{Backpack.pendulum1bp.id}"/>
 						<SetValues target="{Rooms.session.questPersists}" pendulum1Ready="true"/>
@@ -409,7 +391,7 @@
 				</MoveTo>
 			</pendulum1bp>
 			<pendulum2bp>
-				<MoveTo gameObject="{Room.player}" x="{Room.player.x}" y="{Room.player.y}" targetX="730" targetY="413">
+				<MoveTo gameObject="{Room.player}" targetX="730" targetY="413">
 					<Complete>
 						<RemoveFromBackpack possession="{Backpack.pendulum2bp.id}"/>
 						<SetValues target="{Rooms.session.questPersists}" pendulum2Ready="true"/>
@@ -419,7 +401,7 @@
 				</MoveTo>
 			</pendulum2bp>
 			<pendulum3bp>
-				<MoveTo gameObject="{Room.player}" x="{Room.player.x}" y="{Room.player.y}" targetX="730" targetY="413">
+				<MoveTo gameObject="{Room.player}" targetX="730" targetY="413">
 					<Complete>
 						<RemoveFromBackpack possession="{Backpack.pendulum3bp.id}"/>							
 						<SetValues target="{Rooms.session.questPersists}" pendulum3Ready="true"/>
@@ -460,7 +442,7 @@
 	</BehaviourDefinition>
 
 	<Trigger event="OnPickUp" gameObject="{Room.pendulum1}">
-		<MoveTo gameObject="{Room.player}" x="{Room.player.x}" y="{Room.player.y}" targetX="448" targetY="426">
+		<MoveTo gameObject="{Room.player}" targetX="448" targetY="426">
 			<Complete>
 				<AddToBackpack possession="pendulum1bp"/>
 				<SetValues target="{Room.fireplace}" verbEnabled="true" clickThrough="true" mouseEnabled="true" visible="true"/>
@@ -475,7 +457,7 @@
 	</Trigger>
 	
 	<Trigger event="OnPickUp" gameObject="{Room.pendulum2}">
-		<MoveTo gameObject="{Room.player}" x="{Room.player.x}" y="{Room.player.y}" targetX="1048" targetY="477">
+		<MoveTo gameObject="{Room.player}" targetX="1048" targetY="477">
 			<Complete>
 				<AddToBackpack possession="pendulum2bp"/>
 				<ShowBubble gameObject="{Room.player}" message="A pendulum, it looks like it could belong to the grandfather clock over there"/>
@@ -489,7 +471,7 @@
 	</Trigger>
 
 	<Trigger event="OnPickUp" gameObject="{Room.globe}">
-		<MoveTo gameObject="{Room.player}" x="{Room.player.x}" y="{Room.player.y}" targetX="599" targetY="476">
+		<MoveTo gameObject="{Room.player}" targetX="599" targetY="476">
 			<Complete>				
 				<If expression="({Quests.timeMachineQuest.telescope.complete} == {true})">
 					<Then>
@@ -530,7 +512,7 @@
 	</Trigger>
 
 	<Trigger event="OnPickUp" gameObject="{Room.Fireplace}">
-		<MoveTo gameObject="{Room.player}" x="{Room.player.x}" y="{Room.player.y}" targetX="489" targetY="429">
+		<MoveTo gameObject="{Room.player}" targetX="489" targetY="429">
 			<Complete>
 				<If expression="({Quests.timeMachineQuest.fireplace.complete} == {false})">
 					<Then>
@@ -558,7 +540,7 @@
 	<Trigger event="OnDragDrop" gameObject="{Room.cogs}">
 		<Switch value="{Event.dragInitiator.id}">
 			<cog1>		
-				<MoveTo gameObject="{Room.player}" x="{Room.player.x}" y="{Room.player.y}" targetX="490" targetY="429">
+				<MoveTo gameObject="{Room.player}" targetX="490" targetY="429">
 					<Complete>
 						<RemoveFromBackpack possession="{Backpack.cog1.id}"/>
 						<SetValues target="{Rooms.session.questPersists}" cog1Ready="true"/>
@@ -568,7 +550,7 @@
 				</MoveTo>
 			</cog1>
 			<cog2>
-				<MoveTo gameObject="{Room.player}" x="{Room.player.x}" y="{Room.player.y}" targetX="490" targetY="429">
+				<MoveTo gameObject="{Room.player}" targetX="490" targetY="429">
 					<Complete>
 						<RemoveFromBackpack possession="{Backpack.cog2.id}"/>
 						<SetValues target="{Rooms.session.questPersists}" cog2Ready="true"/>
@@ -578,7 +560,7 @@
 				</MoveTo>
 			</cog2>
 			<cog3>
-			   <MoveTo gameObject="{Room.player}" x="{Room.player.x}" y="{Room.player.y}" targetX="490" targetY="429">
+			   <MoveTo gameObject="{Room.player}" targetX="490" targetY="429">
 					<Complete>
 						<RemoveFromBackpack possession="{Backpack.cog3.id}"/>							
 						<SetValues target="{Rooms.session.questPersists}" cog3Ready="true"/>
@@ -632,7 +614,7 @@
 	</Trigger>
 
 	<Trigger event="OnPickUp" gameObject="{Room.cog1bg}">
-		<MoveTo gameObject="{Room.player}" x="{Room.player.x}" y="{Room.player.y}" targetX="335" targetY="450">
+		<MoveTo gameObject="{Room.player}" targetX="335" targetY="450">
 			<Complete>
 				<AddToBackpack possession="cog1"/>
 				<ShowBubble gameObject="{Room.player}" message="This sort of cog could only be used in a large contraption"/>
@@ -646,7 +628,7 @@
 	</Trigger>
 
 	<Trigger event="OnPickUp" gameObject="{Room.cog2bg}">
-		<MoveTo gameObject="{Room.player}" x="{Room.player.x}" y="{Room.player.y}" targetX="730" targetY="413">
+		<MoveTo gameObject="{Room.player}" targetX="730" targetY="413">
 			<Complete>
 				<AddToBackpack possession="cog2"/>
 				<ShowBubble gameObject="{Room.player}" message="It does't look right there I would where it really belongs?"/>
@@ -668,7 +650,7 @@
 	</Trigger>
 
 	<Trigger event="OnPickUp" gameObject="{Room.bookshelf_two}">
-		<MoveTo gameObject="{Room.player}" x="{Room.player.x}" y="{Room.player.y}" targetX="614" targetY="423">
+		<MoveTo gameObject="{Room.player}" targetX="614" targetY="423">
 			<Complete>
 				<If expression="({Rooms.session.questPersists.cog3PickedUp} == {false})">
 					<Then>
@@ -689,7 +671,7 @@
 	</Trigger>
 	
 	<Trigger event="OnRead" gameObject="{Room.bookshelf_two}">
-		<MoveTo gameObject="{Room.player}" x="{Room.player.x}" y="{Room.player.y}" targetX="619" targetY="400">
+		<MoveTo gameObject="{Room.player}" targetX="619" targetY="400">
 			<Complete>
 				<Call behaviourID="readAction" />
 			</Complete>
@@ -701,7 +683,7 @@
 	</Trigger>
 	
 	<Trigger event="OnRead" gameObject="{Room.bookshelf_three}">
-		<MoveTo gameObject="{Room.player}" x="{Room.player.x}" y="{Room.player.y}" targetX="682" targetY="400">
+		<MoveTo gameObject="{Room.player}" targetX="682" targetY="400">
 			<Complete>
 				<Call behaviourID="readAction" />
 			</Complete>
@@ -713,7 +695,7 @@
 	</Trigger>
 	
 	<Trigger event="OnRead" gameObject="{Room.bookshelf_four}">
-		<MoveTo gameObject="{Room.player}" x="{Room.player.x}" y="{Room.player.y}" targetX="797" targetY="405">
+		<MoveTo gameObject="{Room.player}" targetX="797" targetY="405">
 			<Complete>
 				<Call behaviourID="readAction" />
 			</Complete>
@@ -725,7 +707,7 @@
 	</Trigger>
 	
 	<Trigger event="OnRead" gameObject="{Room.bookshelf_five}">
-		<MoveTo gameObject="{Room.player}" x="{Room.player.x}" y="{Room.player.y}" targetX="846" targetY="403">
+		<MoveTo gameObject="{Room.player}" targetX="846" targetY="403">
 			<Complete>
 				<Call behaviourID="readAction" />
 			</Complete>
@@ -737,7 +719,7 @@
 	</Trigger>
 	
 	<Trigger event="OnRead" gameObject="{Room.bookshelf_six}">
-		<MoveTo gameObject="{Room.player}" x="{Room.player.x}" y="{Room.player.y}" targetX="1166" targetY="419">
+		<MoveTo gameObject="{Room.player}" targetX="1166" targetY="419">
 			<Complete>
 				<Call behaviourID="readAction" />
 			</Complete>
@@ -749,7 +731,7 @@
 	</Trigger>
 	
 	<Trigger event="OnRead" gameObject="{Room.bookshelf_seven}">
-		<MoveTo gameObject="{Room.player}" x="{Room.player.x}" y="{Room.player.y}" targetX="1240" targetY="423">
+		<MoveTo gameObject="{Room.player}" targetX="1240" targetY="423">
 			<Complete>
 				<Call behaviourID="readAction" />
 			</Complete>
@@ -780,7 +762,7 @@
 	</Trigger>
 		
 	<Trigger event="OnTalkTo" gameObject="{Room.doc}">
-		<MoveTo gameObject="{Room.player}" x="{Room.player.x}" y="{Room.player.y}" targetX="280" targetY="475">
+		<MoveTo gameObject="{Room.player}" targetX="280" targetY="475">
 			<Complete>
 				<BeginDialogue statement="{Room.talkToTheDoc}" npc="{Room.doc}"/>
 				<AddContactAsFriend contact="{Contacts.doc_contact}" useServer="false" />
