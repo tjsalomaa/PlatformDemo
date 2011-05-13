@@ -836,7 +836,7 @@
 			<Attribute required="true" name="active" defaultValue="false" type="Boolean" description="Only active quests are visible in the quest interface"/>
 			<Attribute required="true" name="complete" defaultValue="false" type="Boolean" description="Setting a quest to complete completes all objectives"/>
 			<Attribute required="true" name="description" type="String" description="The quest description"/>
-			<Attribute required="true" nodoc="true" name="skin" type="String" description="The skin class" defaultValue="com.dubitplatform.views.QuestsView"/>
+			<Attribute required="true" nodoc="true" name="skin" type="String" description="The skin class" defaultValue="com.dubitplatform.views.quests.QuestsView"/>
 			<Attribute required="true" nodoc="true" name="targetContainer" type="String" description="The skin container" defaultValue="Quest"/>
 			<Attribute required="true" nodoc="true" name="attachSkin" type="Boolean" description="True if the skin should be attached immediately" defaultValue="true"/>
 			<Events>
@@ -1798,7 +1798,7 @@
 	<!-- SKILLS -->
 	<Package name="Skills">
 		<Binding name="Skills" class="uk.co.dubit.platform.components.skills.Skills" factory="uk.co.dubit.platform.scriptEngine.gameObject.GameObjectFactory">
-			<Attribute required="true" name="skin" type="string" description="The skin class" defaultValue="com.dubitplatform.views.SkillsView"/>
+			<Attribute required="true" name="skin" type="string" description="The skin class" defaultValue="com.dubitplatform.views.skills.SkillsView"/>
 			<Attribute required="true" name="targetContainer" type="string" description="The skin container" defaultValue="Skills"/>
 			<Attribute required="true" name="attachSkin" type="boolean" description="True if the skin should be attached immediately" defaultValue="true"/>
 		</Binding>

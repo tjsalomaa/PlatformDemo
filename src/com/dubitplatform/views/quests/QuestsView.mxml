@@ -2,7 +2,7 @@
 <QuestViewBase width="100%" height="100%"
 			   xmlns="uk.co.dubit.platform.components.quest.*"
 			   xmlns:views="com.dubitplatform.views.*" 
-			   xmlns:mx="http://www.adobe.com/2006/mxml" xmlns:s="library://ns.adobe.com/flex/spark">
+			   xmlns:mx="http://www.adobe.com/2006/mxml" xmlns:s="library://ns.adobe.com/flex/spark" xmlns:quests="com.dubitplatform.views.quests.*">
 
 	<mx:Script>
 		<![CDATA[
@@ -17,14 +17,14 @@
 			<mx:Repeater id="questsRepeater" dataProvider="{ activeQuests }" >
 			   <mx:VBox width="100%" height="100%" label="{ questsRepeater.currentItem.name }" paddingLeft="15" paddingRight="15" paddingTop="15" paddingBottom="15">
 
-					<mx:Text text="{questsRepeater.currentItem.description}" fontWeight="bold" width="100%"/>
+					<mx:Text text="{questsRepeater.currentItem.description}" selectable="false" fontWeight="bold" width="100%"/>
 			
 					<mx:Box paddingTop="10" paddingBottom="10" width="100%"><mx:HRule width="100%"/></mx:Box>
 			
 					<mx:List dataProvider="{ questsRepeater.currentItem.objectives }" width="100%" height="100%" borderStyle="none" variableRowHeight="true" useRollOver="false">
 						<mx:itemRenderer>
 					   		<mx:Component>
-								<views:ObjectiveView objective="{ IObjective(data) }" width="100%" height="20" horizontalScrollPolicy="off"/> 	
+								<quests:ObjectiveView objective="{ IObjective(data) }" width="100%" height="20" horizontalScrollPolicy="off"/> 	
 					   		</mx:Component>
 						</mx:itemRenderer>
 					</mx:List>

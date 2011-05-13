@@ -19,13 +19,13 @@ package
 	import com.dubitplatform.views.GrowlView;
 	import com.dubitplatform.views.MinigameView;
 	import com.dubitplatform.views.ProfileView;
-	import com.dubitplatform.views.QuestsView;
 	import com.dubitplatform.views.RoomListView;
-	import com.dubitplatform.views.SkillsView;
 	import com.dubitplatform.views.VerbControllerView;
 	import com.dubitplatform.views.contactList.ContactListView;
+	import com.dubitplatform.views.quests.QuestsView;
 	import com.dubitplatform.views.quickChat.QuickChatView;
 	import com.dubitplatform.views.shop.ShopView;
+	import com.dubitplatform.views.skills.SkillsView;
 	
 	/**
 	 *  This file should include references to your custom GAML skins which otherwise would not

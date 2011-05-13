@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<SkillViewBase xmlns="uk.co.dubit.platform.components.skills.*" xmlns:mx="http://www.adobe.com/2006/mxml" width="100%">
+	
+	<mx:HBox width="100%">
+		<mx:Text text="{skill.name} ({skill.points}/{skill.maximum}): {skill.description}" width="100%" />
+		<mx:Button label="+1" enabled="{skills.points > 0}" click="{incrementSkill()}"/>
+	</mx:HBox>	
+	
+</SkillViewBase>
