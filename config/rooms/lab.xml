@@ -12,7 +12,7 @@
 	</Filters>
 	
 	<Sounds target="{Room.player}">
-		<Sound id="background_music" assetID="background_music_asset" play="false" looping="true"/>
+		<Sound id="background_music" assetID="background_music_asset" play="true" looping="true"/>
 	</Sounds>
 	
 	<Scene id="scene" target="{Room.player}" viewportWidth="850" viewportHeight="400" width="1400" height="546">
