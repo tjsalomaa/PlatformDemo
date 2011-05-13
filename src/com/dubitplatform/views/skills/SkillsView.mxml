@@ -13,7 +13,10 @@
 			private function showSkillsWindow () : void
 			{
 				var app : DisplayObject = ApplicationUtils.getTopLevelApplication() as DisplayObject;
-				window = PopUpManager.createPopUp(app, EditSkillsWindow, true) as EditSkillsWindow;
+				
+				var window:EditSkillsWindow = new EditSkillsWindow();
+			
+				PopUpManager.addPopUp(window, app, true);
 				PopUpManager.centerPopUp(window);
 			}
 			
