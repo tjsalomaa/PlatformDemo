@@ -13,7 +13,9 @@
 		<Binding name="PlayerDefinition" factory="uk.co.dubit.platform.scriptEngine.gameObject.GameObjectDefinitionFactory" class="uk.co.dubit.platform.scriptEngine.gameObject.types.avatar.Character" nodoc="true"/>
 		<Binding name="Channel" factory="uk.co.dubit.platform.scriptEngine.gameObject.GameObjectFactory" class="uk.co.dubit.platform.scriptEngine.gameObject.types.net.ConnectionProxy" nodoc="true"/>
 		<Binding name="NotificationHandler" factory="uk.co.dubit.platform.scriptEngine.gameObject.GameObjectFactory" class="uk.co.dubit.platform.scriptEngine.gameObject.types.net.NotificationHandler" nodoc="true"/>
-		<Binding name="LoadClothingLayers" class="uk.co.dubit.platform.components.avatar.editor.behaviours.LoadClothingLayers" nodoc="true"/>
+		<Binding name="LoadClothingLayers" class="uk.co.dubit.platform.components.avatar.editor.behaviours.LoadClothingLayers" nodoc="true">
+			<Attribute name="serviceURL" defaultValue="[path.web-services]/clothing_layers.nexus" />
+		</Binding>
 		<Binding name="EnterSession" class="uk.co.dubit.platform.scriptEngine.behaviour.types.net.EnterSession"/>
 		<Binding name="TransmitRequest" class="uk.co.dubit.platform.scriptEngine.behaviour.types.net.TransmitRequest"/>
 		<Binding name="TransmitMessage" class="uk.co.dubit.platform.scriptEngine.behaviour.types.net.TransmitMessage"/>

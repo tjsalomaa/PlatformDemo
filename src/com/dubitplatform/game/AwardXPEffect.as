@@ -17,21 +17,23 @@ package com.dubitplatform.game
 			super(name);
 		}
 		
-		override protected function readRenderObjectAttributes(renderObject:IRenderObject) : void
+		override public function set renderObject(value:IRenderObject) : void
 		{
-			super.readRenderObjectAttributes(renderObject);
+			super.renderObject = value;
 			
-			var effect:DisplayObject = new EffectClass();
-		 	effect.scaleX = target.displayObject.scaleX;
-			effect.scaleY = target.displayObject.scaleY; 
-					
-			material = new Material();
-			material.addChild(effect);
-			material.filters = [new GlowFilter(000000,1,4,4,10,1)];
-		
-			// this is important. The animation will easily go off the edge of the screen. But thats ok
-			fitToScreen = false
+			if(renderObject)
+			{
+				sprite.filters = [ new GlowFilter(000000,1,4,4,10,1) ];
+				
+				var effect:DisplayObject = new EffectClass();
+				/*
+				effect.x = -200 * target.displayObject.scaleX;
+				effect.y = -200 * target.displayObject.scaleY;*/
+				effect.scaleX = target.displayObject.scaleX;
+				effect.scaleY = target.displayObject.scaleY; 
+				
+				material = new Material(effect);
+			}
 		}
-
 	}
 }
