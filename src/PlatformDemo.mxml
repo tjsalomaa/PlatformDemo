@@ -2,7 +2,6 @@
 <app:NexusBase
 	width="100%" height="100%" minHeight="550" minWidth="1000" 
 	layout="absolute" 
-	backgroundColor="black" 
 	creationComplete="onCreationComplete()"
 	xmlns:mx="http://www.adobe.com/2006/mxml" 
 	xmlns:app="uk.co.dubit.platform.app.*"

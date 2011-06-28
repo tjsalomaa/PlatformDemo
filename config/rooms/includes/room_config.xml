@@ -7,9 +7,9 @@
 	<MouseMovementController yVelocityScale="0.3" directions="4" />
 	
 	<!-- Move the player when he clicks -->
-	<Trigger event="onClick" gameObject="{Room.click}">
-		<MoveTo targetX="{Event.x}" targetY="{Event.y}" />
-	</Trigger>
+<!--	<Trigger event="onClick" gameObject="{Room.click}">-->
+<!--		<MoveTo targetX="{Event.x}" targetY="{Event.y}" />-->
+<!--	</Trigger>-->
 
 	<!-- These are the actions you can perform in the world -->
 	<VerbController id="verbController"

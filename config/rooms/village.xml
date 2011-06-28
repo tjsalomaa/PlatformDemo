@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ChatRoom id="village" xmlns:xi="http://www.w3.org/2001/XInclude" startX="1667" startY="442">
 
-	<Include href="includes/room_config.xml"/>
+	<xi:include href="includes/room_config.xml"/>
 		
 	<CollisionMap assetID="hit_asset" />
 
@@ -10,7 +10,7 @@
 	</Filters>
 	
 	<Sounds target="{Room.player}">
-		<Sound id="background_music" assetID="background_music_asset" play="false" looping="true"/>
+		<Sound id="background_music" x="600" y="200" carry="100" stereoWidth="1" assetID="background_music_asset" play="true" looping="true"/>
 		<Sound id="pop_effect" assetID="pop_effect_asset" play="false" looping="false"/>
 	</Sounds>
 
