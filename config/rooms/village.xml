@@ -3,7 +3,7 @@
 
 	<xi:include href="includes/room_config.xml"/>
 		
-	<CollisionMap assetID="hit_asset" />
+	<CollisionMap id="walkableArea" assetID="hit_asset" />
 
 	<Filters id="playerFilters">
 		<DepthFilter id="playerDepthFilter" scaleBack="-0.5" scaleFront="0.15"/>

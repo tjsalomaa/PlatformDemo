@@ -40,7 +40,7 @@
 		<!-- SHOP -->
 		<property name="path.shop-product-groups" value="[path.web-services]/shops/{shop}/product_groups.nexus?gender={gender}"/>
 		<property name="path.products" value="[path.web-services]/product_groups/{product_group_id}/products.nexus"/>
-		<property name="path.product-image" value="[path.swf-server]/shop/{asset_group_id}/interface.swf" />
+		<property name="path.product-image" value="[path.web-services]/assets/asset_groups/{asset_group_id}/shop/interface.swf" />
 		<property name="path.purchase-product" value="[path.web-services]/avatars/{avatar_id}/avatar_transactions/buy_product.nexus?"/>
 		<property name="path.remove-owned-product" value="[path.web-services]/avatars/{avatar_id}/avatar_transactions/remove_product.nexus" />
 	</environment>
