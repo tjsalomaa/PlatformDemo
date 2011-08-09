@@ -1,14 +1,175 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ChatRoom id="lab" xmlns:xi="http://www.w3.org/2001/XInclude" startX="700" startY="470">
 
-	<Include href="config/rooms/includes/room_config.xml"/>
-	<Include href="config/rooms/includes/cds.xml"/>
+	<Include xmlns:xi="http://www.w3.org/2001/XInclude" xml:base="includes/room_config.xml">
+
+	<PlayerDefinition id="playerDefinition" x="{Room.startX}" y="{Room.startY}" originX="264" originY="600" nameOriginX="0" nameOriginY="0" mouseEnabled="true" mouseChildren="false" clickThrough="true" useHandCursor="true" clothingLayers="{AvatarEditors.clothingLayers}" location="furniture" filters="{Room.playerFilters}" defaultSpeed="18" flip="true" displayObjectClass="com.dubitplatform.game.Avatar" nameBubbleClass="com.dubitplatform.game.CartoonNameBubble" loaderClass="" xml:base="includes/player_definition.xml">
+
+	<Triggers>		
+		<onClick>
+			<If expression="({Event.handler} == {Room.player})">
+				<Then><OpenMenu menu="playerMenu" target="{Event.handler}"/></Then>
+				<Else><OpenMenu menu="otherPlayerMenu" target="{Event.handler}"/></Else>
+			</If>
+		</onClick>
+	</Triggers>
+</PlayerDefinition>	
+	<Include xmlns:xi="http://www.w3.org/2001/XInclude" xml:base="includes/room_notification_handler.xml">
 	
-	<CollisionMap assetID="hit_asset" />
+	<NotificationHandler id="world" namespace="world" channel="roomChannel">
+		
+		<Triggers>
+			
+			<createGameObject><CreateGameObject gameObject="{Event.gameObject}"/></createGameObject>
+			<destroyGameObject><DestroyGameObject gameObject="{Event.gameObject}"/></destroyGameObject>
+
+			
+			<moveToPoint>
+				
+				<MovePlayerTo gameObject="{Event.gameObject}" targetX="{Event.end_x}" targetY="{Event.end_y}" useServer="false"/>
+			</moveToPoint>
+
+			
+			<receiveMessage>
+				<If expression="({Event.gameObject} != {Room.player})">
+					<Then>
+						
+						<ShowChatBubble gameObject="{Event.gameObject}" message="{Event.message}" useServer="false"/>
+					</Then>
+				</If>
+			</receiveMessage>
+
+			
+			<setMemberAttribute>
+				
+				<If expression="({Event.gameObject} != {Room.player})">
+					<Then>
+						<SetValue target="{Event.gameObject}" name="{Event.attributename}" value="{Event.attributevalue}"/>
+					</Then>
+				</If>
+			</setMemberAttribute>
+		</Triggers>
+	</NotificationHandler>
+</Include>	
+
+	<CollisionController target="{Room.player}"/>
+	<MouseMovementController yVelocityScale="0.3" directions="4"/>
+	
+	
+
+
+
+
+	
+	<VerbController id="verbController" skin="com.dubitplatform.views.VerbControllerView" targetContainer="Verb" attachSkin="true" customCursorClass="uk.co.dubit.platform.components.verb.VerbCustomCursor">
+
+		<Verb id="OnLookAt" name="Look at"/>
+		<Verb id="OnPickUp" name="Pick up"/>
+		<Verb id="OnTalkTo" name="Talk to"/>
+		<Verb id="OnUse" name="Use the"/>
+		<Verb id="OnRead" name="Read a book"/>
+		
+		<Triggers>
+			<onVerbBarOpened>
+			</onVerbBarOpened>
+		</Triggers>
+	</VerbController>
+
+	
+	<BehaviourDefinition id="cantLookAt">
+		<ShowPlayerBubble message="It's a {Event.gameObject.name}"/>
+	</BehaviourDefinition>
+
+	<BehaviourDefinition id="cantGrab">
+		<ShowPlayerBubble message="I shouldn't, it's not mine"/>
+	</BehaviourDefinition>
+
+	<BehaviourDefinition id="cantTalkTo">
+		<ShowPlayerBubble message="I don't want to talk to that"/>
+	</BehaviourDefinition>
+	
+	<BehaviourDefinition id="readAction">
+		<If expression="({Meters.energy.amount} >= {15})">
+			<Then>
+				<SetValues target="{Event}" reduction="({Skills.bookreading.points}*{200})"/>
+				<SetValues target="{ActivityBars.reading}" duration="({5000}-{Event.reduction})"/>
+				<OpenActivityBar activityBar="reading" targettedObject="{Event.handler}"/>
+			</Then>
+			<Else>
+				<ShowBubble gameObject="{Room.player}" message="I'm too tired"/>
+			</Else>
+		</If>
+	</BehaviourDefinition>
+	
+	
+	<Dialogue id="dialogue" skin="com.dubitplatform.views.BranchingConversationView" targetContainer="dialogue">
+		<Triggers>
+			<OnMessage/>
+			<OnBeginDialogue>
+				<OpenDialogue/>
+			</OnBeginDialogue>
+			<OnCompleteDialogue/>
+		</Triggers>
+	</Dialogue>
+</Include>
+	<Include xmlns:xi="http://www.w3.org/2001/XInclude" xml:base="includes/cds.xml">
+	<DisplayObjectDefinition id="cd_collectable" name="CD" tooltip="CD" clickThrough="true" verbEnabled="true" mouseEnabled="true" displayObjectClass="uk.co.dubit.graphics.render2D.DisplayObject2D">
+				
+		<Triggers>
+			<OnLookAt>
+				<ShowBubble gameObject="{Room.player}" message="It's a CD full of sensitive data" useServer="false"/>
+			</OnLookAt>	
+			<OnPickUp>
+				<MoveTo gameObject="{Room.player}" x="{Room.player.x}" y="{Room.player.y}" targetX="{Event.handler.x}" targetY="{Event.handler.y}">
+					<Complete>
+						<ShowBubble gameObject="{Room.player}" message="I'd better take this" useServer="false"/>
+						<SetValues target="{Event.handler}" visible="false"/>
+						<ForEach in="{Collections.cdCollection.children}">
+							<If expression="({Event.iteration.id} == {Event.handler.id})">
+								<Then>
+									<AddToCollection collectionID="cdCollection" collectableID="{Event.handler.id}"/>
+									<SetValues target="{Event.iteration}" quantity="1" delay="1000"/>
+								</Then>	
+							</If>
+						</ForEach>
+					</Complete>
+				</MoveTo>
+			</OnPickUp>
+				
+			<onFixup>			
+				
+				<ForEach in="{Collections.cdCollection.children}">
+					<SetValues target="{Event}" collectable="{Event.iteration}" displayObject=""/>
+				
+					
+					<ForEach in="{Room.renderObjects}">
+						<If expression="({Event.iteration.id} == {Event.collectable.id})">
+							<Then>
+								
+								<Setvalues target="{Event}" displayObject="{Event.iteration}"/>
+								
+								
+								<If expression="({Event.collectable.quantity} >= {1})">
+									<Then>
+										
+										<SetValues target="{Event.displayObject}" visible="false"/>
+									</Then>
+								</If>
+							</Then>
+						</If>
+					</ForEach>	
+				</ForEach>			
+			</onFixup>
+
+		</Triggers>			
+	</DisplayObjectDefinition>
+</Include>
+	
+	<CollisionMap assetID="hit_asset"/>
 
 	<Filters id="playerFilters">
 		<DepthFilter id="playerDepthFilter" scaleBack="-1" scaleFront="0.2"/>
-		<LightMapFilter assetID="light_filter_asset" />
+		<LightMapFilter assetID="light_filter_asset"/>
 	</Filters>
 	
 	<Sounds target="{Room.player}">
@@ -21,60 +182,60 @@
 		<DisplayObject2D id="background" assetID="background_asset"/>
 		<DisplayObject2D id="click" assetID="click_asset" mouseEnabled="true" alpha="0"/>
 
-		<DisplayObject2D name="A pendulum" id="pendulum1" assetID="pendulum1_asset" x="418" y="395" originX="8" originY="17" verbEnabled="true" clickThrough="true" mouseEnabled="true" visible="true"/> <!-- The pendulum in the fire -->
-		<DisplayObject2D name="Scattered Books" id="books" assetID="books_asset" x="911" y="439" originX="328" originY="35" visible="false"/> <!-- The books which are scattered after the explosion -->
-		<DisplayObject2D name="A shard from the window" id="Glass" assetID="glass_asset" x="659" y="422" originX="13" originY="18" verbEnabled="true" clickThrough="true" mouseEnabled="true" visible="false"/> <!-- The glass which appears after the explosion -->
+		<DisplayObject2D name="A pendulum" id="pendulum1" assetID="pendulum1_asset" x="418" y="395" originX="8" originY="17" verbEnabled="true" clickThrough="true" mouseEnabled="true" visible="true"/> 
+		<DisplayObject2D name="Scattered Books" id="books" assetID="books_asset" x="911" y="439" originX="328" originY="35" visible="false"/> 
+		<DisplayObject2D name="A shard from the window" id="Glass" assetID="glass_asset" x="659" y="422" originX="13" originY="18" verbEnabled="true" clickThrough="true" mouseEnabled="true" visible="false"/> 
 
-		<DisplayObject2D name="Blackboard" id="chalkboard" assetID="chalkboard_asset" x="119" y="429" originX="71" originY="195" verbEnabled="true" clickThrough="true" mouseEnabled="true" alpha="0"/> <!-- Chalkboard Hit -->
-		<DisplayObject2D name="Bookshelf labled A-D" id="bookshelf_one" assetID="books1_asset" x="270" y="393" originX="29" originY="93" verbEnabled="true" clickThrough="true" mouseEnabled="true" alpha="0"/> <!-- Bookshelf Hit -->
-		<DisplayObject2D name="Bookshelf labled E-H" id="bookshelf_two" assetID="books2_asset" x="620" y="402" originX="29" originY="93" verbEnabled="true" clickThrough="true" mouseEnabled="true" alpha="0"/> <!-- Bookshelf Hit -->
-		<DisplayObject2D name="Bookshelf labled I-L" id="bookshelf_three" assetID="books3_asset" x="683" y="402" originX="29" originY="93" verbEnabled="true" clickThrough="true" mouseEnabled="true" alpha="0"/> <!-- Bookshelf Hit -->
-		<DisplayObject2D name="Bookshelf labled M-P" id="bookshelf_four" assetID="books4_asset" x="799" y="402" originX="29" originY="93" verbEnabled="true" clickThrough="true" mouseEnabled="true" alpha="0"/> <!-- Bookshelf Hit -->
-		<DisplayObject2D name="Bookshelf labled Q-T" id="bookshelf_five" assetID="books5_asset" x="862"  y="402" originX="29" originY="93" verbEnabled="true" clickThrough="true" mouseEnabled="true" alpha="0"/> <!-- Bookshelf Hit -->
-		<DisplayObject2D name="Bookshelf labled U-W" id="bookshelf_six" assetID="books6_asset" x="1168" y="416" originX="29" originY="93" verbEnabled="true" clickThrough="true" mouseEnabled="true" alpha="0"/> <!-- Bookshelf Hit -->
-		<DisplayObject2D name="Bookshelf labled X-Z" id="bookshelf_seven" assetID="books7_asset" x="1246" y="422" originX="29" originY="93" verbEnabled="true" clickThrough="true" mouseEnabled="true" alpha="0"/> <!-- Bookshelf Hit -->
-		<DisplayObject2D name="A grandfather clock?" id="Grandfather clock" assetID="timemachine_asset" x="744" y="403" originX="61" originY="209" verbEnabled="true" clickThrough="true" mouseEnabled="true" alpha="0"/> <!-- Clock Hit -->
-		<DisplayObject2D name="The Fireplace" id="Fireplace" assetID="fireplace_asset" x="448" y="421" originX="36" originY="67" verbEnabled="true" clickThrough="true" mouseEnabled="true" alpha="0"/> <!-- Fire Hit -->
-		<DisplayObject2D name="A device of some sort" id="Cogs" assetID="cogs_asset" x="448" y="303" originX="49" originY="23" verbEnabled="true" clickThrough="true" mouseEnabled="true" alpha="0"/> <!-- Cogs Hit -->
+		<DisplayObject2D name="Blackboard" id="chalkboard" assetID="chalkboard_asset" x="119" y="429" originX="71" originY="195" verbEnabled="true" clickThrough="true" mouseEnabled="true" alpha="0"/> 
+		<DisplayObject2D name="Bookshelf labled A-D" id="bookshelf_one" assetID="books1_asset" x="270" y="393" originX="29" originY="93" verbEnabled="true" clickThrough="true" mouseEnabled="true" alpha="0"/> 
+		<DisplayObject2D name="Bookshelf labled E-H" id="bookshelf_two" assetID="books2_asset" x="620" y="402" originX="29" originY="93" verbEnabled="true" clickThrough="true" mouseEnabled="true" alpha="0"/> 
+		<DisplayObject2D name="Bookshelf labled I-L" id="bookshelf_three" assetID="books3_asset" x="683" y="402" originX="29" originY="93" verbEnabled="true" clickThrough="true" mouseEnabled="true" alpha="0"/> 
+		<DisplayObject2D name="Bookshelf labled M-P" id="bookshelf_four" assetID="books4_asset" x="799" y="402" originX="29" originY="93" verbEnabled="true" clickThrough="true" mouseEnabled="true" alpha="0"/> 
+		<DisplayObject2D name="Bookshelf labled Q-T" id="bookshelf_five" assetID="books5_asset" x="862" y="402" originX="29" originY="93" verbEnabled="true" clickThrough="true" mouseEnabled="true" alpha="0"/> 
+		<DisplayObject2D name="Bookshelf labled U-W" id="bookshelf_six" assetID="books6_asset" x="1168" y="416" originX="29" originY="93" verbEnabled="true" clickThrough="true" mouseEnabled="true" alpha="0"/> 
+		<DisplayObject2D name="Bookshelf labled X-Z" id="bookshelf_seven" assetID="books7_asset" x="1246" y="422" originX="29" originY="93" verbEnabled="true" clickThrough="true" mouseEnabled="true" alpha="0"/> 
+		<DisplayObject2D name="A grandfather clock?" id="Grandfather clock" assetID="timemachine_asset" x="744" y="403" originX="61" originY="209" verbEnabled="true" clickThrough="true" mouseEnabled="true" alpha="0"/> 
+		<DisplayObject2D name="The Fireplace" id="Fireplace" assetID="fireplace_asset" x="448" y="421" originX="36" originY="67" verbEnabled="true" clickThrough="true" mouseEnabled="true" alpha="0"/> 
+		<DisplayObject2D name="A device of some sort" id="Cogs" assetID="cogs_asset" x="448" y="303" originX="49" originY="23" verbEnabled="true" clickThrough="true" mouseEnabled="true" alpha="0"/> 
 		
-		<DisplayObject2D id="cd1" definitionID="cd_collectable" assetID="cd_asset" x="528" y="408" visible="true" />
+		<DisplayObject2D id="cd1" definitionID="cd_collectable" assetID="cd_asset" x="528" y="408" visible="true"/>
 		<DisplayObject2D id="cd2" definitionID="cd_collectable" assetID="cd_asset" x="1060" y="406" visible="true"/>
-		<DisplayObject2D id="cd3" definitionID="cd_collectable" assetID="cd_asset" x="1206" y="314" visible="true" />
-		<DisplayObject2D id="cd4" definitionID="cd_collectable" assetID="cd_asset" x="1141" y="452" visible="true" />
-		<DisplayObject2D id="cd5" definitionID="cd_collectable" assetID="cd_asset" x="257" y="446" visible="true" />
+		<DisplayObject2D id="cd3" definitionID="cd_collectable" assetID="cd_asset" x="1206" y="314" visible="true"/>
+		<DisplayObject2D id="cd4" definitionID="cd_collectable" assetID="cd_asset" x="1141" y="452" visible="true"/>
+		<DisplayObject2D id="cd5" definitionID="cd_collectable" assetID="cd_asset" x="257" y="446" visible="true"/>
 					
-		<DisplayObject2D  id="strange_note" name="A strange note" assetURL="[base.url]images/lab/page_white_text.png" x="970" y="440" verbEnabled="true" clickThrough="true" mouseEnabled="true" /> 
+		<DisplayObject2D id="strange_note" name="A strange note" assetURL="[base.url]images/lab/page_white_text.png" x="970" y="440" verbEnabled="true" clickThrough="true" mouseEnabled="true"/> 
 		
 		<ZSortingDisplayObject id="furniture">
 						
-			<DisplayObject2D name="A telescope!" id="telescope" assetID="telescope_asset" x="967" y="431" originX="115" originY="246" verbEnabled="true" clickThrough="true" mouseEnabled="true"/> <!-- The telescope -->
-			<DisplayObject2D name="A roaring fire" id="fire" assetID="fire_asset" x="412" y="395" originX="30" originY="55" scalex="0.7" scaley="0.7"/> <!-- Animation for the fire -->
-			<DisplayObject2D name="Burning embers" id="fireout" assetID="fireout_asset" x="412" y="395" originX="30" originY="55" scalex="0.7" scaley="0.7"/> <!-- Animation for the fire going out -->
-			<DisplayObject2D name="Karlheinz Fotheringay" id="doc" previewURL="images/lab/dochead.png" assetID="doc_asset" x="150" y="469" originX="102" originY="220" verbEnabled="true" clickThrough="true" mouseEnabled="true"/> <!-- The Doctor -->
-			<DisplayObject2D name="A cog" id="cog1bg" assetID="cog1bg_asset" x="293" y="399" originX="29" originY="17" verbEnabled="true" clickThrough="true" mouseEnabled="true"/> <!-- A cog that you pick up -->
-			<DisplayObject2D name="A cog" id="cog2bg" assetID="cog2bg_asset" x="729" y="323" originX="11" originY="13" verbEnabled="true" clickThrough="true" mouseEnabled="true"/> <!-- A cog that you pick up -->
-			<DisplayObject2D name="A Gramophone" id="Gramophone" assetID="gramophone_asset" x="341" y="392" originX="22" originY="49" verbEnabled="true" clickThrough="true" mouseEnabled="true"/> <!-- The gramophone -->
-			<DisplayObject2D name="A sproingy spring" id="Spring" assetID="spring_asset" x="252" y="399" originX="24" originY="16" verbEnabled="true" clickThrough="true" mouseEnabled="true"/> <!-- The spring on the desk -->
+			<DisplayObject2D name="A telescope!" id="telescope" assetID="telescope_asset" x="967" y="431" originX="115" originY="246" verbEnabled="true" clickThrough="true" mouseEnabled="true"/> 
+			<DisplayObject2D name="A roaring fire" id="fire" assetID="fire_asset" x="412" y="395" originX="30" originY="55" scalex="0.7" scaley="0.7"/> 
+			<DisplayObject2D name="Burning embers" id="fireout" assetID="fireout_asset" x="412" y="395" originX="30" originY="55" scalex="0.7" scaley="0.7"/> 
+			<DisplayObject2D name="Karlheinz Fotheringay" id="doc" previewURL="images/lab/dochead.png" assetID="doc_asset" x="150" y="469" originX="102" originY="220" verbEnabled="true" clickThrough="true" mouseEnabled="true"/> 
+			<DisplayObject2D name="A cog" id="cog1bg" assetID="cog1bg_asset" x="293" y="399" originX="29" originY="17" verbEnabled="true" clickThrough="true" mouseEnabled="true"/> 
+			<DisplayObject2D name="A cog" id="cog2bg" assetID="cog2bg_asset" x="729" y="323" originX="11" originY="13" verbEnabled="true" clickThrough="true" mouseEnabled="true"/> 
+			<DisplayObject2D name="A Gramophone" id="Gramophone" assetID="gramophone_asset" x="341" y="392" originX="22" originY="49" verbEnabled="true" clickThrough="true" mouseEnabled="true"/> 
+			<DisplayObject2D name="A sproingy spring" id="Spring" assetID="spring_asset" x="252" y="399" originX="24" originY="16" verbEnabled="true" clickThrough="true" mouseEnabled="true"/> 
 
-			<DisplayObject2D name="Some moving cogs" id="cogsmove" assetID="cogsmove_asset" x="465" y="300" originX="167" originY="27" visible="false"/> <!-- The cogs animation -->
-			<DisplayObject2D name="The missing cog" id="wallcog1" assetID="wallcog1_asset" x="460" y="297" originX="27" originY="27" visible="false" /> <!-- The cogs after you have put them on the wall -->
-			<DisplayObject2D name="The missing cog" id="wallcog2" assetID="wallcog2_asset" x="437" y="295" originX="12" originY="13" visible="false" /> <!-- The cogs after you have put them on the wall -->
-			<DisplayObject2D name="The missing cog" id="wallcog3" assetID="wallcog3_asset" x="477" y="303" originX="9" originY="15" visible="false" /> <!-- The cogs after you have put them on the wall -->
+			<DisplayObject2D name="Some moving cogs" id="cogsmove" assetID="cogsmove_asset" x="465" y="300" originX="167" originY="27" visible="false"/> 
+			<DisplayObject2D name="The missing cog" id="wallcog1" assetID="wallcog1_asset" x="460" y="297" originX="27" originY="27" visible="false"/> 
+			<DisplayObject2D name="The missing cog" id="wallcog2" assetID="wallcog2_asset" x="437" y="295" originX="12" originY="13" visible="false"/> 
+			<DisplayObject2D name="The missing cog" id="wallcog3" assetID="wallcog3_asset" x="477" y="303" originX="9" originY="15" visible="false"/> 
 			
-			<DisplayObject2D name="A pendulum" id="pendulum2" assetID="pendulum2_asset" x="1139" y="510" originX="88" originY="196" verbEnabled="true" clickThrough="true" mouseEnabled="true"/> <!-- The pendulum on the stand -->
-			<DisplayObject2D name="A star Globe" id="globe" assetID="globe_asset" x="589" y="481" originX="64" originY="140" verbEnabled="true" clickThrough="true" mouseEnabled="true"/> <!-- The globe -->
-			<DisplayObject2D name="tools" id="tools" assetID="tools_asset" x="209" y="401" originX="26" originY="39" verbEnabled="true" clickThrough="true" mouseEnabled="true"/> <!-- Box of tools -->
-			<DisplayObject2D name="lens" id="lens1" assetID="lens1_asset" x="984" y="432" originX="13" originY="58" verbEnabled="true" clickThrough="true" mouseEnabled="true"/> <!-- A lens that you pick up -->
-			<DisplayObject2D name="A pendulum" id="pendulumbase" assetID="pendulumbase_asset" x="1082" y="499" originX="44" originY="28"/> <!-- The stand for the pendulum -->
-			<DisplayObject2D name="globe2" id="globe2" assetID="globe2_asset" x="604" y="487" originX="63" originY="133" visible="false"/> <!-- Purple glow on the globe -->
-			<DisplayObject2D name="A Lens" id="wallLens1" assetID="WallLens1_asset" x="0" y="432" originX="0" originY="432" visible="false"/> <!-- The lens after you have put them on the telescope -->
-			<DisplayObject2D name="A Lens" id="wallLens2" assetID="WallLens2_asset" x="0" y="432" originX="0" originY="432" visible="false"/> <!-- The lens after you have put them on the telescope -->
-			<DisplayObject2D name="A Lens" id="wallLens3" assetID="WallLens3_asset" x="0" y="432" originX="0" originY="432" visible="false"/> <!-- The lens after you have put them on the telescope -->
-			<DisplayObject2D name="A pendulum" id="wallPendulum1" assetID="Wallpendulum1_asset" x="745" y="360" originX="15" originY="102" visible="false"/> <!-- The pendulum after you have put them in the clock -->
-			<DisplayObject2D name="A pendulum" id="wallPendulum2" assetID="Wallpendulum2_asset" x="720" y="335" originX="7" originY="69" visible="false"/> <!-- The pendulum after you have put them in the clock -->
-			<DisplayObject2D name="A pendulum" id="wallPendulum3" assetID="Wallpendulum3_asset" x="730" y="305" originX="13" originY="42" visible="false"/> <!-- The pendulum after you have put them in the clock -->
-			<DisplayObject2D id="gramexp" culling="false" assetID="gramexp_asset" x="0" y="432" originX="0" originY="432"/> <!-- Animation for the gramophone -->
-			<DisplayObject2D id="blackout" culling="false" assetID="blackout_asset" x="0" y="546" originX="0" originY="546"/> <!-- Animation for the gramophone -->			
+			<DisplayObject2D name="A pendulum" id="pendulum2" assetID="pendulum2_asset" x="1139" y="510" originX="88" originY="196" verbEnabled="true" clickThrough="true" mouseEnabled="true"/> 
+			<DisplayObject2D name="A star Globe" id="globe" assetID="globe_asset" x="589" y="481" originX="64" originY="140" verbEnabled="true" clickThrough="true" mouseEnabled="true"/> 
+			<DisplayObject2D name="tools" id="tools" assetID="tools_asset" x="209" y="401" originX="26" originY="39" verbEnabled="true" clickThrough="true" mouseEnabled="true"/> 
+			<DisplayObject2D name="lens" id="lens1" assetID="lens1_asset" x="984" y="432" originX="13" originY="58" verbEnabled="true" clickThrough="true" mouseEnabled="true"/> 
+			<DisplayObject2D name="A pendulum" id="pendulumbase" assetID="pendulumbase_asset" x="1082" y="499" originX="44" originY="28"/> 
+			<DisplayObject2D name="globe2" id="globe2" assetID="globe2_asset" x="604" y="487" originX="63" originY="133" visible="false"/> 
+			<DisplayObject2D name="A Lens" id="wallLens1" assetID="WallLens1_asset" x="0" y="432" originX="0" originY="432" visible="false"/> 
+			<DisplayObject2D name="A Lens" id="wallLens2" assetID="WallLens2_asset" x="0" y="432" originX="0" originY="432" visible="false"/> 
+			<DisplayObject2D name="A Lens" id="wallLens3" assetID="WallLens3_asset" x="0" y="432" originX="0" originY="432" visible="false"/> 
+			<DisplayObject2D name="A pendulum" id="wallPendulum1" assetID="Wallpendulum1_asset" x="745" y="360" originX="15" originY="102" visible="false"/> 
+			<DisplayObject2D name="A pendulum" id="wallPendulum2" assetID="Wallpendulum2_asset" x="720" y="335" originX="7" originY="69" visible="false"/> 
+			<DisplayObject2D name="A pendulum" id="wallPendulum3" assetID="Wallpendulum3_asset" x="730" y="305" originX="13" originY="42" visible="false"/> 
+			<DisplayObject2D id="gramexp" culling="false" assetID="gramexp_asset" x="0" y="432" originX="0" originY="432"/> 
+			<DisplayObject2D id="blackout" culling="false" assetID="blackout_asset" x="0" y="546" originX="0" originY="546"/> 			
 		
 		</ZSortingDisplayObject>
 
@@ -129,8 +290,11 @@
         <Asset id="wallLens3_asset" url="images/lab/wallLens3.swf"/>
         <Asset id="cd_asset" url="images/lab/cd.png"/>
     </Assets>
+    
+    <Trigger event="onClick" gameObject="{Room.click}">
+    	<MoveTo gameObject="{Room.player}" targetX="{Event.x}" targetY="{Event.y}" />
+    </Trigger>
 
-<!--Telescope-->
 	<Trigger event="OnLookAt" gameObject="{Room.telescope}">
 		<If expression="({Quests.timeMachineQuest.telescope.complete} == {false})">
 			<Then>
@@ -275,7 +439,7 @@
 	</Trigger>
 
 	<Trigger event="OnDragDrop" gameObject="{Room.Gramophone}">
-		<MoveTo gameObject="{Room.player}"  targetX="407" targetY="444">
+		<MoveTo gameObject="{Room.player}" targetX="407" targetY="444">
 			<Complete>
 				<Switch value="{Event.dragInitiator.id}">
 					<spring_backpack>
@@ -299,35 +463,35 @@
 				<MoveTo gameObject="{Room.player}" targetX="407" targetY="444">
 					<Complete>
 												
-						<!-- Play animation and trigger events -->
+						
 						<SetValues target="{Room.Gramophone}" visible="false"/>
 						<GotoAndPlay gameObject="{Room.gramexp}" frame="2">
 							<Frame>
 								
-								<!-- Move player out of the way -->
+								
 								<ShowBubble gameObject="{Room.player}" message="Oooer this doesn't look good, better stand back!" if="({Event.frame}=={80})" displayTime="3000"/>
 								<MoveTo gameObject="{Room.player}" targetX="589" targetY="430" if="({Event.frame}=={85})"/>
 								
-								<!-- Pause the explosion -->
+								
 								<GotoAndStop gameObject="{Room.gramexp}" frame="155" if="({Event.frame}=={155})"/>
 								
-								<!-- Black out the room -->
+								
 								<GotoAndPlay gameObject="{Room.blackout}" frame="2" if="({Event.frame}=={50})">
 									<Frame>
 										<If expression="({Event.frame}=={155})">
 											<Then>
-												<!-- Finish the standing animation -->
+												
 												<SetValues target="{Room.player}" visible="false"/>
 												<Play gameObject="{Room.gramexp}"/>
 
-												<!-- Show the damage -->
+												
 												<SetValues target="{Room.books}" visible="true"/>
 												<SetValues target="{Room.Glass}" visible="true"/>
 
-												<!-- Face the player left -->
+												
 												<MoveTo gameObject="{Room.player}" targetX="588" targetY="430"/>
 
-												<!-- Show the gramophone again -->
+												
 												<SetValues target="{Room.Gramophone}" visible="true"/>											
 											</Then>
 										</If>	
@@ -352,7 +516,7 @@
 					<Else>
 						<ShowBubble gameObject="{Room.player}" message="There really is something in this music, but it's still hard to figure out exactly what"/>
 						<CompleteObjective objective="{Quests.noteQuest.listengramophone}"/>
-						<BeginQuest questID="blackboardQuest" />
+						<BeginQuest questID="blackboardQuest"/>
 					</Else>
 				</If>
 			</Else>
@@ -373,7 +537,7 @@
 		<ShowBubble gameObject="{Room.player}" message="HIGH TENSILE TUNGSTEN SPRING Of course using this as a component for a machine could make it dangerously volatile, but life wouldn't be much fun without risks, would it?"/>
 	</Trigger>
 
-<!--Time Machine-->
+
 	<Trigger event="OnLookAt" gameObject="{Room.Grandfather clock}">
 		<ShowBubble gameObject="{Room.player}" message="This is a peculiar machine similar to a grandfather clock, that runs on a system of perpetual centrifugal motion, that's what the plaque says"/>
 	</Trigger>
@@ -499,7 +663,7 @@
 		<ShowBubble gameObject="{Room.player}" message="It's a star chart globe thing"/>
 	</Trigger>
 
-<!--Fireplace-->
+
 	<Trigger event="OnLookAt" gameObject="{Room.Fireplace}">
 		<If expression="({Quests.timeMachineQuest.fireplace.complete} == {false})">
 			<Then>
@@ -528,8 +692,8 @@
 	
 	<Trigger event="OnDig" gameObject="{Room.Fireplace}">
 		<ShowBubble gameObject="{Room.helper}" message="Woof" yOffset="-20"/>
-		<DisableTracker tracker="pet_follower" />
-		<SetValues target="{Room.helper}" defaultSpeed="10" />
+		<DisableTracker tracker="pet_follower"/>
+		<SetValues target="{Room.helper}" defaultSpeed="10"/>
 		<MoveTo gameObject="{Room.helper}" targetX="{Room.Fireplace.x}" targetY="{Room.Fireplace.y}">
 			<Complete>
 				<OpenActivityBar activityBar="digging" targettedObject="{Room.helper}"/>
@@ -587,11 +751,11 @@
 								<SetValues target="{Rooms.session.questPersists}" cogsReady="true"/>
 								<SetValues delay="3000" target="{Room.fire}" verbEnabled="false" clickThrough="true" mouseEnabled="false" visible="false"/>
 								<SetValues delay="1000" target="{Room.lens1}" verbEnabled="true" mouseEnabled="true" visible="true"/>
-								<SetValues target="{Room.fireplace}" verbEnabled="false" clickThrough="false" mouseEnabled= "false" visible="false"/>
+								<SetValues target="{Room.fireplace}" verbEnabled="false" clickThrough="false" mouseEnabled="false" visible="false"/>
 								<SetValues target="{Room.cogsmove}" verbEnabled="true" mouseEnabled="true" visible="true"/>
-								<SetValues target="{Room.wallcog1}" verbEnabled="true" mouseEnabled= "false" visible="false"/>
-								<SetValues target="{Room.wallcog2}" verbEnabled="true" mouseEnabled= "false" visible="false"/>
-								<SetValues target="{Room.wallcog3}" verbEnabled="true" mouseEnabled= "false" visible="false"/>
+								<SetValues target="{Room.wallcog1}" verbEnabled="true" mouseEnabled="false" visible="false"/>
+								<SetValues target="{Room.wallcog2}" verbEnabled="true" mouseEnabled="false" visible="false"/>
+								<SetValues target="{Room.wallcog3}" verbEnabled="true" mouseEnabled="false" visible="false"/>
 								<GotoAndPlay gameObject="{Room.cogsmove}" frame="2"/>	
 								<GotoAndPlay gameObject="{Room.fireout}" frame="2" delay="3000"/>
 								<CompleteObjective objective="{Quests.timeMachineQuest.fireplace}"/>
@@ -673,7 +837,7 @@
 	<Trigger event="OnRead" gameObject="{Room.bookshelf_two}">
 		<MoveTo gameObject="{Room.player}" targetX="619" targetY="400">
 			<Complete>
-				<Call behaviourID="readAction" />
+				<Call behaviourID="readAction"/>
 			</Complete>
 		</MoveTo>
 	</Trigger>
@@ -685,7 +849,7 @@
 	<Trigger event="OnRead" gameObject="{Room.bookshelf_three}">
 		<MoveTo gameObject="{Room.player}" targetX="682" targetY="400">
 			<Complete>
-				<Call behaviourID="readAction" />
+				<Call behaviourID="readAction"/>
 			</Complete>
 		</MoveTo>
 	</Trigger>
@@ -697,7 +861,7 @@
 	<Trigger event="OnRead" gameObject="{Room.bookshelf_four}">
 		<MoveTo gameObject="{Room.player}" targetX="797" targetY="405">
 			<Complete>
-				<Call behaviourID="readAction" />
+				<Call behaviourID="readAction"/>
 			</Complete>
 		</MoveTo>
 	</Trigger>
@@ -709,7 +873,7 @@
 	<Trigger event="OnRead" gameObject="{Room.bookshelf_five}">
 		<MoveTo gameObject="{Room.player}" targetX="846" targetY="403">
 			<Complete>
-				<Call behaviourID="readAction" />
+				<Call behaviourID="readAction"/>
 			</Complete>
 		</MoveTo>
 	</Trigger>
@@ -721,7 +885,7 @@
 	<Trigger event="OnRead" gameObject="{Room.bookshelf_six}">
 		<MoveTo gameObject="{Room.player}" targetX="1166" targetY="419">
 			<Complete>
-				<Call behaviourID="readAction" />
+				<Call behaviourID="readAction"/>
 			</Complete>
 		</MoveTo>
 	</Trigger>
@@ -733,7 +897,7 @@
 	<Trigger event="OnRead" gameObject="{Room.bookshelf_seven}">
 		<MoveTo gameObject="{Room.player}" targetX="1240" targetY="423">
 			<Complete>
-				<Call behaviourID="readAction" />
+				<Call behaviourID="readAction"/>
 			</Complete>
 		</MoveTo>
 	</Trigger>
@@ -743,7 +907,7 @@
 	</Trigger>
 
 	<Trigger event="OnLookAt" gameObject="{Room.chalkboard}">
-		<If expression="({Quests.blackboardQuest.active} == {true})" >
+		<If expression="({Quests.blackboardQuest.active} == {true})">
 			<Then>
 				<ShowBubble gameObject="{Room.player}" message="There seems to be no information on the board about the secret message"/>
 				<CompleteObjective objective="{Quests.blackboardQuest.readblackboard}"/>
@@ -754,7 +918,7 @@
 		</If>
 	</Trigger>
 		
-	<!-- DIALOGUE -->
+	
 
 	<Trigger event="OnLookAt" gameObject="{Room.strange_note}">
 		<ShowBubble gameObject="{Room.player}" message="The note looks to have been hastily written, but suggests that the music that the gramophone produces contains a hidden message..." useServer="false"/>
@@ -765,7 +929,7 @@
 		<MoveTo gameObject="{Room.player}" targetX="280" targetY="475">
 			<Complete>
 				<BeginDialogue statement="{Room.talkToTheDoc}" npc="{Room.doc}"/>
-				<AddContactAsFriend contact="{Contacts.doc_contact}" useServer="false" />
+				<AddContactAsFriend contact="{Contacts.doc_contact}" useServer="false"/>
 			</Complete>
 		</MoveTo>
 	</Trigger>
@@ -1015,4 +1179,3 @@
 		</Statement>
 	</BehaviourDefinition>
 </ChatRoom>
-
