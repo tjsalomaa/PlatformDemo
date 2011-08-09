@@ -56,6 +56,10 @@
 		<PlaySound sound="{Sounds.pop_effect}"/>
 	</Trigger>
 	
+	<Trigger gameObject="{Room.click}" event="onClick">
+		<MoveTo gameObject="{Room.player}" targetX="{Event.x}" targetY="{Event.y}" />
+	</Trigger>
+	
 	<Trigger gameObject="{Room}" event="OnMouseOver">
 		<If expression="({Event.origin.verbEnabled}=={true})">
 			<Then>

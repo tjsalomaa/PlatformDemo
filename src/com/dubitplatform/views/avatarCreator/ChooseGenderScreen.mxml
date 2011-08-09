@@ -33,19 +33,17 @@
 		]]>
 	</mx:Script>
 	
-	<mx:VBox width="100%" height="100%" horizontalAlign="center" paddingTop="20">
-		<mx:HBox horizontalAlign="center" paddingTop="10" width="400">
-			<editor:TintablePose id="avatarPreview1" 
-								 width="400" height="600" scaleX="0.40" scaleY="0.40"
-								 horizontalScrollPolicy="off" verticalScrollPolicy="off"
-								 click="avatarSelected(avatarPreview1.avatar)" 
-								 buttonMode="true" filters="{[new DropShadowFilter(0, 45, 0x000000, 0.7, 5, 5, 1, 2)]}"/>
-			<editor:TintablePose id="avatarPreview2" 
-								 width="400" height="600" scaleX="0.40" scaleY="0.40"
-								 horizontalScrollPolicy="off" verticalScrollPolicy="off"
-								 click="avatarSelected(avatarPreview2.avatar)"
-								 buttonMode="true" filters="{[new DropShadowFilter(0, 45, 0x000000, 0.7, 5, 5, 1, 2)]}"/>		
-		</mx:HBox>				
-	</mx:VBox>
+	<mx:HBox paddingTop="30" paddingLeft="200" width="100%" height="100%">
+		<editor:TintablePose id="avatarPreview1" 
+							 width="400" height="600" scaleX="0.40" scaleY="0.40"
+							 horizontalScrollPolicy="off" verticalScrollPolicy="off"
+							 click="avatarSelected(avatarPreview1.avatar)" 
+							 buttonMode="true" filters="{[new DropShadowFilter(0, 45, 0x000000, 0.7, 5, 5, 1, 2)]}"/>
+		<editor:TintablePose id="avatarPreview2" 
+							 width="400" height="600" scaleX="0.40" scaleY="0.40"
+							 horizontalScrollPolicy="off" verticalScrollPolicy="off"
+							 click="avatarSelected(avatarPreview2.avatar)"
+							 buttonMode="true" filters="{[new DropShadowFilter(0, 45, 0x000000, 0.7, 5, 5, 1, 2)]}"/>		
+	</mx:HBox>				
 
 </ui:AvatarCreatorSkinViewBase>
