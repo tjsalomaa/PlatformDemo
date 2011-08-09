@@ -2166,7 +2166,11 @@
 	<Binding name="Contains" class="com.dubitplatform.behaviours.Contains"/>
 	<Binding name="CloseAllAvatarEditors" class="uk.co.dubit.platform.components.avatarEditor.behaviours.CloseAllAvatarEditors"/>
 	<Binding name="CreateAvatar" class="uk.co.dubit.platform.components.avatarEditor.behaviours.CreateAvatar" />
-	<Binding name="GetDefaultPackages" class="uk.co.dubit.platform.components.avatarEditor.behaviours.GetDefaultPackages"/>
+	
+	<Binding name="GetDefaultPackages" class="uk.co.dubit.platform.components.avatarEditor.behaviours.GetDefaultPackages">
+		<Attribute name="serviceURL" defaultValue="[path.web-services]/default_packages.nexus" />
+	</Binding>
+	
 	<Binding name="GetAvatarEditorProductGroups" class="uk.co.dubit.platform.components.avatarEditor.behaviours.GetAvatarEditorProductGroups"/>
 	<Binding name="GetOwnedItemsInProductGroup" class="uk.co.dubit.platform.components.avatarEditor.behaviours.GetOwnedItemsInProductGroup"/>
 	<Binding name="ShowAwardXPEffect" class="uk.co.dubit.platform.scriptEngine.behaviour.types.world.ShowBubble">
