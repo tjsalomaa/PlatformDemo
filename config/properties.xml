@@ -1,11 +1,11 @@
-<environments current="all">
-  <environment type="all">
-    <property name="setting.useServer" value="true"/>
-    
+<environments current="dubit-sandbox">
+  <environment type="dubit-sandbox">
     <property name="path.game-server" value="worldhub.dubitplatform.com:1938"/>
     <property name="path.web-services" value="http://sandbox.dubitplatform.com"/>
     <property name="path.swf-server" value="http://imagebaker.dubitplatform.com"/>
-    
+  </environment>
+  <environment type="all">
+    <property name="setting.useServer" value="true"/>
     <property name="setting.rooms.path" value="config/rooms/"/>
     <property name="setting.rooms.default-room" value="village"/>
     <property name="app.name" value="1"/>
