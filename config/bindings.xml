@@ -793,236 +793,32 @@
 	
 	<!-- QUEST BINDINGS -->
 	<Package name="Quest">
-		<Binding name="Quest" factory="uk.co.dubit.platform.scriptEngine.gameObject.GameObjectFactory" class="uk.co.dubit.platform.components.quest.Quest">
-			<Description><![CDATA[
-					A quest is a task that a player-controlled character or group of characters may complete in order to gain a reward. Rewards may include an increase in the character's experience in order to learn new skills and abilities, loot or treasure, in-game currency such as gold coins, access to new locations or areas, or any combination of the above.
-
-					A quest is made up of a series of objectives. When all the objectives are complete the quest will also be complete. 
-
-					Only active quests are shown in the players quest list. Only active objectives are shown in the quest interface. This structure allows designers to reveal new quests, or even new objectives within a quest. 
-
-					Quests can be chained together. A quest chain is a group of quests that are completed in sequence. Completion of each quest is a prerequisite to beginning the next quest in the chain. Quests usually increase in difficulty as a player progresses through the chain. The quests typically reveal a single plotline in stages that explain the reason for the quests. Quest chains can also start with opening or breadcrumb quests, in order to encourage characters to journey to a new area, where further elements of the quest chain are revealed. Through mechanisms like these, the setting of a particular location is explained to the player, with the plot or storyline being disclosed as the character progresses.
-				]]></Description>
-			<Example><![CDATA[
-					The following example shows a quest to escape from a treehouse. On successfully escaping the player is awarded experience.
-				
-					<code>
-						<Quest id="escapeTreehouseQuest" name="Escape from the Treehouse" active="true" complete="false" description="The Treehouse is a great place to hang out, but when you're trapped inside, it loses some of its appeal. Find an escape route if you ever want to see the sun again!">
-							<!-- Define the objectives  -->
-							<Objective name="1) Build Device" id="buildDevice" complete="false" active="true"/>
-							<Objective name="2) Escape!" id="escapeTreehouse" complete="false" active="true"/>
-							<Triggers>
-								<OnBeginQuest>
-									<!-- The quest is accessed from the event object by {Event.quest} -->
-									<Trace message="Quest Begun {Event.quest.name}"/>
-								</OnBeginQuest>
-								<OnCompleteQuest>
-									<!-- The quest is accessed from the event object by {Event.quest} -->
-									<Trace message="Quest Complete {Event.quest.name}"/>
-									<AwardExperiencePoints points="100"/>
-								</OnCompleteQuest>
-								<OnBeginObjective>
-									<!-- The objective is accessed from the event object by {Event.objective} -->
-									<Trace message="Objective Begun {Event.objective.name}"/>
-								</OnBeginObjective>
-								<OnCompleteObjective>
-									<!-- The objective is accessed from the event object by {Event.objective} -->
-									<Trace message="Objective Begun {Event.objective.name}"/>
-								</OnCompleteObjective> 
-							</Triggers>
-						</Quest>
-					</code>
-				]]></Example>
-			<Attribute required="true" name="id" type="String" description="All IDs must be unique"/>
-			<Attribute required="true" name="name" type="String" description="The name of the quest"/>
-			<Attribute required="true" name="active" defaultValue="false" type="Boolean" description="Only active quests are visible in the quest interface"/>
-			<Attribute required="true" name="complete" defaultValue="false" type="Boolean" description="Setting a quest to complete completes all objectives"/>
-			<Attribute required="true" name="description" type="String" description="The quest description"/>
-			<Attribute required="true" nodoc="true" name="skin" type="String" description="The skin class" defaultValue="com.dubitplatform.views.quests.QuestsView"/>
-			<Attribute required="true" nodoc="true" name="targetContainer" type="String" description="The skin container" defaultValue="Quest"/>
-			<Attribute required="true" nodoc="true" name="attachSkin" type="Boolean" description="True if the skin should be attached immediately" defaultValue="true"/>
-			<Events>
-				<Event name="OnBeginQuest" description="Fired when the quest is begin">
-					<Atttribute name="quest" type="Quest" description="The quest that was begun"/>
-					<Atttribute name="objective" type="Objective" description="The objective that was activitated to start the quest"/>
-				</Event>
-				<Event name="OnCompleteQuest" description="Fired when the quest is complete">
-					<Atttribute name="quest" type="Quest" description="The quest that was completed"/>
-					<Atttribute name="objective" type="Objective" description="The objective that was completed to end the quest"/>
-				</Event>
-				<Event name="OnBeginObjective" description="Fired when the an objective is begin">
-					<Atttribute name="quest" type="Quest" description="The quest that contains the objective"/>
-					<Atttribute name="objective" type="Objective" description="The objective that has started"/>
-				</Event>
-				<Event name="OnCompleteObjective" description="Fired when the quest is complete">
-					<Atttribute name="quest" type="Quest" description="The quest that contains the objective"/>
-					<Atttribute name="objective" type="Objective" description="The objective that has finished"/>
-				</Event>
-			</Events>
-			<Children>
-				<Child name="Objective" required="true" description="The objectives that must be completed"/>
-				<Child name="Triggers" required="true" description="Contains the events"/>
-			</Children>
-		</Binding>
-		<Binding name="Objective" factory="uk.co.dubit.platform.scriptEngine.gameObject.GameObjectFactory" class="uk.co.dubit.platform.components.quest.Objective">
-			<Description><![CDATA[
-					A quest can contain multiple objectives. All the objectives must be complete before the quest will be complete.
-				]]></Description>
-			<Example><![CDATA[
-					The following example shows a quest to escape from a treehouse. On successfully escaping the player is awarded experience.
-			
-					<code>
-						<Quest id="escapeTreehouseQuest" name="Escape from the Treehouse" active="true" complete="false" description="The Treehouse is a great place to hang out, but when you're trapped inside, it loses some of its appeal. Find an escape route if you ever want to see the sun again!">
-							<!-- Define the objectives  -->
-							<Objective name="1) Build Device" id="buildDevice" complete="false" active="true"/>
-							<Objective name="2) Escape!" id="escapeTreehouse" complete="false" active="true"/>
-							<Triggers>
-								<OnBeginQuest>
-									<!-- The quest is accessed from the event object by {Event.quest} -->
-									<Trace message="Quest Begun {Event.quest.name}"/>
-								</OnBeginQuest>
-								<OnCompleteQuest>
-									<!-- The quest is accessed from the event object by {Event.quest} -->
-									<Trace message="Quest Complete {Event.quest.name}"/>
-									<AwardExperiencePoints points="100"/>
-								</OnCompleteQuest>
-								<OnBeginObjective>
-									<!-- The objective is accessed from the event object by {Event.objective} -->
-									<Trace message="Objective Begun {Event.objective.name}"/>
-								</OnBeginObjective>
-								<OnCompleteObjective>
-									<!-- The objective is accessed from the event object by {Event.objective} -->
-									<Trace message="Objective Complete {Event.objective.name}"/>
-								</OnCompleteObjective> 
-							</Triggers>
-						</Quest>
-					</code>					
-				]]></Example>
-			<Attribute required="true" name="id" type="String" description="All IDs must be unique"/>
-			<Attribute required="true" name="name" type="String" description="The name of the objective"/>
-			<Attribute required="true" name="active" defaultValue="true" type="Boolean" description="Only active objectives are visible in the quest interface"/>
-			<Attribute required="true" name="complete" defaultValue="false" type="Boolean" description="Setting an objective to complete does not reveal the next objective, the GAML author is responsible for revealing the next objective"/>
-		</Binding>
-		<Binding name="CompleteQuest" class="uk.co.dubit.platform.components.quest.behaviours.CompleteQuest">
-			<Description><![CDATA[
-					Completes the quest and all its objectives
-				]]></Description>
-			<Example><![CDATA[
-					The following example shows how to complete a quest
-			
-					<code>
-						<Quest id="escapeTreehouseQuest" name="Escape from the Treehouse" active="true" complete="false" description="The Treehouse is a great place to hang out, but when you're trapped inside, it loses some of its appeal. Find an escape route if you ever want to see the sun again!">
-							<!-- Define the objectives  -->
-							<Objective name="1) Build Device" id="buildDevice" complete="false" active="true"/>
-							<Objective name="2) Escape!" id="escapeTreehouse" complete="false" active="true"/>
-							<Triggers>
-								<OnCompleteQuest>
-									<!-- The quest is accessed from the event object by {Event.quest} -->
-									<Trace message="Quest Complete {Event.quest.name}"/>
-								</OnCompleteQuest>
-							</Triggers>
-						</Quest>
-						
-						<Trigger gameObject="{Room.ball}" event="OnClick">
-							<!-- Completes the quest. The quest can be accessed from the Quests.escapeTreehouseQuest construct. -->
-							<CompleteQuest quest="{Quests.escapeTreehouseQuest}"/>
-						</Trigger>	
-					</code>					
-				]]></Example>
-			<Attribute required="true" name="quest" type="Quest" description="The quest to complete"/>
-		</Binding>
-		<Binding name="CompleteObjective" class="uk.co.dubit.platform.components.quest.behaviours.CompleteObjective">
-			<Description><![CDATA[
-					Completes an objective of a quest
-				]]></Description>
-			<Example><![CDATA[
-					The following example shows how to complete an objective within a specific quest.
-					
-					To access an objective of a quest we use the {Quests.questID.objectiveID} syntax. For example, to access the buildDevice objective we use {Quests.escapeTreehouseQuest.buildDevice}
-			
-					<code>
-						<Quest id="escapeTreehouseQuest" name="Escape from the Treehouse" active="true" complete="false" description="The Treehouse is a great place to hang out, but when you're trapped inside, it loses some of its appeal. Find an escape route if you ever want to see the sun again!">
-							<!-- Define the objectives  -->
-							<Objective name="1) Build Device" id="buildDevice" complete="false" active="true"/>
-							<Objective name="2) Escape!" id="escapeTreehouse" complete="false" active="true"/>
-							<Triggers>
-								<OnCompleteObjective>
-									<!-- The objective is accessed from the event object by {Event.objective} -->
-									<Trace message="Objective Complete {Event.objective.name}"/>
-								</OnCompleteObjective>
-							</Triggers>
-						</Quest>
-						
-						<Trigger gameObject="{Room.ball}" event="OnClick">
-							<!-- Completes the buildDevice objective. The quest can be accessed from the Quests.escapeTreehouseQuest construct. -->
-							<CompleteObjective quest="{Quests.escapeTreehouseQuest.buildDevice}"/>
-						</Trigger>	
-					</code>					
-				]]></Example>
-			<Attribute required="true" name="objective" type="Objective" description="The objective to complete"/>
-		</Binding>
+		<GameObjectBinding name="Quests" class="uk.co.dubit.platform.components.new_quest.Quests" />
+		<GameObjectBinding name="Quest" class="uk.co.dubit.platform.components.new_quest.Quest" />
 		
-		<Binding name="BeginQuest" class="uk.co.dubit.platform.components.quest.behaviours.BeginQuest">
-			<Description><![CDATA[
-					Begins the quest and activates its first objective. Begging a quest sets the active attribute to true, and shows the quest in the players quest list.
-				]]></Description>
-			<Example><![CDATA[
-					The following example shows how to begin a quest
-			
-					<code>
-						<Quest id="escapeTreehouseQuest" name="Escape from the Treehouse" active="false" complete="false" description="The Treehouse is a great place to hang out, but when you're trapped inside, it loses some of its appeal. Find an escape route if you ever want to see the sun again!">
-							<!-- Define the objectives  -->
-							<Objective name="1) Build Device" id="buildDevice" complete="false" active="false"/>
-							<Objective name="2) Escape!" id="escapeTreehouse" complete="false" active="false"/>
-							<Triggers>
-								<OnBeginQuest>
-									<!-- The quest is accessed from the event object by {Event.quest} -->
-									<Trace message="Quest Begin {Event.quest.name}"/>
-								</OnBeginQuest>
-							</Triggers>
-						</Quest>
-						
-						<Trigger gameObject="{Room.ball}" event="OnClick">
-							<!-- Begins the quest. The quest can be accessed from the Quests.escapeTreehouseQuest construct. -->
-							<BeginQuest quest="{Quests.escapeTreehouseQuest}"/>
-						</Trigger>	
-					</code>					
-				]]></Example>
-			<Attribute required="true" name="quest" type="Quest" description="The quest to begin"/>
-		</Binding>
+		<Binding name="CloseQuests" class="uk.co.dubit.platform.components.new_quest.behaviours.CloseQuests" />
+		<Binding name="OpenQuests" class="uk.co.dubit.platform.components.new_quest.behaviours.OpenQuests" />
+		<Binding name="StartQuest" class="uk.co.dubit.platform.components.new_quest.behaviours.StartQuest" />
 		
-		<Binding name="BeginObjective" class="uk.co.dubit.platform.components.quest.behaviours.BeginObjective">
-			<Description><![CDATA[
-					Begins the objective. If the quest is not yet active the quest is activated and will appear in the players quest list.
-				]]></Description>
-			<Example><![CDATA[
-					The following example shows how to begin a quest
-			
-					<code>
-						<Quest id="escapeTreehouseQuest" name="Escape from the Treehouse" active="false" complete="false" description="The Treehouse is a great place to hang out, but when you're trapped inside, it loses some of its appeal. Find an escape route if you ever want to see the sun again!">
-							<!-- Define the objectives  -->
-							<Objective name="1) Build Device" id="buildDevice" complete="false" active="false"/>
-							<Objective name="2) Escape!" id="escapeTreehouse" complete="false" active="false"/>
-							<Triggers>
-								<OnBeginQuest>
-									<!-- The quest is accessed from the event object by {Event.quest} -->
-									<Trace message="Quest Begin {Event.quest.name}"/>
-								</OnBeginQuest>
-								<OnBeginObjective>
-									<!-- The objective is accessed from the event object by {Event.objective} -->
-									<Trace message="Objective Begun {Event.objective.name}"/>
-								</OnBeginObjective>								
-							</Triggers>
-						</Quest>
-						
-						<Trigger gameObject="{Room.ball}" event="OnClick">
-							<!-- Begins the quest. The quest can be accessed from the Quests.escapeTreehouseQuest construct. -->
-							<BeginObjective objective="{Quests.escapeTreehouseQuest.buildDevice}"/>
-						</Trigger>	
-					</code>					
-				]]></Example>
-			<Attribute required="true" name="objective" type="Objective" description="The objective"/>
-		</Binding>
+		<GameObjectBinding name="EarnPointsObjective" class="uk.co.dubit.platform.components.new_quest.objective.EarnPointsObjective" />
+		<GameObjectBinding name="EventObjective" class="uk.co.dubit.platform.components.new_quest.objective.EventObjective" />
+		<GameObjectBinding name="GameObjectPropertyObjective" class="uk.co.dubit.platform.components.new_quest.objective.GameObjectPropertyObjective" />
+		<GameObjectBinding name="OrObjective" class="uk.co.dubit.platform.components.new_quest.objective.OrObjective" />
+		<GameObjectBinding name="ThresoldObjective" class="uk.co.dubit.platform.components.new_quest.objective.ThresoldObjective" />
+		<GameObjectBinding name="CompleteActivityObjective" class="uk.co.dubit.platform.components.new_quest.objective.activityBar.CompleteActivityObjective" />
+		<GameObjectBinding name="StartActivityObjective" class="uk.co.dubit.platform.components.new_quest.objective.activityBar.StartActivityObjective" />
+		<GameObjectBinding name="CloseCameraObjective" class="uk.co.dubit.platform.components.new_quest.objective.camera.CloseCameraObjective" />
+		<GameObjectBinding name="OpenCameraObjective" class="uk.co.dubit.platform.components.new_quest.objective.camera.OpenCameraObjective" />
+		<GameObjectBinding name="TakePhotoObjective" class="uk.co.dubit.platform.components.new_quest.objective.camera.TakePhotoObjective" />
+		<GameObjectBinding name="EarnExperienceObjective" class="uk.co.dubit.platform.components.new_quest.objective.experience.EarnExperienceObjective" />
+		<GameObjectBinding name="LevelUpObjective" class="uk.co.dubit.platform.components.new_quest.objective.experience.LevelUpObjective" />
+		<GameObjectBinding name="ReachLevelObjective" class="uk.co.dubit.platform.components.new_quest.objective.experience.ReachLevelObjective" />
+		<GameObjectBinding name="EmptyMeterObjective" class="uk.co.dubit.platform.components.new_quest.objective.meter.EmptyMeterObjective" />
+		<GameObjectBinding name="FillMeterObjective" class="uk.co.dubit.platform.components.new_quest.objective.meter.FillMeterObjective" />
+		<GameObjectBinding name="OpenMinigameObjective" class="uk.co.dubit.platform.components.new_quest.objective.minigame.OpenMinigameObjective" />
+		<GameObjectBinding name="CompleteQuestObjective" class="uk.co.dubit.platform.components.new_quest.objective.quest.CompleteQuestObjective" />
+		<GameObjectBinding name="StartQuestObjective" class="uk.co.dubit.platform.components.new_quest.objective.quest.StartQuestObjective" />
+		<GameObjectBinding name="GotoRoomObjective" class="uk.co.dubit.platform.components.new_quest.objective.room.GotoRoomObjective" />
 	</Package>
 	
 	<!-- BACKPACK BINDINGS -->

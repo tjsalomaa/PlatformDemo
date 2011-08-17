@@ -1,4 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ObjectiveItemViewBase xmlns="uk.co.dubit.platform.components.quest.*" xmlns:mx="http://www.adobe.com/2006/mxml" width="100%" height="100%">
+<mx:Canvas xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		 xmlns:s="library://ns.adobe.com/flex/spark" 
+		 xmlns:mx="library://ns.adobe.com/flex/mx">
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+	
+	<fx:Script>
+		<![CDATA[
+			import uk.co.dubit.platform.components.new_quest.QuestObjective;
+			
+			private var _objective:QuestObjective;
+			
+			override public function set data(value:Object) : void
+			{
+				super.data = value;
+				
+				objective = value as QuestObjective;
+			}
+			
+			[Bindable]
+			public function get objective() : QuestObjective
+			{
+				return _objective;
+			}
+			
+			public function set objective(value:QuestObjective) : void
+			{
+				_objective = value;
+			}
+		]]>
+	</fx:Script>
+	
 	<mx:Label text="{objective.name + (objective.complete ? ' (complete)' : '')}" width="100%" enabled="{objective.complete ? false : true}" />
-</ObjectiveItemViewBase>
+
+</mx:Canvas>

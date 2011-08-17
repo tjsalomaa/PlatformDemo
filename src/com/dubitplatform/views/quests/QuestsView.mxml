@@ -1,42 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
-<QuestViewBase width="100%" height="100%"
-			   xmlns="uk.co.dubit.platform.components.quest.*"
-			   xmlns:views="com.dubitplatform.views.*" 
-			   xmlns:mx="http://www.adobe.com/2006/mxml" xmlns:s="library://ns.adobe.com/flex/spark" xmlns:quests="com.dubitplatform.views.quests.*">
-
-	<mx:Script>
+<s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		 xmlns:s="library://ns.adobe.com/flex/spark" 
+		 xmlns:mx="library://ns.adobe.com/flex/mx" width="400" height="300" xmlns:quests="com.dubitplatform.views.quests.*">
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+	
+	<fx:Script>
 		<![CDATA[
-			import uk.co.dubit.platform.components.quest.IObjective;
-			import uk.co.dubit.platform.components.quest.QuestModel;
+			import uk.co.dubit.platform.components.new_quest.QuestObjective;
+			import uk.co.dubit.platform.components.new_quest.Quests;
+			
+			[Bindable] private var quests:Quests = Quests.getInstance();
 		]]>
-	</mx:Script>	
+	</fx:Script>
 	
 	<mx:VBox width="100%" height="100%" paddingLeft="0" paddingRight="0" paddingTop="15" paddingBottom="0">
-
+		
 		<mx:Accordion width="100%" height="100%" creationPolicy="all" borderStyle="none">
-			<mx:Repeater id="questsRepeater" dataProvider="{ activeQuests }" >
-			   <mx:VBox width="100%" height="100%" label="{ questsRepeater.currentItem.name }" paddingLeft="15" paddingRight="15" paddingTop="15" paddingBottom="15">
-
+			<mx:Repeater id="questsRepeater" dataProvider="{ quests.activeQuests }" >
+				<mx:VBox width="100%" height="100%" label="{ questsRepeater.currentItem.name }" paddingLeft="15" paddingRight="15" paddingTop="15" paddingBottom="15">
+					
 					<mx:Text text="{questsRepeater.currentItem.description}" selectable="false" fontWeight="bold" width="100%"/>
-			
+					
 					<mx:Box paddingTop="10" paddingBottom="10" width="100%"><mx:HRule width="100%"/></mx:Box>
-			
-					<mx:List dataProvider="{ questsRepeater.currentItem.objectives }" width="100%" height="100%" borderStyle="none" variableRowHeight="true" useRollOver="false">
-						<mx:itemRenderer>
-					   		<mx:Component>
-								<quests:ObjectiveView objective="{ IObjective(data) }" width="100%" height="20" horizontalScrollPolicy="off"/> 	
-					   		</mx:Component>
-						</mx:itemRenderer>
-					</mx:List>
-						
-			   </mx:VBox>				
+					
+					<mx:List dataProvider="{ questsRepeater.currentItem.objectives }" itemRenderer="{ new ClassFactory(ObjectiveView) }" width="100%" height="100%" borderStyle="none" variableRowHeight="true" useRollOver="false" />
+					
+				</mx:VBox>				
 			</mx:Repeater>
 		</mx:Accordion>
 	</mx:VBox>
-	
-	<s:TextArea width="100%" height="50" verticalCenter="0"
-				selectable="false" editable="false" borderVisible="false"
-				textAlign="center" text="You don't have any active quests!  Try exploring the world - There's bound to be someone who needs a hand!" 
-				visible="{ QuestModel.getInstance().activeQuests.length == 0 }" />
-
-</QuestViewBase>
+</s:Group>

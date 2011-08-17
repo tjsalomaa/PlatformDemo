@@ -8,7 +8,7 @@
 	xmlns:views="com.dubitplatform.views.*"
 	xmlns:map="uk.co.dubit.platform.components.map.*"
 	xmlns:achievements="uk.co.dubit.platform.components.achievements.*"
-	xmlns:collections="uk.co.dubit.platform.components.collections.*" xmlns:s="library://ns.adobe.com/flex/spark">
+	xmlns:collections="uk.co.dubit.platform.components.collections.*" xmlns:s="library://ns.adobe.com/flex/spark" xmlns:quests="com.dubitplatform.views.quests.*">
 	
 	<mx:Script>
         <![CDATA[
@@ -25,7 +25,9 @@
 	</mx:Script>
 	
 	<mx:TabNavigator id="tabNavigator" x="0" y="40" width="100%" height="100%" creationPolicy="all">
-		<quest:QuestSkinContainer label="Quests" width="100%" height="100%"/>
+		<s:NavigatorContent label="Quests" width="100%" height="100%">
+			<quests:QuestsView width="100%" height="100%" />
+		</s:NavigatorContent>
 		<backpack:BackpackSkinContainer label="Stuff" width="100%" height="100%"/>
 		<views:NotificationsView label="Notifications" width="100%" height="100%"/>
 		<map:MapSkinContainer label="Rooms" width="100%" height="100%"/>
