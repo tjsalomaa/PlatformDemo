@@ -2,13 +2,35 @@
 <Include xmlns:xi="http://www.w3.org/2001/XInclude">
 
 	<Quests>
-		<Quest id="testQuest" name="My new quest" active="true" description="This is the quest description">
-			<OpenMinigameObjective name="open the minigame" minigame="apiTester" />
+		<Quest id="testQuest" name="My new quest" activateOnUnlock="true" description="This is the quest description">
+			<UnlockObjectives>
+				<OrderedObjectiveGroup>
+					<GotoRoomObjective roomID="lab" />
+					<PurchaseProduct product="horse" />
+				</OrderedObjectiveGroup>
+				
+				<ObjectiveGroup>
+					<PurchaseProductObjective product="horse" />
+					<PurchaseProductObjective product="badger" />
+					<PurchaseProductObjective product="mouse" />
+				</ObjectiveGroup>
+			</UnlockObjectives>
+			
+			<CompleteObjectives>
+				<OrdererObjectiveGroup>
+					<OpenMinigameObjective name="open the minigame" minigame="apiTester" />
+				</OrdererObjectiveGroup>
+				
+			</CompleteObjectives>
 			
 			<Triggers>
-				<onQuestComplete>
+				<onQuestUnlocked>
+					<Alert message="Quest unlocked" />
+				</onQuestUnlocked>
+				
+				<onQuestCompleted>
 					<Alert message="Quest complete" />
-				</onQuestComplete>
+				</onQuestCompleted>
 			</Triggers>
 		</Quest>
 	</Quests>

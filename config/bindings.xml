@@ -800,11 +800,12 @@
 		<Binding name="OpenQuests" class="uk.co.dubit.platform.components.new_quest.behaviours.OpenQuests" />
 		<Binding name="StartQuest" class="uk.co.dubit.platform.components.new_quest.behaviours.StartQuest" />
 		
+		<GameObjectBinding name="UnlockObjectives" class="uk.co.dubit.platform.components.new_quest.QuestObjective" />
+		<GameObjectBinding name="CompleteObjectives" class="uk.co.dubit.platform.components.new_quest.QuestObjective" />
+		
 		<GameObjectBinding name="EarnPointsObjective" class="uk.co.dubit.platform.components.new_quest.objective.EarnPointsObjective" />
 		<GameObjectBinding name="EventObjective" class="uk.co.dubit.platform.components.new_quest.objective.EventObjective" />
 		<GameObjectBinding name="GameObjectPropertyObjective" class="uk.co.dubit.platform.components.new_quest.objective.GameObjectPropertyObjective" />
-		<GameObjectBinding name="OrObjective" class="uk.co.dubit.platform.components.new_quest.objective.OrObjective" />
-		<GameObjectBinding name="ThresoldObjective" class="uk.co.dubit.platform.components.new_quest.objective.ThresoldObjective" />
 		<GameObjectBinding name="CompleteActivityObjective" class="uk.co.dubit.platform.components.new_quest.objective.activityBar.CompleteActivityObjective" />
 		<GameObjectBinding name="StartActivityObjective" class="uk.co.dubit.platform.components.new_quest.objective.activityBar.StartActivityObjective" />
 		<GameObjectBinding name="CloseCameraObjective" class="uk.co.dubit.platform.components.new_quest.objective.camera.CloseCameraObjective" />
