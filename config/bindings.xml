@@ -800,8 +800,12 @@
 		<Binding name="OpenQuests" class="uk.co.dubit.platform.components.new_quest.behaviours.OpenQuests" />
 		<Binding name="StartQuest" class="uk.co.dubit.platform.components.new_quest.behaviours.StartQuest" />
 		
-		<GameObjectBinding name="UnlockObjectives" class="uk.co.dubit.platform.components.new_quest.QuestObjective" />
-		<GameObjectBinding name="CompleteObjectives" class="uk.co.dubit.platform.components.new_quest.QuestObjective" />
+		<GameObjectBinding name="UnlockObjectives" class="uk.co.dubit.platform.components.new_quest.objective.group.UnOrderedObjectiveGroup" />
+		<GameObjectBinding name="CompleteObjectives" class="uk.co.dubit.platform.components.new_quest.objective.group.OrderedObjectiveGroup" />
+		
+		<GameObjectBinding name="ObjectiveGroup" class="uk.co.dubit.platform.components.new_quest.objective.group.ObjectiveGroup" />
+		<GameObjectBinding name="OrderedObjectiveGroup" class="uk.co.dubit.platform.components.new_quest.objective.group.OrderedObjectiveGroup" />
+		<GameObjectBinding name="UnOrderedObjectiveGroup" class="uk.co.dubit.platform.components.new_quest.objective.group.UnOrderedObjectiveGroup" />
 		
 		<GameObjectBinding name="EarnPointsObjective" class="uk.co.dubit.platform.components.new_quest.objective.EarnPointsObjective" />
 		<GameObjectBinding name="EventObjective" class="uk.co.dubit.platform.components.new_quest.objective.EventObjective" />
@@ -811,9 +815,13 @@
 		<GameObjectBinding name="CloseCameraObjective" class="uk.co.dubit.platform.components.new_quest.objective.camera.CloseCameraObjective" />
 		<GameObjectBinding name="OpenCameraObjective" class="uk.co.dubit.platform.components.new_quest.objective.camera.OpenCameraObjective" />
 		<GameObjectBinding name="TakePhotoObjective" class="uk.co.dubit.platform.components.new_quest.objective.camera.TakePhotoObjective" />
+		<GameObjectBinding name="AddFriendObjective" class="uk.co.dubit.platform.components.new_quest.objective.contactList.AddFriendObjective" />
+		<GameObjectBinding name="FriendCountObjective" class="uk.co.dubit.platform.components.new_quest.objective.contactList.FriendCountObjective" />
 		<GameObjectBinding name="EarnExperienceObjective" class="uk.co.dubit.platform.components.new_quest.objective.experience.EarnExperienceObjective" />
 		<GameObjectBinding name="LevelUpObjective" class="uk.co.dubit.platform.components.new_quest.objective.experience.LevelUpObjective" />
 		<GameObjectBinding name="ReachLevelObjective" class="uk.co.dubit.platform.components.new_quest.objective.experience.ReachLevelObjective" />
+		<GameObjectBinding name="CloseMenuObjective" class="uk.co.dubit.platform.components.new_quest.objective.menu.CloseMenuObjective" />
+		<GameObjectBinding name="OpenMenuObjective" class="uk.co.dubit.platform.components.new_quest.objective.menu.OpenMenuObjective" />
 		<GameObjectBinding name="EmptyMeterObjective" class="uk.co.dubit.platform.components.new_quest.objective.meter.EmptyMeterObjective" />
 		<GameObjectBinding name="FillMeterObjective" class="uk.co.dubit.platform.components.new_quest.objective.meter.FillMeterObjective" />
 		<GameObjectBinding name="OpenMinigameObjective" class="uk.co.dubit.platform.components.new_quest.objective.minigame.OpenMinigameObjective" />

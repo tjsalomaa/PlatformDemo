@@ -4,23 +4,13 @@
 	<Quests>
 		<Quest id="testQuest" name="My new quest" activateOnUnlock="true" description="This is the quest description">
 			<UnlockObjectives>
-				<OrderedObjectiveGroup>
-					<GotoRoomObjective roomID="lab" />
-					<PurchaseProduct product="horse" />
-				</OrderedObjectiveGroup>
-				
-				<ObjectiveGroup>
-					<PurchaseProductObjective product="horse" />
-					<PurchaseProductObjective product="badger" />
-					<PurchaseProductObjective product="mouse" />
-				</ObjectiveGroup>
+				<GotoRoomObjective roomID="lab" />
 			</UnlockObjectives>
 			
 			<CompleteObjectives>
-				<OrdererObjectiveGroup>
-					<OpenMinigameObjective name="open the minigame" minigame="apiTester" />
-				</OrdererObjectiveGroup>
-				
+				<GotoRoomObjective roomID="village" name="Go back to the village"/>
+				<OpenMenuObjective menu="playerMenu" name="Open the player menu"/>
+				<OpenMinigameObjective minigame="apiTester" name="Play a minigame" />
 			</CompleteObjectives>
 			
 			<Triggers>
