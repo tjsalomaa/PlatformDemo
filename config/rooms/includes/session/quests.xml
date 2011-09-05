@@ -2,15 +2,20 @@
 <Include xmlns:xi="http://www.w3.org/2001/XInclude">
 
 	<Quests>
-		<Quest id="testQuest" name="My new quest" activateOnUnlock="true" description="This is the quest description">
+		<Quest id="testQuest" name="My new quest" activateOnUnlock="false" description="This is the quest description">
 			<UnlockObjectives>
-				<GotoRoomObjective roomID="lab" />
+				<GotoRoomObjective roomID="village" />
 			</UnlockObjectives>
 			
 			<CompleteObjectives>
-				<GotoRoomObjective roomID="village" name="Go back to the village"/>
-				<OpenMenuObjective menu="playerMenu" name="Open the player menu"/>
-				<OpenMinigameObjective minigame="apiTester" name="Play a minigame" />
+				<UnOrderedObjectiveGroup>
+					<GotoRoomObjective roomID="lab" name="Go to the village"/>
+					<OpenMenuObjective menu="playerMenu" name="Open the player menu"/>
+					<OpenMinigameObjective minigame="apiTester" name="Play a minigame" />
+					<CompleteCollectionObjective collection="fruitCollection" name="Complete the fruit collection" />
+				</UnOrderedObjectiveGroup>
+				
+				
 			</CompleteObjectives>
 			
 			<Triggers>
@@ -22,6 +27,45 @@
 					<Alert message="Quest complete" />
 				</onQuestCompleted>
 			</Triggers>
+		</Quest>
+		
+		<Quest id="fruitQuest" name="Find the fruit for Le' Chuck" description="Le Chuck, who some say is the most dangerous pirate ever to infest the Dubit Platform, would like some Grog. Fruit is scattered around the village, find an apple, orange, pear, and apricot to complete the quest. Argh!">
+			<CompleteObjectives>
+				<CompleteCollectionObjective id="fruitQuest_objective1" collection="fruitCollection" name="Pick up an apple, orange, pear and apricot for Le' Chuck">
+					<Triggers>
+						<onCollectableFound>
+							<If expression="({Event.collection.complete} == {false})">
+								<Then>
+									<!-- Show a chat bubble -->
+									<ShowBubble gameObject="{Rooms.currentRoom.player}" message="Just what I needed for my fruit collection!" useServer="false" />
+									
+									<!--  And create a notification (which shows an on-screen message -->
+									<CreateNotification title="You just earned 10XP!" 
+														body="Congratulations, you just earned 10XP collecting an {Event.collectable.id}. Keep up the good work!" 
+														can_remove="true"/>	
+								</Then>
+							</If>
+						</onCollectableFound>
+					</Triggers>
+				</CompleteCollectionObjective>
+				
+				<GameObjectPropertyObjective name="Give the fruit to Le' Chuck" gameObject="{This.quest}" property="fruitGivenToLeChuck" value="true" />
+			</CompleteObjectives>
+			
+			<Triggers>
+				<onQuestStarted>
+					<AwardExperiencePoints points="10"/>
+					<CreateNotification title="You just earned 10XP!" body="You've been given a job by Le Chuck and earned 10XP!" can_remove="true"/>					
+					<ShowAwardXPEffect />
+				</onQuestStarted>
+				
+				<onQuestCompleted>
+					<AwardExperiencePoints points="20"/>
+					<CreateNotification title="You just earned 20XP!" body="Ahoy! You found all the fruit for Le Chuck's grog and earned 20XP!" can_remove="true"/>					
+					<ShowAwardXPEffect />
+				</onQuestCompleted>
+			</Triggers>
+			
 		</Quest>
 	</Quests>
 </Include>

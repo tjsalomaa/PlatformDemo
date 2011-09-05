@@ -815,6 +815,7 @@
 		<GameObjectBinding name="CloseCameraObjective" class="uk.co.dubit.platform.components.new_quest.objective.camera.CloseCameraObjective" />
 		<GameObjectBinding name="OpenCameraObjective" class="uk.co.dubit.platform.components.new_quest.objective.camera.OpenCameraObjective" />
 		<GameObjectBinding name="TakePhotoObjective" class="uk.co.dubit.platform.components.new_quest.objective.camera.TakePhotoObjective" />
+		<GameObjectBinding name="CompleteCollectionObjective" class="uk.co.dubit.platform.components.new_quest.objective.collection.CompleteCollectionObjective" />
 		<GameObjectBinding name="AddFriendObjective" class="uk.co.dubit.platform.components.new_quest.objective.contactList.AddFriendObjective" />
 		<GameObjectBinding name="FriendCountObjective" class="uk.co.dubit.platform.components.new_quest.objective.contactList.FriendCountObjective" />
 		<GameObjectBinding name="EarnExperienceObjective" class="uk.co.dubit.platform.components.new_quest.objective.experience.EarnExperienceObjective" />
@@ -1796,9 +1797,8 @@
 			<Attribute required="true" name="name" type="string" description="The name of the collectable"/>
 			<Attribute required="true" name="imageURL" type="string" description="The image of the collection to show in the collectable interface"/>
 		</Binding>
-		<Binding name="AddToCollection" class="uk.co.dubit.platform.components.collections.behaviours.AddToCollection">
-			<Attribute required="true" name="collectionID" type="string" description="The collectionID"/>
-			<Attribute required="true" name="collectabeID" type="string" description="The id of the collectable to be added to the collection"/>
+		<Binding name="FindCollectable" class="uk.co.dubit.platform.components.collections.behaviours.FindCollectable">
+			<Attribute name="collectable" type="ICollectable" description="The collectable to be added to the collection" required="true"/>
 		</Binding>
 	</Package>
 	<!-- MINIGAMES -->

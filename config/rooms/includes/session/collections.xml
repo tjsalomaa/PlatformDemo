@@ -2,33 +2,34 @@
 <Include xmlns:xi="http://www.w3.org/2001/XInclude">
 	<Collections>
 		<Collection id="fruitCollection" name="Fruit" description="Looks like the makings of a fruit salad!">
-			<Collectable id="apple" name="Apple" imageURL="[base.url]images/collections/apple.png" quantity="0"/>
-			<Collectable id="pear" name="Pear" imageURL="[base.url]images/collections/pear.png" quantity="0"/>
-			<Collectable id="orange" name="Orange" imageURL="[base.url]images/collections/orange.png" quantity="0"/>
-			<Collectable id="apricot" name="Apricot" imageURL="[base.url]images/collections/apricot.png" quantity="0"/>
+			<Collectable id="apple" name="Apple" imageURL="[base.url]images/collections/apple.png" />
+			<Collectable id="pear" name="Pear" imageURL="[base.url]images/collections/pear.png" />
+			<Collectable id="orange" name="Orange" imageURL="[base.url]images/collections/orange.png" />
+			<Collectable id="apricot" name="Apricot" imageURL="[base.url]images/collections/apricot.png"/>
 			
 			<Triggers>
-				<OnCompleteCollection>
+				<onCollectionComplete>
 					<CompleteQuest quest="{Quests.fruitQuest}"/>
-				</OnCompleteCollection>				
+				</onCollectionComplete>				
 			</Triggers>	
 		</Collection>	
-			
+		
 		<Collection id="cdCollection" name="Data Disks" description="Data discs containing sensitive information have been scattered across the room! Collect all the discs to discover a secret!">
-			<Collectable id="cd1" name="Disc 1" imageURL="[base.url]images/collections/cd.png" quantity="0"/>
-			<Collectable id="cd2" name="Disc 2" imageURL="[base.url]images/collections/cd.png" quantity="0"/>
-			<Collectable id="cd3" name="Disc 3" imageURL="[base.url]images/collections/cd.png" quantity="0"/>
-			<Collectable id="cd4" name="Disc 4" imageURL="[base.url]images/collections/cd.png" quantity="0"/>
-			<Collectable id="cd5" name="Disc 5" imageURL="[base.url]images/collections/cd.png" quantity="0"/>
+			<Collectable id="cd1" name="Disc 1" imageURL="[base.url]images/collections/cd.png" />
+			<Collectable id="cd2" name="Disc 2" imageURL="[base.url]images/collections/cd.png" />
+			<Collectable id="cd3" name="Disc 3" imageURL="[base.url]images/collections/cd.png" />
+			<Collectable id="cd4" name="Disc 4" imageURL="[base.url]images/collections/cd.png" />
+			<Collectable id="cd5" name="Disc 5" imageURL="[base.url]images/collections/cd.png" />
 		</Collection>
 		 		
 		<Triggers>
-			<OnFoundCollectable>
+			<onCollectableFound>
 				<Trace message="Found collectable {Event.collection.name} : {Event.collectable.name}"/>
-			</OnFoundCollectable>
-			<OnCompleteCollection>
+			</onCollectableFound>
+			
+			<onCollectionComplete>
 				<Trace message="Complete collection {Event.collection.name} : {Event.collectable.name}"/>
-			</OnCompleteCollection>			
+			</onCollectionComplete>			
 		</Triggers>	
 	</Collections>
 </Include>

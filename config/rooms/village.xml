@@ -133,22 +133,31 @@
 		<Response message="Keep calm, I'm only here to learn about the Dubit Platform">
 			<Statement message="Arrr, good answer landlubber. Before I tell ye about my tails o' swashbucklin, booty, and the Dubit Platform Me need t' fill this great, grand ol' hole in my stomach. Go find me an orange, a pear, an apple, and a apricot, the base in'redients for grog, and I'll tell you all you want t' know. Aye, me parrot concurs.">
 				<Response message="Yes sir, pirate sir!">
-					<BeginQuest quest="{Quests.fruitQuest}" delay="1000"/>
+					<StartQuest quest="{Quests.fruitQuest}" delay="1000"/>
 				</Response>	
 			</Statement>		
 		</Response>
 		<Response message="I don't want your stinking treasure!">
 			<Statement message="Ahoy, they all want my booty, dont kid yourself landlubber. But Me want some grog, go find me an orange, a pear, an apple, and a apricot, the base in'redients for grog. Aye, me parrot concurs.">
 				<Response message="Sounds delicious!">
-					<BeginQuest quest="{Quests.fruitQuest}" delay="1000"/>
+					<StartQuest quest="{Quests.fruitQuest}" delay="1000"/>
 				</Response>	
 			</Statement>		
 		</Response>	
+		
 		<Response message="What is there to do around here?">
 			<Statement message="Ahoy, thar's jobs for me t' do, Captain Le Chuck, no go make your self useful and find me an orange, a pear, an apple, and a apricot, the base in'redients for grog, argh! ">
 				<Response message="Well I do like the sound of grog...">
-					<BeginQuest quest="{Quests.fruitQuest}" delay="1000"/>
+					<StartQuest quest="{Quests.fruitQuest}" delay="1000"/>
 				</Response>	
+			</Statement>		
+		</Response>	
+		
+		<Response message="Here's the fruit you wanted!" condition="{Quests.fruitQuest.fruitQuest_objective1.complete}">
+			<Statement message="Ahoy, ther be grog in those fruities!  Thanks! ">
+				<Response message="No problem!" >
+					<SetValues target="{Quests.fruitQuest}" fruitGivenToLeChuck="true" />
+				</Response>
 			</Statement>		
 		</Response>			
 	</Statement>

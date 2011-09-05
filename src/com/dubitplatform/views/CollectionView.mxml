@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<CollectionsViewBase xmlns="uk.co.dubit.platform.components.collections.*" xmlns:mx="http://www.adobe.com/2006/mxml" width="100%" height="100%" xmlns:shared="uk.co.dubit.platform.components.shared.*">
+<CollectionsViewBase xmlns="uk.co.dubit.platform.components.collections.ui.*" xmlns:mx="http://www.adobe.com/2006/mxml" width="100%" height="100%" xmlns:shared="uk.co.dubit.platform.components.shared.*">
 	
 		<mx:Script>
 			<![CDATA[
