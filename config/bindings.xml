@@ -812,6 +812,8 @@
 		<GameObjectBinding name="GameObjectPropertyObjective" class="uk.co.dubit.platform.components.new_quest.objective.GameObjectPropertyObjective" />
 		<GameObjectBinding name="CompleteActivityObjective" class="uk.co.dubit.platform.components.new_quest.objective.activityBar.CompleteActivityObjective" />
 		<GameObjectBinding name="StartActivityObjective" class="uk.co.dubit.platform.components.new_quest.objective.activityBar.StartActivityObjective" />
+		<GameObjectBinding name="OpenAvatarEditorObjective" class="uk.co.dubit.platform.components.new_quest.objective.avatarEditor.OpenAvatarEditorObjective" />
+		<GameObjectBinding name="CloseAvatarEditorObjective" class="uk.co.dubit.platform.components.new_quest.objective.avatarEditor.CloseAvatarEditorObjective" />
 		<GameObjectBinding name="CloseCameraObjective" class="uk.co.dubit.platform.components.new_quest.objective.camera.CloseCameraObjective" />
 		<GameObjectBinding name="OpenCameraObjective" class="uk.co.dubit.platform.components.new_quest.objective.camera.OpenCameraObjective" />
 		<GameObjectBinding name="TakePhotoObjective" class="uk.co.dubit.platform.components.new_quest.objective.camera.TakePhotoObjective" />
