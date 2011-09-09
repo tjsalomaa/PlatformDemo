@@ -14,8 +14,6 @@
 					<OpenMinigameObjective minigame="apiTester" name="Play a minigame" />
 					<CompleteCollectionObjective collection="fruitCollection" name="Complete the fruit collection" />
 				</UnOrderedObjectiveGroup>
-				
-				
 			</CompleteObjectives>
 			
 			<Triggers>
@@ -37,7 +35,7 @@
 							<If expression="({Event.collection.complete} == {false})">
 								<Then>
 									<!-- Show a chat bubble -->
-									<ShowBubble gameObject="{Rooms.currentRoom.player}" message="Just what I needed for my fruit collection!" useServer="false" />
+									<ShowPlayerBubble message="Just what I needed for my fruit collection!" useServer="false" />
 									
 									<!--  And create a notification (which shows an on-screen message -->
 									<CreateNotification title="You just earned 10XP!" 

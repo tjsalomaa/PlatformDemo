@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<AchievementsViewBase xmlns="uk.co.dubit.platform.components.achievements.*" xmlns:mx="http://www.adobe.com/2006/mxml" width="100%" height="100%" xmlns:shared="uk.co.dubit.platform.components.shared.*">
+<AchievementsViewBase xmlns="uk.co.dubit.platform.components.achievements.ui.*" xmlns:mx="http://www.adobe.com/2006/mxml" width="100%" height="100%" xmlns:shared="uk.co.dubit.platform.components.shared.*">
 	
 	<mx:Script>
 		<![CDATA[
