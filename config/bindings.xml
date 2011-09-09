@@ -1633,7 +1633,19 @@
 		</Binding>
 		
 		<Binding name="BlurFilter" class="uk.co.dubit.platform.scriptEngine.gameObject.types.filters.BlurFilterNode" factory="uk.co.dubit.platform.scriptEngine.gameObject.GameObjectFactory" />
-		<Binding name="DropShadowFilter" class="uk.co.dubit.platform.scriptEngine.gameObject.types.filters.DropShadowFilterNode" factory="uk.co.dubit.platform.scriptEngine.gameObject.GameObjectFactory" />
+		<Binding name="DropShadowFilter" factory="uk.co.dubit.platform.scriptEngine.gameObject.GameObjectFactory" class="uk.co.dubit.platform.scriptEngine.gameObject.types.filters.DropShadowFilterNode" >
+			<Attribute name="alpha" required="false" defaultValue="1.0" description="The alpha transparency value for the shadow color" />
+			<Attribute name="angle" required="false" defaultValue="45" description="The angle of the shadow" />
+			<Attribute name="blurX" required="false" defaultValue="4.0" description="The amount of horizontal blur" />
+			<Attribute name="blurY" required="false" defaultValue="4.0" description="The amount of vertical blur" />
+			<Attribute name="colour" required="false" defaultValue="0" description="The color of the shadow" />
+			<Attribute name="distance" required="false" defaultValue="4.0" description="The offset distance for the shadow, in pixels" />
+			<Attribute name="hideObject" required="false" defaultValue="false" description="Indicates whether or not the object is hidden" />
+			<Attribute name="inner" required="false" defaultValue="false" description="Indicates whether or not the shadow is an inner shadow" />
+			<Attribute name="knockout" required="false" defaultValue="false" description="Applies a knockout effect (true), which effectively makes the object's fill transparent and reveals the background color of the document" />
+			<Attribute name="quality" required="false" defaultValue="1" description="The number of times to apply the filter" />
+			<Attribute name="strength" required="false" defaultValue="1.0" description="The strength of the imprint or spread" />
+			</Binding>
 		<Binding name="GlowFilter" class="uk.co.dubit.platform.scriptEngine.gameObject.types.filters.GlowFilterNode" factory="uk.co.dubit.platform.scriptEngine.gameObject.GameObjectFactory" />
 	</Package>
 	

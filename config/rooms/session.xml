@@ -2,7 +2,6 @@
 <SessionRoom xmlns:xi="http://www.w3.org/2001/XInclude">
 	<xi:include href="includes/session/startup.xml"/>
 	
-	<xi:include href="includes/session/actions.xml"/>
 	<xi:include href="includes/session/achievements.xml"/>
 	<xi:include href="includes/session/activity_bars.xml"/>
 	<xi:include href="includes/session/avatar_editors.xml"/>

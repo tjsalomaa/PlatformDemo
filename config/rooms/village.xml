@@ -6,7 +6,7 @@
 	<CollisionMap id="walkableArea" assetID="hit_asset" />
 
 	<Filters id="playerFilters">
-		<DepthFilter id="playerDepthFilter" scaleBack="-0.5" scaleFront="0.15"/>
+		<DepthFilter id="playerDepthFilter" scaleBack="0.5" scaleFront="0.5"/>
 	</Filters>
 	
 	<Sounds target="{Room.player}">

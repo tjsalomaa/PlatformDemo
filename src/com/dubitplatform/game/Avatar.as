@@ -3,9 +3,9 @@ package com.dubitplatform.game
 	import flash.display.Sprite;
 	import flash.filters.DropShadowFilter;
 	
-	import uk.co.dubit.graphics.render2D.IKActionPlayer;
+	import uk.co.dubit.graphics.render2D.SWFActionPlayer;
 
-	public class Avatar extends IKActionPlayer
+	public class Avatar extends SWFActionPlayer
 	{
 		public function Avatar(name:String)
 		{
