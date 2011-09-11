@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ui:AvatarCreatorSkinViewBase 
+<ui:AvatarCreatorSkinViewBase
 	xmlns:mx="http://www.adobe.com/2006/mxml" 
 	xmlns:ui="uk.co.dubit.platform.components.avatarEditor.ui.*" >
 	
@@ -28,14 +28,14 @@
 				<mx:Label text="Have you been here before?"/>
 			</mx:FormItem>
 			<mx:FormItem label="Username">
-				<mx:TextInput id="username" width="190" />
+				<mx:TextInput id="username" width="190" enter="onLoginClicked()"/>
 			</mx:FormItem>
 			<mx:FormItem label="Password">
-				<mx:TextInput id="password" width="190" displayAsPassword="true" />
+				<mx:TextInput id="password" width="190" displayAsPassword="true" enter="onLoginClicked()" />
 			</mx:FormItem>
 			<mx:FormItem>
 				<mx:HBox width="190">
-					<mx:Button label="Login" click="onLoginClicked()" width="100%" />
+					<mx:Button id="loginButton" width="100%" label="Login" click="onLoginClicked()" />
 					<mx:Button label="Register" click="onRegisterClicked()" />	
 				</mx:HBox>
 			</mx:FormItem>

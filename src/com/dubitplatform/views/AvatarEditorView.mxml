@@ -4,7 +4,7 @@
 	xmlns:mx="http://www.adobe.com/2006/mxml" 
 	xmlns:ui="uk.co.dubit.platform.components.avatarEditor.ui.*" 
 	xmlns:avatarEditor="com.dubitplatform.views.avatarEditor.*" 
-	xmlns:editor="uk.co.dubit.platform.components.avatar.editor.*">
+	xmlns:editor="uk.co.dubit.platform.components.avatar.editor.*" xmlns:ui1="uk.co.dubit.platform.components.avatar.ui.*">
 	
 	<mx:Script>
 		<![CDATA[
@@ -13,17 +13,14 @@
 			import uk.co.dubit.platform.components.avatarEditor.IAvatarEditor;
 			import uk.co.dubit.platform.components.catalogue.IProductGroup;
 			import uk.co.dubit.platform.components.catalogue.ui.ProductGroupLoadMode;
+			import uk.co.dubit.properties.Properties;
 			
 			[Bindable]
 			override public function set avatarEditor(value:IAvatarEditor) : void
 			{
 				super.avatarEditor = value;
 				
-				if(avatarEditor)
-				{
-					avatarPreview.actionID = "stand_front_" + avatarEditor.avatar.gender.toLowerCase();
-					avatarPreview.avatar = avatarEditor.avatar;
-				}
+				if(avatarEditor) avatarPreview.avatar = avatarEditor.avatar;
 			}
 			
 			private function resetAvatar() : void
@@ -31,7 +28,6 @@
 				avatarEditor.resetAvatar();
 				
 				avatarPreview.avatar = avatarEditor.avatar;
-				avatarPreview.loadPose();
 			}
 			
 			private function onProductGroupClicked(e:ItemClickEvent) : void
@@ -51,10 +47,10 @@
 					<mx:FormHeading label="Avatar Preview" />
 					<mx:FormItem>
 						<mx:VBox>
-							<editor:TintablePose id="avatarPreview"
-												 horizontalScrollPolicy="off" verticalScrollPolicy="off"
-												 width="400" height="600"
-												 scaleX="0.4" scaleY="0.4" />
+							<ui1:AvatarView id="avatarPreview" width="160" height="240"
+											action="stand" directionAngle="180" templateURL="{ Properties.getInstance().getProperty('path.anim-server') }"
+											mouseChildren="false"
+											buttonMode="true" filters="{[new DropShadowFilter(0, 45, 0x000000, 0.7, 5, 5, 1, 2)]}" />
 							<mx:HBox width="100%" paddingLeft="10">
 								<mx:Button label="Save appearance" click="{ avatarEditor.saveAvatar() }" />
 								<mx:Button label="Reset" click="resetAvatar()" />
@@ -78,7 +74,7 @@
 																	   avatar="{ avatarEditor.avatar }"
 																	   loadMode="{ ProductGroupLoadMode.OWNED }"
 																	   productGroup="{ avatarEditor.selectedProductGroup }"
-																	   clothingChanged="{ avatarPreview.loadPose() }" />
+																	   clothingChanged="{ avatarPreview.load() }" />
 						</mx:VBox>
 					</mx:FormItem>
 				</mx:Form>	

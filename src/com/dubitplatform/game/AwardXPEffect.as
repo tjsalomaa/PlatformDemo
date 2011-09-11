@@ -26,11 +26,11 @@ package com.dubitplatform.game
 				sprite.filters = [ new GlowFilter(000000,1,4,4,10,1) ];
 				
 				var effect:DisplayObject = new EffectClass();
-				/*
-				effect.x = -200 * target.displayObject.scaleX;
-				effect.y = -200 * target.displayObject.scaleY;*/
-				effect.scaleX = target.displayObject.scaleX;
-				effect.scaleY = target.displayObject.scaleY; 
+
+				effect.x = 100 * target.displayObject.scaleX;
+				effect.y = 350 * target.displayObject.scaleY;
+				effect.scaleX = target.displayObject.scaleX * 0.5;
+				effect.scaleY = target.displayObject.scaleY * 0.5; 
 				
 				material = new Material(effect);
 			}

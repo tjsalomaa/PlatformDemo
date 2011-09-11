@@ -13,7 +13,7 @@
 	xmlns:ui="uk.co.dubit.platform.components.rooms.ui.*" 
 	xmlns:video="uk.co.dubit.platform.components.video.*" 
 	xmlns:verb="uk.co.dubit.platform.components.verb.*" 
-	xmlns:chat="uk.co.dubit.platform.components.chat.*" >
+	xmlns:chat="uk.co.dubit.platform.components.chat.ui.*" >
 		
 	<mx:Script>
 		<![CDATA[
