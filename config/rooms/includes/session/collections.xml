@@ -23,12 +23,12 @@
 		</Collection>
 		 		
 		<Triggers>
-			<OnFoundCollectable>
+			<onCollectableFound>
 				<Trace message="Found collectable {Event.collection.name} : {Event.collectable.name}"/>
-			</OnFoundCollectable>
-			<OnCompleteCollection>
+			</onCollectableFound>
+			<onCollectionComplete>
 				<Trace message="Complete collection {Event.collection.name} : {Event.collectable.name}"/>
-			</OnCompleteCollection>			
+			</onCollectionComplete>			
 		</Triggers>	
 	</Collections>
 </Include>

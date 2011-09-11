@@ -12,11 +12,11 @@
 			<Trophy name="Librarian" score="100" imageURL="images/trophies/booksRead_3.png" xp="50"/>
 		</Achievement>	
 		<Triggers>
-			<OnAwardedTrophy>
+			<onTrophyAwarded>
 				<!--Trace message="Awarded trophy {Event.trophy.name} : {Event.achievement.name}"/-->
 				<CreateNotification title="Trophy earned!" body="You have earned the {Event.trophy.name} trophy. You have been awarded {Event.trophy.xp} experience points." can_remove="true"/>
 				<AwardExperiencePoints points="{Event.trophy.xp}" />
-			</OnAwardedTrophy>	
+			</onTrophyAwarded>	
 		</Triggers>				
 	</Achievements>	
 </Include>

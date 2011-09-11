@@ -7,7 +7,7 @@
 	clothingLayers="{AvatarEditors.clothingLayers}" 
 	location="furniture" 
 	filters="{Room.playerFilters}" 
-	defaultSpeed="18"
+	defaultSpeed="8"
 	flip="true"
 	displayObjectClass="com.dubitplatform.game.Avatar"
 	nameBubbleClass="com.dubitplatform.game.CartoonNameBubble" 
@@ -16,7 +16,6 @@
 	<Actions>
 		<Stand name="stand" />
 		<Walk name="walk" />
-		<Action name="magic" />
 	</Actions>
 
 	<Triggers>		

@@ -28,7 +28,7 @@
 					<!-- Close the bar -->
 					<CloseActivityBar activityBar="collecting" />
 					<!-- Give the fruit - this works because the fruit and the collection have the same ids, a clever fudge -->
-					<AddToCollection collectionID="fruitCollection" collectableID="{Event.activityBar.targettedGameObject.id}" />				
+					<FindCollectable collectable="{Event.activityBar.targettedGameObject.id}" />				
 					<!-- Show a bubble -->
 					<ShowBubble gameObject="{Rooms.currentRoom.player}" message="Just what I needed for my fruit collection!"/>
 					<!-- Award experience points, and notify the player through the notification system -->
