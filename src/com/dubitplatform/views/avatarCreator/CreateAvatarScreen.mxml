@@ -50,8 +50,8 @@
 	</mx:Script>
 	
 	
-	<mx:HBox left="100" paddingTop="10">
-		<mx:Box paddingTop="10">
+	<mx:HBox left="80" paddingTop="10">
+		<mx:Box paddingTop="25">
 			<ui1:AvatarView id="avatarPreview" width="160" height="240"
 						   action="stand" directionAngle="180" templateURL="{ Properties.getInstance().getProperty('path.anim-server') }"
 						   mouseChildren="false"

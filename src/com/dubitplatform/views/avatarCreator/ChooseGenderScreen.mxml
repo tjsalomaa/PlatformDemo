@@ -30,7 +30,7 @@
 		]]>
 	</mx:Script>
 	
-	<mx:HBox paddingTop="30" paddingLeft="200" width="100%" height="100%">
+	<mx:HBox horizontalCenter="0" verticalCenter="0">
 		<ui:AvatarView id="malePreview" width="160" height="240"
 					   action="stand" directionAngle="180" templateURL="{ Properties.getInstance().getProperty('path.anim-server') }"
 					   click="avatarSelected(malePreview.avatar)" mouseChildren="false"

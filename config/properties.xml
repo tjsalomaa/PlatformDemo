@@ -1,26 +1,29 @@
 <environments current="dubit-sandbox">
   <environment type="dubit-sandbox">
-    <property name="path.game-server" value="lvo.dubitplatform.com:1937"/>
+    <property name="path.game-server" value="worldhub.dubitplatform.com:1938"/>
     <property name="path.web-services" value="http://sandbox.dubitplatform.com"/>
-    <property name="path.swf-server" value="http://lvo-assets.dubitplatform.com"/>
+    <property name="path.swf-server" value="http://imagebaker.dubitplatform.com"/>
   </environment>
   <environment type="all">
     <property name="setting.useServer" value="true"/>
     <property name="setting.rooms.path" value="config/rooms/"/>
     <property name="setting.rooms.default-room" value="village"/>
+    
     <property name="path.create-avatar" value="[path.web-services]/users/{userID}/avatars.nexus"/>
     <property name="path.first-avatar" value="[path.web-services]/users/{userID}/avatars/first.nexus"/>
+   	
     <property name="path.anim-server" value="[path.swf-server]/swfs/{gender}/{asset_group_ids}.swf"/>
-    <property name="path.profile.stand_front_male" value="[path.swf-server]/anim/{asset_group_ids}.zip"/>
-    <property name="path.profile.stand_front_female" value="[path.swf-server]/anim/{asset_group_ids}.zip"/>
-    <property name="path.product-groups" value="[path.web-services]/product_groups.nexus"/>
+    
+     
     <property name="path.avatar" value="[path.web-services]/avatars/{avatarID}.nexus"/>
     <property name="path.avatar-owned-items" value="[path.web-services]/avatars/{avatarID}/avatar_inventories.nexus"/>
     <property name="path.avatar-owned-items-by-group" value="[path.web-services]/avatars/{avatarID}/avatar_inventories.nexus?product_group_id={productGroupID}"/>
     <property name="path.avatar-inventory-worn" value="[path.web-services]/avatars/{avatarID}/avatar_inventories.nexus?worn=1"/>
     <property name="path.avatar-inventory-worn-update" value="[path.web-services]/avatars/{avatarID}/avatar_inventories/mass_update.nexus"/>
     <property name="path.avatar-inventory-worn-create" value="[path.web-services]/users/{userID}/avatars.nexus"/>
+    
     <property name="path.shop-product-groups" value="[path.web-services]/shops/{shop}/product_groups.nexus?gender={gender}"/>
+    <property name="path.product-groups" value="[path.web-services]/product_groups.nexus"/>
     <property name="path.products" value="[path.web-services]/product_groups/{product_group_id}/products.nexus"/>
     <property name="path.product-image" value="[path.web-services]/assets/asset_groups/{asset_group_id}/shop/interface.swf"/>
     <property name="path.purchase-product" value="[path.web-services]/avatars/{avatar_id}/avatar_transactions/buy_product.nexus?"/>
